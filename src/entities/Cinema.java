@@ -1,13 +1,13 @@
+package entities;
 
-public class Cinema{
+public class Cinema {
     private String cinemaName = "";
-    public Cinema()
-    {
+
+    public Cinema() {
 
     }
 
-    public String getCinemaName()
-    {
+    public String getCinemaName() {
         return this.cinemaName;
     }
 }

@@ -1,11 +1,11 @@
-public class AdminSystem{
-    public AdminSystem()
-    {
+package boundaries;
+
+public class AdminSystem {
+    public AdminSystem() {
 
     }
 
-    public void viewScreen()
-    {
-        
+    public void viewScreen() {
+
     }
 }
