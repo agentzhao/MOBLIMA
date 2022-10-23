@@ -83,7 +83,7 @@ public class UserSystem {
         {
             if(bookingHistory[x] == 0)
             {
-                bookingHistory[x] = x; //change to booking ID
+                bookingHistory[x] = x + 1; //change to booking ID
                 System.out.println("Ticket booked");
                 break;
             }
