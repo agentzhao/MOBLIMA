@@ -1,5 +1,8 @@
 package entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Movie {
   public enum Type {
     BLOCKBUSTER, THREED, IMAX, REGULAR
@@ -14,18 +17,25 @@ public class Movie {
   }
 
   private int movieID;
-  public String movieName;
+  private String movieName;
   private Type movieType;
-  public Status movieStatus;
-  public Rating movieRating;
+  private Status movieStatus;
+  private Rating movieRating;
   private List<Review> movieReviews;
-  public String synopsis;
-  public String[] cast; // at least 2
-  public String director; // 1
-  public int overallRating; // 1 - 5 (best)
+  private String synopsis;
+  private String[] cast; // at least 2
+  private String director; // 1
+  private int overallRating; // 1 - 5 (best)
   private int ticketSales;
 
-  // constructor
+  // constructor (default and parameterized)
+  public Movie(int movieID) {
+    this.movieID = movieID;
+    this.movieReviews = new ArrayList<Review>();
+    this.overallRating = 0;
+    this.ticketSales = 0;
+  }
+
   // after calling, need to update Reviews and TicketSales
   // movie.addReview(review)
   // movie.updateOverallRating()
@@ -91,16 +101,24 @@ public class Movie {
   }
 
   // setters
-  public void setTicketSales(int ticketSales) {
-    this.ticketSales = ticketSales;
+  public void setMovieID(int movieID) {
+    this.movieID = movieID;
   }
 
-  public void updateTicketSales() {
-    this.ticketSales += 1;
+  public void setMovieName(String movieName) {
+    this.movieName = movieName;
+  }
+
+  public void setMovieType(Type movieType) {
+    this.movieType = movieType;
   }
 
   public void setMovieStatus(Status movieStatus) {
     this.movieStatus = movieStatus;
+  }
+
+  public void setMovieRating(Rating movieRating) {
+    this.movieRating = movieRating;
   }
 
   public void addReview(Review review) {
@@ -111,7 +129,25 @@ public class Movie {
     this.movieReviews.remove(review);
   }
 
+  public void setSynopsis(String synopsis) {
+    this.synopsis = synopsis;
+  }
+
+  public void setCast(String[] cast) {
+    this.cast = cast;
+  }
+
+  public void setDirector(String director) {
+    this.director = director;
+  }
+
   public void updateOverallRating() {
+    // 1 or less reviews
+    if (this.movieReviews.size() <= 1) {
+      this.overallRating = 0;
+      return;
+    }
+
     int temp = 0;
     for (Review review : this.movieReviews) {
       temp += review.getReviewRating();
@@ -119,4 +155,11 @@ public class Movie {
     this.overallRating = temp / this.movieReviews.size();
   }
 
+  public void setTicketSales(int ticketSales) {
+    this.ticketSales = ticketSales;
+  }
+
+  public void updateTicketSales() {
+    this.ticketSales += 1;
+  }
 }

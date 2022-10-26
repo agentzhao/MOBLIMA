@@ -9,6 +9,10 @@ public class Review {
   private int reviewRating; // 1 - 5 (best)
 
   // constructor
+  public Review(int reviewID) {
+    this.reviewID = reviewID;
+  };
+
   public Review(int reviewID, int movieID, String reviewName, String reviewTitle,
       String reviewBody, int reviewRating) {
     this.reviewID = reviewID;
@@ -44,5 +48,35 @@ public class Review {
     return reviewRating;
   }
 
+  public void printReview() {
+    System.out.println("Review Name: " + reviewName);
+    System.out.println("Review Title: " + reviewTitle);
+    System.out.println("Review Body: " + reviewBody);
+    System.out.println("Review Rating: " + reviewRating);
+  }
+
   // setters
+  public void setReviewID(int reviewID) {
+    this.reviewID = reviewID;
+  }
+
+  public void setMovieID(int movieID) {
+    this.movieID = movieID;
+  }
+
+  public void setReviewName(String reviewName) {
+    this.reviewName = reviewName;
+  }
+
+  public void setReviewTitle(String reviewTitle) {
+    this.reviewTitle = reviewTitle;
+  }
+
+  public void setReviewBody(String reviewBody) {
+    this.reviewBody = reviewBody;
+  }
+
+  public void setReviewRating(int reviewRating) {
+    this.reviewRating = reviewRating;
+  }
 }
