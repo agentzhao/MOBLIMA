@@ -144,9 +144,9 @@ public class MovieManager {
   }
 
   /* User System (search, getDetails, ranking) */
-  public Movie searchMovie(String movieName) {
+  public Movie searchMovie(int movieID) {
     for (Movie m : movies) {
-      if (m.getMovieName() == movieName) {
+      if (m.getMovieID() == movieID) {
         return m;
       }
     }
