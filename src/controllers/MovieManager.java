@@ -227,11 +227,11 @@ public class MovieManager {
       return;
     }
 
-    Review newReview = new Review(reviews.size());
+    Review newReview = new Review();
     newReview.setMovieID(movieID);
 
-    System.out.println("Enter review name: ");
-    newReview.setReviewName(sc.nextLine());
+    System.out.println("Enter customer name: ");
+    newReview.setCustomerName(sc.nextLine());
 
     System.out.println("Enter review title: ");
     newReview.setReviewTitle(sc.nextLine());
