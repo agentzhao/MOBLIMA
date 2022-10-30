@@ -5,8 +5,12 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import entities.Review;
+import entities.Review.*;
 import entities.Movie;
 import entities.Movie.*;
+
+import controllers.MovieManager;
 
 public class MoblimaInitializer {
   public static List<Movie> initializeMovie(String dataPath) {
@@ -43,6 +47,48 @@ public class MoblimaInitializer {
     return movies;
   }
   
+  
+  public static List<Review> initializeReview(String dataPath) {
+    File reviewsDir = new File(dataPath + "/reviews");
+    FileFilter fileFilter = file -> !file.isDirectory() && file.getName().endsWith(".txt");
+    File[] file = reviewsDir.listFiles(fileFilter);
+    
+    List<Review> reviews = new ArrayList<Review>();
+    
+    for (int i = 0; i < file.length; i += 1) {
+      try {
+        FileReader fr = new FileReader(file[i].getPath());
+        BufferedReader br = new BufferedReader(fr);
+        
+        //int reviewID = Integer.parseInt(br.readLine());
+        int movieID = Integer.parseInt(br.readLine());
+        
+        MovieManager mm = new MovieManager();
+        Movie m = mm.searchMovie(movieID);
+        
+        String customerName = br.readLine();
+        String reviewTitle = br.readLine();
+        String reviewBody = br.readLine();
+        int reviewRating = Integer.parseInt(br.readLine());
+      
+        Review newReview = new Review(movieID, customerName, reviewTitle, reviewBody, reviewRating);
+        
+        m.addReview(newReview);
+        m.updateOverallRating();
+        
+        reviews.add(newReview);
+        
+        br.close();
+        
+      } catch(IOException e) {
+        e.printStackTrace();
+      }
+    }
+    
+    return reviews;
+  }
+  
+  /*
   public static List<Cineplex> initializeCineplex(String dataPath) {
     File cineplexDir = new File(dataPath + "/cineplexes");
     FileFilter fileFilter = file -> !file.isDirectory() && file.getName().endsWith(".txt");
@@ -104,13 +150,15 @@ public class MoblimaInitializer {
     
     return cinemas;
   }
+  */
   
   /* Temporary Main to test initialization */
   
   public static void main(String[] args) {
     String dataPath = Paths.get("").toAbsolutePath() + "/data/initialization_files";
     List<Movie> movies = initializeMovie(dataPath);
-    for (int i = 0; i < movies.size(); i += 1) {
+    List<Review> reviews = initializeReview(dataPath);
+    /*for (int i = 0; i < movies.size(); i += 1) {
       System.out.println(movies.get(i).getMovieID());
       System.out.println(movies.get(i).getMovieName());
       System.out.println(movies.get(i).getMovieType());
@@ -122,6 +170,6 @@ public class MoblimaInitializer {
       }
       System.out.println(movies.get(i).getDirector());
       System.out.println();
-    }
+    }*/
   }
 }
