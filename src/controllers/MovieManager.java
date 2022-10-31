@@ -17,6 +17,14 @@ public class MovieManager {
     movies = new ArrayList<Movie>();
     reviews = new ArrayList<Review>();
   }
+  
+  public void addMovieList(List<Movie> movies) {
+    this.movies = movies;
+  }
+  
+  public void addReviewList(List<Review> reviews) {
+    this.reviews = reviews;
+  }
 
   /* Admin System (create, update, delete) */
 
