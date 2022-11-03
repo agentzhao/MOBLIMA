@@ -1,6 +1,7 @@
 package controllers;
 
 import entities.Movie;
+import entities.Movie.*;
 import entities.Review;
 
 import java.util.ArrayList;
@@ -37,18 +38,18 @@ public class MovieManager {
 
     // movieType
     System.out.print("Type of movie (BLOCKBUSTER, THREED, IMAX, REGULAR): ");
-    System.out.print("Enter movie type (int): ");
-    newMovie.setMovieType(Movie.Type[sc.nextInt() - 1]);
+    System.out.print("Enter movie type: ");
+    newMovie.setMovieType(Type.valueOf(sc.nextLine()));
 
     // movieStatus
     System.out.print("Status of movie (COMINGSOON, PREVIEW, NOWSHOWING, ENDOFSHOWING): ");
     System.out.print("Enter movie status (int): ");
-    newMovie.setMovieStatus(Movie.Status[sc.nextInt() - 1]);
+    newMovie.setMovieStatus(Status.valueOf(sc.nextLine()));
 
     // movieRating
     System.out.print("Rating of movie (G, PG, PG13, NC16, M18, R21): ");
     System.out.print("Enter movie rating (int): ");
-    newMovie.setMovieRating(Movie.Rating[sc.nextInt() - 1]);
+    newMovie.setMovieRating(Rating.valueOf(sc.nextLine()));
 
     // synopsis
     System.out.print("Enter synopsis: ");
@@ -56,8 +57,8 @@ public class MovieManager {
 
     // cast
     System.out.print("Enter number of casts: ");
-    temp = new String[sc.nextInt()];
-    for (int i = 0; i < this.cast.length; i++) {
+    String[] temp = new String[sc.nextInt()];
+    for (int i = 0; i < temp.length; i++) {
       System.out.print("Enter name of cast " + (i + 1) + ": ");
       temp[i] = sc.nextLine();
     }
@@ -103,18 +104,18 @@ public class MovieManager {
         break;
       case 3:
         System.out.println("Type of movie (BLOCKBUSTER, THREED, IMAX, REGULAR): ");
-        System.out.print("Enter new movie type (int): ");
-        m.setMovieType(Movie.Type[sc.nextInt() - 1]);
+        System.out.print("Enter new movie type: ");
+        m.setMovieType(Type.valueOf(sc.nextLine()));
         break;
       case 4:
         System.out.print("Status of movie (COMINGSOON, PREVIEW, NOWSHOWING, ENDOFSHOWING): ");
-        System.out.print("Enter new movie status (int): ");
-        m.setMovieStatus(Movie.Status[sc.nextInt() - 1]);
+        System.out.print("Enter new movie status: ");
+        m.setMovieStatus(Status.valueOf(sc.nextLine()));
         break;
       case 5:
         System.out.print("Rating of movie (G, PG, PG13, NC16, M18, R21): ");
-        System.out.print("Enter new movie rating (int): ");
-        m.setMovieRating(Movie.Rating[sc.nextInt() - 1]);
+        System.out.print("Enter new movie rating: ");
+        m.setMovieRating(Rating.valueOf(sc.nextLine()));
         break;
       case 6:
         System.out.print("Enter new synopsis: ");
@@ -122,8 +123,8 @@ public class MovieManager {
         break;
       case 7:
         System.out.print("Enter number of casts: ");
-        temp = new String[sc.nextInt()];
-        for (int i = 0; i < this.cast.length; i++) {
+        String[] temp = new String[sc.nextInt()];
+        for (int i = 0; i < temp.length; i++) {
           System.out.print("Enter name of cast " + (i + 1) + ": ");
           temp[i] = sc.nextLine();
         }
@@ -139,6 +140,7 @@ public class MovieManager {
         System.out.println("Invalid choice!");
         break;
     }
+    return 1;
   }
 
   public int deleteMovie(int movieID) {
@@ -184,8 +186,8 @@ public class MovieManager {
   public void topSales() {
     System.out.println("Top 5 Movies by Ticket Sales");
 
-    dupMovie = new ArrayList<Movie>();
-    dupMovie = movies;
+    List<Movie> dupMovies = new ArrayList<Movie>();
+    dupMovies = movies;
     // insertion sort with ticket sales (descending)
     for (int i = 1; i < dupMovies.size(); i++) {
       Movie temp = dupMovies.get(i);
@@ -206,8 +208,8 @@ public class MovieManager {
   public void topRating() {
     System.out.println("Top 5 Movies by Overall Rating");
 
-    dupMovie = new ArrayList<Movie>();
-    dupMovie = movies;
+    List<Movie> dupMovies = new ArrayList<Movie>();
+    dupMovies = movies;
     // insertion sort with ticket sales (descending)
     for (int i = 1; i < dupMovies.size(); i++) {
       Movie temp = dupMovies.get(i);

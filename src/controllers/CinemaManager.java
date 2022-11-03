@@ -33,7 +33,7 @@ public class CinemaManager{
             }
         });
         cinema.screeningTimes.add(screentime);
-        System.out.println("Showtime created!")
+        System.out.println("Showtime created!");
     }
 
     public void updateShowtime(Cinema cinema, int movieID){
@@ -53,7 +53,7 @@ public class CinemaManager{
         cinema.screeningTimes.forEach(screeningTime->{
             if(screeningTime.getDate() == date && screeningTime.getScreenTime() == showtime){
                 screeningTime = screentime;
-                System.out.println("Showtime updated!")
+                System.out.println("Showtime updated!");
                 return;
             }
         });
