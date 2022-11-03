@@ -12,10 +12,10 @@ public class UserSystem {
 
     }
 
-    public void viewScreen() {
+    public void viewScreenMember() {
         int choice = 0;
-        System.out.println("Welcome to MOBLIMA!");
-        while (true) {
+        //System.out.println("Welcome to MOBLIMA!");
+        /*while (true) {
             System.out.println("Please select function:\n1: Search Movies\n2: Top 5 movie\n3: View Booking History");
             choice = sc.nextInt();
             switch (choice) {
@@ -29,8 +29,14 @@ public class UserSystem {
                 case 12345:
                     return;
             }
-        }
+        }*/
 
+    }
+
+    public void viewScreenGuest() {
+        int choice = 0;
+        System.out.println("Welcome to MOBLIMA!");
+        System.out.println("Please select function:\n1: Search Movies\n2: Top 5 movie\n3: Login");
     }
 
     private void searchMovie(String name) {
