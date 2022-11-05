@@ -1,2 +1,0 @@
-SW
-SWA,SWB,SWC

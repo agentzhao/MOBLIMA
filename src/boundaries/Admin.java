@@ -4,12 +4,12 @@ import java.util.*;
 
 public class Admin extends User {
     private int id;
-    private int cinemaId;
+    private String cineplexID;
 
-    public Admin(String email, int password, int type, int id, int cinemaId) {
+    public Admin(String email, String password, int type, int id, String cineplexID) {
         super(email, password, type);
         this.id = id;
-        this.cinemaId = cinemaId;
+        this.cineplexID = cineplexID;
     }
 
     public int getId() {
@@ -20,12 +20,12 @@ public class Admin extends User {
         this.id = id;
     }
 
-    public int getCinemaId() {
-        return cinemaId;
+    public String getcineplexID() {
+        return cineplexID;
     }
 
-    public void setCinemaId(int cinemaId) {
-        this.cinemaId = cinemaId;
+    public void setCinemaId(String cineplexID) {
+        this.cineplexID = cineplexID;
     }
 
 }

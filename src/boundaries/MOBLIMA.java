@@ -12,8 +12,8 @@ public class MOBLIMA {
     Scanner sc = new Scanner(System.in);
     int choice = -1;
     Login log = new Login();
-    log.createAdmin("admin@gmail.com", 123, 1, 1234, 1333);
-    log.createCustomer("customer@gmail.com", 123, 0, "123999", "James", 21);
+    log.createAdmin("admin@gmail.com", "123", 1, 1234, "1333");
+    log.createCustomer("customer@gmail.com", "123", 0, "123999", "James", 21);
     System.out.println("Welcome to MOBLIMA");
 
     // todo initialize data
@@ -41,7 +41,7 @@ public class MOBLIMA {
           int p;
           if (login == 0) {
             // Login
-            Admin test = (Admin) log.loginSystem("admin@gmail.com", 123);
+            Admin test = (Admin) log.loginSystem("admin@gmail.com", "123");
             // System.out.println(test.getCinemaId());
             // Customer testc = (Customer) log.loginSystem("customer@gmail.com", 123);
             // System.out.println(testc.getMobile_number());

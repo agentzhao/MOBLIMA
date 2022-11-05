@@ -13,6 +13,10 @@ import entities.Movie.*;
 import entities.Cinema;
 import entities.Cineplex;
 
+import boundaries.User;
+import boundaries.Admin;
+import boundaries.Customer;
+
 import controllers.MovieManager;
 
 public class MoblimaInitializer {  
@@ -109,7 +113,6 @@ public class MoblimaInitializer {
         
         Cinema[] cinemas = new Cinema[cinemaStr.length];
               
-        
         for (int j = 0; j < cinemaStr.length; j += 1) {
           String cinemaStrName = cinemaStr[j]; 
           FileFilter ff = filec -> !filec.isDirectory() && filec.getName().endsWith(".txt") && filec.getName().startsWith(cinemaStrName);
@@ -130,24 +133,22 @@ public class MoblimaInitializer {
           }
           
           List<ScreeningTimes> st = new ArrayList<ScreeningTimes>();
-          for (int k = 1; k <= 8; k += 1) {
-            ScreeningTimes s0 = new ScreeningTimes(k, "0900", "13/11/2022");
-            ScreeningTimes s1 = new ScreeningTimes(k, "1100", "13/11/2022");
-            ScreeningTimes s2 = new ScreeningTimes(k, "1300", "13/11/2022");
-            ScreeningTimes s3 = new ScreeningTimes(k, "1500", "13/11/2022");
-            ScreeningTimes s4 = new ScreeningTimes(k, "1700", "13/11/2022");
-            ScreeningTimes s5 = new ScreeningTimes(k, "1900", "13/11/2022");
-            ScreeningTimes s6 = new ScreeningTimes(k, "2100", "13/11/2022");
-            ScreeningTimes s7 = new ScreeningTimes(k, "2300", "13/11/2022");
-            st.add(s0);
-            st.add(s1);
-            st.add(s2);
-            st.add(s3);
-            st.add(s4);
-            st.add(s5);
-            st.add(s6);
-            st.add(s7);
-          }
+          ScreeningTimes s0 = new ScreeningTimes(1, "0900", "13/11/2022");
+          ScreeningTimes s1 = new ScreeningTimes(2, "1100", "13/11/2022");
+          ScreeningTimes s2 = new ScreeningTimes(2, "1300", "13/11/2022");
+          ScreeningTimes s3 = new ScreeningTimes(3, "1500", "13/11/2022");
+          ScreeningTimes s4 = new ScreeningTimes(3, "1700", "13/11/2022");
+          ScreeningTimes s5 = new ScreeningTimes(4, "1900", "13/11/2022");
+          ScreeningTimes s6 = new ScreeningTimes(4, "2100", "13/11/2022");
+          ScreeningTimes s7 = new ScreeningTimes(4, "2300", "13/11/2022");
+          st.add(s0);
+          st.add(s1);
+          st.add(s2);
+          st.add(s3);
+          st.add(s4);
+          st.add(s5);
+          st.add(s6);
+          st.add(s7);
            
           cinemas[j] = new Cinema(isPlatinum, cinemaCode, cinemaName, seats, movies, st);
         }
@@ -166,10 +167,75 @@ public class MoblimaInitializer {
   }
   
   
+  public static ArrayList<Customer> initializeCustomers(String dataPath) {
+    File custDir = new File(dataPath + "/users/customers");
+    FileFilter fileFilter = file -> !file.isDirectory() && file.getName().endsWith(".txt");
+    File[] file = custDir.listFiles(fileFilter);
+    
+    ArrayList<Customer> customers = new ArrayList<Customer>();
+    
+    for (int i = 0; i < file.length; i += 1) {
+      try {
+        FileReader fr = new FileReader(file[i].getPath());
+        BufferedReader br = new BufferedReader(fr);
+        
+        String email = br.readLine();
+        String password = br.readLine();
+        int type = Integer.parseInt(br.readLine());
+        String mobile_number = br.readLine();
+        String name = br.readLine();
+        int age = Integer.parseInt(br.readLine());
+      
+        Customer newCustomer = new Customer(email, password, type, mobile_number, name, age);
+        customers.add(newCustomer);
+        
+        br.close();
+        
+      } catch(IOException e) {
+        e.printStackTrace();
+      }
+    }
+    
+    return customers;
+  }
+  
+  
+  public static ArrayList<Admin> initializeAdmin(String dataPath) {
+    File adminDir = new File(dataPath + "/users/admin");
+    FileFilter fileFilter = file -> !file.isDirectory() && file.getName().endsWith(".txt");
+    File[] file = adminDir.listFiles(fileFilter);
+    
+    ArrayList<Admin> admins = new ArrayList<Admin>();
+    
+    for (int i = 0; i < file.length; i += 1) {
+      try {
+        FileReader fr = new FileReader(file[i].getPath());
+        BufferedReader br = new BufferedReader(fr);
+        
+        String email = br.readLine();
+        String password = br.readLine();
+        int type = Integer.parseInt(br.readLine());
+        int id = Integer.parseInt(br.readLine());
+        String cineplexID = br.readLine();
+      
+        Admin newAdmin = new Admin(email, password, type, id, cineplexID);
+        admins.add(newAdmin);
+        
+        br.close();
+        
+      } catch(IOException e) {
+        e.printStackTrace();
+      }
+    }
+    
+    return admins;
+  }
+  
+  
   /* Temporary Main to test initialization */
   
   public static void main(String[] args) {
-    // Get file path of initialisation text files
+    // Get file path of initialisation .txt files
     String dataPath = Paths.get("").toAbsolutePath() + "/data/initialization_files";
     
     // Create MovieManager Object
@@ -229,19 +295,37 @@ public class MoblimaInitializer {
             System.out.println(actor);
           }
           System.out.println("Movie Director: " + m.getDirector());
-          System.out.println("Movie Screening Time: ");
+          System.out.println("Movie Screening Times: ");
           
-          /* getScreeningTimes(id) need to be filtered by cinema?*/
-          /*for (ScreeningTimes st : c[j].getScreeningTimes(m.getMovieID())) {
-            System.out.print(st.getMovieID());
-            System.out.print(st.getDate());
-            System.out.print(st.getScreenTime());
-          }*/
+          for (ScreeningTimes st : c[j].getScreeningTimes(m.getMovieID())) {
+            System.out.println(st.getMovieID());
+            System.out.println(st.getDate());
+            System.out.println(st.getScreenTime());
+          }
         }
         
         System.out.println("");
       }
       System.out.println("");
+    }
+    
+    ArrayList<Admin> admins = initializeAdmin(dataPath);
+    for (int i = 0; i < admins.size(); i += 1) {
+      System.out.println(admins.get(i).getEmail());
+      System.out.println(admins.get(i).getPassword());
+      System.out.println(admins.get(i).getType());
+      System.out.println(admins.get(i).getId());
+      System.out.println(admins.get(i).getcineplexID());
+    }
+    
+    ArrayList<Customer> customers = initializeCustomers(dataPath);
+    for (int i = 0; i < customers.size(); i += 1) {
+      System.out.println(customers.get(i).getEmail());
+      System.out.println(customers.get(i).getPassword());
+      System.out.println(customers.get(i).getType());
+      System.out.println(customers.get(i).getMobile_number());
+      System.out.println(customers.get(i).getName());
+      System.out.println(customers.get(i).getAge());
     }
   }
 }

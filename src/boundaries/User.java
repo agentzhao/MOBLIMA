@@ -4,10 +4,10 @@ import java.util.*;
 
 public class User {
     private String email;
-    private int password;
+    private String password;
     private int type;
 
-    public User(String email, int password, int type) {
+    public User(String email, String password, int type) {
         this.email = email;
         this.password = password;
         this.type = type;
@@ -29,11 +29,11 @@ public class User {
         this.email = email;
     }
 
-    public int getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(int password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 

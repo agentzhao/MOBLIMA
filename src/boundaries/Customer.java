@@ -8,7 +8,7 @@ public class Customer extends User {
     private int age;
     private int type;
 
-    public Customer(String email, int password, int type, String mobile_number, String name, int age) {
+    public Customer(String email, String password, int type, String mobile_number, String name, int age) {
         super(email, password, type);
         this.mobile_number = mobile_number;
         this.name = name;
