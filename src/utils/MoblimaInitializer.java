@@ -13,14 +13,18 @@ import entities.Movie.*;
 import entities.Cinema;
 import entities.Cineplex;
 
-import boundaries.User;
 import boundaries.Admin;
 import boundaries.Customer;
 
 import controllers.MovieManager;
 
 public class MoblimaInitializer {  
-  public static List<Movie> initializeMovie(String dataPath) {
+  private String dataPath;
+  
+  public MoblimaInitializer() {
+    dataPath = Paths.get("").toAbsolutePath() + "/data/initialization_files";
+  }
+  public List<Movie> initializeMovie() {
     File moviesDir = new File(dataPath + "/movies");
     FileFilter fileFilter = file -> !file.isDirectory() && file.getName().endsWith(".txt");
     File[] file = moviesDir.listFiles(fileFilter);
@@ -55,7 +59,7 @@ public class MoblimaInitializer {
   }
   
   
-  public static List<Review> initializeReview(String dataPath, MovieManager mm) {
+  public List<Review> initializeReview(MovieManager mm) {
     File reviewsDir = new File(dataPath + "/reviews");
     FileFilter fileFilter = file -> !file.isDirectory() && file.getName().endsWith(".txt");
     File[] file = reviewsDir.listFiles(fileFilter);
@@ -94,7 +98,7 @@ public class MoblimaInitializer {
   }
   
   
-  public static List<Cineplex> initializeCineplex(String dataPath, List<Movie> movies) {
+  public List<Cineplex> initializeCineplex(List<Movie> movies) {
     File cinemaDir = new File(dataPath + "/cinemas");
     
     File cineplexDir = new File(dataPath + "/cineplexes");
@@ -167,7 +171,7 @@ public class MoblimaInitializer {
   }
   
   
-  public static ArrayList<Customer> initializeCustomers(String dataPath) {
+  public ArrayList<Customer> initializeCustomers() {
     File custDir = new File(dataPath + "/users/customers");
     FileFilter fileFilter = file -> !file.isDirectory() && file.getName().endsWith(".txt");
     File[] file = custDir.listFiles(fileFilter);
@@ -200,7 +204,7 @@ public class MoblimaInitializer {
   }
   
   
-  public static ArrayList<Admin> initializeAdmin(String dataPath) {
+  public ArrayList<Admin> initializeAdmin() {
     File adminDir = new File(dataPath + "/users/admin");
     FileFilter fileFilter = file -> !file.isDirectory() && file.getName().endsWith(".txt");
     File[] file = adminDir.listFiles(fileFilter);
@@ -234,7 +238,7 @@ public class MoblimaInitializer {
   
   /* Temporary Main to test initialization */
   
-  public static void main(String[] args) {
+  /*public static void main(String[] args) {
     // Get file path of initialisation .txt files
     String dataPath = Paths.get("").toAbsolutePath() + "/data/initialization_files";
     
@@ -327,5 +331,5 @@ public class MoblimaInitializer {
       System.out.println(customers.get(i).getName());
       System.out.println(customers.get(i).getAge());
     }
-  }
+  }*/
 }

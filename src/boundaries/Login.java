@@ -10,6 +10,14 @@ public class Login {
     public Login() {
 
     }
+    
+    public void addCustomerList(ArrayList<Customer> customer) {
+      this.customer = customer;
+    }
+    
+    public void addAdminList(ArrayList<Admin> admins) {
+      this.admin = admin;
+    }
 
     public User loginSystem(String email, String password) {
         return searchUser(email, password);

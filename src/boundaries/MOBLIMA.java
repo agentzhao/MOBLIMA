@@ -11,18 +11,20 @@ public class MOBLIMA {
   private static CinemaManager cm = new CinemaManager();
   private static UserSystem us = new UserSystem(mm);
   private static AdminSystem as = new AdminSystem(mm, cm);
+  private static Login log;
+  
   public static void main(String[] args) {
     //ReviewManager rm = new ReviewManager();
     //SeatManager sm = new SeatManager();
     //TicketManager tm = new TicketManager();
-    Login log = new Login();
+    /*Login log = new Login();
     log.createAdmin("admin@gmail.com", "123", 1, 1234, "1333");
-    log.createCustomer("customer@gmail.com", "123", 0, "123999", "James", 21);
+    log.createCustomer("customer@gmail.com", "123", 0, "123999", "James", 21);*/
     //System.out.println("Welcome to MOBLIMA");
-    MoblimaInitializer mi = new MoblimaInitializer();
+    initData();
     mainMenu(log);
     // todo initialize data
-
+    
     
     /*
      * while (choice < 3) {
@@ -45,9 +47,20 @@ public class MOBLIMA {
     
   }
 
-  public void initData()
+  public static void initData()
   {
+    MoblimaInitializer mi = new MoblimaInitializer();
+    
     mm = new MovieManager();
+    mm.addMovieList(mi.initializeMovie());
+    mm.addReviewList(mi.initializeReview(mm));
+    
+    log = new Login();
+    log.addCustomerList(mi.initializeCustomers());
+    log.addAdminList(mi.initializeAdmin());
+    
+    /* Initialise Cineplexes Below */
+   
     cm = new CinemaManager();
     us = new UserSystem(mm);
     as = new AdminSystem(mm, cm);
