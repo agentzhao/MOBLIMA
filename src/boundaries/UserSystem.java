@@ -2,18 +2,19 @@ package boundaries;
 
 import java.util.*;
 
+import controllers.MovieManager;
 import entities.Cinema;
 
 public class UserSystem {
     Scanner sc = new Scanner(System.in);
     private int[] bookingHistory = new int[20];
-
-    public UserSystem() {
-
+    private MovieManager mm;
+    public UserSystem(MovieManager m) {
+        mm = m;
     }
 
     public void viewScreenMember() {
-        int choice = 0;
+        //int choice = 0;
         //System.out.println("Welcome to MOBLIMA!");
         /*while (true) {
             System.out.println("Please select function:\n1: Search Movies\n2: Top 5 movie\n3: View Booking History");
@@ -30,7 +31,8 @@ public class UserSystem {
                     return;
             }
         }*/
-
+        System.out.println("Welcome to MOBLIMA!");
+        System.out.println("Please select function:\n1: Search Movies\n2: Top 5 movie\n3: View Booking History\n4: Logout");
     }
 
     public void viewScreenGuest() {
@@ -38,6 +40,9 @@ public class UserSystem {
         System.out.println("Welcome to MOBLIMA!");
         System.out.println("Please select function:\n1: Search Movies\n2: Top 5 movie\n3: Login");
     }
+
+
+
 
     private void searchMovie(String name) {
         // go into Cineplex.java

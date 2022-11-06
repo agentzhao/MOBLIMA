@@ -28,17 +28,26 @@ public class Login {
     public User searchUser(String email, String password) {
 
         for (int x = 0; x < admin.size(); x++) {
-            if (admin.get(x).getEmail() == email && admin.get(x).getPassword() == password) {
+            System.out.println(admin.get(x).getEmail() + " password: " + admin.get(x).getPassword());
+            System.out.println(email + " password: " + password);
+            String e = admin.get(x).getEmail();
+            String p = admin.get(x).getPassword();
+            if (email.equals(e) && password.equals(p)) {
                 returnUser = admin.get(x);
+                System.out.println("Successful admin login");
                 return returnUser;
             }
         }
         for (int x = 0; x < customer.size(); x++) {
-            if (customer.get(x).getEmail() == email && customer.get(x).getPassword() == password) {
+            String e = customer.get(x).getEmail();
+            String p = customer.get(x).getPassword();
+            if (email.equals(e) && password.equals(p)) {
                 returnUser = customer.get(x);
+                System.out.println("Successful customer login");
                 return returnUser;
             }
         }
+        System.out.println("Fail login");
         return returnUser;
     }
 }

@@ -29,6 +29,11 @@ public class MovieManager {
 
   /* Admin System (create, update, delete) */
 
+  public int getMovieLength()
+  {
+    return movies.size();
+  }
+
   public void createMovie(int movieID) {
     Movie newMovie = new Movie(movieID);
 
