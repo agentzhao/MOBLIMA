@@ -168,6 +168,15 @@ public class MovieManager {
     return null;
   }
 
+  public Movie searchMovieName(String movieName) {
+    for (Movie m : movies) {
+      if (m.getMovieName().toLowerCase() == movieName.toLowerCase()) {
+        return m;
+      }
+    }
+    return null;
+  }
+
   public void getMovieDetails(Movie m) {
     // print details (only relevant fields)
     // System.out.println("Movie ID: " + m.getMovieID());
