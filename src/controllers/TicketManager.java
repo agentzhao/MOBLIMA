@@ -1,30 +1,48 @@
 package controllers;
 
+import entities.Cinema;
+import entities.Movie;
+import entities.Seat;
 import entities.Ticket;
+import entities.Transaction;
+import entities.Movie.Type;
 import entities.Ticket.TicType;
 
 
 import java.util.*;
 
+//import javax.lang.model.util.ElementScanner14;
+
+import boundaries.Customer;
+
 
 
 public class TicketManager{
     
+    private List<Transaction> transactions;
     private List<Ticket> ticket;
 
-    private int basePrice;
+    private double basePrice;
+    private double agePrice;
+    private double typePrice;
 
     Scanner sc = new Scanner(System.in);
 
     //constructor
     public TicketManager() {
         ticket = new ArrayList<Ticket>();
+        transactions = new ArrayList<Transaction>();
         this.basePrice=12;
     }
 
     public void addTicketList (List<Ticket> ticket)
     {
         this.ticket = ticket;
+    }
+    
+    public void addTransactionList (List<Transaction> transactions)
+    {
+        this.transactions = transactions;
     }
 
 
@@ -35,54 +53,99 @@ public class TicketManager{
      * delete a ticket
      */
 
-    public void setBasePrice( int basePrice)
+    public void setBasePrice(double basePrice)
     {
         this.basePrice=basePrice;
     }
-    public int getBasePrice()
+    public double getBasePrice()
     {
         return this.basePrice;
     }
 
-    public void createTicket(int userID, String movieName)
+    public void createTicket(Customer customer, Cinema cinema, Seat seat, Movie movie)
     {
-        Ticket newTicket = new Ticket(userID, movieName);
+        
+        Ticket newTicket= new Ticket(customer.getId(), movie.getMovieName());
+
 
         //User ID
-        System.out.println("Enter User ID: ");
-        newTicket.setUserID(sc.nextInt());
+        newTicket.setUserID(customer.getId());
+
 
         //Ticket ID
-        System.out.println("Enter Ticket ID: ");
-        newTicket.setTicketID(sc.nextInt());
+        //setting the ticket id as the pos + 1
+        int ticID= ticket.size()+1;
+        newTicket.setTicketID(ticID);
 
-        //Ticket Type
-        System.out.println("Type of Ticket (SENIOR, ADULT, CHILD): ");
-        System.out.println("Enter the type of ticket:");
-        newTicket.setTicketType(TicType.valueOf(sc.nextLine()));
+
+        //Ticket Type, We need to see if the person is senior child or adult
+        if(customer.getAge()>=60)
+        {
+            newTicket.setTicketType(TicType.SENIOR);
+            agePrice=0.8;
+        }
+        else if(customer.getAge()<=12)
+        {
+            newTicket.setTicketType(TicType.CHILD);
+            agePrice=1;
+        }
+        else
+        {
+            newTicket.setTicketType(TicType.ADULT);
+            agePrice=0.5;
+        }
         
         //Enter Movie Time
-        System.out.println("Enter movie time: ");
-        newTicket.setMovieTime(sc.nextLine());
+        //System.out.println("Enter movie time: ");
+        //newTicket.setMovieTime(sc.nextLine());
 
         //Moive ID
-        System.out.println("Enter movie ID: ");
-        newTicket.setMovieID(sc.nextInt());
+        newTicket.setMovieID(movie.getMovieID());
 
         //Movie Name
-        System.out.println("Enter Movie Name: ");
-        newTicket.setMovieName(sc.nextLine());
+        newTicket.setMovieName(movie.getMovieName());
 
         //Cinema Name
-        System.out.println("Enter Cinema Name: ");
-        newTicket.setCinemaName(sc.nextLine());
+        newTicket.setCinemaName(cinema.getCinemaName());
 
         //seat ID
-        System.out.println("Enter Seat ID: ");
-        newTicket.setSeatID(sc.nextInt());
+        newTicket.setSeatID(seat.getSeatID());
+
+        //Price
+        double totprice = calPrice(movie);
+        newTicket.setPrice(totprice);
+
+
 
         //Add to list
         ticket.add(newTicket);
+    }
+
+
+
+
+    //CREATING A TRANSACTION
+    public void createTransaction(Customer customer, Cinema cinema)
+    {
+        Transaction newTran= new Transaction(customer.getName(), customer.getId());
+        
+        //User ID
+        newTran.setUserID(customer.getId());
+
+        // Amount of Transaction
+        newTran.setTransactionAmount(ticket.get(transactions.size()-1).getPrice());
+
+        // Name of Customer
+        newTran.setNameOfCustomer(customer.getName());
+
+        // Mobile Number
+        newTran.setMobileNumber(customer.getMobile_number());
+
+        // Transaction ID
+        newTran.setTID(cinema);
+
+        //Add to list
+        transactions.add(newTran);
     }
 
 
@@ -94,12 +157,27 @@ public class TicketManager{
      */
     public int updateTicket(String movieName, int userID)
     {
-        Ticket t = searchTicket(movieName, userID);
+        ArrayList<Ticket> tic = new ArrayList<Ticket>();
+        
+        tic= searchTicket(movieName, userID);
+        int ch; 
 
-        if(t==null)
+        if(tic==null)
             return 0;
 
-        getTicketDetails(t);
+        if(tic.size()!=1) 
+        {
+             System.out.println("Select a ticket to update:");
+             for(int i=0; i<tic.size(); i++)
+              System.out.println(i+1+". "+ tic.get(i).getTicketID());
+            ch=sc.nextInt();
+        }
+        else 
+        ch= 0;
+
+
+
+        getTicketDetails(tic.get(ch));
 
         System.out.println("1. User ID: ");
         System.out.println("2. Ticket ID: ");
@@ -119,47 +197,47 @@ public class TicketManager{
 
             case 1:
             System.out.println("Enter new User ID: ");
-            t.setUserID(sc.nextInt());
+            tic.get(ch).setUserID(sc.nextInt());
             break;
 
             case 2:
             System.out.println("Enter new Ticket ID: ");
-            t.setTicketID(sc.nextInt());
+            tic.get(ch).setTicketID(sc.nextInt());
 
             case 3:
             System.out.println("Type of Ticket (SENIOR, ADULT, CHILD): ");
             System.out.println("Enter the new type of ticket:");
-            t.setTicketType(TicType.valueOf(sc.nextLine()));
+            tic.get(ch).setTicketType(TicType.valueOf(sc.nextLine()));
             break;
 
             case 4:
             System.out.println("Enter new movie time: ");
-            t.setMovieTime(sc.nextLine());
+            tic.get(ch).setMovieTime(sc.nextLine());
             break;
 
             case 5:
             System.out.println("Enter new movie ID: ");
-            t.setMovieID(sc.nextInt());
+            tic.get(ch).setMovieID(sc.nextInt());
             break;
 
             case 6:
             System.out.println("Enter new Movie Name: ");
-            t.setMovieName(sc.nextLine());
+            tic.get(ch).setMovieName(sc.nextLine());
             break;
 
             case 7:
             System.out.println("Enter new Price to set: ");
-            t.setPrice(sc.nextInt());
+            tic.get(ch).setPrice(sc.nextInt());
             break;
 
             case 8:
             System.out.println("Enter new Cinema Name: ");
-            t.setCinemaName(sc.nextLine());
+            tic.get(ch).setCinemaName(sc.nextLine());
             break;
 
             case 9:
             System.out.println("Enter new Seat ID: ");
-            t.setSeatID(sc.nextInt());
+            tic.get(ch).setSeatID(sc.nextInt());
             break;
 
             case 0:
@@ -193,38 +271,62 @@ public class TicketManager{
      * get ticket details.
      */
 
-    public Ticket searchTicket(String movieName, int userID)
+
+     //This function will return a list of tickets purchased acc to 
+     //both movie name and for a specific user 
+
+    public ArrayList<Ticket> searchTicket(String movieName, int userID)
     {
+        ArrayList<Ticket>  searchTickets = new ArrayList<Ticket>();
+
+
         for(Ticket t : ticket){
             if(t.getMovieName().equals(movieName) && t.getUserID()==userID)
             {
-                return t;
+                searchTickets.add(t);
             }
         }
-        return null;
+        return searchTickets;
     }
+
+
+    //This function will return a list of tickets purchased by the specific user
+    public ArrayList<Ticket> searchTicketUser (int userID)
+    {
+        ArrayList<Ticket>  searchTickets = new ArrayList<Ticket>();
+
+        for(Ticket t : ticket){
+            if(t.getUserID()==userID)
+            {
+                searchTickets.add(t);
+            }
+        }
+        return searchTickets;
+    }
+
+
     
 
     /* This function calculates the price of the ticket based on the 
      * ticket type: SENIOR, ADULT , CHILD
      * It provides a temporary total to work on after the above classification
      */
-    public int calPrice (Ticket t){
+    public double calPrice (Movie movie)
+    {
 
-        int agePrice=0;
+        if(movie.getMovieType()==Type.BLOCKBUSTER)
+            typePrice=1.2;
+        else if(movie.getMovieType()==Type.IMAX)
+            typePrice=1.5;
+        else if(movie.getMovieType()==Type.THREED)
+            typePrice=1.8;
+        else 
+            typePrice=1.0;
 
-        if(t.getTicketType()==TicType.ADULT)
-            agePrice=0;
-        else if(t.getTicketType() == TicType.CHILD)
-            agePrice=-3;
-        else if(t.getTicketType() == TicType.SENIOR)
-            agePrice=-2;
+        double totprice= basePrice*agePrice*typePrice;
 
-        int temptotal = basePrice+agePrice; 
 
-        t.setPrice(temptotal);
-
-        return temptotal;
+        return totprice;
     }
 
     public void getTicketDetails(Ticket t)
