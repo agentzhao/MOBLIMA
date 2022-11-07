@@ -1,6 +1,9 @@
 package boundaries;
 
 import java.util.*;
+
+import javax.lang.model.util.ElementScanner14;
+
 import controllers.*;
 import utils.MoblimaInitializer;
 import entities.Movie;
@@ -167,7 +170,7 @@ public class MOBLIMA {
     {
       mm.getMovieDetails(temp);
     }
-    while(choice != 4)
+    while(choice != 2)
     {
       System.out.println("1: Check screen time\n2: Exit");
       choice = sc.nextInt();
@@ -184,8 +187,6 @@ public class MOBLIMA {
           break;
       }
     }
-    
-    sc.close();
   }
 
   public static void screenTimeMenu(String movieName)
@@ -194,6 +195,7 @@ public class MOBLIMA {
     System.out.println("1: Get Seat\n2: Exit");
     Scanner sc = new Scanner(System.in);
     int c = sc.nextInt();
+    
     switch(c)
     {
       case 1:
@@ -202,26 +204,51 @@ public class MOBLIMA {
       case 2: 
         break;
       default:
-        System.out.println("Please input a valid data");
+        System.out.println("Please input a valid number");
+        break;
     }
-    seatMenu(movieName);
-    sc.close();
+    //sc.close();
   }
 
   public static void seatMenu(String movieName)
   {
     //Print out Seating plan
-    System.out.println("1: Book ticket\n2: Exit");
+    if(tempUser != null)
+    {
+      System.out.println("1: Book ticket\n2: Exit");
+    }
+    else
+    {
+      System.out.println("1: Exit");
+    }
     Scanner sc = new Scanner(System.in);
     int c = sc.nextInt();
     switch(c)
     {
       case 1:
-        System.out.println("Please select a seat");
-        sc.nextInt();
-        bookingMenu(movieName);
+        if(tempUser != null)
+        {
+          System.out.println("Please select a seat");
+          //sc.nextInt();
+          bookingMenu(movieName);
+        }
+        else
+        {
+          System.out.println("Exiting Seat Menu");
+        }
+        break;
+      case 2:
+        if(tempUser == null)
+        {
+          System.out.println("Please input a valid number");
+        }
+        break;
+      default:
+        System.out.println("Please input a valid number");
+        break;
+        
     }
-    sc.close();
+    //sc.close();
   }
 
   public static void bookingMenu(String movieName)
