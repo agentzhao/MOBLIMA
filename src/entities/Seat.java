@@ -33,9 +33,6 @@ public class Seat {
     public void setSeatID(int seatID) {
         this.seatID = seatID;
     }
-    public void setAvailability(boolean newAvailability){
-        this.available = newAvailability;
-    }
     public void setTicketHolder(int ticketHolder){
         this.ticketHolder = ticketHolder;
     }

@@ -16,5 +16,4 @@ public class Cineplex{
     public Cinema[] getCinemas() {
         return cinemas;
     }
-    
 }
