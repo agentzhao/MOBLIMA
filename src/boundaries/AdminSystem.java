@@ -2,15 +2,15 @@ package boundaries;
 
 import java.util.Scanner;
 
-import controllers.CinemaManager;
+import controllers.CineplexManager;
 import controllers.MovieManager;
 
 
 public class AdminSystem {
     private MovieManager mm;
-    private CinemaManager cm;
+    private CineplexManager cm;
     private Admin a;
-    public AdminSystem(MovieManager m, CinemaManager c) {
+    public AdminSystem(MovieManager m, CineplexManager c) {
         mm = m;
         cm = c;
     }

@@ -47,6 +47,10 @@ public class CineplexManager{
         }
         return null;
     }
+    public List<Cineplex> getCineplexList()
+    {
+        return cineplexes;
+    }
 
     //Create, Update, Remove showtime
     public void createShowtime(String cineplexID, String cinemaName, int movieID){

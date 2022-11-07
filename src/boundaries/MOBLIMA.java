@@ -6,12 +6,13 @@ import javax.lang.model.util.ElementScanner14;
 
 import controllers.*;
 import utils.MoblimaInitializer;
+import entities.Cineplex;
 import entities.Movie;
 
 public class MOBLIMA {
 
   private static MovieManager mm;
-  private static CinemaManager cm = new CinemaManager();
+  private static CineplexManager cm = new CineplexManager();
   private static UserSystem us = new UserSystem(mm);
   private static AdminSystem as = new AdminSystem(mm, cm);
   private static Login log;
@@ -68,7 +69,7 @@ public class MOBLIMA {
     
     /* Initialise Cineplexes Below */
    
-    cm = new CinemaManager();
+    cm = new CineplexManager();
     us = new UserSystem(mm);
     as = new AdminSystem(mm, cm);
   }
@@ -155,6 +156,9 @@ public class MOBLIMA {
         case 6:
           System.out.println("Shutting down MOBLIMA");
           return;
+        default:
+          System.out.println("Enter a valid number");
+          break;
       }
     }
     sc.close();
@@ -170,6 +174,11 @@ public class MOBLIMA {
     {
       mm.getMovieDetails(temp);
     }
+    else
+    {
+      System.out.println("Movie not found");
+      return;
+    }
     while(choice != 2)
     {
       System.out.println("1: Check screen time\n2: Exit");
@@ -178,7 +187,7 @@ public class MOBLIMA {
       {
         case 1:
           //get screen time for show
-          screenTimeMenu(searchName);
+          screenTimeMenu(temp.getMovieID());
           break;
         case 2:
           break;
@@ -189,9 +198,15 @@ public class MOBLIMA {
     }
   }
 
-  public static void screenTimeMenu(String movieName)
+  public static void screenTimeMenu(int movieID)
   {
     //TODO Grab screentime from cinemaManager and seat from seatManager
+    List<Cineplex> cps = cm.getCineplexList();
+    for(Cineplex c : cps)
+    {
+      cm.displayScreentime(c.getCineplexID(), movieID);
+    }
+    
     System.out.println("1: Get Seat\n2: Exit");
     Scanner sc = new Scanner(System.in);
     int c = sc.nextInt();
@@ -199,7 +214,7 @@ public class MOBLIMA {
     switch(c)
     {
       case 1:
-        seatMenu(movieName);
+        //seatMenu(movieName);
         break;
       case 2: 
         break;
