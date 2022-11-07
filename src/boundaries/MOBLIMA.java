@@ -12,6 +12,10 @@ public class MOBLIMA {
   private static UserSystem us = new UserSystem(mm);
   private static AdminSystem as = new AdminSystem(mm, cm);
   private static Login log;
+  private static TicketManager tm;
+  private static Admin a;
+  private static Customer c;
+  private static User tempUser;
   
   public static void main(String[] args) {
     //ReviewManager rm = new ReviewManager();
@@ -68,9 +72,7 @@ public class MOBLIMA {
 
   public static void mainMenu(Login log)
   {
-    Admin a;
-    Customer c;
-    User tempUser;
+   
     int login = 0, admin = 0;
     Scanner sc = new Scanner(System.in);
     int choice = -1;
@@ -88,7 +90,7 @@ public class MOBLIMA {
       
       switch (choice) {
         case 1:
-          bookingMenu();
+          movieMenu();
           break;
         case 2:
           System.out.println("Sort by:\n1: Rating\n2: Ticket Sales");
@@ -154,11 +156,12 @@ public class MOBLIMA {
     }
     sc.close();
   }
-  public static void bookingMenu()
+  public static void movieMenu()
   {
     Scanner sc = new Scanner(System.in);
-    System.out.println("Please Enter the movie ID: "); //should it be name?
-    Movie temp = mm.searchMovie(sc.nextInt());
+    System.out.println("Please Enter the movie name: ");
+    String searchName = sc.next();
+    Movie temp = mm.searchMovieName(searchName);
     int choice = 0;
     if(temp != null)
     {
@@ -166,20 +169,15 @@ public class MOBLIMA {
     }
     while(choice != 4)
     {
-      System.out.println("1: Check Seat\n2: Check screen time\n3: Book ticket\n4: Exit");
+      System.out.println("1: Check screen time\n2: Exit");
       choice = sc.nextInt();
       switch(choice)
       {
         case 1:
-          //get seat for show
+          //get screen time for show
+          screenTimeMenu(searchName);
           break;
         case 2:
-          //get screen time for show
-          break;
-        case 3:
-          //book ticket
-          break;
-        case 4:
           break;
         default:
           System.out.println("Enter a valid number");
@@ -188,6 +186,56 @@ public class MOBLIMA {
     }
     
     sc.close();
+  }
+
+  public static void screenTimeMenu(String movieName)
+  {
+    //TODO Grab screentime from cinemaManager and seat from seatManager
+    System.out.println("1: Get Seat\n2: Exit");
+    Scanner sc = new Scanner(System.in);
+    int c = sc.nextInt();
+    switch(c)
+    {
+      case 1:
+        seatMenu(movieName);
+        break;
+      case 2: 
+        break;
+      default:
+        System.out.println("Please input a valid data");
+    }
+    seatMenu(movieName);
+    sc.close();
+  }
+
+  public static void seatMenu(String movieName)
+  {
+    //Print out Seating plan
+    System.out.println("1: Book ticket\n2: Exit");
+    Scanner sc = new Scanner(System.in);
+    int c = sc.nextInt();
+    switch(c)
+    {
+      case 1:
+        System.out.println("Please select a seat");
+        sc.nextInt();
+        bookingMenu(movieName);
+    }
+    sc.close();
+  }
+
+  public static void bookingMenu(String movieName)
+  {
+    if(tempUser.getType() == 0)
+    {
+      //Waiting for ticketmanager update
+      //tm.createTicket(c, Movie class);
+    }
+    else
+    {
+      //tm.createTicket(c, Movie class);
+      System.out.println("Admin cannot book ticket");
+    }
   }
 
 }

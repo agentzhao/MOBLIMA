@@ -6,10 +6,9 @@ public class Customer extends User {
     private String mobile_number;
     private String name;
     private int age;
-    private int type;
 
-    public Customer(String email, String password, int type, String mobile_number, String name, int age) {
-        super(email, password, type);
+    public Customer(String email, String password, int type, String mobile_number, String name, int age, int id) {
+        super(email, password, type, id);
         this.mobile_number = mobile_number;
         this.name = name;
         this.age = age;

@@ -5,7 +5,7 @@ import java.util.*;
 public class Login {
     private ArrayList<Customer> customer = new ArrayList<Customer>();
     private ArrayList<Admin> admin = new ArrayList<Admin>();
-    private User returnUser;
+    private User returnUser = null;
 
     public Login() {
 
@@ -15,7 +15,7 @@ public class Login {
       this.customer = customer;
     }
     
-    public void addAdminList(ArrayList<Admin> admins) {
+    public void addAdminList(ArrayList<Admin> admin) {
       this.admin = admin;
     }
 
@@ -28,8 +28,8 @@ public class Login {
         admin.add(newAdmin);
     }
 
-    public void createCustomer(String email, String password, int type, String mobile_number, String name, int age) {
-        Customer newCustomer = new Customer(email, password, type, mobile_number, name, age);
+    public void createCustomer(String email, String password, int type, String mobile_number, String name, int age, int id) {
+        Customer newCustomer = new Customer(email, password, type, mobile_number, name, age, id);
         customer.add(newCustomer);
     }
 

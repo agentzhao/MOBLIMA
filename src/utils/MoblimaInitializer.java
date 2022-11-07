@@ -189,8 +189,9 @@ public class MoblimaInitializer {
         String mobile_number = br.readLine();
         String name = br.readLine();
         int age = Integer.parseInt(br.readLine());
+        int id = Integer.parseInt(br.readLine());
       
-        Customer newCustomer = new Customer(email, password, type, mobile_number, name, age);
+        Customer newCustomer = new Customer(email, password, type, mobile_number, name, age, id);
         customers.add(newCustomer);
         
         br.close();
@@ -221,6 +222,7 @@ public class MoblimaInitializer {
         int type = Integer.parseInt(br.readLine());
         int id = Integer.parseInt(br.readLine());
         String cineplexID = br.readLine();
+        int age = Integer.parseInt(br.readLine());
       
         Admin newAdmin = new Admin(email, password, type, id, cineplexID);
         admins.add(newAdmin);
