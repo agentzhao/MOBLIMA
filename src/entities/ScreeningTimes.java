@@ -55,23 +55,23 @@ public class ScreeningTimes {
         return availability;
     }
     public void changeSeat(int bfSeatID, int aftSeatID){
-        seats[aftSeatID].setAvailability(false);
-        seats[bfSeatID].setAvailability(true);
+        seats[aftSeatID].setAvailable(false);
+        seats[bfSeatID].setAvailable(true);
         seats[aftSeatID].setTicketHolder(seats[bfSeatID].getTicketholder());
         seats[bfSeatID].setTicketHolder(0);
 
     }
     public void bookSeat(int seatID, int ticketholder){
-        seats[seatID].setAvailability(false);
+        seats[seatID].setAvailable(false);
         seats[seatID].setTicketHolder(ticketholder);
     }
     public void unbookSeat(int seatID){
-        seats[seatID].setAvailability(true);
+        seats[seatID].setAvailable(true);
         seats[seatID].setTicketHolder(0);
     }
     public void makeAllAvailable(){
         for(int i=0; i<seats.length; i++){
-            seats[i].setAvailability(true);
+            seats[i].setAvailable(true);
         }
     }
 }
