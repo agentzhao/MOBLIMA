@@ -250,7 +250,7 @@ public class CineplexManager{
         int count =0;
         System.out.print("Screen\n");
         System.out.print(" 1 "+" 2 "+" 3 "+" 4 "+" 5 "+"  "+" 6 "+" 7 "+" 8 "+" 9 "+" 10\n");
-        System.out.print("1");
+        System.out.print("0");
         for(int i=0; i<seats.length; i++){
             System.out.print( "|");
             if(aseats[count] == seats[i]){
