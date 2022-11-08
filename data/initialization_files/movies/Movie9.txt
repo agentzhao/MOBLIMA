@@ -1,9 +1,9 @@
 9
 The Avengers
 REGULAR
-ENDOFSHOWING
+NOWSHOWING
 PG13
 Nick Fury is compelled to launch the Avengers Initiative when Loki poses a threat to planet Earth. His squad of superheroes put their minds together to accomplish the task.
 Robert Downey Jr.,Chris Evans,Mark Ruffalo,Chris Hemsworth,Scarlett Johansson,Jeremy Renner
 Joss Whedon
-151881552
+1518815
