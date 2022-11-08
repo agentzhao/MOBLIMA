@@ -173,11 +173,11 @@ public class CineplexManager{
         }
 
         for(Cinema cinema : c.getCinemas()){
-            System.out.printf("%22s: %10d%n", cinema.getCinemaName()+"\n");
-            System.out.println();
+            System.out.println(cinema.getCinemaName());
             for(ScreeningTimes screentime : cinema.getScreeningTimes()){
-                if(screentime.getMovieID() == movieID)
-                    System.out.printf("%22s: %10d%n", screentime.getDate() + screentime.getScreenTime()+"\n");
+                if(screentime.getMovieID() == movieID) {
+                  System.out.println(screentime.getDate() + " - " + screentime.getScreenTime());
+                }
             }
         }
     }
