@@ -4,15 +4,18 @@ import java.util.Scanner;
 
 import controllers.CineplexManager;
 import controllers.MovieManager;
+import controllers.TicketManager;
 
 
 public class AdminSystem {
     private MovieManager mm;
     private CineplexManager cm;
     private Admin a;
-    public AdminSystem(MovieManager m, CineplexManager c) {
+    private TicketManager tm;
+    public AdminSystem(MovieManager m, CineplexManager c, TicketManager t) {
         mm = m;
         cm = c;
+        tm = t;
     }
     public void setAdmin(Admin a)
     {
@@ -26,11 +29,12 @@ public class AdminSystem {
     public void adminPanel()
     {
         Scanner sc = new Scanner(System.in);
-        int id, cid;
+        int id;
+        String cid;
         int choice = 0;
         while(choice != 8)
         {
-            System.out.println("1: Create Movie Listing\n2: Update Movie Listing\n3:Remove Movie Listing\n4:Create Cinema showtime\n5: Update Cinema Showtime\n6: Remove Cinema Showtime\n7: Configure System settings\n8: Exit");
+            System.out.println("1: Create Movie Listing\n2: Update Movie Listing\n3:Remove Movie Listing\n4:Create Cinema showtime\n5: Update Cinema Showtime\n6: Remove Cinema Showtime\n7: Configure System settings\n8: Update ticket\n9: Exit");
             choice = sc.nextInt();
             switch(choice)
             {
@@ -51,26 +55,35 @@ public class AdminSystem {
                     System.out.println("Enter the movie ID of the movie you want to add screentime for");
                     id = sc.nextInt();
                     System.out.println("Select the cinema you want to add screentime for");
-                    cid = sc.nextInt();
-                    //cm.createShowtime(, id); //waiting for init to complete
+                    cid = sc.next();
+                    cm.createShowtime(a.getcineplexID(), cid, id); 
                     break;
                 case 5:
                     System.out.println("Enter the movie ID of the movie you want to update screentime for");
                     id = sc.nextInt();
                     System.out.println("Select the cinema you want to update screentime for");
-                    cid = sc.nextInt();
-                    //cm.updateShowtime(null, cid); //waiting for init to complete
+                    cid = sc.next();
+                    cm.updateShowtime(a.getcineplexID(), cid, id); 
                     break;
                 case 6:
                     System.out.println("Enter the movie ID of the movie you want to remove screentime for");
                     id = sc.nextInt();
                     System.out.println("Select the cinema you want to remove screentime for");
-                    cid = sc.nextInt();
-                    //cm.removeShowTime(null, cid); //waiting for init to complete
+                    cid = sc.next();
+                    cm.removeShowTime(a.getcineplexID(), cid, id);
                     break;
                 case 7:
+                    System.out.println("1: Set base price\n2: Set age price\n3: Set type price");
+                    tm.setBasePrice(choice);
                     break;
                 case 8:
+                    System.out.println("End the userid that you want to edit");
+                    id = sc.nextInt();
+                    System.out.println("Enter the movie of the ticket");
+                    cid = sc.next();
+                    tm.updateTicket(cid, id);
+                    break;
+                case 9:
                     break;
                 default:
                     System.out.println("Please input a valid number");

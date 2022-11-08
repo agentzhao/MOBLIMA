@@ -13,10 +13,10 @@ public class MOBLIMA {
 
   private static MovieManager mm;
   private static CineplexManager cm;
-  private static UserSystem us = new UserSystem(mm);
-  private static AdminSystem as = new AdminSystem(mm, cm);
-  private static Login log;
   private static TicketManager tm;
+  private static UserSystem us;
+  private static AdminSystem as;
+  private static Login log;
   private static Admin a;
   private static Customer c;
   private static User tempUser;
@@ -75,7 +75,7 @@ public class MOBLIMA {
     cm.setCineplexes(mi.initializeCineplex(mm.getMovieList()));
     
     us = new UserSystem(mm);
-    as = new AdminSystem(mm, cm);
+    as = new AdminSystem(mm, cm, tm);
   }
 
   public static void mainMenu(Login log)
@@ -158,7 +158,10 @@ public class MOBLIMA {
           }
           break;
         case 6:
-          System.out.println("Shutting down MOBLIMA");
+        if(admin == 1)
+          {
+            System.out.println("Shutting down MOBLIMA");
+          }
           return;
         default:
           System.out.println("Enter a valid number");
@@ -191,7 +194,7 @@ public class MOBLIMA {
       {
         case 1:
           //get screen time for show
-          screenTimeMenu(temp.getMovieID());
+          screenTimeMenu(temp);
           break;
         case 2:
           break;
@@ -202,13 +205,13 @@ public class MOBLIMA {
     }
   }
 
-  public static void screenTimeMenu(int movieID)
+  public static void screenTimeMenu(Movie movie)
   {
     //TODO Grab screentime from cinemaManager and seat from seatManager
     List<Cineplex> cps = cm.getCineplexList();
     for(Cineplex c : cps)
     {
-      cm.displayScreentime(c.getCineplexID(), movieID);
+      cm.displayScreentime(c.getCineplexID(), movie.getMovieID());
     }
     
     System.out.println("1: Get Seat\n2: Exit");
@@ -218,7 +221,8 @@ public class MOBLIMA {
     switch(c)
     {
       case 1:
-        //seatMenu(movieName);
+        seatMenu(movie);
+       
         break;
       case 2: 
         break;
@@ -229,9 +233,10 @@ public class MOBLIMA {
     //sc.close();
   }
 
-  public static void seatMenu(String movieName)
+  public static void seatMenu(Movie movie)
   {
     //Print out Seating plan
+    cm.printSeats(null, null, null, null);
     if(tempUser != null)
     {
       System.out.println("1: Book ticket\n2: Exit");
@@ -249,7 +254,7 @@ public class MOBLIMA {
         {
           System.out.println("Please select a seat");
           //sc.nextInt();
-          bookingMenu(movieName);
+          bookingMenu(movie);
         }
         else
         {
@@ -270,7 +275,7 @@ public class MOBLIMA {
     //sc.close();
   }
 
-  public static void bookingMenu(String movieName)
+  public static void bookingMenu(Movie movie)
   {
     if(tempUser.getType() == 0)
     {
