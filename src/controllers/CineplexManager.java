@@ -53,13 +53,22 @@ public class CineplexManager{
     }
 
     //Create, Update, Remove showtime
-    public void createShowtime(String cineplexID, String cinemaName, int movieID){
+    public void createShowtime(String cineplexID, int movieID){
         //Getting the cineplex
         Cineplex c = getCineplex(cineplexID);
         if(c == null){
             System.out.println("This Cineplex is not available");
             return;
         }
+
+        int count=1;
+        for(Cinema cinema: c.getCinemas()){
+            System.out.println(count + ": " + cinema.getCinemaName());
+            count++;
+        }
+        System.out.println("Choose the Cinema name");
+        int cinemaChoice = sc.nextInt();
+        String cinemaName = c.getCinemas()[cinemaChoice].getCinemaName();
 
         //Getting the cinema
         Cinema cinema = getCinema(c, cinemaName);
@@ -94,14 +103,22 @@ public class CineplexManager{
         cinema.screeningTimes.add(screentime);
         System.out.println("Showtime created!");
     }
-    public void updateShowtime(String cineplexID,String cinemaName, int movieID){
+    public void updateShowtime(String cineplexID, int movieID){
         Cineplex c = getCineplex(cineplexID);
         if(c == null){
             System.out.println("This Cineplex is not available");
             return;
         }
-
         //Getting the cinema
+        int count=1;
+        for(Cinema cinema: c.getCinemas()){
+            System.out.println(count + ": " + cinema.getCinemaName());
+            count++;
+        }
+        System.out.println("Choose the Cinema name");
+        int cinemaChoice = sc.nextInt();
+        String cinemaName = c.getCinemas()[cinemaChoice].getCinemaName();
+
         Cinema cinema = getCinema(c, cinemaName);
         if(cinema == null){
             System.out.println("This Cinema is not available");
@@ -126,7 +143,7 @@ public class CineplexManager{
         });
         System.out.println("No such Showtime yet!");
     }
-    public void removeShowTime(String cineplexID,String cinemaName, int movieID){
+    public void removeShowTime(String cineplexID, int movieID){
         boolean check = false;
 
         Cineplex c = getCineplex(cineplexID);
@@ -134,6 +151,15 @@ public class CineplexManager{
             System.out.println("This Cineplex is not available");
             return;
         }
+
+        int count=1;
+        for(Cinema cinema: c.getCinemas()){
+            System.out.println(count + ": " + cinema.getCinemaName());
+            count++;
+        }
+        System.out.println("Choose the Cinema name");
+        int cinemaChoice = sc.nextInt();
+        String cinemaName = c.getCinemas()[cinemaChoice].getCinemaName();
 
         //Getting the cinema
         Cinema cinema = getCinema(c, cinemaName);
@@ -183,68 +209,55 @@ public class CineplexManager{
     }
 
     //Display all screening time for movie
-    public void displayAllScreentime(int movieID){
+    public ScreeningTimes displayAllScreentime(int movieID){
+        int count = 1;
         for(Cineplex cineplex: cineplexes){
             System.out.print(cineplex.getCineplexID()+"\n");
             for(Cinema cinema: cineplex.getCinemas()){
                 System.out.print(cinema.getCinemaName());
                 for(ScreeningTimes screentime: cinema.getScreeningTimes()){
                     if(screentime.getMovieID() == movieID) {
-                        System.out.println(screentime.getDate() + " - " + screentime.getScreenTime());
+                        System.out.println(count+": "+screentime.getDate() + " - " + screentime.getScreenTime());
+                        count++;
                     }
                 }
             }
         }
+        System.out.println("Choose the screening time:");
+        int ScreeningTimeChoice = sc.nextInt();
+        while(ScreeningTimeChoice>count && ScreeningTimeChoice!=0){
+            System.out.println("Invalid choice!");
+            System.out.println("Choose the screening time:");
+            System.out.println("To exit, choose 0");
+            ScreeningTimeChoice = sc.nextInt();
+        }
+        if(ScreeningTimeChoice == 0)
+        {
+            return null;
+        }
+        count=1;
+        for(Cineplex cineplex: cineplexes){
+            System.out.print(cineplex.getCineplexID()+"\n");
+            for(Cinema cinema: cineplex.getCinemas()){
+                System.out.print(cinema.getCinemaName());
+                for(ScreeningTimes screentime: cinema.getScreeningTimes()){
+                    if(screentime.getMovieID() == movieID && count == ScreeningTimeChoice) {
+                        return screentime;
+                    }
+                }
+            }
+        }
+        return null;
     }
 
     //Number for seats available
-    public void getSeatAvailability(String cineplexID, String cinemaName, String date, String showtime){
-        Cineplex c = getCineplex(cineplexID);
-        if(c == null){
-            System.out.println("This Cineplex is not available");
-            return;
-        }
-
-        //Getting the cinema
-        Cinema cinema = getCinema(c, cinemaName);
-        if(cinema == null){
-            System.out.println("This Cinema is not available");
-            return;
-        }
-
-        //getting the screeningtime
-        ScreeningTimes screentime = getScreeningTime(cinema, date, showtime);
-        if(screentime == null){
-            System.out.println("No such Showtime yet");
-            return;
-        }
-
-        Seat[] seats = screentime.getSeats();
+    public void getSeatAvailability(ScreeningTimes screentime){
+        Seat[] seats = screentime.seatsAvailable();
         System.out.println("The seats available are: " + seats.length);
     }
 
     //Print the ascii cinema seat
-    public void printSeats(String cineplexID, String cinemaName, String date, String showtime){
-        Cineplex c = getCineplex(cineplexID);
-        if(c == null){
-            System.out.println("This Cineplex is not available");
-            return;
-        }
-
-        //Getting the cinema
-        Cinema cinema = getCinema(c, cinemaName);
-        if(cinema == null){
-            System.out.println("This Cinema is not available");
-            return;
-        }
-
-        //getting the screeningtime
-        ScreeningTimes screentime = getScreeningTime(cinema, date, showtime);
-        if(screentime == null){
-            System.out.println("No such Showtime yet!");
-            return;
-        }
-
+    public void printSeats(ScreeningTimes screentime){
         Seat[] seats = screentime.getSeats();
         Seat[] aseats = screentime.seatsAvailable();
         int count =0;
@@ -278,97 +291,13 @@ public class CineplexManager{
     }
 
     //Booking, Unbooking, Changing Seats
-    public void  bookSeat(String cineplexID, String cinemaName,  int seatID, int tID){
-        Cineplex c = getCineplex(cineplexID);
-        if(c == null){
-            System.out.println("This Cineplex is not available");
-            return;
-        }
-
-        //Getting the cinema
-        Cinema cinema = getCinema(c, cinemaName);
-        if(cinema == null){
-            System.out.println("This Cinema is not available");
-            return;
-        }
-
-        //getting the showtime
-        System.out.println("Enter show time: ");
-        String showtime = sc.next();
-
-        //getting the date
-        System.out.println("Enter date: ");
-        String date = sc.next();
-
-        //getting the screeningtime
-        ScreeningTimes screentime = getScreeningTime(cinema, date, showtime);
-        if(screentime == null){
-            System.out.println("No such Showtime yet!");
-            return;
-        }
-
+    public void  bookSeat(ScreeningTimes screentime, int seatID, int tID){
         screentime.bookSeat(seatID, tID);
     }
-    public void unbookSeat(String cineplexID, String cinemaName, int seatID){
-        Cineplex c = getCineplex(cineplexID);
-        if(c == null){
-            System.out.println("This Cineplex is not available");
-            return;
-        }
-
-        //Getting the cinema
-        Cinema cinema = getCinema(c, cinemaName);
-        if(cinema == null){
-            System.out.println("This Cinema is not available");
-            return;
-        }
-
-        //getting the showtime
-        System.out.println("Enter show time: ");
-        String showtime = sc.next();
-
-        //getting the date
-        System.out.println("Enter date: ");
-        String date = sc.next();
-
-        //getting the screeningtime
-        ScreeningTimes screentime = getScreeningTime(cinema, date, showtime);
-        if(screentime == null){
-            System.out.println("No such Showtime yet!");
-            return;
-        }
-
+    public void unbookSeat(ScreeningTimes screentime, int seatID){
         screentime.unbookSeat(seatID);
     }
-    public void changeSeat(String cineplexID, String cinemaName, int b4seatID, int aftseatID){
-        Cineplex c = getCineplex(cineplexID);
-        if(c == null){
-            System.out.println("This Cineplex is not available");
-            return;
-        }
-
-        //Getting the cinema
-        Cinema cinema = getCinema(c, cinemaName);
-        if(cinema == null){
-            System.out.println("This Cinema is not available");
-            return;
-        }
-
-        //getting the showtime
-        System.out.println("Enter show time: ");
-        String showtime = sc.next();
-
-        //getting the date
-        System.out.println("Enter date: ");
-        String date = sc.next();
-
-        //getting the screeningtime
-        ScreeningTimes screentime = getScreeningTime(cinema, date, showtime);
-        if(screentime == null){
-            System.out.println("No such Showtime yet!");
-            return;
-        }
-
+    public void changeSeat(ScreeningTimes screentime, int b4seatID, int aftseatID){
         screentime.changeSeat(b4seatID, aftseatID);
     }
     
