@@ -176,7 +176,7 @@ public class CineplexManager{
             System.out.print(cinema.getCinemaName()+"\n");
             for(ScreeningTimes screentime : cinema.getScreeningTimes()){
                 if(screentime.getMovieID() == movieID)
-                    System.out.print(screentime.getDate() + screentime.getScreenTime()+"\n");
+                    System.out.print(screentime.getDate() + " " + screentime.getScreenTime()+"\n");
             }
         }
     }
@@ -189,7 +189,7 @@ public class CineplexManager{
                 System.out.print(cinema.getCinemaName());
                 for(ScreeningTimes screentime: cinema.getScreeningTimes()){
                     if(screentime.getMovieID() == movieID)
-                        System.out.print(screentime.getDate()+screentime.getScreenTime()+"\n");
+                        System.out.print(screentime.getDate() + " " + screentime.getScreenTime()+"\n");
                 }
             }
         }
@@ -247,13 +247,13 @@ public class CineplexManager{
         Seat[] aseats = screentime.seatsAvailable();
         int count =0;
         System.out.print("Screen\n");
-        System.out.print("1"+"2"+"3"+"4"+"5"+"6"+"7"+"8"+"9"+"10\n");
+        System.out.print(" 1 "+" 2 "+" 3 "+" 4 "+" 5 "+"  "+" 6 "+" 7 "+" 8 "+" 9 "+" 10\n");
         System.out.print("1");
         for(int i=0; i<seats.length; i++){
             System.out.print( "|");
             if(aseats[count] == seats[i]){
                 if(seats[i].getType() != Type.Normal){
-                    System.out.print( "X X");
+                    System.out.print( "X  X");
                     i++;
                 }
                 else    System.out.print( "X");
@@ -270,7 +270,7 @@ public class CineplexManager{
                 System.out.println();
                 System.out.print(i/10);
             }
-            else if(i%5 == 0)   System.out.print( " ");
+            else if(i%5 == 0)   System.out.print( "  ");
         }
         System.out.print( "Entrance\n");
     }
