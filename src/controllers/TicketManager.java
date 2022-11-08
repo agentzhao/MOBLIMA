@@ -5,13 +5,12 @@ import entities.Movie;
 import entities.Seat;
 import entities.Ticket;
 import entities.Transaction;
+import entities.Movie.Status;
 import entities.Movie.Type;
 import entities.Ticket.TicType;
 
 
 import java.util.*;
-
-//import javax.lang.model.util.ElementScanner14;
 
 import boundaries.Customer;
 
@@ -23,9 +22,11 @@ public class TicketManager{
     private List<Ticket> ticket;
 
     private double basePrice;
-    private double agePrice;
-    private double typePrice;
-
+    private double agePrice[]= new double[3];
+    private int agePriceVar;
+    private double typePrice[] = new double[4];
+    private int typePriceVar;
+    private double previewPrice;
     Scanner sc = new Scanner(System.in);
 
     //constructor
@@ -33,6 +34,17 @@ public class TicketManager{
         ticket = new ArrayList<Ticket>();
         transactions = new ArrayList<Transaction>();
         this.basePrice=12;
+
+        agePrice[0] =0.8; //SENIOR
+        agePrice[1] =1.0; //ADULT
+        agePrice[2] =0.5; //CHILD
+
+        typePrice[0]= 1.2; //BLOCKBUSTER
+        typePrice[1]= 1.8; //THREED
+        typePrice[2]= 1.5; //IMAX
+        typePrice[3]= 1.0; //REGULAR
+
+        previewPrice=2.0;
     }
 
     public void addTicketList (List<Ticket> ticket)
@@ -62,7 +74,7 @@ public class TicketManager{
         return this.basePrice;
     }
 
-    public void createTicket(Customer customer, Cinema cinema, Seat seat, Movie movie)
+    public Ticket createTicket(Customer customer, Cinema cinema, Seat seat, Movie movie)
     {
         
         Ticket newTicket= new Ticket(customer.getId(), movie.getMovieName());
@@ -82,17 +94,17 @@ public class TicketManager{
         if(customer.getAge()>=60)
         {
             newTicket.setTicketType(TicType.SENIOR);
-            agePrice=0.8;
+            agePriceVar=0;
         }
         else if(customer.getAge()<=12)
         {
             newTicket.setTicketType(TicType.CHILD);
-            agePrice=1;
+            agePriceVar=2;
         }
         else
         {
             newTicket.setTicketType(TicType.ADULT);
-            agePrice=0.5;
+            agePriceVar=1;
         }
         
         //Enter Movie Time
@@ -119,13 +131,15 @@ public class TicketManager{
 
         //Add to list
         ticket.add(newTicket);
+
+        return newTicket;
     }
 
 
 
 
     //CREATING A TRANSACTION
-    public void createTransaction(Customer customer, Cinema cinema)
+    public Transaction createTransaction(Customer customer, Cinema cinema)
     {
         Transaction newTran= new Transaction(customer.getName(), customer.getId());
         
@@ -146,6 +160,8 @@ public class TicketManager{
 
         //Add to list
         transactions.add(newTran);
+
+        return newTran;
     }
 
 
@@ -164,6 +180,7 @@ public class TicketManager{
 
         if(tic==null)
             return 0;
+
 
         if(tic.size()!=1) 
         {
@@ -257,9 +274,11 @@ public class TicketManager{
             if(t.getUserID()==userID && t.getMovieName().equals(movieName))
             {
                 ticket.remove(t);
+                System.out.println("Ticket deleted sucessfully!");
                 return 1;//success
             }
         }
+        System.out.println("Ticket not found!");
         return 0;//unsuccessfull
 
     }
@@ -286,6 +305,9 @@ public class TicketManager{
                 searchTickets.add(t);
             }
         }
+        if(searchTickets.isEmpty())
+        System.out.println("Ticket not found!");
+
         return searchTickets;
     }
 
@@ -301,6 +323,9 @@ public class TicketManager{
                 searchTickets.add(t);
             }
         }
+        if(searchTickets.isEmpty())
+        System.out.println("Ticket not found!");
+
         return searchTickets;
     }
 
@@ -313,18 +338,25 @@ public class TicketManager{
      */
     public double calPrice (Movie movie)
     {
+ 
+        double totprice;
 
         if(movie.getMovieType()==Type.BLOCKBUSTER)
-            typePrice=1.2;
-        else if(movie.getMovieType()==Type.IMAX)
-            typePrice=1.5;
+            typePriceVar=0;
         else if(movie.getMovieType()==Type.THREED)
-            typePrice=1.8;
+            typePriceVar=1;
+        else if(movie.getMovieType()==Type.IMAX)
+            typePriceVar=2;
         else 
-            typePrice=1.0;
+            typePriceVar=3;
 
-        double totprice= basePrice*agePrice*typePrice;
-
+        if(movie.getMovieStatus()==Status.PREVIEW)
+         totprice= basePrice*agePrice[agePriceVar]*typePrice[typePriceVar]*previewPrice;
+        
+        else 
+         totprice= basePrice*agePrice[agePriceVar]*typePrice[typePriceVar];
+     
+        totprice= totprice*0.7 + totprice; //Adding GST
 
         return totprice;
     }
@@ -342,4 +374,95 @@ public class TicketManager{
         System.out.println("Seat ID: "+t.getSeatID());
     }
 
+
+    public int getTicketid (String movieName, int userID)
+    {
+        ArrayList<Ticket> tic = new ArrayList<Ticket>();
+        
+        tic= searchTicket(movieName, userID);
+        int ch; 
+
+        if(tic==null)
+            return 0;
+
+
+        if(tic.size()!=1) 
+        {
+             System.out.println("Select a ticket to update:");
+             for(int i=0; i<tic.size(); i++)
+              System.out.println(i+1+". "+ tic.get(i).getTicketID());
+            ch=sc.nextInt();
+        }
+        else 
+        ch= 0;
+
+        tic.get(ch).getTicketID();
+        return 0;
+    }
+
+    public void updatePrices()
+    {
+        System.out.println("What price do you want to update?");
+        System.out.println("1. Age Price <SENIOR, ADULT, CHILD> ");
+        System.out.println("2. Movie Type Price <BLOCKBUSTER, PREVIEW, NOWSHOWING, ENDOFSHOWING> ");
+        System.out.println("3. Preview Price");
+
+        int choice= sc.nextInt();
+
+        if(choice == 1)//update age price
+        {
+            double multiplier;
+            int ch;
+            System.out.println("For what age do you want to update the price?");
+            System.out.println("1. SENIOR");
+            System.out.println("2. ADULT");
+            System.out.println("3. CHILD");
+            System.out.println("Enter your choice: ");
+            ch=sc.nextInt();
+
+            if(ch==1||ch==2||ch==3)
+            {
+            System.out.println("Enter the new multiplier: ");
+            multiplier=sc.nextDouble();
+            agePrice[ch-1]=multiplier; //Update the multiplier
+            }
+            else 
+            System.out.println("Invalid Choice!");
+
+
+        }
+        else if(choice == 2)// update type price
+        {
+            double multiplier;
+            int ch;
+            System.out.println("For what type of moive do you want to update the price?");
+            System.out.println("1. BLOCKBUSTER");
+            System.out.println("2. THREED");
+            System.out.println("3. IMAX");
+            System.out.println("4. REGULAR");
+            System.out.println("Enter your choice: ");
+            ch=sc.nextInt();
+
+            if(ch==1||ch==2||ch==3||ch==4)
+            {
+            System.out.println("Enter the new multiplier: ");
+            multiplier=sc.nextDouble();
+            typePrice[ch-1]=multiplier; //Update the multiplier
+            }
+            else 
+            System.out.println("Invalid Choice!");
+
+        }
+
+        else if(choice==3) //Update the Preview Price
+        {
+            System.out.println("Enter new Preview Price: ");
+            previewPrice= sc.nextDouble();
+        }
+
+        else 
+        {
+            System.out.println("Invalid choice!" );
+        }
+    }
 }
