@@ -18,6 +18,11 @@ public class MovieManager {
     movies = new ArrayList<Movie>();
     reviews = new ArrayList<Review>();
   }
+
+  public MovieManager(List<Movie> movies, List<Review> reviews) {
+    this.movies = movies;
+    this.reviews = reviews;
+  }
   
   public void addMovieList(List<Movie> movies) {
     this.movies = movies;
@@ -165,7 +170,7 @@ public class MovieManager {
   /* User System (search, getDetails, ranking) */
   public Movie searchMovie(int movieID) {
     for (Movie m : movies) {
-      if (m.getMovieID() == movieID) {
+      if (m.getMovieID().equals(movieID) {
         return m;
       }
     }
@@ -174,7 +179,7 @@ public class MovieManager {
 
   public Movie searchMovieName(String movieName) {
     for (Movie m : movies) {
-      if (m.getMovieName().toLowerCase() == movieName.toLowerCase()) {
+      if (m.getMovieName().equalsIgnoreCase(movieName)) {
         return m;
       }
     }

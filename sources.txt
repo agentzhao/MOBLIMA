@@ -5,7 +5,7 @@
 ./src/boundaries/MOBLIMA.java
 ./src/boundaries/User.java
 ./src/boundaries/UserSystem.java
-./src/controllers/CinemaManager.java
+./src/controllers/CineplexManager.java
 ./src/controllers/MovieManager.java
 ./src/controllers/ReviewManager.java
 ./src/controllers/SeatManager.java
