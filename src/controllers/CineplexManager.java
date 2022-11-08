@@ -191,21 +191,44 @@ public class CineplexManager{
     }
 
     //Display Screening time for movie
-    public void displayScreentime(String cineplexID, int movieID){
+    public ScreeningTimes displayScreentime(String cineplexID, int movieID){
         Cineplex c = getCineplex(cineplexID);
         if(c == null){
             System.out.println("This Cineplex is not available");
-            return;
+            return null;
         }
-
+        int count =1;
         for(Cinema cinema : c.getCinemas()){
             System.out.println(cinema.getCinemaName());
             for(ScreeningTimes screentime : cinema.getScreeningTimes()){
                 if(screentime.getMovieID() == movieID) {
-                  System.out.println(screentime.getDate() + " - " + screentime.getScreenTime());
+                  System.out.println(count+": "+screentime.getDate() + " - " + screentime.getScreenTime());
+                  count++;
                 }
             }
         }
+        System.out.println("Choose the screening time:");
+        int ScreeningTimeChoice = sc.nextInt();
+        while(ScreeningTimeChoice>count && ScreeningTimeChoice!=0){
+            System.out.println("Invalid choice!");
+            System.out.println("Choose the screening time:");
+            System.out.println("To exit, choose 0");
+            ScreeningTimeChoice = sc.nextInt();
+        }
+        if(ScreeningTimeChoice == 0)
+        {
+            return null;
+        }
+        count=1;
+        for(Cinema cinema : c.getCinemas()){
+            for(ScreeningTimes screentime : cinema.getScreeningTimes()){
+                if(screentime.getMovieID() == movieID) {
+                    if(count == ScreeningTimeChoice)    return screentime;
+                    count++;
+                }
+            }
+        }
+        return null;
     }
 
     //Display all screening time for movie
@@ -237,12 +260,11 @@ public class CineplexManager{
         }
         count=1;
         for(Cineplex cineplex: cineplexes){
-            System.out.print(cineplex.getCineplexID()+"\n");
             for(Cinema cinema: cineplex.getCinemas()){
-                System.out.print(cinema.getCinemaName());
                 for(ScreeningTimes screentime: cinema.getScreeningTimes()){
-                    if(screentime.getMovieID() == movieID && count == ScreeningTimeChoice) {
-                        return screentime;
+                    if(screentime.getMovieID() == movieID) {
+                        if(count == ScreeningTimeChoice)    return screentime;
+                        count++;
                     }
                 }
             }
