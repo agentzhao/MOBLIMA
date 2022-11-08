@@ -49,6 +49,11 @@ public class MoblimaInitializer {
         Movie newMovie = new Movie(movieID, movieName, movieType, movieStatus, movieRating, synopsis, cast, director);
         movies.add(newMovie);
         
+        if (movieStatus == Movie.Status.ENDOFSHOWING) {
+          int ticketSales = Integer.parseInt(br.readLine());
+          newMovie.setTicketSales(ticketSales);
+        }
+        
         br.close();
         
       } catch(IOException e) {
