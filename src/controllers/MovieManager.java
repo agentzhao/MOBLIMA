@@ -177,7 +177,10 @@ public class MovieManager {
   /* User System (search, getDetails, ranking) */
   public Movie searchMovie(int movieID) {
     for (Movie m : movies) {
-      if (m.getMovieID() == movieID && m.getMovieStatus() != Status.ENDOFSHOWING) {
+      if (m.getMovieStatus() == Status.COMINGSOON || m.getMovieStatus() == Status.ENDOFSHOWING) {
+        continue;
+      }
+      if (m.getMovieID() == movieID) {
         return m;
       }
     }
@@ -187,7 +190,10 @@ public class MovieManager {
 
   public Movie searchMovieName(String movieName) {
     for (Movie m : movies) {
-      if (movieName.equalsIgnoreCase(m.getMovieName()) && m.getMovieStatus() != Status.ENDOFSHOWING) {
+      if (m.getMovieStatus() == Status.COMINGSOON || m.getMovieStatus() == Status.ENDOFSHOWING) {
+        continue;
+      }
+      if (movieName.equalsIgnoreCase(m.getMovieName())) {
         return m;
       }
     }
@@ -223,7 +229,7 @@ public class MovieManager {
     // insertion sort with ticket sales (descending)
     for (int i = 1; i < dupMovies.size(); i++) {
       Movie temp = dupMovies.get(i);
-      if (temp.getMovieStatus() == Status.ENDOFSHOWING) {
+      if (temp.getMovieStatus() == Status.COMINGSOON || temp.getMovieStatus() == Status.ENDOFSHOWING) {
         continue;
       }
       int j = i - 1;
@@ -248,7 +254,7 @@ public class MovieManager {
     // insertion sort with ticket sales (descending)
     for (int i = 1; i < dupMovies.size(); i++) {
       Movie temp = dupMovies.get(i);
-      if (temp.getMovieStatus() == Status.ENDOFSHOWING) {
+      if (temp.getMovieStatus() == Status.COMINGSOON || temp.getMovieStatus() == Status.ENDOFSHOWING) {
         continue;
       }
       int j = i - 1;
