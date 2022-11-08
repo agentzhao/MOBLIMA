@@ -143,11 +143,13 @@ public class TicketManager{
     {
         Transaction newTran= new Transaction(customer.getName(), customer.getId());
         
-        //User ID
+        //User IDs
         newTran.setUserID(customer.getId());
 
         // Amount of Transaction
-        newTran.setTransactionAmount(ticket.get(transactions.size()-1).getPrice());
+        if (transactions.size()==0)
+        newTran.setTransactionAmount(ticket.get(ticket.size()-1).getPrice());
+
 
         // Name of Customer
         newTran.setNameOfCustomer(customer.getName());
