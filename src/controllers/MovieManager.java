@@ -215,8 +215,8 @@ public class MovieManager {
     System.out.println("Overall Reviewer Rating: " + m.getOverallRating());
     System.out.println("Reviews: " + m.getMovieReviews().size());
     for (Review r : m.getMovieReviews()) {
-      r.printReview();
       System.out.println();
+      r.printReview();
     }
     System.out.println("--------------------------------------------------");
   }
