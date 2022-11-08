@@ -170,7 +170,7 @@ public class MovieManager {
   /* User System (search, getDetails, ranking) */
   public Movie searchMovie(int movieID) {
     for (Movie m : movies) {
-      if (m.getMovieID().equals(movieID)) {
+      if (m.getMovieID() == movieID) {
         return m;
       }
     }
