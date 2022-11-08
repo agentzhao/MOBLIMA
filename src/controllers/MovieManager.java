@@ -200,12 +200,7 @@ public class MovieManager {
       System.out.println();
     }
     System.out.println("Movie Synopsis: " + m.getSynopsis());
-    System.out.println("Movie Cast: ");
-    
-    for (String actor : m.getCast()) {
-      System.out.println(actor);
-    }
-    
+    System.out.println("Movie Cast: " + m.getCast());
     System.out.println("Movie Director: " + m.getDirector());
     System.out.println("Movie Overall Rating: " + m.getOverallRating());
     // System.out.println("Movie Ticket Sales: " + m.getTicketSales());

@@ -173,10 +173,23 @@ public class CineplexManager{
         }
 
         for(Cinema cinema : c.getCinemas()){
-            System.out.println(cinema.getCinemaName());
+            System.out.print(cinema.getCinemaName()+"\n");
             for(ScreeningTimes screentime : cinema.getScreeningTimes()){
-                if(screentime.getMovieID() == movieID) {
-                  System.out.println(screentime.getDate() + " - " + screentime.getScreenTime());
+                if(screentime.getMovieID() == movieID)
+                    System.out.print(screentime.getDate() + " " + screentime.getScreenTime()+"\n");
+            }
+        }
+    }
+
+    //Display all screening time for movie
+    public void displayAllScreentime(int movieID){
+        for(Cineplex cineplex: cineplexes){
+            System.out.print(cineplex.getCineplexID()+"\n");
+            for(Cinema cinema: cineplex.getCinemas()){
+                System.out.print(cinema.getCinemaName());
+                for(ScreeningTimes screentime: cinema.getScreeningTimes()){
+                    if(screentime.getMovieID() == movieID)
+                        System.out.print(screentime.getDate() + " " + screentime.getScreenTime()+"\n");
                 }
             }
         }
