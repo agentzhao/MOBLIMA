@@ -182,6 +182,21 @@ public class CineplexManager{
         }
     }
 
+    //Display all screening time for movie
+    public void displayAllScreentime(int movieID){
+        for(Cineplex cineplex: cineplexes){
+            System.out.print(cineplex.getCineplexID()+"\n");
+            for(Cinema cinema: cineplex.getCinemas()){
+                System.out.print(cinema.getCinemaName());
+                for(ScreeningTimes screentime: cinema.getScreeningTimes()){
+                    if(screentime.getMovieID() == movieID) {
+                        System.out.println(screentime.getDate() + " - " + screentime.getScreenTime());
+                    }
+                }
+            }
+        }
+    }
+
     //Number for seats available
     public void getSeatAvailability(String cineplexID, String cinemaName, String date, String showtime){
         Cineplex c = getCineplex(cineplexID);
