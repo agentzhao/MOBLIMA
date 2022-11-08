@@ -177,7 +177,7 @@ public class MovieManager {
   /* User System (search, getDetails, ranking) */
   public Movie searchMovie(int movieID) {
     for (Movie m : movies) {
-      if (m.getMovieID() == movieID) {
+      if (m.getMovieID() == movieID && m.getMovieStatus() != Status.ENDOFSHOWING) {
         return m;
       }
     }
@@ -187,7 +187,7 @@ public class MovieManager {
 
   public Movie searchMovieName(String movieName) {
     for (Movie m : movies) {
-      if (movieName.equalsIgnoreCase(m.getMovieName())) {
+      if (movieName.equalsIgnoreCase(m.getMovieName()) && m.getMovieStatus() != Status.ENDOFSHOWING) {
         return m;
       }
     }
@@ -223,6 +223,9 @@ public class MovieManager {
     // insertion sort with ticket sales (descending)
     for (int i = 1; i < dupMovies.size(); i++) {
       Movie temp = dupMovies.get(i);
+      if (temp.getMovieStatus() == Status.ENDOFSHOWING) {
+        continue;
+      }
       int j = i - 1;
       while (j >= 0 && dupMovies.get(j).getTicketSales() < temp.getTicketSales()) {
         dupMovies.set(j + 1, dupMovies.get(j));
@@ -245,6 +248,9 @@ public class MovieManager {
     // insertion sort with ticket sales (descending)
     for (int i = 1; i < dupMovies.size(); i++) {
       Movie temp = dupMovies.get(i);
+      if (temp.getMovieStatus() == Status.ENDOFSHOWING) {
+        continue;
+      }
       int j = i - 1;
       while (j >= 0 && dupMovies.get(j).getOverallRating() < temp.getOverallRating()) {
         dupMovies.set(j + 1, dupMovies.get(j));
