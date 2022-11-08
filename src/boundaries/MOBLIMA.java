@@ -74,6 +74,8 @@ public class MOBLIMA {
     cm = new CineplexManager();
     cm.setCineplexes(mi.initializeCineplex(mm.getMovieList()));
     
+    tm = new TicketManager();
+    
     us = new UserSystem(mm);
     as = new AdminSystem(mm, cm, tm);
   }
