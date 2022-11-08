@@ -7,7 +7,10 @@ import javax.lang.model.util.ElementScanner14;
 import controllers.*;
 import utils.MoblimaInitializer;
 import entities.Cineplex;
+import entities.Cinema;
 import entities.Movie;
+import entities.ScreeningTimes;
+import entities.Seat;
 
 public class MOBLIMA {
 
@@ -60,22 +63,34 @@ public class MOBLIMA {
     /* Create MoblimaInitializer Object */
     MoblimaInitializer mi = new MoblimaInitializer();
     
-    /* Initialize Movies and Reviews and store into MovieManager */
+    /* Initialise Movies and Reviews and store into MovieManager */
     mm = new MovieManager();
     mm.addMovieList(mi.initializeMovie());
     mm.addReviewList(mi.initializeReview(mm));
     
-    /* Initialize Customers and Administrators and store into Login */
+    /* Initialise Customers and Administrators and store into Login */
     log = new Login();
-    log.addCustomerList(mi.initializeCustomers());
+    
+    ArrayList<Customer> customer = new ArrayList<Customer>();
+    customer = mi.initializeCustomers();
+    log.addCustomerList(customer);
+    
     log.addAdminList(mi.initializeAdmin());
     
     /* Initialise Cineplexes and store into CineplexManager */
     cm = new CineplexManager();
-    cm.setCineplexes(mi.initializeCineplex(mm.getMovieList()));
-    
+    List<Cineplex> cineplexes = mi.initializeCineplex(mm.getMovieList());
+    cm.setCineplexes(cineplexes);
+        
+    /* Initialise 3 Tickets Child, Adult and Senior Citizen */
     tm = new TicketManager();
     
+    /* Create ticket and transaction */
+    tm = mi.initializeTickets(customer, cineplexes.get(0));
+    
+    /* Set seat to occupied based on purchased ticket */
+    cm = mi.initializeSeats(customer, cineplexes.get(0), tm);
+        
     us = new UserSystem(mm);
     as = new AdminSystem(mm, cm, tm);
   }

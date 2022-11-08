@@ -8,6 +8,7 @@ import java.util.List;
 import entities.Review;
 import entities.ScreeningTimes;
 import entities.Seat;
+import entities.Ticket;
 import entities.Seat.*;
 import entities.Movie;
 import entities.Movie.*;
@@ -18,6 +19,8 @@ import boundaries.Admin;
 import boundaries.Customer;
 
 import controllers.MovieManager;
+import controllers.TicketManager;
+import controllers.CineplexManager;
 
 public class MoblimaInitializer {  
   private String dataPath;
@@ -163,13 +166,17 @@ public class MoblimaInitializer {
           
           List<ScreeningTimes> st = new ArrayList<ScreeningTimes>();
           ScreeningTimes s0 = new ScreeningTimes(1, "0900", "13/11/2022", seats);
-          ScreeningTimes s1 = new ScreeningTimes(2, "1100", "13/11/2022", seats);
-          ScreeningTimes s2 = new ScreeningTimes(2, "1300", "13/11/2022", seats);
-          ScreeningTimes s3 = new ScreeningTimes(3, "1500", "13/11/2022", seats);
-          ScreeningTimes s4 = new ScreeningTimes(3, "1700", "13/11/2022", seats);
-          ScreeningTimes s5 = new ScreeningTimes(4, "1900", "13/11/2022", seats);
-          ScreeningTimes s6 = new ScreeningTimes(4, "2100", "13/11/2022", seats);
-          ScreeningTimes s7 = new ScreeningTimes(4, "2300", "13/11/2022", seats);
+          ScreeningTimes s1 = new ScreeningTimes(5, "1100", "13/11/2022", seats);
+          ScreeningTimes s2 = new ScreeningTimes(5, "1300", "13/11/2022", seats);
+          ScreeningTimes s3 = new ScreeningTimes(7, "1500", "13/11/2022", seats);
+          ScreeningTimes s4 = new ScreeningTimes(7, "1700", "13/11/2022", seats);
+          ScreeningTimes s5 = new ScreeningTimes(9, "1900", "13/11/2022", seats);
+          ScreeningTimes s6 = new ScreeningTimes(9, "2100", "13/11/2022", seats);
+          ScreeningTimes s7 = new ScreeningTimes(9, "2300", "13/11/2022", seats);
+          ScreeningTimes s8 = new ScreeningTimes(11, "0900", "14/11/2022", seats);
+          ScreeningTimes s9 = new ScreeningTimes(11, "1200", "14/11/2022", seats);
+          ScreeningTimes s10 = new ScreeningTimes(11, "1500", "14/11/2022", seats);
+          ScreeningTimes s11 = new ScreeningTimes(11, "1800", "14/11/2022", seats);
           st.add(s0);
           st.add(s1);
           st.add(s2);
@@ -178,6 +185,10 @@ public class MoblimaInitializer {
           st.add(s5);
           st.add(s6);
           st.add(s7);
+          st.add(s8);
+          st.add(s9);
+          st.add(s10);
+          st.add(s11);
            
           cinemas[j] = new Cinema(isPlatinum, cinemaCode, cinemaName, movies, st);
         }
@@ -259,6 +270,36 @@ public class MoblimaInitializer {
     }
     
     return admins;
+  }
+  
+  public TicketManager initializeTickets(ArrayList<Customer> customer, Cineplex cineplex) {
+    TicketManager tm = new TicketManager();
+    
+    Cinema c = cineplex.getCinemas()[0];    
+    Movie m = c.getMovies().get(0);
+        
+    for (int i = 0; i < 3; i += 1) {
+      Seat s = c.getScreeningTimes().get(0).getSeats()[i];
+      tm.createTicket(customer.get(i), c, s, m);
+      tm.createTransaction(customer.get(i), c);
+    }
+    
+    return tm;
+  }
+  
+  public CineplexManager initializeSeats(ArrayList<Customer> customer, Cineplex cineplex, TicketManager tm) {
+    CineplexManager cm = new CineplexManager();
+    
+    Cinema c = cineplex.getCinemas()[0];
+    ScreeningTimes st = c.getScreeningTimes().get(0);
+    
+    for (int i = 0; i < 3 ; i += 1) {
+      int s = c.getScreeningTimes().get(0).getSeats()[i].getSeatID();
+      int t = tm.getTicketid(c.getMovies().get(0).getMovieName(), customer.get(i).getId());
+      cm.bookSeat(st, s, t);
+    }
+    
+    return cm;
   }
   
   
