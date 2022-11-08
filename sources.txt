@@ -7,8 +7,6 @@
 ./src/boundaries/UserSystem.java
 ./src/controllers/CineplexManager.java
 ./src/controllers/MovieManager.java
-./src/controllers/ReviewManager.java
-./src/controllers/SeatManager.java
 ./src/controllers/TicketManager.java
 ./src/entities/Cinema.java
 ./src/entities/Cineplex.java

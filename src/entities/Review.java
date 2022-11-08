@@ -22,23 +22,23 @@ public class Review {
 
   // getters
   public int getMovieID() {
-    return movieID;
+    return this.movieID;
   }
 
   public String getCustomerName() {
-    return customerName;
+    return this.customerName;
   }
 
   public String getReviewTitle() {
-    return reviewTitle;
+    return this.reviewTitle;
   }
 
   public String getReviewBody() {
-    return reviewBody;
+    return this.reviewBody;
   }
 
   public int getReviewRating() {
-    return reviewRating;
+    return this.reviewRating;
   }
 
   public void printReview() {

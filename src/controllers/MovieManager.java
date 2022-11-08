@@ -7,6 +7,7 @@ import entities.Review;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class MovieManager {
   private List<Movie> movies;
@@ -15,32 +16,31 @@ public class MovieManager {
 
   // constructor
   public MovieManager() {
-    movies = new ArrayList<Movie>();
-    reviews = new ArrayList<Review>();
+    this.movies = new ArrayList<Movie>();
+    this.reviews = new ArrayList<Review>();
   }
 
   public MovieManager(List<Movie> movies, List<Review> reviews) {
     this.movies = movies;
     this.reviews = reviews;
   }
-  
+
   public void addMovieList(List<Movie> movies) {
     this.movies = movies;
   }
-  
+
   public void addReviewList(List<Review> reviews) {
     this.reviews = reviews;
   }
-  
+
   public List<Movie> getMovieList() {
-    return movies;
+    return this.movies;
   }
 
   /* Admin System (create, update, delete) */
 
-  public int getMovieLength()
-  {
-    return movies.size();
+  public int getMovieLength() {
+    return this.movies.size();
   }
 
   public void createMovie(int movieID) {
@@ -57,12 +57,12 @@ public class MovieManager {
 
     // movieStatus
     System.out.print("Status of movie (COMINGSOON, PREVIEW, NOWSHOWING, ENDOFSHOWING): ");
-    System.out.print("Enter movie status (int): ");
+    System.out.print("Enter movie status: ");
     newMovie.setMovieStatus(Status.valueOf(sc.nextLine()));
 
     // movieRating
     System.out.print("Rating of movie (G, PG, PG13, NC16, M18, R21): ");
-    System.out.print("Enter movie rating (int): ");
+    System.out.print("Enter movie rating: ");
     newMovie.setMovieRating(Rating.valueOf(sc.nextLine()));
 
     // synopsis
@@ -72,6 +72,7 @@ public class MovieManager {
     // cast
     System.out.print("Enter number of casts: ");
     String[] temp = new String[sc.nextInt()];
+    sc.nextLine();
     for (int i = 0; i < temp.length; i++) {
       System.out.print("Enter name of cast " + (i + 1) + ": ");
       temp[i] = sc.nextLine();
@@ -83,7 +84,7 @@ public class MovieManager {
     newMovie.setDirector(sc.nextLine());
 
     // add to list
-    movies.add(newMovie);
+    this.movies.add(newMovie);
   }
 
   public int updateMovie(int movieID) {
@@ -107,45 +108,50 @@ public class MovieManager {
     System.out.println("Enter field to update: ");
 
     int choice = sc.nextInt();
+    sc.nextLine();
     switch (choice) {
       case 1:
-        System.out.print("Enter new movie ID: ");
+        System.out.println("Enter new movie ID: ");
         m.setMovieID(sc.nextInt());
         break;
       case 2:
-        System.out.print("Enter new movie name: ");
+        System.out.println("Enter new movie name: ");
         m.setMovieName(sc.nextLine());
         break;
       case 3:
         System.out.println("Type of movie (BLOCKBUSTER, THREED, IMAX, REGULAR): ");
-        System.out.print("Enter new movie type: ");
-        m.setMovieType(Type.valueOf(sc.nextLine()));
+        System.out.println("Enter new movie type: ");
+        Movie.Type movieType = Movie.Type.valueOf(sc.nextLine());
+        m.setMovieType(movieType);
         break;
       case 4:
-        System.out.print("Status of movie (COMINGSOON, PREVIEW, NOWSHOWING, ENDOFSHOWING): ");
-        System.out.print("Enter new movie status: ");
-        m.setMovieStatus(Status.valueOf(sc.nextLine()));
+        System.out.println("Status of movie (COMINGSOON, PREVIEW, NOWSHOWING, ENDOFSHOWING): ");
+        System.out.println("Enter new movie status: ");
+        Status movieStatus = Status.valueOf(sc.nextLine());
+        m.setMovieStatus(movieStatus);
         break;
       case 5:
-        System.out.print("Rating of movie (G, PG, PG13, NC16, M18, R21): ");
-        System.out.print("Enter new movie rating: ");
-        m.setMovieRating(Rating.valueOf(sc.nextLine()));
+        System.out.println("Rating of movie (G, PG, PG13, NC16, M18, R21): ");
+        System.out.println("Enter new movie rating: ");
+        Rating movieRating = Rating.valueOf(sc.nextLine());
+        m.setMovieRating(movieRating);
         break;
       case 6:
-        System.out.print("Enter new synopsis: ");
+        System.out.println("Enter new synopsis: ");
         m.setSynopsis(sc.nextLine());
         break;
       case 7:
-        System.out.print("Enter number of casts: ");
+        System.out.println("Enter number of casts: ");
         String[] temp = new String[sc.nextInt()];
+        sc.nextLine();
         for (int i = 0; i < temp.length; i++) {
-          System.out.print("Enter name of cast " + (i + 1) + ": ");
+          System.out.println("Enter name of cast " + (i + 1) + ": ");
           temp[i] = sc.nextLine();
         }
         m.setCast(temp);
         break;
       case 8:
-        System.out.print("Enter new director: ");
+        System.out.println("Enter new director: ");
         m.setDirector(sc.nextLine());
         break;
       case 0:
@@ -164,6 +170,7 @@ public class MovieManager {
         return 1; // success
       }
     }
+    System.out.println("Movie not found. Delete failed.");
     return 0; // unsuccessful
   }
 
@@ -174,48 +181,45 @@ public class MovieManager {
         return m;
       }
     }
+    System.out.println("Movie not found. Search failed.");
     return null;
   }
 
   public Movie searchMovieName(String movieName) {
     for (Movie m : movies) {
-      if (m.getMovieName().equalsIgnoreCase(movieName)) {
+      if (movieName.equalsIgnoreCase(m.getMovieName())) {
         return m;
       }
     }
+    System.out.println("Movie not found. Search failed.");
     return null;
   }
 
   public void getMovieDetails(Movie m) {
     // print details (only relevant fields)
-    // System.out.println("Movie ID: " + m.getMovieID());
+    System.out.println("------------------- Movie Details -----------------");
     System.out.println("Movie Name: " + m.getMovieName());
     System.out.println("Movie Type: " + m.getMovieType());
     System.out.println("Movie Status: " + m.getMovieStatus());
     System.out.println("Movie Rating: " + m.getMovieRating());
-    // todo print reviews
+    System.out.println("Movie Synopsis: " + m.getSynopsis());
+    String temp = Arrays.toString(m.getCast());
+    System.out.println("Movie Cast: " + temp.replace("[", "").replace("]", ""));
+    System.out.println("Movie Director: " + m.getDirector());
+    System.out.println("Overall Reviewer Rating: " + m.getOverallRating());
     System.out.println("Reviews: " + m.getMovieReviews().size());
     for (Review r : m.getMovieReviews()) {
       r.printReview();
       System.out.println();
     }
-    System.out.println("Movie Synopsis: " + m.getSynopsis());
-    System.out.println("Movie Cast: ");
-    
-    for (String actor : m.getCast()) {
-      System.out.println(actor);
-    }
-    
-    System.out.println("Movie Director: " + m.getDirector());
-    System.out.println("Movie Overall Rating: " + m.getOverallRating());
-    // System.out.println("Movie Ticket Sales: " + m.getTicketSales());
+    System.out.println("--------------------------------------------------");
   }
 
   public void topSales() {
     System.out.println("Top 5 Movies by Ticket Sales");
 
     List<Movie> dupMovies = new ArrayList<Movie>();
-    dupMovies = movies;
+    dupMovies = this.movies;
     // insertion sort with ticket sales (descending)
     for (int i = 1; i < dupMovies.size(); i++) {
       Movie temp = dupMovies.get(i);
@@ -229,7 +233,7 @@ public class MovieManager {
 
     // print top 5
     for (int i = 0; i < 5; i++) {
-      System.out.println((i + 1) + ". " + dupMovies.get(i).getMovieName());
+      System.out.println((i + 1) + ". " + dupMovies.get(i).getMovieName() + " - " + dupMovies.get(i).getTicketSales());
     }
   }
 
@@ -251,7 +255,8 @@ public class MovieManager {
 
     // print top 5
     for (int i = 0; i < 5; i++) {
-      System.out.println((i + 1) + ". " + dupMovies.get(i).getMovieName());
+      System.out
+          .println((i + 1) + ". " + dupMovies.get(i).getMovieName() + " - " + dupMovies.get(i).getOverallRating());
     }
   }
 

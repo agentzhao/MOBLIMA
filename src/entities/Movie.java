@@ -25,7 +25,7 @@ public class Movie {
   private String synopsis;
   private String[] cast; // at least 2
   private String director; // 1
-  private int overallRating; // 1 - 5 (best)
+  private double overallRating; // 1 - 5 (best)
   private int ticketSales;
 
   // constructor (default and parameterized)
@@ -57,47 +57,47 @@ public class Movie {
 
   // getters
   public int getMovieID() {
-    return movieID;
+    return this.movieID;
   }
 
   public String getMovieName() {
-    return movieName;
+    return this.movieName;
   }
 
   public Type getMovieType() {
-    return movieType;
+    return this.movieType;
   }
 
   public Status getMovieStatus() {
-    return movieStatus;
+    return this.movieStatus;
   }
 
   public Rating getMovieRating() {
-    return movieRating;
+    return this.movieRating;
   }
 
   public List<Review> getMovieReviews() {
-    return movieReviews;
+    return this.movieReviews;
   }
 
   public String getSynopsis() {
-    return synopsis;
+    return this.synopsis;
   }
 
   public String[] getCast() {
-    return cast;
+    return this.cast;
   }
 
   public String getDirector() {
-    return director;
+    return this.director;
   }
 
-  public int getOverallRating() {
-    return overallRating;
+  public double getOverallRating() {
+    return this.overallRating;
   }
 
   public int getTicketSales() {
-    return ticketSales;
+    return this.ticketSales;
   }
 
   // setters
@@ -152,7 +152,7 @@ public class Movie {
     for (Review review : this.movieReviews) {
       temp += review.getReviewRating();
     }
-    this.overallRating = temp / this.movieReviews.size();
+    this.overallRating = temp / (double) this.movieReviews.size();
   }
 
   public void setTicketSales(int ticketSales) {
