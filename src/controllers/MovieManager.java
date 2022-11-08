@@ -26,6 +26,10 @@ public class MovieManager {
   public void addReviewList(List<Review> reviews) {
     this.reviews = reviews;
   }
+  
+  public List<Movie> getMovieList() {
+    return movies;
+  }
 
   /* Admin System (create, update, delete) */
 

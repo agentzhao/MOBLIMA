@@ -12,7 +12,7 @@ import entities.Movie;
 public class MOBLIMA {
 
   private static MovieManager mm;
-  private static CineplexManager cm = new CineplexManager();
+  private static CineplexManager cm;
   private static UserSystem us = new UserSystem(mm);
   private static AdminSystem as = new AdminSystem(mm, cm);
   private static Login log;
@@ -57,19 +57,23 @@ public class MOBLIMA {
 
   public static void initData()
   {
+    /* Create MoblimaInitializer Object */
     MoblimaInitializer mi = new MoblimaInitializer();
     
+    /* Initialize Movies and Reviews and store into MovieManager */
     mm = new MovieManager();
     mm.addMovieList(mi.initializeMovie());
     mm.addReviewList(mi.initializeReview(mm));
     
+    /* Initialize Customers and Administrators and store into Login */
     log = new Login();
     log.addCustomerList(mi.initializeCustomers());
     log.addAdminList(mi.initializeAdmin());
     
-    /* Initialise Cineplexes Below */
-   
+    /* Initialise Cineplexes and store into CineplexManager */
     cm = new CineplexManager();
+    cm.setCineplexes(mi.initializeCineplex(mm.getMovieList()));
+    
     us = new UserSystem(mm);
     as = new AdminSystem(mm, cm);
   }

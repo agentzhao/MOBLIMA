@@ -8,6 +8,7 @@ import java.util.List;
 import entities.Review;
 import entities.ScreeningTimes;
 import entities.Seat;
+import entities.Seat.*;
 import entities.Movie;
 import entities.Movie.*;
 import entities.Cinema;
@@ -38,7 +39,7 @@ public class MoblimaInitializer {
         
         int movieID = Integer.parseInt(br.readLine());
         String movieName = br.readLine();
-        Type movieType = Type.valueOf(br.readLine());
+        Movie.Type movieType = Movie.Type.valueOf(br.readLine());
         Status movieStatus = Status.valueOf(br.readLine());
         Rating movieRating = Rating.valueOf(br.readLine());
         String synopsis = br.readLine();
@@ -130,21 +131,40 @@ public class MoblimaInitializer {
           String cinemaName = brc.readLine();
           
           int noOfSeats = Integer.parseInt(brc.readLine());
+          
           Seat[] seats = new Seat[noOfSeats];
-          for (int k = 0; k < noOfSeats; k += 1) {
-            Seat s = new Seat(k + 1, false, 0);
-            seats[k] = s;
+          
+          if (!isPlatinum) {
+            for (int k = 0; k < 10; k += 1) {
+              Seat s = new Seat(Seat.Type.Couple, k + 1, false, 0);
+              seats[k] = s;
+            }
+            
+            for (int k = 10; k < noOfSeats; k += 1) {
+              Seat s = new Seat(Seat.Type.Normal, k + 1, false, 0);
+              seats[k] = s;
+            }
+          } else {
+            for (int k = 0; k < noOfSeats / 2; k += 1) {
+              Seat s = new Seat(Seat.Type.Elite, k + 1, false, 0);
+              seats[k] = s;
+            }
+            
+            for (int k = noOfSeats / 2; k < noOfSeats; k += 1) {
+              Seat s = new Seat(Seat.Type.Ultima, k + 1, false, 0);
+              seats[k] = s;
+            }
           }
           
           List<ScreeningTimes> st = new ArrayList<ScreeningTimes>();
-          ScreeningTimes s0 = new ScreeningTimes(1, "0900", "13/11/2022");
-          ScreeningTimes s1 = new ScreeningTimes(2, "1100", "13/11/2022");
-          ScreeningTimes s2 = new ScreeningTimes(2, "1300", "13/11/2022");
-          ScreeningTimes s3 = new ScreeningTimes(3, "1500", "13/11/2022");
-          ScreeningTimes s4 = new ScreeningTimes(3, "1700", "13/11/2022");
-          ScreeningTimes s5 = new ScreeningTimes(4, "1900", "13/11/2022");
-          ScreeningTimes s6 = new ScreeningTimes(4, "2100", "13/11/2022");
-          ScreeningTimes s7 = new ScreeningTimes(4, "2300", "13/11/2022");
+          ScreeningTimes s0 = new ScreeningTimes(1, "0900", "13/11/2022", seats);
+          ScreeningTimes s1 = new ScreeningTimes(2, "1100", "13/11/2022", seats);
+          ScreeningTimes s2 = new ScreeningTimes(2, "1300", "13/11/2022", seats);
+          ScreeningTimes s3 = new ScreeningTimes(3, "1500", "13/11/2022", seats);
+          ScreeningTimes s4 = new ScreeningTimes(3, "1700", "13/11/2022", seats);
+          ScreeningTimes s5 = new ScreeningTimes(4, "1900", "13/11/2022", seats);
+          ScreeningTimes s6 = new ScreeningTimes(4, "2100", "13/11/2022", seats);
+          ScreeningTimes s7 = new ScreeningTimes(4, "2300", "13/11/2022", seats);
           st.add(s0);
           st.add(s1);
           st.add(s2);
@@ -154,7 +174,7 @@ public class MoblimaInitializer {
           st.add(s6);
           st.add(s7);
            
-          cinemas[j] = new Cinema(isPlatinum, cinemaCode, cinemaName, seats, movies, st);
+          cinemas[j] = new Cinema(isPlatinum, cinemaCode, cinemaName, movies, st);
         }
         
         Cineplex newCineplex = new Cineplex(cineplexID, cinemas);
