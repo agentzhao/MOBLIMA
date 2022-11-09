@@ -86,11 +86,11 @@ public class MOBLIMA {
     tm = new TicketManager();
     
     /* Create ticket and transaction */
-    tm = mi.initializeTickets(customer, cineplexes.get(0));
+    tm = mi.initializeTickets(customer, cm.getCineplexList().get(0));
             
     /* Set seat to occupied based on purchased ticket */
-    cm = mi.initializeSeats(customer, cineplexes.get(0), tm, cm);
-                
+    mi.initializeSeats(customer, cm.getCineplexList().get(0), tm);
+    
     us = new UserSystem(mm);
     as = new AdminSystem(mm, cm, tm);
   }

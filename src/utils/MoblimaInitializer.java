@@ -140,55 +140,37 @@ public class MoblimaInitializer {
           
           int noOfSeats = Integer.parseInt(brc.readLine());
           
-          Seat[] seats = new Seat[noOfSeats];
-          
-          if (!isPlatinum) {
-            for (int k = 0; k < 10; k += 1) {
-              Seat s = new Seat(Seat.Type.Couple, k + 1, true, 0);
-              seats[k] = s;
-            }
-            
-            for (int k = 10; k < noOfSeats; k += 1) {
-              Seat s = new Seat(Seat.Type.Normal, k + 1, true, 0);
-              seats[k] = s;
-            }
-          } else {
-            for (int k = 0; k < noOfSeats / 2; k += 1) {
-              Seat s = new Seat(Seat.Type.Elite, k + 1, true, 0);
-              seats[k] = s;
-            }
-            
-            for (int k = noOfSeats / 2; k < noOfSeats; k += 1) {
-              Seat s = new Seat(Seat.Type.Ultima, k + 1, true, 0);
-              seats[k] = s;
-            }
-          }
-          
           List<ScreeningTimes> st = new ArrayList<ScreeningTimes>();
-          ScreeningTimes s0 = new ScreeningTimes(1, "0900", "13/11/2022", seats);
-          ScreeningTimes s1 = new ScreeningTimes(5, "1100", "13/11/2022", seats);
-          ScreeningTimes s2 = new ScreeningTimes(5, "1300", "13/11/2022", seats);
-          ScreeningTimes s3 = new ScreeningTimes(7, "1500", "13/11/2022", seats);
-          ScreeningTimes s4 = new ScreeningTimes(7, "1700", "13/11/2022", seats);
-          ScreeningTimes s5 = new ScreeningTimes(9, "1900", "13/11/2022", seats);
-          ScreeningTimes s6 = new ScreeningTimes(9, "2100", "13/11/2022", seats);
-          ScreeningTimes s7 = new ScreeningTimes(9, "2300", "13/11/2022", seats);
-          ScreeningTimes s8 = new ScreeningTimes(11, "0900", "14/11/2022", seats);
-          ScreeningTimes s9 = new ScreeningTimes(11, "1200", "14/11/2022", seats);
-          ScreeningTimes s10 = new ScreeningTimes(11, "1500", "14/11/2022", seats);
-          ScreeningTimes s11 = new ScreeningTimes(11, "1800", "14/11/2022", seats);
-          st.add(s0);
-          st.add(s1);
-          st.add(s2);
-          st.add(s3);
-          st.add(s4);
-          st.add(s5);
-          st.add(s6);
-          st.add(s7);
-          st.add(s8);
-          st.add(s9);
-          st.add(s10);
-          st.add(s11);
+          
+          String[] times = new String[] {"0900", "1100", "1300", "1500", "1700", "1900", "2100", "2300", "0900", "1200", "1500", "1800"};
+          for (int x = 0; x < 12; x += 1) {
+            Seat[] seats = new Seat[noOfSeats];
+            
+            if (!isPlatinum) {
+              for (int k = 0; k < 10; k += 1) {
+                Seat s = new Seat(Seat.Type.Couple, k + 1, true, 0);
+                seats[k] = s;
+              }
+              
+              for (int k = 10; k < noOfSeats; k += 1) {
+                Seat s = new Seat(Seat.Type.Normal, k + 1, true, 0);
+                seats[k] = s;
+              }
+            } else {
+              for (int k = 0; k < noOfSeats / 2; k += 1) {
+                Seat s = new Seat(Seat.Type.Elite, k + 1, true, 0);
+                seats[k] = s;
+              }
+              
+              for (int k = noOfSeats / 2; k < noOfSeats; k += 1) {
+                Seat s = new Seat(Seat.Type.Ultima, k + 1, true, 0);
+                seats[k] = s;
+              }
+            }
+            
+            ScreeningTimes s = new ScreeningTimes(1, times[x], "13/11/2022", seats);
+            st.add(s);
+          }
            
           cinemas[j] = new Cinema(isPlatinum, cinemaCode, cinemaName, movies, st);
         }
@@ -274,19 +256,24 @@ public class MoblimaInitializer {
   
   public TicketManager initializeTickets(ArrayList<Customer> customer, Cineplex cineplex) {
     /* 
+     * 
      * Cineplex: SWB 
      * Cinema: Shaw Theatres Waterway Point Hall 1
-     * Movie: Titanic
+     * Movie: Jurassic World (Movie id: 7)
      * Seat Id: 1, 2, 3
      * Customer: Terence Tang (id: 4) (Child / 12), Rachel Tan (id: 6) (Senior Citizen / 65), Wesley Chan (id: 5) (Adult / 23)
-     * */
+     * 
+     */
+    
     TicketManager tm = new TicketManager();
     
     Cinema c = cineplex.getCinemas()[0];   
-    Movie m = c.getMovies().get(0);
-        
+    Movie m = c.getMovies().get(7);
+    
+    //c.getscreeningtimes() should have a parameter for movieid ?
+                
     for (int i = 0; i < 3; i += 1) {
-      Seat s = c.getScreeningTimes().get(0).getSeats()[i];
+      Seat s = c.getScreeningTimes().get(3).getSeats()[i];
       tm.createTicket(customer.get(i), c, s, m);
       tm.createTransaction(customer.get(i), c);
     }
@@ -294,125 +281,27 @@ public class MoblimaInitializer {
     return tm;
   }
   
-  public CineplexManager initializeSeats(ArrayList<Customer> customer, Cineplex cineplex, TicketManager tm, CineplexManager cm) {  
+  public void initializeSeats(ArrayList<Customer> customer, Cineplex cineplex, TicketManager tm) {  
     /* 
+     * 
      * Cineplex: SWB 
      * Cinema: Shaw Theatres Waterway Point Hall 1
-     * Movie: Titanic
+     * Movie: Jurassic World (Movie id: 7)
      * Date: 13/11/2022
-     * Time: 0900
+     * Time: 1500
      * Seat id: 1, 2, 3
      * Ticket id: 1, 2, 3
-     *  */
+     *  
+     */
+    
     Cinema c = cineplex.getCinemas()[0];
-    ScreeningTimes st = c.getScreeningTimes().get(0);
+    ScreeningTimes st = c.getScreeningTimes().get(3);
             
     for (int i = 0; i < 3 ; i += 1) {
-      int s = c.getScreeningTimes().get(0).getSeats()[i].getSeatID();
-      int t = tm.getTicketid(c.getMovies().get(0).getMovieName(), customer.get(i).getId());
-      System.out.println(t);
+      int s = st.getSeats()[i].getSeatID();
+      int t = tm.getTicketid(c.getMovies().get(7).getMovieName(), customer.get(i).getId());
       st.getSeats()[s].setAvailable(false);
       st.getSeats()[s].setTicketHolder(t);
     }
-            
-    return cm;
   }
-  
-  
-  /* Temporary Main to test initialization */
-  
-  /*public static void main(String[] args) {
-    // Get file path of initialisation .txt files
-    String dataPath = Paths.get("").toAbsolutePath() + "/data/initialization_files";
-    
-    // Create MovieManager Object
-    MovieManager mm = new MovieManager();
-    
-    // Create movie objects based on text files, store into movies array, add movies array to MovieManager object
-    List<Movie> movies = initializeMovie(dataPath);
-    mm.addMovieList(movies);
-    
-    // Create review objects based on text files, store into reviews array, add reviews array to MovieManager object
-    List<Review> reviews = initializeReview(dataPath, mm);
-    mm.addReviewList(reviews);
-    
-    // Test print movies and their respective reviews
-    for (int i = 0; i < movies.size(); i += 1) {
-      reviews = movies.get(i).getMovieReviews();
-      for (int j = 0; j < reviews.size(); j += 1) {
-        System.out.println("Movie ID: " + reviews.get(j).getMovieID());
-        System.out.println("Title: " + reviews.get(j).getReviewTitle());
-        System.out.println("Text: " + reviews.get(j).getReviewBody());
-        System.out.println("Rating: " + reviews.get(j).getReviewRating());
-      }
-      System.out.println();
-    }
-    
-    // Create Cineplex, cinema, seats, movies and screeningtimes
-    List<Cineplex> cineplexes = initializeCineplex(dataPath, movies);
-    
-    for (int i = 0; i < cineplexes.size(); i += 1) {
-      System.out.println("Cineplex ID: " + cineplexes.get(i).getCineplexID());
-      
-      Cinema[] c = cineplexes.get(i).getCinemas();
-      for (int j = 0; j < c.length; j += 1) {
-        System.out.println("Is Platinum?: " + c[j].getIsPlatinum());
-        System.out.println("Cinema Code: " + c[j].getCinemaCode());
-        System.out.println("Cinema Name: " + c[j].getCinemaName());
-        
-        Seat[] s = c[j].getSeats();
-        for (int k = 0; k < s.length; k += 1) {
-          System.out.print("Seat ID: " + s[k].getSeatID());
-          System.out.print("Available?: " + s[k].getAvailability());
-          System.out.print("Current holder: " + s[k].getTicketholder());
-        }
-        
-        System.out.println();
-        
-        for (Movie m : c[j].getMovies()) {
-          System.out.println("Movie ID: " + m.getMovieID());
-          System.out.println("Movie Name: " + m.getMovieName());
-          System.out.println("Movie Type: " + m.getMovieType());
-          System.out.println("Movie Status: " + m.getMovieStatus());
-          System.out.println("Movie Rating: " + m.getMovieRating());
-          System.out.println("Movie Synopsis: " + m.getSynopsis());
-          System.out.println("Movie Cast: ");
-          
-          for (String actor : m.getCast()) {
-            System.out.println(actor);
-          }
-          System.out.println("Movie Director: " + m.getDirector());
-          System.out.println("Movie Screening Times: ");
-          
-          for (ScreeningTimes st : c[j].getScreeningTimes(m.getMovieID())) {
-            System.out.println(st.getMovieID());
-            System.out.println(st.getDate());
-            System.out.println(st.getScreenTime());
-          }
-        }
-        
-        System.out.println("");
-      }
-      System.out.println("");
-    }
-    
-    ArrayList<Admin> admins = initializeAdmin(dataPath);
-    for (int i = 0; i < admins.size(); i += 1) {
-      System.out.println(admins.get(i).getEmail());
-      System.out.println(admins.get(i).getPassword());
-      System.out.println(admins.get(i).getType());
-      System.out.println(admins.get(i).getId());
-      System.out.println(admins.get(i).getcineplexID());
-    }
-    
-    ArrayList<Customer> customers = initializeCustomers(dataPath);
-    for (int i = 0; i < customers.size(); i += 1) {
-      System.out.println(customers.get(i).getEmail());
-      System.out.println(customers.get(i).getPassword());
-      System.out.println(customers.get(i).getType());
-      System.out.println(customers.get(i).getMobile_number());
-      System.out.println(customers.get(i).getName());
-      System.out.println(customers.get(i).getAge());
-    }
-  }*/
 }
