@@ -379,7 +379,7 @@ public class TicketManager{
         System.out.println("Movie Date: "+t.getMoiveDate());
         System.out.println("Movie ID: "+t.getMovieID());
         System.out.println("Movie Name: "+t.getMovieName());
-        System.out.println("Price: "+t.getPrice());
+        System.out.println("Price: "+ String.format("%.2f", t.getPrice()));
         System.out.println("Cinema Name: "+t.getCinemaName());
         System.out.println("Seat ID: "+t.getSeatID());
         
