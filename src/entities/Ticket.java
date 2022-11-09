@@ -132,7 +132,7 @@ public class Ticket
 
 	public void printTicketInfo()
 	{
-		System.out.println("User ID: "+userID+"\nTicket ID: "+ticketID+"\nTicket Type: "+ticketType+"\nMovie Time: "+ movieTime + "\nMovie ID: "+ movieID +"\nMovie Name: "+ movieName +"\nPrice: " + price +"\nCinema Name: "+ cinemaName +"\nSeat ID: "+seatID+"\nDate of Movie: "+datemov);
+		System.out.println("User ID: "+userID+"\nTicket ID: "+ticketID+"\nTicket Type: "+ticketType+"\nMovie Time: "+ movieTime + "\nMovie ID: "+ movieID +"\nMovie Name: "+ movieName +"\nPrice: " + String.format("%.2f",price) +"\nCinema Name: "+ cinemaName +"\nSeat ID: "+seatID+"\nDate of Movie: "+datemov);
 	}
 	
 }
