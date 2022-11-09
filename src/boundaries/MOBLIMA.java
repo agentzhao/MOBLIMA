@@ -87,10 +87,10 @@ public class MOBLIMA {
     
     /* Create ticket and transaction */
     tm = mi.initializeTickets(customer, cineplexes.get(0));
-    
+            
     /* Set seat to occupied based on purchased ticket */
-    cm = mi.initializeSeats(customer, cineplexes.get(0), tm);
-        
+    cm = mi.initializeSeats(customer, cineplexes.get(0), tm, cm);
+                
     us = new UserSystem(mm);
     as = new AdminSystem(mm, cm, tm);
   }

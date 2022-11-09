@@ -144,22 +144,22 @@ public class MoblimaInitializer {
           
           if (!isPlatinum) {
             for (int k = 0; k < 10; k += 1) {
-              Seat s = new Seat(Seat.Type.Couple, k + 1, false, 0);
+              Seat s = new Seat(Seat.Type.Couple, k + 1, true, 0);
               seats[k] = s;
             }
             
             for (int k = 10; k < noOfSeats; k += 1) {
-              Seat s = new Seat(Seat.Type.Normal, k + 1, false, 0);
+              Seat s = new Seat(Seat.Type.Normal, k + 1, true, 0);
               seats[k] = s;
             }
           } else {
             for (int k = 0; k < noOfSeats / 2; k += 1) {
-              Seat s = new Seat(Seat.Type.Elite, k + 1, false, 0);
+              Seat s = new Seat(Seat.Type.Elite, k + 1, true, 0);
               seats[k] = s;
             }
             
             for (int k = noOfSeats / 2; k < noOfSeats; k += 1) {
-              Seat s = new Seat(Seat.Type.Ultima, k + 1, false, 0);
+              Seat s = new Seat(Seat.Type.Ultima, k + 1, true, 0);
               seats[k] = s;
             }
           }
@@ -273,9 +273,16 @@ public class MoblimaInitializer {
   }
   
   public TicketManager initializeTickets(ArrayList<Customer> customer, Cineplex cineplex) {
+    /* 
+     * Cineplex: SWB 
+     * Cinema: Shaw Theatres Waterway Point Hall 1
+     * Movie: Titanic
+     * Seat Id: 1, 2, 3
+     * Customer: Terence Tang (id: 4) (Child / 12), Rachel Tan (id: 6) (Senior Citizen / 65), Wesley Chan (id: 5) (Adult / 23)
+     * */
     TicketManager tm = new TicketManager();
     
-    Cinema c = cineplex.getCinemas()[0];    
+    Cinema c = cineplex.getCinemas()[0];   
     Movie m = c.getMovies().get(0);
         
     for (int i = 0; i < 3; i += 1) {
@@ -287,18 +294,27 @@ public class MoblimaInitializer {
     return tm;
   }
   
-  public CineplexManager initializeSeats(ArrayList<Customer> customer, Cineplex cineplex, TicketManager tm) {
-    CineplexManager cm = new CineplexManager();
-    
+  public CineplexManager initializeSeats(ArrayList<Customer> customer, Cineplex cineplex, TicketManager tm, CineplexManager cm) {  
+    /* 
+     * Cineplex: SWB 
+     * Cinema: Shaw Theatres Waterway Point Hall 1
+     * Movie: Titanic
+     * Date: 13/11/2022
+     * Time: 0900
+     * Seat id: 1, 2, 3
+     * Ticket id: 1, 2, 3
+     *  */
     Cinema c = cineplex.getCinemas()[0];
     ScreeningTimes st = c.getScreeningTimes().get(0);
-    
+            
     for (int i = 0; i < 3 ; i += 1) {
       int s = c.getScreeningTimes().get(0).getSeats()[i].getSeatID();
       int t = tm.getTicketid(c.getMovies().get(0).getMovieName(), customer.get(i).getId());
-      cm.bookSeat(st, s, t);
+      System.out.println(t);
+      st.getSeats()[s].setAvailable(false);
+      st.getSeats()[s].setTicketHolder(t);
     }
-    
+            
     return cm;
   }
   

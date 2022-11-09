@@ -251,7 +251,7 @@ public class CineplexManager{
     }
 
     //Booking, Unbooking, Changing Seats
-    public void  bookSeat(ScreeningTimes screentime, int seatID, int tID){
+    public void bookSeat(ScreeningTimes screentime, int seatID, int tID){
         if(screentime.getSeats()[seatID].isAvailable()){
             screentime.getSeats()[seatID].setAvailable(false);
             screentime.getSeats()[seatID].setTicketHolder(tID);

@@ -398,8 +398,7 @@ public class TicketManager{
         else 
         ch= 0;
 
-        tic.get(ch).getTicketID();
-        return 0;
+        return tic.get(ch).getTicketID();
     }
 
     public void updatePrices()
