@@ -2,6 +2,7 @@ package controllers;
 
 import entities.Cinema;
 import entities.Movie;
+import entities.ScreeningTimes;
 import entities.Seat;
 import entities.Ticket;
 import entities.Transaction;
@@ -74,7 +75,7 @@ public class TicketManager{
         return this.basePrice;
     }
 
-    public Ticket createTicket(Customer customer, Cinema cinema, Seat seat, Movie movie)
+    public Ticket createTicket(Customer customer, Cinema cinema, Seat seat, Movie movie, ScreeningTimes scTime)
     {
         
         Ticket newTicket= new Ticket(customer.getId(), movie.getMovieName());
@@ -107,9 +108,11 @@ public class TicketManager{
             agePriceVar=1;
         }
         
-        //Enter Movie Time
-        //System.out.println("Enter movie time: ");
-        //newTicket.setMovieTime(sc.nextLine());
+        // Movie Time
+        newTicket.setMovieTime(scTime.getScreenTime());
+
+        //Movie Date
+        newTicket.setMovieDate(scTime.getDate());
 
         //Moive ID
         newTicket.setMovieID(movie.getMovieID());
@@ -147,7 +150,6 @@ public class TicketManager{
         newTran.setUserID(customer.getId());
 
         // Amount of Transaction
-        if (transactions.size()==0)
         newTran.setTransactionAmount(ticket.get(ticket.size()-1).getPrice());
 
 
@@ -207,6 +209,7 @@ public class TicketManager{
         System.out.println("7. Price: ");
         System.out.println("8. Cinema Name: ");
         System.out.println("9. Seat ID: ");
+        System.out.println("10.Date of the Movie: ");
         System.out.println("0. Exit");
         System.out.println("Enter field to update: ");
 
@@ -258,6 +261,10 @@ public class TicketManager{
             System.out.println("Enter new Seat ID: ");
             tic.get(ch).setSeatID(sc.nextInt());
             break;
+
+            case 10:
+            System.out.println("Enter new Date to set: ");
+            tic.get(ch).setMovieDate(sc.nextLine());
 
             case 0:
             return 1;
@@ -358,7 +365,7 @@ public class TicketManager{
         else 
          totprice= basePrice*agePrice[agePriceVar]*typePrice[typePriceVar];
      
-        totprice= totprice*0.7 + totprice; //Adding GST
+        totprice= totprice*0.07 + totprice; //Adding GST
 
         return totprice;
     }
@@ -369,11 +376,13 @@ public class TicketManager{
         System.out.println("Ticket ID: "+t.getTicketID());
         System.out.println("Ticket Type: "+t.getTicketType());
         System.out.println("Movie Time: "+t.getMovieTime());
+        System.out.println("Movie Date: "+t.getMoiveDate());
         System.out.println("Movie ID: "+t.getMovieID());
         System.out.println("Movie Name: "+t.getMovieName());
         System.out.println("Price: "+t.getPrice());
         System.out.println("Cinema Name: "+t.getCinemaName());
         System.out.println("Seat ID: "+t.getSeatID());
+        
     }
 
 
