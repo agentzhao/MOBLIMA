@@ -16,6 +16,7 @@ public class Ticket
 	private double price;
 	private String cinemaName;
 	private int seatID;
+	private String datemov;
 
 	public Ticket(int userID, String movieName)
 	{
@@ -70,6 +71,11 @@ public class Ticket
 		return seatID;
 	}
 
+	public String getMoiveDate()
+	{
+		return datemov;
+	}
+
 
 
 	//setter methods
@@ -118,9 +124,15 @@ public class Ticket
 		this.seatID=seatID;
 	}
 	
+	public void setMovieDate(String datemov)
+	{
+		this.datemov=datemov;
+	}
+
+
 	public void printTicketInfo()
 	{
-		System.out.println("User ID: "+userID+"\nTicket ID: "+ticketID+"\nTicket Type: "+ticketType+"\nMovie Time: "+ movieTime + "\nMovie ID: "+ movieID +"\nMovie Name: "+ movieName +"\nPrice: " + price +"\nCinema Name: "+ cinemaName +"\nSeat ID: "+seatID);
+		System.out.println("User ID: "+userID+"\nTicket ID: "+ticketID+"\nTicket Type: "+ticketType+"\nMovie Time: "+ movieTime + "\nMovie ID: "+ movieID +"\nMovie Name: "+ movieName +"\nPrice: " + price +"\nCinema Name: "+ cinemaName +"\nSeat ID: "+seatID+"\nDate of Movie: "+datemov);
 	}
 	
 }
