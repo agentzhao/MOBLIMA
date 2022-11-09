@@ -8,8 +8,6 @@ import java.util.List;
 import entities.Review;
 import entities.ScreeningTimes;
 import entities.Seat;
-import entities.Ticket;
-import entities.Seat.*;
 import entities.Movie;
 import entities.Movie.*;
 import entities.Cinema;
@@ -20,7 +18,6 @@ import boundaries.Customer;
 
 import controllers.MovieManager;
 import controllers.TicketManager;
-import controllers.CineplexManager;
 
 public class MoblimaInitializer {  
   private String dataPath;
@@ -269,12 +266,13 @@ public class MoblimaInitializer {
     
     Cinema c = cineplex.getCinemas()[0];   
     Movie m = c.getMovies().get(7);
+    ScreeningTimes st = c.getScreeningTimes().get(3);
     
     //c.getscreeningtimes() should have a parameter for movieid ?
                 
     for (int i = 0; i < 3; i += 1) {
-      Seat s = c.getScreeningTimes().get(3).getSeats()[i];
-      tm.createTicket(customer.get(i), c, s, m);
+      Seat s = st.getSeats()[i];
+      tm.createTicket(customer.get(i), c, s, m, st);
       tm.createTransaction(customer.get(i), c);
     }
     
