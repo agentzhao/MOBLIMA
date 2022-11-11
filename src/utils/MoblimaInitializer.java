@@ -60,9 +60,14 @@ public class MoblimaInitializer {
         String synopsis = br.readLine();
         String[] cast = br.readLine().split(",", 0);
         String director = br.readLine();
+        
+        long[] screenTimes = new long[3];
+        for (int k = 0; k < 3; k += 1) {
+          screenTimes[k] = Long.parseLong(br.readLine());
+        }
       
         /* Create movie object and store into movies list. */
-        Movie newMovie = new Movie(movieID, movieName, movieType, movieStatus, movieRating, synopsis, cast, director);
+        Movie newMovie = new Movie(movieID, movieName, movieType, movieStatus, movieRating, synopsis, cast, director, screenTimes);
         movies.add(newMovie);
         
         /* Set ticket sales for PREVIEW/ENDOFSHOWING/NOWSHOWING movies */

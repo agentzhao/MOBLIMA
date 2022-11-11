@@ -27,6 +27,7 @@ public class Movie {
   private String director; // 1
   private double overallRating; // 1 - 5 (best)
   private int ticketSales;
+  private long[] screenTimes;
 
   // constructor (default and parameterized)
   public Movie(int movieID) {
@@ -34,6 +35,7 @@ public class Movie {
     this.movieReviews = new ArrayList<Review>();
     this.overallRating = 0;
     this.ticketSales = 0;
+    this.screenTimes = new long[3];
   }
 
   // after calling, need to update Reviews and TicketSales
@@ -41,7 +43,7 @@ public class Movie {
   // movie.updateOverallRating()
   // movie.setTicketSales()
   public Movie(int movieID, String movieName, Type movieType, Status movieStatus,
-      Rating movieRating, String synopsis, String[] cast, String director) {
+      Rating movieRating, String synopsis, String[] cast, String director, long[] screenTimes) {
     this.movieID = movieID;
     this.movieName = movieName;
     this.movieType = movieType;
@@ -53,6 +55,7 @@ public class Movie {
     this.director = director;
     this.overallRating = 0; // 0 = null
     this.ticketSales = 0;
+    this.screenTimes = screenTimes;
   }
 
   // getters
@@ -100,6 +103,10 @@ public class Movie {
     return this.ticketSales;
   }
 
+  public long[] getScreenTimes() {
+    return this.screenTimes;
+  }
+
   // setters
   public void setMovieID(int movieID) {
     this.movieID = movieID;
@@ -139,6 +146,27 @@ public class Movie {
 
   public void setDirector(String director) {
     this.director = director;
+  }
+
+  public void setScreenTimes(long[] screenTimes) {
+    this.screenTimes = screenTimes;
+  }
+
+  public void updateMovieStatus() {
+    int temp = 0;
+    long currentTime = System.currentTimeMillis();
+    while (currentTime < this.screenTimes[temp]) {
+      temp += 1;
+    }
+    if (temp == 0) {
+      this.movieStatus = Status.COMINGSOON;
+    } else if (temp == 1) {
+      this.movieStatus = Status.PREVIEW;
+    } else if (temp == 2) {
+      this.movieStatus = Status.NOWSHOWING;
+    } else {
+      this.movieStatus = Status.ENDOFSHOWING;
+    }
   }
 
   public void updateOverallRating() {

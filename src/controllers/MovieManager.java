@@ -83,6 +83,16 @@ public class MovieManager {
     System.out.print("Enter director: ");
     newMovie.setDirector(sc.nextLine());
 
+    // screenTimes
+    System.out.println("Enter screen times in unix time (preview, showing, end): ");
+    long[] temp2 = new long[3];
+    for (int i = 0; i < 3; i++) {
+      temp2[i] = sc.nextLong();
+    }
+    newMovie.setScreenTimes(temp2);
+    newMovie.updateMovieStatus();
+    sc.nextLine();
+
     // add to list
     this.movies.add(newMovie);
   }
@@ -104,6 +114,7 @@ public class MovieManager {
     System.out.println("6. Synopsis");
     System.out.println("7. Cast");
     System.out.println("8. Director");
+    System.out.println("9. Screen Times");
     System.out.println("0. Exit");
     System.out.println("Enter field to update: ");
 
@@ -153,6 +164,16 @@ public class MovieManager {
       case 8:
         System.out.println("Enter new director: ");
         m.setDirector(sc.nextLine());
+        break;
+      case 9:
+        System.out.println("Enter new screen times in unix time (preview, showing, end): ");
+        long[] temp2 = new long[3];
+        for (int i = 0; i < 3; i++) {
+          temp2[i] = sc.nextLong();
+        }
+        m.setScreenTimes(temp2);
+        m.updateMovieStatus();
+        sc.nextLine();
         break;
       case 0:
         return 1;
