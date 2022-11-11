@@ -187,8 +187,9 @@ public class MoblimaInitializer {
           /* Create empty list of ScreeningTimes objects */
           List<ScreeningTimes> st = new ArrayList<ScreeningTimes>();
           
-          /* Initialise 12 ScreeningTimes */
-          String[] times = new String[] {"0900", "1100", "1300", "1500", "1700", "1900", "2100", "2300", "0900", "1200", "1500", "1800"};
+          /* Helper arrays to initialise screeningtimes */
+          String[] times = new String[] {"0900", "1500", "2100"};
+          int[] mov = new int[] {1,4,5,7,8,9,11};
           
           /* 
            * Generate array of seat objects
@@ -203,7 +204,7 @@ public class MoblimaInitializer {
           
           int noOfSeats = Integer.parseInt(brc.readLine());
           
-          for (int x = 0; x < 12; x += 1) {
+          for (int y = 0; y < times.length; y += 1) {
             Seat[] seats = new Seat[noOfSeats];
             
             if (!isPlatinum) {
@@ -228,9 +229,11 @@ public class MoblimaInitializer {
               }
             }
             
-            /* Create ScreeningTimes object and store into st list */
-            ScreeningTimes s = new ScreeningTimes(cinemaCode, cinemaName, 1, times[x], "13/11/2022", seats);
-            st.add(s);
+            /* Create three screeningtimes per day at every cinema */
+            for (int z = 0; z < mov.length; z += 1) {
+              ScreeningTimes s = new ScreeningTimes(cinemaCode, cinemaName, mov[z], times[y], "13/11/2022", seats);
+              st.add(s);
+            }
           }
           
           /* Create cinema object and store into cinemas array */ 
@@ -374,6 +377,7 @@ public class MoblimaInitializer {
     for (int i = 0; i < 3; i += 1) {
       /* Create seatID Array and store seat id */
       int s = st.getSeats()[i].getSeatID();
+            
       ArrayList<Integer> seatID = new ArrayList<Integer>();
       seatID.add(s);
             
@@ -401,7 +405,7 @@ public class MoblimaInitializer {
      * Cinema: Shaw Theatres Waterway Point Hall 1
      * Movie: Jurassic World (Movie id: 7)
      * Date: 13/11/2022
-     * Time: 1500
+     * Time: 0900
      * Seat id: 1, 2, 3
      * Ticket id: 1, 2, 3
      */
@@ -416,6 +420,7 @@ public class MoblimaInitializer {
     for (int i = 0; i < 3 ; i += 1) {
       int s = st.getSeats()[i].getSeatID();
       int t = tm.getTicketid(c.getMovies().get(7).getMovieName(), customer.get(i).getId());
+      
       st.getSeats()[s].setAvailable(false);
       st.getSeats()[s].setTicketHolder(t);
     }
