@@ -14,6 +14,8 @@ public class Transaction{
 	private String mobileNumber;//customer mobile number
 	
 	private double amount;//Amount of the transaction
+
+
 	
 	
 	public Transaction( String name,int userID)
@@ -50,9 +52,9 @@ public class Transaction{
 	
 	//setter functions
 
-	public void setTID( Cinema cinema)
+	public void setTID(String cinemaID)
 	{
-		String tid= generateTID(cinema);
+		String tid= generateTID(cinemaID);
 		this.TID=tid;
 	}
 
@@ -86,13 +88,13 @@ public class Transaction{
 		
 	}
 
-	public static String generateTID(Cinema cinema)
+	public static String generateTID(String cinemaID)
 	{
 		Date date = new Date();
 		SimpleDateFormat formatter = new SimpleDateFormat("YYYYMMddhhmm");
 		String strDate= formatter.format(date);
 		
-		String strTID= cinema.getCinemaID() + strDate;
+		String strTID= cinemaID + strDate;
 
 		return strTID;
 	}

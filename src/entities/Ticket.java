@@ -17,6 +17,7 @@ public class Ticket
 	private String cinemaName;
 	private int seatID;
 	private String datemov;
+	private String transID;
 
 	public Ticket(int userID, String movieName)
 	{
@@ -76,6 +77,11 @@ public class Ticket
 		return datemov;
 	}
 
+	public String getTransID()
+	{
+		return transID;
+	}
+
 
 
 	//setter methods
@@ -130,10 +136,14 @@ public class Ticket
 		this.datemov=datemov;
 	}
 
+	public void setTransID(String transID)
+	{
+		this.transID=transID;
+	}
 
 	public void printTicketInfo()
 	{
-		System.out.println("User ID: "+userID+"\nTicket ID: "+ticketID+"\nTicket Type: "+ticketType+"\nMovie Time: "+ movieTime + "\nMovie ID: "+ movieID +"\nMovie Name: "+ movieName +"\nPrice: " + String.format("%.2f",price) +"\nCinema Name: "+ cinemaName +"\nSeat ID: "+seatID+"\nDate of Movie: "+datemov);
+		System.out.println("User ID: "+userID+"\nTicket ID: "+ticketID+"\nTicket Type: "+ticketType+"\nMovie Time: "+ movieTime + "\nMovie ID: "+ movieID +"\nMovie Name: "+ movieName +"\nPrice: " + String.format("%.2f",price) +"\nCinema Name: "+ cinemaName +"\nSeat ID: "+seatID+"\nDate of Movie: "+datemov+"\nTransaction ID: "+transID);
 	}
 	
 }
