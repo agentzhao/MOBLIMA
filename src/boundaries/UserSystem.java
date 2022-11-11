@@ -44,7 +44,7 @@ public class UserSystem {
 
 
 
-    private void searchMovie(String name) {
+   /*  private void searchMovie(String name) {
         // go into Cineplex.java
         // get return from Cineplex.java and display match result
         Cinema[] cm = new Cinema[3]; // Equal to return from Cineplex
@@ -101,5 +101,5 @@ public class UserSystem {
             System.out.println(x + ": " + bookingHistory[x]);
         }
     }
-
+*/
 }
