@@ -376,7 +376,7 @@ public class MoblimaInitializer {
     /* Create ticket and transaction for customers */
     for (int i = 0; i < 3; i += 1) {
       /* Create seatID Array and store seat id */
-      int s = st.getSeats()[i].getSeatID();
+      int s = st.getSeats()[i+9].getSeatID();
             
       ArrayList<Integer> seatID = new ArrayList<Integer>();
       seatID.add(s);
@@ -418,7 +418,7 @@ public class MoblimaInitializer {
     
     /* Set seat to occupied and set ticketholder to customerid */ 
     for (int i = 0; i < 3 ; i += 1) {
-      int s = st.getSeats()[i].getSeatID();
+      int s = st.getSeats()[i+9].getSeatID();
       int t = tm.getTicketid(c.getMovies().get(7).getMovieName(), customer.get(i).getId());
       
       st.getSeats()[s].setAvailable(false);
