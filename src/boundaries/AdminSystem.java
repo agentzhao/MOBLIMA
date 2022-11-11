@@ -6,6 +6,7 @@ import controllers.CineplexManager;
 import controllers.MovieManager;
 import controllers.TicketManager;
 import entities.Admin;
+import entities.Movie;
 
 public class AdminSystem {
   private MovieManager mm;
@@ -32,6 +33,7 @@ public class AdminSystem {
     String id;
     int i;
     String cid;
+    Movie m;
     int choice = 0;
     while (choice != 9) {
       System.out.println(
@@ -45,12 +47,18 @@ public class AdminSystem {
         case 2:
           System.out.println("Enter the movie name of the movie you want to update");
           id = sc.nextLine();
-          mm.updateMovie(mm.searchMovieName(id).getMovieID());
+          m = mm.searchMovieName(id);
+          if (m == null)
+            break;
+          mm.updateMovie(m.getMovieID());
           break;
         case 3:
           System.out.println("Enter the name of the movie you want to remove");
           id = sc.nextLine();
-          mm.deleteMovie(mm.searchMovieName(id).getMovieID());
+          m = mm.searchMovieName(id);
+          if (m == null)
+            break;
+          mm.deleteMovie(m.getMovieID());
           break;
         case 4:
           System.out.println("Enter the movie name of the movie you want to add screentime for");
@@ -60,7 +68,10 @@ public class AdminSystem {
            * cid = sc.next();
            */
           // cm.createShowtime(a.getcineplexID(), cid, id);
-          cm.createShowtime(a.getcineplexID(), mm.searchMovieName(id));
+          m = mm.searchMovieName(id);
+          if (m == null)
+            break;
+          cm.createShowtime(a.getcineplexID(), m);
           break;
         case 5:
           System.out.println("Enter the movie name of the movie you want to update screentime for");
@@ -68,7 +79,10 @@ public class AdminSystem {
           // System.out.println("Select the cinema you want to update screentime for");
           // cid = sc.next();
           // cm.updateShowtime(a.getcineplexID(), cid, id);
-          cm.updateShowtime(a.getcineplexID(), mm.searchMovieName(id), mm.getMovieList());
+          m = mm.searchMovieName(id);
+          if (m == null)
+            break;
+          cm.updateShowtime(a.getcineplexID(), m, mm.getMovieList());
           break;
         case 6:
           System.out.println("Enter the movie name of the movie you want to remove screentime for");
