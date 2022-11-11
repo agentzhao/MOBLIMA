@@ -278,8 +278,8 @@ public class MOBLIMA {
                 System.out.println("No seat selected");
               }
               if (z != -1) {
+                s.add(z);
                 if (a.size() == 0) {
-                  s.add(z);
                   a.add(tm.ageToTicketType(MOBLIMA.c.getAge()));
                   // System.out.println("Seat");
                 } else {
@@ -333,7 +333,6 @@ public class MOBLIMA {
       // tm.createTicket(c, Movie class);
       int t = 0;
       ArrayList<Ticket> tempTicket = tm.createTicket(c, s, a, movie, st);
-
       for (int x = 0; x < tempTicket.size(); x++) {
         t = cm.bookSeat(st, s.get(x), tempTicket.get(x).getTicketID());
         if (t == 0) {
