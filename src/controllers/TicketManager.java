@@ -649,4 +649,12 @@ public class TicketManager{
         tamt= Math.round(tamt*100)/100;
         return t.getTransactionAmount();
     }
+
+    public void printAllTickets()
+    {
+        for(Ticket t: ticket)
+        {
+            getTicketDetails(t);
+        }
+    }
 }
