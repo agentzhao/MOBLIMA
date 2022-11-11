@@ -169,6 +169,7 @@ public class MovieManager {
         System.out.println("Current screen times: " + m.getScreenTimes()[0] + ", " + m.getScreenTimes()[1] + ", "
             + m.getScreenTimes()[2]);
         long[] temp2 = new long[3];
+        System.out.println("Current time: " + System.currentTimeMillis());
         System.out.println("Enter new screen time in unix time (preview): ");
         temp2[0] = sc.nextLong();
         System.out.println("Enter new screen time in unix time (start): ");
