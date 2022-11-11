@@ -179,11 +179,10 @@ public class CineplexManager {
       else
         continue;
       for (Cinema cinema : cineplex.getCinemas()) {
-        System.out.print(cinema.getCinemaName());
+        System.out.print(cinema.getCinemaName()+"\n");
         for (ScreeningTimes screentime : cinema.getScreeningTimes()) {
           if (screentime.getMovieID() == movie.getMovieID()) {
-            System.out.println(
-                count + ": " + screentime.getDate() + " - " + screentime.getScreenTime() + ": " + movie.getMovieName());
+            System.out.printf("%3d %s %2s %s %2s %s %2s %n", count, ": ", screentime.getDate(), " - ", screentime.getScreenTime(), ": ", movie.getMovieName());
             count++;
           }
         }
