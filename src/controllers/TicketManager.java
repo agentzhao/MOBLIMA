@@ -435,7 +435,7 @@ public class TicketManager{
 
 
         for(Ticket t : ticket){
-            if(t.getMovieName().equals(movieName) && t.getUserID()==userID)
+            if(t.getMovieName().equalsIgnoreCase(movieName) && t.getUserID()==userID)
             {
                 searchTickets.add(t);
             }
@@ -642,12 +642,12 @@ public class TicketManager{
         return 1;   
     }
 
-    public double getTransactionAmount(String TID)
+    public String getTransactionAmount(String TID)
     {
         Transaction t = searchTransaction(TID);
         double tamt=t.getTransactionAmount();
-        tamt= Math.round(tamt*100)/100;
-        return t.getTransactionAmount();
+        
+        return String.format("%.2f", tamt);
     }
 
     public void printAllTickets()
