@@ -168,7 +168,7 @@ public class MoblimaInitializer {
               }
             }
             
-            ScreeningTimes s = new ScreeningTimes(cinemaCode, 1, times[x], "13/11/2022", seats);
+            ScreeningTimes s = new ScreeningTimes(cinemaCode, cinemaName, 1, times[x], "13/11/2022", seats);
             st.add(s);
           }
            
