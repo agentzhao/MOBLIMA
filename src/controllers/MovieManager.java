@@ -166,11 +166,15 @@ public class MovieManager {
         m.setDirector(sc.nextLine());
         break;
       case 9:
-        System.out.println("Enter new screen times in unix time (preview, showing, end): ");
+        System.out.println("Current screen times: " + m.getScreenTimes()[0] + ", " + m.getScreenTimes()[1] + ", "
+            + m.getScreenTimes()[2]);
         long[] temp2 = new long[3];
-        for (int i = 0; i < 3; i++) {
-          temp2[i] = sc.nextLong();
-        }
+        System.out.println("Enter new screen time in unix time (preview): ");
+        temp2[0] = sc.nextLong();
+        System.out.println("Enter new screen time in unix time (start): ");
+        temp2[1] = sc.nextLong();
+        System.out.println("Enter new screen time in unix time (end): ");
+        temp2[2] = sc.nextLong();
         m.setScreenTimes(temp2);
         m.updateMovieStatus();
         sc.nextLine();
@@ -227,6 +231,8 @@ public class MovieManager {
     System.out.println("------------------- Movie Details -----------------");
     System.out.println("Movie Name: " + m.getMovieName());
     System.out.println("Movie Type: " + m.getMovieType());
+    String temp2 = Arrays.toString(m.getScreenTimes());
+    System.out.println("Movie Screen Times: " + temp2.replace("[", "").replace("]", ""));
     System.out.println("Movie Status: " + m.getMovieStatus());
     System.out.println("Movie Rating: " + m.getMovieRating());
     System.out.println("Movie Synopsis: " + m.getSynopsis());
@@ -299,7 +305,6 @@ public class MovieManager {
 
     Movie m = searchMovie(movieID);
     if (m == null) {
-      System.out.println("Movie not found!");
       return;
     }
 
@@ -321,5 +326,11 @@ public class MovieManager {
     m.addReview(newReview);
     m.updateOverallRating();
     reviews.add(newReview);
+  }
+
+  public void printAllMovies() {
+    for (Movie m : movies) {
+      getMovieDetails(m);
+    }
   }
 }
