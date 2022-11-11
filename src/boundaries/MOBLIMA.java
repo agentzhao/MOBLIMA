@@ -19,19 +19,21 @@ public class MOBLIMA {
   private static Admin a;
   private static Customer c;
   private static User tempUser;
-  
+
   public static void main(String[] args) {
-    //ReviewManager rm = new ReviewManager();
-    //SeatManager sm = new SeatManager();
-    //TicketManager tm = new TicketManager();
-    /*Login log = new Login();
-    log.createAdmin("admin@gmail.com", "123", 1, 1234, "1333");
-    log.createCustomer("customer@gmail.com", "123", 0, "123999", "James", 21);*/
-    //System.out.println("Welcome to MOBLIMA");
+    // ReviewManager rm = new ReviewManager();
+    // SeatManager sm = new SeatManager();
+    // TicketManager tm = new TicketManager();
+    /*
+     * Login log = new Login();
+     * log.createAdmin("admin@gmail.com", "123", 1, 1234, "1333");
+     * log.createCustomer("customer@gmail.com", "123", 0, "123999", "James", 21);
+     */
+    // System.out.println("Welcome to MOBLIMA");
     initData();
     mainMenu(log);
     // todo initialize data
-    
+
     /*
      * while (choice < 3) {
      * System.out.
@@ -50,47 +52,47 @@ public class MOBLIMA {
      * }
      */
     System.out.println("Thank you for using MOBLIMA");
-    
+
   }
 
   public static void initData() {
     /* Create MoblimaInitializer Object */
     MoblimaInitializer mi = new MoblimaInitializer();
-    
+
     /* Initialise Movies and Reviews and store into MovieManager */
     mm = new MovieManager();
     mm.addMovieList(mi.initializeMovie());
     mm.addReviewList(mi.initializeReview(mm));
-    
+
     /* Initialise Customers and Administrators and store into Login */
     log = new Login();
-    
+
     ArrayList<Customer> customer = new ArrayList<Customer>();
     customer = mi.initializeCustomers();
     log.addCustomerList(customer);
-    
+
     log.addAdminList(mi.initializeAdmin());
-    
+
     /* Initialise Cineplexes and store into CineplexManager */
     cm = new CineplexManager();
     List<Cineplex> cineplexes = mi.initializeCineplex(mm.getMovieList());
     cm.setCineplexes(cineplexes);
-        
+
     /* Initialise 3 Tickets Child, Adult and Senior Citizen */
     tm = new TicketManager();
-    
+
     /* Create ticket and transaction */
     tm = mi.initializeTickets(customer, cm.getCineplexList().get(0));
-            
+
     /* Set seat to occupied based on purchased ticket */
     mi.initializeSeats(customer, cm.getCineplexList().get(0), tm);
-    
+
     us = new UserSystem(mm);
     as = new AdminSystem(mm, cm, tm);
   }
 
   public static void mainMenu(Login log) {
-   
+
     int login = 0, admin = 0;
     Scanner sc = new Scanner(System.in);
     int choice = -1;
@@ -113,7 +115,7 @@ public class MOBLIMA {
           System.out.println("Sort by:\n1: Rating\n2: Ticket Sales");
           int t = sc.nextInt();
           switch (t) {
-            case 1: 
+            case 1:
               mm.topRating();
               break;
             case 2:
@@ -157,7 +159,7 @@ public class MOBLIMA {
               System.out.println("-------------------------------------");
             }
           }
-          
+
           break;
         case 4:
           System.out.println("Thank you for using MOBLIMA");
@@ -183,7 +185,7 @@ public class MOBLIMA {
           break;
       }
     }
-    
+
   }
 
   public static void movieMenu() {
@@ -220,29 +222,31 @@ public class MOBLIMA {
     int c = 0;
     while (c != 2) {
       st = cm.displayScreentime(null, movie);
-      System.out.println("1: Get Seat\n2: Exit");
+      System.out.println("1: Show Seat\n2: Exit");
       Scanner sc = new Scanner(System.in);
       c = sc.nextInt();
       switch (c) {
         case 1:
           seatMenu(movie, st);
           break;
-        case 2: 
+        case 2:
           break;
         default:
           System.out.println("Please input a valid number");
           break;
       }
     }
-    
+
     // sc.close();
   }
 
   public static void seatMenu(Movie movie, ScreeningTimes st) {
     // Print out Seating plan
-    
+
     int c = 0;
-    int s = -1;
+    ArrayList<Integer> s = new ArrayList<Integer>();
+    ArrayList<Integer> a = new ArrayList<Integer>();
+    int z = 0;
     while (c != 2) {
       cm.printSeats(st);
       if (tempUser != null) {
@@ -255,9 +259,28 @@ public class MOBLIMA {
       switch (c) {
         case 1:
           if (tempUser != null) {
-            System.out.println("Please select a seat");
-            s = sc.nextInt();
-            bookingMenu(movie, st, s);
+            while (true) {
+              System.out.println("Please select a seat. Press 0 to book");
+              z = sc.nextInt();
+              if (z == 0 && s.size() != 0) {
+                bookingMenu(movie, st, s);
+                break;
+              } else {
+                System.out.println("No seat selected");
+              }
+              if (z != 0) {
+                s.add(z);
+                if (z < 10) {
+                  if (z % 2 == 1) {
+                    s.add(z + 1);
+                  } else {
+                    s.add(z - 1);
+                  }
+                  System.out.println("Couple Seat added");
+                }
+              }
+            }
+
           } else {
             System.out.println("Exiting Seat Menu");
             return;
@@ -271,20 +294,25 @@ public class MOBLIMA {
         default:
           System.out.println("Please input a valid number");
           break;
-          
+
       }
     }
-    
+
     // sc.close();
   }
 
-  public static void bookingMenu(Movie movie, ScreeningTimes st, int s) {
+  public static void bookingMenu(Movie movie, ScreeningTimes st, ArrayList<Integer> s) {
     if (tempUser.getType() == 2) {
       // Waiting for ticketmanager update
       // tm.createTicket(c, Movie class);
-      Ticket tempTicket = tm.createTicket(c, s, movie, st);
-      cm.bookSeat(st, s, tempTicket.getTicketID()); // placeholder
-      System.out.println("Book ticket");
+      // ArrayList<Ticket> tempTicket = tm.createTicket(c, s, movie, st);
+      /*
+       * for (Ticket temp : tempTicket) {
+       * // cm.bookSeat(st, s, temp); // placeholder
+       * }
+       */
+
+      // System.out.println("Book ticket");
     } else {
       // tm.createTicket(c, Movie class);
       System.out.println("Admin cannot book ticket");
