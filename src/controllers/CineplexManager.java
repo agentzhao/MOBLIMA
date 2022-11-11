@@ -82,51 +82,15 @@ public class CineplexManager {
   }
 
   public void updateShowtime(String cineplexID, Movie movie) {
-    // Getting the cineplex
-    int cineplexnum = -1;
-    for (int i = 0; i < cineplexes.size(); i++) {
-      if (cineplexID.equalsIgnoreCase(cineplexes.get(i).getCineplexID()))
-        cineplexnum = i;
-    }
-    if (cineplexnum == -1) {
-      System.out.println("This cineplexID does not exist");
-      return;
-    }
-    Cineplex cineplex = cineplexes.get(cineplexnum - 1);
-
-    // Getting the cinema
-    for (int i = 0; i < cineplex.getCinemas().length; i++) {
-      System.out.println(i + 1 + ": " + cineplex.getCinemas()[i].getCinemaName());
-    }
-    System.out.println("Choose the Cinema name");
-    int cinemaChoice = sc.nextInt();
-    if (cinemaChoice >= cineplex.getCinemas().length || cinemaChoice <= 0) {
-      System.out.println("Invalid choice");
-      return;
-    }
-    Cinema cinema = cineplex.getCinemas()[cinemaChoice - 1];
-
-    // getting the showtime
-    System.out.println("Enter show time: ");
-    String showtime = sc.next();
-
-    // getting the date
-    System.out.println("Enter date: ");
-    String date = sc.next();
-
+    ScreeningTimes screeningtime = displayScreentime(cineplexID, null);
     // Updating the screening time
-    for (int i = 0; i < cinema.screeningTimes.size(); i++) {
-      if (cinema.screeningTimes.get(i).getDate().equalsIgnoreCase(date) && cinema.screeningTimes.get(i).getScreenTime().equalsIgnoreCase(showtime)) {
-        cinema.screeningTimes.get(i).setMovieID(movie.getMovieID());
-        System.out.println("Showtime updated");
-        return;
-      }
-    }
-    System.out.println("No such Showtime yet!");
-    return;
+    screeningtime.setMovieID(movie.getMovieID());
+    System.out.println("Showtime updated");
   }
 
   public void removeShowTime(String cineplexID) {
+    ScreeningTimes screeningtime = displayScreentime(cineplexID, null);
+
     // Getting the cineplex
     int cineplexnum = -1;
     for (int i = 0; i < cineplexes.size(); i++) {
@@ -182,7 +146,7 @@ public class CineplexManager {
       for (Cinema cinema : cineplex.getCinemas()) {
         System.out.printf("%s %n", cinema.getCinemaName());
         for (ScreeningTimes screentime : cinema.getScreeningTimes()) {
-          if (screentime.getMovieID() == movie.getMovieID()) {
+          if (movie == null || screentime.getMovieID() == movie.getMovieID()) {
             System.out.printf("%3d %s %2s %s %2s %s %2s %n", count, ": ", screentime.getDate(), " - ", screentime.getScreenTime(), ": ", movie.getMovieName());
             count++;
           }
@@ -207,7 +171,7 @@ public class CineplexManager {
         continue;
       for (Cinema cinema : cineplex.getCinemas()) {
         for (ScreeningTimes screentime : cinema.getScreeningTimes()) {
-          if (screentime.getMovieID() == movie.getMovieID()) {
+          if (movie== null || screentime.getMovieID() == movie.getMovieID()) {
             if (count == ScreeningTimeChoice)
               return screentime;
             count++;
@@ -263,7 +227,7 @@ public class CineplexManager {
   // Booking, Unbooking, Changing Seats
   public int bookSeat(ScreeningTimes screentime, int seatID,  int tID) {
     //Seat is double seat
-    if (screentime.getSeats()[seatID-1].isAvailable() && screentime.getSeats()[seatID-1].getType()!= Type.Normal) {
+    if (screentime.getSeats()[seatID].isAvailable() && screentime.getSeats()[seatID].getType()!= Type.Normal) {
         if((seatID)%2 == 0){
             screentime.getSeats()[seatID+1].setAvailable(false);
             screentime.getSeats()[seatID].setAvailable(false);
