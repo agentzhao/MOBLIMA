@@ -153,7 +153,7 @@ public class MOBLIMA {
               }
             }
           } else {
-            ArrayList<Ticket> tempTicket = tm.searchTicketUser(c.getId());
+            ArrayList<Ticket> tempTicket = tm.searchTicketUser(tempUser.getId());
             for (Ticket i : tempTicket) {
               tm.getTicketDetails(i);
               System.out.println("-------------------------------------");
