@@ -151,7 +151,7 @@ public class TicketManager{
         newTicket.setSeatID(seatID);
 
         //Price
-        double totprice = calPrice(movie);
+        double totprice = calPrice(movie,seatID);
         newTicket.setPrice(totprice);
 
 
@@ -403,7 +403,7 @@ public class TicketManager{
      * ticket type: SENIOR, ADULT , CHILD
      * It provides a temporary total to work on after the above classification
      */
-    public double calPrice (Movie movie)
+    public double calPrice (Movie movie, int seatID)
     {
  
         double totprice;
@@ -422,6 +422,9 @@ public class TicketManager{
         
         else 
          totprice= basePrice*agePrice[agePriceVar]*typePrice[typePriceVar];
+
+         if(seatID>=01 && seatID<=10) // couple seats
+         totprice = totprice * 2;
      
         totprice= totprice*0.07 + totprice; //Adding GST
 
