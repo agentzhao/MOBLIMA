@@ -104,11 +104,12 @@ public class Ticket
 		this.movieID=movieID;
 	}
 	
-	public void setMovieName(String MovieName)
+	public void setMovieName(String movieName)
 	{
-		this.movieName=movieName;
+		this.movieName= movieName;
 	}
-	
+
+
 	public void setPrice(double price)
 	{
 		this.price=price;
