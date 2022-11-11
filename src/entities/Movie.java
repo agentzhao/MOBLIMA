@@ -2,6 +2,7 @@ package entities;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.text.SimpleDateFormat;
 
 public class Movie {
   public enum Type {
@@ -107,6 +108,12 @@ public class Movie {
     return this.screenTimes;
   }
 
+  public void printScreenTimes() {
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    System.out.println("Movie Screen Times (preview, showing, end): " + dateFormat.format(this.screenTimes[0] * 1000)
+        + ", " + dateFormat.format(this.screenTimes[1] * 1000) + ", " + dateFormat.format(this.screenTimes[2] * 1000));
+  }
+
   // setters
   public void setMovieID(int movieID) {
     this.movieID = movieID;
@@ -154,9 +161,12 @@ public class Movie {
 
   public void updateMovieStatus() {
     int temp = 0;
-    long currentTime = System.currentTimeMillis();
-    while (currentTime < this.screenTimes[temp]) {
+    long currentTime = System.currentTimeMillis() / 1000;
+    while (currentTime > this.screenTimes[temp]) {
       temp += 1;
+      if (temp == 3) {
+        break;
+      }
     }
     if (temp == 0) {
       this.movieStatus = Status.COMINGSOON;

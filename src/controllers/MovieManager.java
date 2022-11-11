@@ -8,6 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Arrays;
+import java.time.format.DateTimeFormatter;
+import java.time.ZoneOffset;
+import java.time.temporal.ChronoField;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+import java.util.Calendar;
 
 public class MovieManager {
   private List<Movie> movies;
@@ -57,7 +63,6 @@ public class MovieManager {
 
     // movieStatus
     System.out.print("Status of movie (COMINGSOON, PREVIEW, NOWSHOWING, ENDOFSHOWING): ");
-    System.out.print("Enter movie status: ");
     newMovie.setMovieStatus(Status.valueOf(sc.nextLine()));
 
     // movieRating
@@ -84,14 +89,21 @@ public class MovieManager {
     newMovie.setDirector(sc.nextLine());
 
     // screenTimes
-    System.out.println("Enter screen times in unix time (preview, showing, end): ");
-    long[] temp2 = new long[3];
-    for (int i = 0; i < 3; i++) {
-      temp2[i] = sc.nextLong();
+    System.out.println("Enter screen times in dd/mm/yyyy (preview, showing, end): ");
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    long[] newScreenTimes = new long[3];
+    try {
+      System.out.print("Enter new preview screen time: ");
+      newScreenTimes[0] = dateFormat.parse(sc.nextLine()).getTime() / 1000;
+      System.out.print("Enter new showing screen time: ");
+      newScreenTimes[1] = dateFormat.parse(sc.nextLine()).getTime() / 1000;
+      System.out.print("Enter new end screen time: ");
+      newScreenTimes[2] = dateFormat.parse(sc.nextLine()).getTime() / 1000;
+    } catch (ParseException e) {
+      e.printStackTrace();
     }
-    newMovie.setScreenTimes(temp2);
+    newMovie.setScreenTimes(newScreenTimes);
     newMovie.updateMovieStatus();
-    sc.nextLine();
 
     // add to list
     this.movies.add(newMovie);
@@ -166,19 +178,22 @@ public class MovieManager {
         m.setDirector(sc.nextLine());
         break;
       case 9:
-        System.out.println("Current screen times: " + m.getScreenTimes()[0] + ", " + m.getScreenTimes()[1] + ", "
-            + m.getScreenTimes()[2]);
-        long[] temp2 = new long[3];
-        System.out.println("Current time: " + System.currentTimeMillis());
-        System.out.println("Enter new screen time in unix time (preview): ");
-        temp2[0] = sc.nextLong();
-        System.out.println("Enter new screen time in unix time (start): ");
-        temp2[1] = sc.nextLong();
-        System.out.println("Enter new screen time in unix time (end): ");
-        temp2[2] = sc.nextLong();
-        m.setScreenTimes(temp2);
+        System.out.println("Current screen times: ");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        m.printScreenTimes();
+        long[] newScreenTimes = new long[3];
+        try {
+          System.out.print("Enter new preview screen time: ");
+          newScreenTimes[0] = dateFormat.parse(sc.nextLine()).getTime() / 1000;
+          System.out.print("Enter new showing screen time: ");
+          newScreenTimes[1] = dateFormat.parse(sc.nextLine()).getTime() / 1000;
+          System.out.print("Enter new end screen time: ");
+          newScreenTimes[2] = dateFormat.parse(sc.nextLine()).getTime() / 1000;
+        } catch (ParseException e) {
+          e.printStackTrace();
+        }
+        m.setScreenTimes(newScreenTimes);
         m.updateMovieStatus();
-        sc.nextLine();
         break;
       case 0:
         return 1;
@@ -232,8 +247,7 @@ public class MovieManager {
     System.out.println("------------------- Movie Details -----------------");
     System.out.println("Movie Name: " + m.getMovieName());
     System.out.println("Movie Type: " + m.getMovieType());
-    String temp2 = Arrays.toString(m.getScreenTimes());
-    System.out.println("Movie Screen Times: " + temp2.replace("[", "").replace("]", ""));
+    m.printScreenTimes();
     System.out.println("Movie Status: " + m.getMovieStatus());
     System.out.println("Movie Rating: " + m.getMovieRating());
     System.out.println("Movie Synopsis: " + m.getSynopsis());
@@ -333,5 +347,11 @@ public class MovieManager {
     for (Movie m : movies) {
       getMovieDetails(m);
     }
+  }
+
+  private static long dateToLong(String s) {
+    String pattern = "YYYY/MM/DD";
+    return DateTimeFormatter.ofPattern(pattern).withZone(ZoneOffset.UTC)
+        .parse(s, p -> p.getLong(ChronoField.EPOCH_DAY));
   }
 }
