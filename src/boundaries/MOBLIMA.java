@@ -222,12 +222,18 @@ public class MOBLIMA {
     int c = 0;
     while (c != 2) {
       st = cm.displayScreentime(null, movie);
-      System.out.println("1: Show Seat\n2: Exit");
       Scanner sc = new Scanner(System.in);
+      if (st == null) {
+        System.out.println("1: Exit");
+      } else {
+        System.out.println("1: Show Seat\n2: Exit");
+      }
       c = sc.nextInt();
       switch (c) {
         case 1:
-          seatMenu(movie, st);
+          if (st != null) {
+            seatMenu(movie, st);
+          }
           break;
         case 2:
           break;
@@ -270,27 +276,20 @@ public class MOBLIMA {
               }
               if (z != 0) {
                 s.add(z);
-                if(a.size() == 0)
-                {
-                  //a.add()
-                }
-                else
-                {
-                  while(true)
-                  {
+                if (a.size() == 0) {
+                  a.add(tm.ageToTicketType(MOBLIMA.c.getAge()));
+                } else {
+                  while (true) {
                     System.out.println("Which ticket type are you getting?\n1: Child\n2: Adult\n3: Senior");
                     int y = sc.nextInt();
-                    if(y > 0 && y < 4)
-                    {
+                    if (y > 0 && y < 4) {
                       a.add(y);
                       break;
-                    }
-                    else
-                    {
+                    } else {
                       System.out.println("Please select a valid number");
                     }
                   }
-                  
+
                 }
                 if (z < 10) {
                   if (z % 2 == 1) {
@@ -328,12 +327,19 @@ public class MOBLIMA {
     if (tempUser.getType() == 2) {
       // Waiting for ticketmanager update
       // tm.createTicket(c, Movie class);
-      ArrayList<Ticket> tempTicket = tm.createTicket(c, s, a,  movie, st);
-      
-        for (Ticket temp : tempTicket) {
-        // cm.bookSeat(st, s, temp); // placeholder
+      int t = 0;
+      ArrayList<Ticket> tempTicket = tm.createTicket(c, s, a, movie, st);
+
+      for (int x = 0; x < tempTicket.size(); x++) {
+        t = cm.bookSeat(st, s.get(x), tempTicket.get(x).getTicketID());
+        if (t == 0) {
+          tm.deleteTicket(c.getId(), movie.getMovieName());
+        } else {
+          System.out.println(
+              "Price of ticket for seat " + tempTicket.get(x).getSeatID() + " :" + tempTicket.get(x).getPrice());
         }
-       
+      }
+      System.out.println("Total price of tickets: " + tm.getTransactionAmount(tempTicket.get(0).getTransID()));
 
       // System.out.println("Book ticket");
     } else {
