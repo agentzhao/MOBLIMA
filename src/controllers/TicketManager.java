@@ -23,7 +23,6 @@ public class TicketManager{
 
     private double basePrice;
     private double agePrice[]= new double[3];
-    private int agePriceVar;
     private double typePrice[] = new double[4];
     private int typePriceVar;
     private double previewPrice;
@@ -104,6 +103,7 @@ public class TicketManager{
         int noOfSeats= seatID.size();
         double totalPrice =0.0;
         TicType ttype= TicType.SENIOR;
+        int agePriceVar=0;
         
         ArrayList<Ticket> multipleTics = new ArrayList<Ticket>();
         Transaction newTran= new Transaction(customer.getName(), customer.getId());
@@ -141,16 +141,20 @@ public class TicketManager{
         if(tictype.get(i)==1)
         {
             ttype=TicType.SENIOR;
+            agePriceVar=0;
         }
         else if(tictype.get(i)==2)
         {
             ttype=TicType.ADULT;
+            agePriceVar=1;
         }
         else if(tictype.get(i)==3)
         {
             ttype=TicType.CHILD;
+            agePriceVar=2;
         }
-
+ 
+        //agePriceVar= tictype.get(i)-1;
 
         //Ticket Type
         newTicket.setTicketType(ttype);
@@ -177,7 +181,7 @@ public class TicketManager{
         newTicket.setSeatID(seatID.get(i));
 
         //Price
-        double totprice = calPrice(movie,seatID.get(i));
+        double totprice = calPrice(movie,seatID.get(i),agePriceVar);
         newTicket.setPrice(totprice);
         totalPrice+=totprice;
 
@@ -454,7 +458,7 @@ public class TicketManager{
      * ticket type: SENIOR, ADULT , CHILD
      * It provides a temporary total to work on after the above classification
      */
-    public double calPrice (Movie movie, int seatID)
+    public double calPrice (Movie movie, int seatID, int agePriceVar)
     {
  
         double totprice;
