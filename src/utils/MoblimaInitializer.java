@@ -12,6 +12,7 @@ import entities.Movie;
 import entities.Movie.*;
 import entities.Cinema;
 import entities.Cineplex;
+import entities.Ticket.TicType;
 
 import boundaries.Admin;
 import boundaries.Customer;
@@ -364,11 +365,25 @@ public class MoblimaInitializer {
     /* Get ScreeningTime object */
     ScreeningTimes st = c.getScreeningTimes().get(3);
     
+    /* Helper ArrayList to initialise tickets */
+    ArrayList<TicType> tt = new ArrayList<TicType>();
+    tt.add(TicType.CHILD);
+    tt.add(TicType.SENIOR);
+    tt.add(TicType.ADULT);
+    
     /* Create ticket and transaction for customers */
     for (int i = 0; i < 3; i += 1) {
+      /* Create seatID Array and store seat id */
       int s = st.getSeats()[i].getSeatID();
-      tm.createTicket(customer.get(i), s, m, st);
-      tm.createTransaction(customer.get(i), c);
+      ArrayList<Integer> seatID = new ArrayList<Integer>();
+      seatID.add(s);
+            
+      /* Create tictype array and store corresponding ticket type */
+      ArrayList<TicType> tictype = new ArrayList<TicType>();
+      tictype.add(tt.get(i));
+            
+      tm.createTicket(customer.get(i), seatID, tictype, m, st);
+      //tm.createTransaction(customer.get(i), c);
     }
     
     return tm;
