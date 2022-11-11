@@ -260,31 +260,125 @@ public class CineplexManager {
   }
 
   // Booking, Unbooking, Changing Seats
-  public void bookSeat(ScreeningTimes screentime, int seatID, int tID) {
-    if (screentime.getSeats()[seatID].isAvailable()) {
-      screentime.getSeats()[seatID].setAvailable(false);
-      screentime.getSeats()[seatID].setTicketHolder(tID);
-      System.out.println("Seat is booked");
-    } else
-      System.out.println("Seat taken");
+  public int bookSeat(ScreeningTimes screentime, int seatID,  int tID) {
+    //Seat is double seat
+    if (screentime.getSeats()[seatID-1].isAvailable() && screentime.getSeats()[seatID-1].getType()!= Type.Normal) {
+        if((seatID-1)%2 == 0){
+            screentime.getSeats()[seatID-1].setAvailable(false);
+            screentime.getSeats()[seatID].setAvailable(false);
+            screentime.getSeats()[seatID-1].setTicketHolder(tID);
+            screentime.getSeats()[seatID].setTicketHolder(tID);
+        }
+        else{
+            screentime.getSeats()[seatID-1].setAvailable(false);
+            screentime.getSeats()[seatID-2].setAvailable(false);
+            screentime.getSeats()[seatID-1].setTicketHolder(tID);
+            screentime.getSeats()[seatID-2].setTicketHolder(tID);
+        }
+        return 1;
+    }
+
+    //Seat is single seat
+    else if(screentime.getSeats()[seatID-1].isAvailable()){
+        screentime.getSeats()[seatID-1].setAvailable(false);
+        screentime.getSeats()[seatID-1].setTicketHolder(tID);
+        return 1;
+    }
+    
+    //Seat is already taken
+    System.out.printf("%s %d %s", "Seat ", seatID, " is already taken");
+    return 0;
 
   }
 
-  public void unbookSeat(ScreeningTimes screentime, int seatID) {
-    screentime.getSeats()[seatID].setAvailable(true);
-    screentime.getSeats()[seatID].setTicketHolder(0);
-    System.out.println("Seat is unbooked");
+  public int unbookSeat(ScreeningTimes screentime, int seatID) {
+    //Seat is double seat
+    if (!screentime.getSeats()[seatID-1].isAvailable() && screentime.getSeats()[seatID-1].getType()!= Type.Normal) {
+        if((seatID-1)%2 == 0){
+            screentime.getSeats()[seatID-1].setAvailable(true);
+            screentime.getSeats()[seatID].setAvailable(true);
+            screentime.getSeats()[seatID-1].setTicketHolder(0);
+            screentime.getSeats()[seatID].setTicketHolder(0);
+        }
+        else{
+            screentime.getSeats()[seatID-1].setAvailable(true);
+            screentime.getSeats()[seatID-2].setAvailable(true);
+            screentime.getSeats()[seatID-1].setTicketHolder(0);
+            screentime.getSeats()[seatID-2].setTicketHolder(0);
+        }
+        System.out.println("Seats are unbooked");
+        System.out.println("We have refunded the ticket price");
+        return 1;
+    }
+
+    //Seat is single seat
+    else if(!screentime.getSeats()[seatID-1].isAvailable()){
+        screentime.getSeats()[seatID-1].setAvailable(true);
+        screentime.getSeats()[seatID-1].setTicketHolder(0);
+        System.out.println("Seat is unbooked");
+        System.out.println("We have refunded the ticket price");
+        return 1;
+    }
+
+    //Seat is not booked yet
+    System.out.println("Seat not booked yet");
+    return 0;
   }
 
-  public void changeSeat(ScreeningTimes screentime, int b4seatID, int aftseatID) {
-    if (screentime.getSeats()[aftseatID].isAvailable()) {
-      screentime.getSeats()[aftseatID].setAvailable(false);
-      screentime.getSeats()[aftseatID].setTicketHolder(screentime.getSeats()[b4seatID].getTicketholder());
-      screentime.getSeats()[b4seatID].setAvailable(true);
-      screentime.getSeats()[b4seatID].setTicketHolder(0);
-      System.out.println("Seat has been changed");
-    } else
-      System.out.println("Seat taken");
+  public int changeSeat(ScreeningTimes screentime, int b4seatID, int aftseatID) {
+    //B4 seat is not booked yet
+    if(screentime.getSeats()[b4seatID].isAvailable()){
+        System.out.println("You have not booked the seat yet");
+        return 0;
+    }
+
+    //Changing from couple seat to single seat not allowed, vice versa
+    if(b4seatID>10 && aftseatID<=10 || b4seatID<=10 && aftseatID>10){
+        System.out.println("Cannot change between couple seat and single seat");
+        return 0;
+    }
+
+    //Seat is double seat
+    if (screentime.getSeats()[aftseatID-1].isAvailable() && screentime.getSeats()[aftseatID-1].getType()!= Type.Normal) {
+        if((aftseatID-1)%2 == 0){
+            screentime.getSeats()[aftseatID-1].setAvailable(false);
+            screentime.getSeats()[aftseatID].setAvailable(false);
+            screentime.getSeats()[aftseatID-1].setTicketHolder(screentime.getSeats()[b4seatID].getTicketholder());
+            screentime.getSeats()[aftseatID].setTicketHolder(screentime.getSeats()[b4seatID].getTicketholder());
+            screentime.getSeats()[b4seatID-1].setAvailable(true);
+            screentime.getSeats()[b4seatID].setAvailable(true);
+            screentime.getSeats()[b4seatID-1].setTicketHolder(0);
+            screentime.getSeats()[b4seatID].setTicketHolder(0);
+        }
+        else{
+            screentime.getSeats()[aftseatID-1].setAvailable(false);
+            screentime.getSeats()[aftseatID-2].setAvailable(false);
+            screentime.getSeats()[aftseatID-1].setTicketHolder(screentime.getSeats()[b4seatID].getTicketholder());
+            screentime.getSeats()[aftseatID-2].setTicketHolder(screentime.getSeats()[b4seatID].getTicketholder());
+            screentime.getSeats()[b4seatID-1].setAvailable(true);
+            screentime.getSeats()[b4seatID-2].setAvailable(true);
+            screentime.getSeats()[b4seatID-1].setTicketHolder(0);
+            screentime.getSeats()[b4seatID-2].setTicketHolder(0);
+        }
+        System.out.println("Seats are changed");
+        System.out.println("Thank you for booking with us");
+        return 1;
+    }
+
+    //Seat is single seat
+    else if(screentime.getSeats()[aftseatID-1].isAvailable()){
+        screentime.getSeats()[aftseatID-1].setAvailable(false);
+        screentime.getSeats()[aftseatID-1].setTicketHolder(screentime.getSeats()[b4seatID].getTicketholder());
+        screentime.getSeats()[b4seatID-1].setAvailable(true);
+        screentime.getSeats()[b4seatID-1].setTicketHolder(0);
+        System.out.println("Seat has been changed");
+        System.out.println("Thank you for booking with us");
+        return 1;
+        }
+
+    //Seat is taken
+    System.out.println("Seat taken");
+    return 0;
   }
 
 }
