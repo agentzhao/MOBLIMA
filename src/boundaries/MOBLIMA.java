@@ -221,7 +221,7 @@ public class MOBLIMA {
     ScreeningTimes st;
     int c = 0;
     while (c != 2) {
-      st = cm.displayScreentime(null, movie);
+      st = cm.displayScreentime(null, movie, mm.getMovieList());
       Scanner sc = new Scanner(System.in);
       if (st == null) {
         System.out.println("1: Exit");
@@ -298,8 +298,10 @@ public class MOBLIMA {
                 if (z < 10) {
                   if (z % 2 == 1) {
                     s.add(z - 1);
+                    a.add(tm.ageToTicketType(MOBLIMA.c.getAge()));
                   } else {
                     s.add(z + 1);
+                    a.add(tm.ageToTicketType(MOBLIMA.c.getAge()));
                   }
                   System.out.println("Couple Seat added");
                 }
