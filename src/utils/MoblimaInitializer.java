@@ -351,7 +351,7 @@ public class MoblimaInitializer {
      * Cineplex: SWB 
      * Cinema: Shaw Theatres Waterway Point Hall 1
      * Movie: Jurassic World (Movie id: 7)
-     * Seat Id: 1, 2, 3
+     * Seat Id: 10, 11, 12
      * Customer: Terence Tang (id: 4) (Child / 12), Rachel Tan (id: 6) (Senior Citizen / 65), Wesley Chan (id: 5) (Adult / 23)
      */
     
@@ -406,7 +406,7 @@ public class MoblimaInitializer {
      * Movie: Jurassic World (Movie id: 7)
      * Date: 13/11/2022
      * Time: 0900
-     * Seat id: 1, 2, 3
+     * Seat id: 10, 11, 12
      * Ticket id: 1, 2, 3
      */
     
