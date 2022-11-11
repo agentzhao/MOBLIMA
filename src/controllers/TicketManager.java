@@ -3,7 +3,6 @@ package controllers;
 import entities.Cinema;
 import entities.Movie;
 import entities.ScreeningTimes;
-import entities.Seat;
 import entities.Ticket;
 import entities.Transaction;
 import entities.Movie.Status;
