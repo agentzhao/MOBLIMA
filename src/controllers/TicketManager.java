@@ -614,4 +614,10 @@ public class TicketManager{
         else
         return 2;   
     }
+
+    public double getTransactionAmount(String TID)
+    {
+        Transaction t = searchTransaction(TID);
+        return t.getTransactionAmount();
+    }
 }
