@@ -6,11 +6,7 @@ import javax.lang.model.util.ElementScanner14;
 
 import controllers.*;
 import utils.MoblimaInitializer;
-import entities.Cineplex;
-import entities.Cinema;
-import entities.Movie;
-import entities.ScreeningTimes;
-import entities.Seat;
+import entities.*;
 
 public class MOBLIMA {
 
@@ -101,7 +97,7 @@ public class MOBLIMA {
     int login = 0, admin = 0;
     Scanner sc = new Scanner(System.in);
     int choice = -1;
-    while (choice != 0) {
+    while (true) {
       if (login != 1) {
         us.viewScreenGuest();
       } else if (admin != 1) {
@@ -153,12 +149,22 @@ public class MOBLIMA {
                 admin = 1;
                 login = 1;
                 as.setAdmin(a);
-              } else if (tempUser.getType() == 0) {
+              } else if (tempUser.getType() == 2) {
                 c = (Customer) tempUser;
                 login = 1;
               }
             }
           }
+          else
+          {
+            ArrayList<Ticket> tempTicket = tm.searchTicketUser(c.getId());
+            for(Ticket i : tempTicket)
+            {
+              tm.getTicketDetails(i);
+              System.out.println("-------------------------------------");
+            }
+          }
+          
           break;
         case 4:
           System.out.println("Thank you for using MOBLIMA");
@@ -178,6 +184,7 @@ public class MOBLIMA {
         if(admin == 1)
           {
             System.out.println("Shutting down MOBLIMA");
+            sc.close();
           }
           return;
         default:
@@ -185,7 +192,7 @@ public class MOBLIMA {
           break;
       }
     }
-    sc.close();
+    
   }
   public static void movieMenu()
   {
@@ -224,80 +231,89 @@ public class MOBLIMA {
 
   public static void screenTimeMenu(Movie movie)
   {
-    //TODO Grab screentime from cinemaManager and seat from seatManager
-    List<Cineplex> cps = cm.getCineplexList();
-    for(Cineplex c : cps)
+    ScreeningTimes st;
+    int c = 0;
+    while(c != 2)
     {
-      cm.displayScreentime(c.getCineplexID(), movie.getMovieID());
+      st = cm.displayScreentime(null, movie);
+      System.out.println("1: Get Seat\n2: Exit");
+      Scanner sc = new Scanner(System.in);
+      c = sc.nextInt();
+      switch(c)
+      {
+        case 1:
+          seatMenu(movie,st);
+          break;
+        case 2: 
+          break;
+        default:
+          System.out.println("Please input a valid number");
+          break;
+      }
     }
     
-    System.out.println("1: Get Seat\n2: Exit");
-    Scanner sc = new Scanner(System.in);
-    int c = sc.nextInt();
-    
-    switch(c)
-    {
-      case 1:
-        seatMenu(movie);
-       
-        break;
-      case 2: 
-        break;
-      default:
-        System.out.println("Please input a valid number");
-        break;
-    }
     //sc.close();
   }
 
-  public static void seatMenu(Movie movie)
+  public static void seatMenu(Movie movie, ScreeningTimes st)
   {
     //Print out Seating plan
-    cm.printSeats(null, null, null, null);
-    if(tempUser != null)
+    
+    int c = 0;
+    int s = -1;
+    while(c != 2)
     {
-      System.out.println("1: Book ticket\n2: Exit");
-    }
-    else
-    {
-      System.out.println("1: Exit");
-    }
-    Scanner sc = new Scanner(System.in);
-    int c = sc.nextInt();
-    switch(c)
-    {
-      case 1:
-        if(tempUser != null)
-        {
-          System.out.println("Please select a seat");
-          //sc.nextInt();
-          bookingMenu(movie);
-        }
-        else
-        {
-          System.out.println("Exiting Seat Menu");
-        }
-        break;
-      case 2:
-        if(tempUser == null)
-        {
+      cm.printSeats(st);
+      if(tempUser != null)
+      {
+        System.out.println("1: Book ticket\n2: Exit");
+      }
+      else
+      {
+        System.out.println("1: Exit");
+      }
+      Scanner sc = new Scanner(System.in);
+      c = sc.nextInt();
+      switch(c)
+      {
+        case 1:
+          if(tempUser != null)
+          {
+            System.out.println("Please select a seat");
+            s = sc.nextInt();
+            bookingMenu(movie, st, s);
+          }
+          else
+          {
+            System.out.println("Exiting Seat Menu");
+            return;
+          }
+          break;
+        case 2:
+          if(tempUser == null)
+          {
+            System.out.println("Please input a valid number");
+          }
+          break;
+        default:
           System.out.println("Please input a valid number");
-        }
-        break;
-      default:
-        System.out.println("Please input a valid number");
-        break;
-        
+          break;
+          
+      }
     }
+    
     //sc.close();
   }
 
-  public static void bookingMenu(Movie movie)
+  public static void bookingMenu(Movie movie, ScreeningTimes st , int s)
   {
-    if(tempUser.getType() == 0)
+    if(tempUser.getType() == 2)
     {
       //Waiting for ticketmanager update
       //tm.createTicket(c, Movie class);
+      //tm.createTicket(c, st.getCinemaID() ,s , movie, st);
+      cm.bookSeat(st, s, 1); //placeholder
+      System.out.println("Book ticket");
     }
     else
     {
