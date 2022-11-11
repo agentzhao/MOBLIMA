@@ -435,7 +435,7 @@ public class TicketManager{
 
 
         for(Ticket t : ticket){
-            if(t.getMovieName().equals(movieName) && t.getUserID()==userID)
+            if(t.getMovieName().equalsIgnoreCase(movieName) && t.getUserID()==userID)
             {
                 searchTickets.add(t);
             }
