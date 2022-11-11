@@ -1,6 +1,6 @@
 package controllers;
 
-import entities.Cinema;
+
 import entities.Movie;
 import entities.ScreeningTimes;
 import entities.Ticket;
@@ -99,20 +99,17 @@ public class TicketManager{
      * @param scTime
      * @return Ticket
      */
-    public ArrayList<Ticket> createTicket(Customer customer, ArrayList<Integer> seatID,ArrayList<TicType> tictype, Movie movie, ScreeningTimes scTime)
+    public ArrayList<Ticket> createTicket(Customer customer, ArrayList<Integer> seatID,ArrayList<Integer> tictype, Movie movie, ScreeningTimes scTime)
     {
         int noOfSeats= seatID.size();
         double totalPrice =0.0;
+        TicType ttype= TicType.SENIOR;
         
         ArrayList<Ticket> multipleTics = new ArrayList<Ticket>();
         Transaction newTran= new Transaction(customer.getName(), customer.getId());
         
         //User IDs
         newTran.setUserID(customer.getId());
-
-        // Amount of Transaction
-        //newTran.setTransactionAmount(ticket.get(ticket.size()-1).getPrice());
-
 
         // Name of Customer
         newTran.setNameOfCustomer(customer.getName());
@@ -123,8 +120,6 @@ public class TicketManager{
         // Transaction ID
         newTran.setTID(scTime.getCinemaID());
 
-        //Add to list
-        transactions.add(newTran);
 
         for(int i=0; i<noOfSeats; i++)
         {
@@ -143,25 +138,22 @@ public class TicketManager{
 
 
         //Ticket Type, We need to see if the person is senior child or adult
-        /*if(customer.getAge()>=60)
+        if(tictype.get(i)==0)
         {
-            newTicket.setTicketType(TicType.SENIOR);
-            agePriceVar=0;
+            ttype=TicType.SENIOR;
         }
-        else if(customer.getAge()<=12)
+        else if(tictype.get(i)==1)
         {
-            newTicket.setTicketType(TicType.CHILD);
-            agePriceVar=2;
+            ttype=TicType.ADULT;
         }
         else
         {
-            newTicket.setTicketType(TicType.ADULT);
-            agePriceVar=1;
-        }*/
+            ttype=TicType.CHILD;
+        }
 
 
         //Ticket Type
-        newTicket.setTicketType(tictype.get(i));
+        newTicket.setTicketType(ttype);
         
         // Movie Time
         newTicket.setMovieTime(scTime.getScreenTime());
@@ -186,9 +178,8 @@ public class TicketManager{
 
         //Price
         double totprice = calPrice(movie,seatID.get(i));
-        totalPrice+=totprice;
-
         newTicket.setPrice(totprice);
+        totalPrice+=totprice;
 
         //Add to list
         ticket.add(newTicket);
@@ -607,5 +598,20 @@ public class TicketManager{
         {
             System.out.println("Invalid choice!" );
         }
+    }
+
+
+    //This function returns the index of the TicketType based on the input age
+    // SENIOR - 0
+    // ADULT -  1
+    // CHILD -  2
+    public int ageToTicketType(int age)
+    {
+        if(age>=60)
+        return 0;
+        else if(age>12 && age<60)
+        return 1;
+        else
+        return 2;   
     }
 }
