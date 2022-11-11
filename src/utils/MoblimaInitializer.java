@@ -71,10 +71,8 @@ public class MoblimaInitializer {
         movies.add(newMovie);
         
         /* Set ticket sales for PREVIEW/ENDOFSHOWING/NOWSHOWING movies */
-        if (movieStatus != Movie.Status.COMINGSOON) {
-          int ticketSales = Integer.parseInt(br.readLine());
-          newMovie.setTicketSales(ticketSales);
-        }
+        int ticketSales = Integer.parseInt(br.readLine());
+        newMovie.setTicketSales(ticketSales);
         
         br.close();
         
