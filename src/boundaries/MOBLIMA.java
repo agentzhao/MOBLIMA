@@ -255,6 +255,8 @@ public class MOBLIMA {
     int z = 0;
     while (c != 2) {
       cm.printSeats(st);
+      s.clear();
+      a.clear();
       if (tempUser != null) {
         System.out.println("1: Book ticket\n2: Exit");
       } else {
@@ -335,6 +337,7 @@ public class MOBLIMA {
         t = cm.bookSeat(st, s.get(x), tempTicket.get(x).getTicketID());
         if (t == 0) {
           tm.deleteTicket(c.getId(), movie.getMovieName());
+
         } else {
           System.out.println(
               "Price of ticket for seat " + tempTicket.get(x).getSeatID() + " :" + tempTicket.get(x).getPrice());
