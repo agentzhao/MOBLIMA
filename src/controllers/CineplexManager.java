@@ -286,7 +286,7 @@ public class CineplexManager {
     }
     
     //Seat is already taken
-    System.out.printf("%s %d %s", "Seat ", seatID, " is already taken");
+    System.out.printf("%s %d %s %n", "Seat ", seatID, " is already taken");
     return 0;
 
   }
