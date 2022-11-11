@@ -112,7 +112,7 @@ public class MOBLIMA {
           movieMenu();
           break;
         case 2:
-          System.out.println("Sort by:\n1: Rating\n2: Ticket Sales");
+          System.out.print("1: Rating\n2: Ticket Sales\nSort by: ");
           int t = sc.nextInt();
           switch (t) {
             case 1:
