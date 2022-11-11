@@ -275,9 +275,10 @@ public class MOBLIMA {
                 System.out.println("No seat selected");
               }
               if (z != -1) {
-                s.add(z);
                 if (a.size() == 0) {
+                  s.add(z);
                   a.add(tm.ageToTicketType(MOBLIMA.c.getAge()));
+                  System.out.println("Seat");
                 } else {
                   while (true) {
                     System.out.println("Which ticket type are you getting?\n1: Senior\n2: Adult\n3: Child");
