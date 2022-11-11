@@ -5,7 +5,6 @@ import entities.Cineplex;
 import entities.Seat.Type;
 import entities.ScreeningTimes;
 import entities.Movie;
-import controllers.MovieManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -116,7 +115,8 @@ public class CineplexManager {
         System.out.printf("%s %n", cinema.getCinemaName());
         for (ScreeningTimes screentime : cinema.getScreeningTimes()) {
           if (movie == null || screentime.getMovieID() == movie.getMovieID()) {
-            System.out.printf("%3d %s %2s %s %2s %s %2s %n", count, ": ", screentime.getDate(), " - ", screentime.getScreenTime(), ": ", ((MovieManager) movies).searchMovie(screentime.getMovieID()).getMovieName());
+            System.out.printf("%3d %s %2s %s %2s %s %2s %n", count, ": ", screentime.getDate(), " - ",
+            screentime.getScreenTime(), ": ", ((MovieManager) movies).searchMovie(screentime.getMovieID()).getMovieName());
             count++;
           }
         }
