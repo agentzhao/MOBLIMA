@@ -92,7 +92,7 @@ public class Transaction{
 		SimpleDateFormat formatter = new SimpleDateFormat("YYYYMMddhhmm");
 		String strDate= formatter.format(date);
 		
-		String strTID= cinema.getCinemaCode() + strDate;
+		String strTID= cinema.getCinemaID() + strDate;
 
 		return strTID;
 	}
