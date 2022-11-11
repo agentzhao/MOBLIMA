@@ -279,6 +279,7 @@ public class CineplexManager {
         System.out.println("Thank you for booking with us");
         return;
     }
+    
     //Seat is single seat
     else if(screentime.getSeats()[seatID-1].isAvailable()){
         screentime.getSeats()[seatID-1].setAvailable(false);
@@ -310,12 +311,16 @@ public class CineplexManager {
             screentime.getSeats()[seatID-2].setTicketHolder(0);
         }
         System.out.println("Seats are unbooked");
+        System.out.println("We have refunded the ticket price");
     }
+
     //Seat is single seat
     else if(!screentime.getSeats()[seatID-1].isAvailable()){
         screentime.getSeats()[seatID-1].setAvailable(true);
         screentime.getSeats()[seatID-1].setTicketHolder(0);
         System.out.println("Seat is unbooked");
+        System.out.println("We have refunded the ticket price");
+
     }
 
     //Seat is not booked yet
@@ -329,6 +334,13 @@ public class CineplexManager {
         System.out.println("You have not booked the seat yet");
         return;
     }
+
+    //Changing from couple seat to single seat not allowed, vice versa
+    if(b4seatID>10 && aftseatID<=10 || b4seatID<=10 && aftseatID>10){
+        System.out.println("Cannot change between couple seat and single seat");
+        return;
+    }
+
     //Seat is double seat
     if (screentime.getSeats()[aftseatID-1].isAvailable() && screentime.getSeats()[aftseatID-1].getType()!= Type.Normal) {
         if((aftseatID-1)%2 == 0){
@@ -355,6 +367,7 @@ public class CineplexManager {
         System.out.println("Thank you for booking with us");
         return;
     }
+
     //Seat is single seat
     else if(screentime.getSeats()[aftseatID-1].isAvailable()){
         if (screentime.getSeats()[aftseatID-1].isAvailable()) {
@@ -366,6 +379,7 @@ public class CineplexManager {
             System.out.println("Thank you for booking with us");
             return;
     }
+
     //Seat is taken
     System.out.println("Seat taken");
     return;
