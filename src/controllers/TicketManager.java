@@ -12,7 +12,7 @@ import entities.Ticket.TicType;
 
 import java.util.*;
 
-import boundaries.Customer;
+import entities.Customer;
 
 
 
