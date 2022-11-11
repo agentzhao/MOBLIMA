@@ -4,15 +4,15 @@ import java.util.List;
 
 public class Cinema{
     private boolean isPlatinum;
-    private String cinemaCode;
+    private String cinemaID;
     private String cinemaName;
     private List<Movie> movies;
     public List<ScreeningTimes> screeningTimes;
 
 
-    public Cinema(boolean isPlatinum, String cinemaCode, String cinemaName, List<Movie> movies, List<ScreeningTimes> screeningTimes) {
+    public Cinema(boolean isPlatinum, String cinemaID, String cinemaName, List<Movie> movies, List<ScreeningTimes> screeningTimes) {
         this.isPlatinum = isPlatinum;
-        this.cinemaCode = cinemaCode;
+        this.cinemaID = cinemaID;
         this.cinemaName = cinemaName;
         this.movies = movies;
         this.screeningTimes = screeningTimes;
@@ -31,8 +31,8 @@ public class Cinema{
         return this.cinemaName;
     }
 
-    public String getCinemaCode(){
-        return this.cinemaCode;
+    public String getCinemaID(){
+        return this.cinemaID;
     }
     
     //setters
@@ -40,8 +40,8 @@ public class Cinema{
         this.isPlatinum = isPlatinum;
     }
 
-    public void setCinemaCode(String cinemaCode) {
-        this.cinemaCode = cinemaCode;
+    public void setCinemaID(String cinemaCode) {
+        this.cinemaID = cinemaCode;
     }
 
     public void setCinemaName(String cinemaName) {
