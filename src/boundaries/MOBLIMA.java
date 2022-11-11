@@ -255,8 +255,7 @@ public class MOBLIMA {
     int z = 0;
     while (c != 2) {
       cm.printSeats(st);
-      s.clear();
-      a.clear();
+
       if (tempUser != null) {
         System.out.println("1: Book ticket\n2: Exit");
       } else {
@@ -272,6 +271,8 @@ public class MOBLIMA {
               z = sc.nextInt();
               if (z == -1 && s.size() != 0) {
                 bookingMenu(movie, st, s, a);
+                s.clear();
+                a.clear();
                 break;
               } else if (z == -1) {
                 System.out.println("No seat selected");
