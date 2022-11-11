@@ -273,8 +273,8 @@ public class MoblimaInitializer {
     ScreeningTimes st = c.getScreeningTimes().get(3);
                     
     for (int i = 0; i < 3; i += 1) {
-      Seat s = st.getSeats()[i];
-      tm.createTicket(customer.get(i), c, s, m, st);
+      int s = st.getSeats()[i].getSeatID();
+      tm.createTicket(customer.get(i), s, m, st);
       tm.createTransaction(customer.get(i), c);
     }
     
