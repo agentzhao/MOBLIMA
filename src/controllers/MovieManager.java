@@ -14,6 +14,8 @@ import java.time.temporal.ChronoField;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
+@SuppressWarnings("unchecked")
+
 public class MovieManager {
   private ArrayList<Movie> movies;
   private ArrayList<Review> reviews;
@@ -265,14 +267,13 @@ public class MovieManager {
   public void topSales() {
     System.out.println("Top 5 Movies by Ticket Sales");
 
-    ArrayList<Movie> dupMovies = new ArrayList<Movie>();
-    dupMovies = this.movies;
+    // ArrayList<Movie> dupMovies = new ArrayList<Movie>();
+    // dupMovies = this.movies;
+    ArrayList<Movie> dupMovies = (ArrayList<Movie>) this.movies.clone();
+    dupMovies.removeIf(m -> m.getMovieStatus() == Status.COMINGSOON || m.getMovieStatus() == Status.ENDOFSHOWING);
     // insertion sort with ticket sales (descending)
     for (int i = 1; i < dupMovies.size(); i++) {
       Movie temp = dupMovies.get(i);
-      if (temp.getMovieStatus() == Status.COMINGSOON || temp.getMovieStatus() == Status.ENDOFSHOWING) {
-        continue;
-      }
       int j = i - 1;
       while (j >= 0 && dupMovies.get(j).getTicketSales() < temp.getTicketSales()) {
         dupMovies.set(j + 1, dupMovies.get(j));
@@ -290,14 +291,13 @@ public class MovieManager {
   public void topRating() {
     System.out.println("Top 5 Movies by Overall Rating");
 
-    ArrayList<Movie> dupMovies = new ArrayList<Movie>();
-    dupMovies = movies;
-    // insertion sort with ticket sales (descending)
+    // ArrayList<Movie> dupMovies = new ArrayList<Movie>();
+    // dupMovies = this.movies;
+    ArrayList<Movie> dupMovies = (ArrayList<Movie>) this.movies.clone();
+    dupMovies.removeIf(m -> m.getMovieStatus() == Status.COMINGSOON || m.getMovieStatus() == Status.ENDOFSHOWING);
+    // insertion sort with top rating (descending)
     for (int i = 1; i < dupMovies.size(); i++) {
       Movie temp = dupMovies.get(i);
-      if (temp.getMovieStatus() == Status.COMINGSOON || temp.getMovieStatus() == Status.ENDOFSHOWING) {
-        continue;
-      }
       int j = i - 1;
       while (j >= 0 && dupMovies.get(j).getOverallRating() < temp.getOverallRating()) {
         dupMovies.set(j + 1, dupMovies.get(j));
@@ -346,11 +346,5 @@ public class MovieManager {
     for (Movie m : movies) {
       getMovieDetails(m);
     }
-  }
-
-  private static long dateToLong(String s) {
-    String pattern = "YYYY/MM/DD";
-    return DateTimeFormatter.ofPattern(pattern).withZone(ZoneOffset.UTC)
-        .parse(s, p -> p.getLong(ChronoField.EPOCH_DAY));
   }
 }
