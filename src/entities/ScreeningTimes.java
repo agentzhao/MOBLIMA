@@ -1,12 +1,14 @@
 package entities;
 
-public class ScreeningTimes {
+public class ScreeningTimes{
+    private String cinemaID;
     private int movieID;
     private String screenTime;
     private String date;
     private Seat[] seats;
 
-    public ScreeningTimes(int movieID, String screenTime, String date, Seat[] seats){
+    public ScreeningTimes(String cinemaID, int movieID, String screenTime, String date, Seat[] seats){
+        this.cinemaID = cinemaID;
         this.movieID = movieID;
         this.screenTime = screenTime;
         this.date = date;
@@ -19,6 +21,9 @@ public class ScreeningTimes {
     }
     public String getScreenTime(){
         return this.screenTime;
+    }
+    public String getCinemaID() {
+        return cinemaID;
     }
     public Seat[] getSeats() {
         return this.seats;
@@ -39,5 +44,8 @@ public class ScreeningTimes {
     }
     public void setSeats(Seat[] seats) {
         this.seats = seats;
+    }
+    public void setCinemaID(String cinemaID) {
+        this.cinemaID = cinemaID;
     }
 }
