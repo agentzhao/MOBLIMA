@@ -82,7 +82,7 @@ public class AdminSystem {
           m = mm.searchMovieName(id);
           if (m == null)
             break;
-          cm.updateShowtime(a.getcineplexID(), m, mm.getMovieList());
+          cm.updateShowtime(a.getcineplexID(), m);
           break;
         case 6:
           System.out.println("Enter the movie name of the movie you want to remove screentime for");
@@ -90,7 +90,10 @@ public class AdminSystem {
           // System.out.println("Select the cinema you want to remove screentime for");
           // cid = sc.next();
           // cm.removeShowTime(a.getcineplexID(), cid, id);
-          cm.removeShowTime(a.getcineplexID(), mm.getMovieList());
+          m = mm.searchMovieName(id);
+          if (m == null)
+            break;
+          cm.removeShowTime(a.getcineplexID(), m);
           break;
         case 7:
           System.out.println("1: Set base price\n2: Set modifier");

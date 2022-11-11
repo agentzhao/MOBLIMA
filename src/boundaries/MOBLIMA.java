@@ -74,7 +74,7 @@ public class MOBLIMA {
     log.addAdminList(mi.initializeAdmin());
 
     /* Initialise Cineplexes and store into CineplexManager */
-    cm = new CineplexManager(mm);
+    cm = new CineplexManager();
     List<Cineplex> cineplexes = mi.initializeCineplex(mm.getMovieList());
     cm.setCineplexes(cineplexes);
 
@@ -221,7 +221,7 @@ public class MOBLIMA {
     ScreeningTimes st;
     int c = 0;
     while (c != 2) {
-      st = cm.displayScreentime(null, movie, mm.getMovieList());
+      st = cm.displayScreentime(null, movie);
       Scanner sc = new Scanner(System.in);
       if (st == null) {
         System.out.println("1: Exit");

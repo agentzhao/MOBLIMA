@@ -37,6 +37,7 @@ public class CineplexManager {
     int cineplexnum = -1;
     for (int i = 0; i < cineplexes.size(); i++) {
       if (cineplexID.equalsIgnoreCase(cineplexes.get(i).getCineplexID()))
+        System.out.print("");
         cineplexnum = i;
     }
     if (cineplexnum == -1) {
@@ -97,23 +98,28 @@ public class CineplexManager {
 
   public void removeShowTime(String cineplexID, Movie movie) {
     ScreeningTimes screeningtime = displayScreentime(cineplexID, movie);
+    
+    Cinema c = null;
+    
     for (Cineplex cineplex : cineplexes) {
-      if (cineplexID == cineplex.getCineplexID()){
+      if (cineplexID.equalsIgnoreCase(cineplex.getCineplexID())) {
         for (Cinema cinema : cineplex.getCinemas()) {
           for (ScreeningTimes screentime : cinema.getScreeningTimes()) {
               if (screentime == screeningtime)
-                cinema.screeningTimes.remove(screentime);
+                c = cinema;
             }
           }
         }
       }
+    
+      c.screeningTimes.remove(screeningtime);
     }
 
   // Display screening time for movie
   public ScreeningTimes displayScreentime(String cineplexID, Movie movie) {
     int count = 1;
     for (Cineplex cineplex : cineplexes) {
-      if (cineplexID == null || cineplexID == cineplex.getCineplexID())
+      if (cineplexID == null || cineplexID.equalsIgnoreCase(cineplex.getCineplexID()))
         System.out.printf("%s %n", cineplex.getCineplexName());
       else
         continue;
@@ -141,17 +147,21 @@ public class CineplexManager {
       return null;
     count = 1;
     for (Cineplex cineplex : cineplexes) {
-      if (cineplexID != null && cineplexID != cineplex.getCineplexID())
-        continue;
-      for (Cinema cinema : cineplex.getCinemas()) {
-        for (ScreeningTimes screentime : cinema.getScreeningTimes()) {
-          if (movie== null || screentime.getMovieID() == movie.getMovieID()) {
-            if (count == ScreeningTimeChoice)
-              return screentime;
-            count++;
+      
+      if (cineplexID == null || cineplex.getCineplexID().equalsIgnoreCase(cineplexID)) {
+        for (Cinema cinema : cineplex.getCinemas()) {
+          
+          for (ScreeningTimes screentime : cinema.getScreeningTimes()) {
+            
+            if (screentime.getMovieID() == movie.getMovieID()) {
+              
+              if (count == ScreeningTimeChoice)
+                return screentime;
+              count++;
+            }
           }
-        }
-      }
+        } 
+      }       
     }
     return null;
   }
