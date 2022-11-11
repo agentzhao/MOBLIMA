@@ -478,7 +478,7 @@ public class TicketManager{
         else 
          totprice= basePrice*agePrice[agePriceVar]*typePrice[typePriceVar];
 
-         if(seatID>=01 && seatID<=10) // couple seats
+         if(seatID>=01 && seatID<10) // couple seats
          totprice = totprice * 2;
      
         totprice= totprice*0.07 + totprice; //Adding GST
