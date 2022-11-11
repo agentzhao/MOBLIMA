@@ -265,6 +265,7 @@ public class CineplexManager {
       screentime.getSeats()[seatID].setAvailable(false);
       screentime.getSeats()[seatID].setTicketHolder(tID);
       System.out.println("Seat is booked");
+      System.out.println("Thank you for booking with us");
     } else
       System.out.println("Seat taken");
 
