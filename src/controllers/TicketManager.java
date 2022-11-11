@@ -48,17 +48,29 @@ public class TicketManager{
         previewPrice=2.0;
     }
 
+    
+    /** 
+     * @param ticket
+     */
     public void addTicketList (List<Ticket> ticket)
     {
         this.ticket = ticket;
     }
     
+    
+    /** 
+     * @param transactions
+     */
     public void addTransactionList (List<Transaction> transactions)
     {
         this.transactions = transactions;
     }
 
 
+    
+    /** 
+     * @param basePrice
+     */
     /*Admin System:
      * set and get base price,
      * create a ticket,
@@ -70,12 +82,25 @@ public class TicketManager{
     {
         this.basePrice=basePrice;
     }
+    
+    /** 
+     * @return double
+     */
     public double getBasePrice()
     {
         return this.basePrice;
     }
 
-    public Ticket createTicket(Customer customer, Cinema cinema, Seat seat, Movie movie, ScreeningTimes scTime)
+    
+    /** 
+     * @param customer
+     * @param cinema
+     * @param seatID
+     * @param movie
+     * @param scTime
+     * @return Ticket
+     */
+    public Ticket createTicket(Customer customer, int seatID,Movie movie, ScreeningTimes scTime)
     {
         
         Ticket newTicket= new Ticket(customer.getId(), movie.getMovieName());
@@ -115,16 +140,16 @@ public class TicketManager{
         newTicket.setMovieDate(scTime.getDate());
 
         //Moive ID
-        newTicket.setMovieID(movie.getMovieID());
+        newTicket.setMovieID(scTime.getMovieID());
 
         //Movie Name
         newTicket.setMovieName(movie.getMovieName());
 
         //Cinema Name
-        newTicket.setCinemaName(cinema.getCinemaName());
+        newTicket.setCinemaName(scTime.getCinemaName());
 
         //seat ID
-        newTicket.setSeatID(seat.getSeatID());
+        newTicket.setSeatID(seatID);
 
         //Price
         double totprice = calPrice(movie);
@@ -141,6 +166,12 @@ public class TicketManager{
 
 
 
+    
+    /** 
+     * @param customer
+     * @param cinema
+     * @return Transaction
+     */
     //CREATING A TRANSACTION
     public Transaction createTransaction(Customer customer, Cinema cinema)
     {
@@ -169,6 +200,12 @@ public class TicketManager{
     }
 
 
+    
+    /** 
+     * @param movieName
+     * @param userID
+     * @return int
+     */
     /*
      * The set price part for this function will allow the admin to set 
      * the price of the ticket at any stage. For example, when booking ,
@@ -276,6 +313,12 @@ public class TicketManager{
         return 1;
     }
 
+    
+    /** 
+     * @param userID
+     * @param movieName
+     * @return int
+     */
     public int deleteTicket(int userID, String movieName)
     {
         for(Ticket t: ticket)
@@ -293,6 +336,12 @@ public class TicketManager{
     }
 
 
+    
+    /** 
+     * @param movieName
+     * @param userID
+     * @return ArrayList<Ticket>
+     */
     /* User System:
      * searchTicket ,
      * calculate the price depending on the type: SENIOR, ADULT, CHILD ..,
@@ -321,6 +370,11 @@ public class TicketManager{
     }
 
 
+    
+    /** 
+     * @param userID
+     * @return ArrayList<Ticket>
+     */
     //This function will return a list of tickets purchased by the specific user
     public ArrayList<Ticket> searchTicketUser (int userID)
     {
@@ -341,6 +395,11 @@ public class TicketManager{
 
     
 
+    
+    /** 
+     * @param movie
+     * @return double
+     */
     /* This function calculates the price of the ticket based on the 
      * ticket type: SENIOR, ADULT , CHILD
      * It provides a temporary total to work on after the above classification
@@ -370,6 +429,10 @@ public class TicketManager{
         return totprice;
     }
 
+    
+    /** 
+     * @param t
+     */
     public void getTicketDetails(Ticket t)
     {
         System.out.println("User ID: "+t.getUserID());
@@ -386,6 +449,12 @@ public class TicketManager{
     }
 
 
+    
+    /** 
+     * @param movieName
+     * @param userID
+     * @return int
+     */
     public int getTicketid (String movieName, int userID)
     {
         ArrayList<Ticket> tic = new ArrayList<Ticket>();
