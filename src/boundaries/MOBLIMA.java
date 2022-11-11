@@ -271,7 +271,7 @@ public class MOBLIMA {
               if (z == -1 && s.size() != 0) {
                 bookingMenu(movie, st, s, a);
                 break;
-              } else {
+              } else if (z == -1) {
                 System.out.println("No seat selected");
               }
               if (z != -1) {
@@ -293,9 +293,9 @@ public class MOBLIMA {
                 }
                 if (z < 10) {
                   if (z % 2 == 1) {
-                    s.add(z + 1);
-                  } else {
                     s.add(z - 1);
+                  } else {
+                    s.add(z + 1);
                   }
                   System.out.println("Couple Seat added");
                 }
