@@ -84,14 +84,14 @@ public class CineplexManager {
     System.out.println("Showtime created!");
   }
 
-  public void updateShowtime(String cineplexID, Movie movie, List<Movie> movies) {
+  public void updateShowtime(String cineplexID, Movie movie, ArrayList<Movie> movies) {
     ScreeningTimes screeningtime = displayScreentime(cineplexID, null, movies);
     // Updating the screening time
     screeningtime.setMovieID(movie.getMovieID());
     System.out.println("Showtime updated");
   }
 
-  public void removeShowTime(String cineplexID, List<Movie> movies) {
+  public void removeShowTime(String cineplexID, ArrayList<Movie> movies) {
     ScreeningTimes screeningtime = displayScreentime(cineplexID, null, movies);
     for (Cineplex cineplex : cineplexes) {
       if (cineplexID == cineplex.getCineplexID()){
@@ -106,7 +106,7 @@ public class CineplexManager {
   }
 
   // Display screening time for movie
-  public ScreeningTimes displayScreentime(String cineplexID, Movie movie, List<Movie> movies) {
+  public ScreeningTimes displayScreentime(String cineplexID, Movie movie, ArrayList<Movie> movies) {
     int count = 1;
     for (Cineplex cineplex : cineplexes) {
       if (cineplexID == null || cineplexID == cineplex.getCineplexID())
@@ -118,7 +118,7 @@ public class CineplexManager {
         for (ScreeningTimes screentime : cinema.getScreeningTimes()) {
           if (movie == null || screentime.getMovieID() == movie.getMovieID()) {
             System.out.printf("%3d %s %2s %s %2s %s %2s %n", count, ": ", screentime.getDate(), " - ",
-            screentime.getScreenTime(), ": ", ((MovieManager) movies).searchMovie(screentime.getMovieID()).getMovieName());
+            screentime.getScreenTime(), ": ", mm.searchMovie(screentime.getMovieID()).getMovieName());
             count++;
           }
         }
