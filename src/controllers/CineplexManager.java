@@ -71,7 +71,7 @@ public class CineplexManager{
             }
         }
 
-        ScreeningTimes screeningtime = new ScreeningTimes(cinema.getCinemaCode(), cinema.getCinemaName(), movie.getMovieID(), showtime, date, null);
+        ScreeningTimes screeningtime = new ScreeningTimes(cinema.getCinemaID(), cinema.getCinemaName(), movie.getMovieID(), showtime, date, null);
         screeningtime.setSeats(cineplexes.get(cineplexnum).getCinemas()[cinemaChoice].screeningTimes.get(0).getSeats());
         for(int i=0; i<screeningtime.getSeats().length; i++){
             screeningtime.getSeats()[i].setAvailable(true);
