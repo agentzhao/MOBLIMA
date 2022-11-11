@@ -34,7 +34,7 @@ public class CineplexManager {
     // Getting the cineplex
     int cineplexnum = -1;
     for (int i = 0; i < cineplexes.size(); i++) {
-      if (cineplexID == cineplexes.get(i).getCineplexID())
+      if (cineplexID.equalsIgnoreCase(cineplexes.get(i).getCineplexID()))
         cineplexnum = i;
     }
     if (cineplexnum == -1) {
