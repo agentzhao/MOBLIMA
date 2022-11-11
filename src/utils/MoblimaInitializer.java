@@ -205,32 +205,32 @@ public class MoblimaInitializer {
           int noOfSeats = Integer.parseInt(brc.readLine());
           
           for (int y = 0; y < times.length; y += 1) {
-            Seat[] seats = new Seat[noOfSeats];
-            
-            if (!isPlatinum) {
-              for (int k = 0; k < 10; k += 1) {
-                Seat s = new Seat(Seat.Type.Couple, k + 1, true, 0);
-                seats[k] = s;
-              }
+            for (int z = 0; z < mov.length; z += 1) {
+              Seat[] seats = new Seat[noOfSeats];
               
-              for (int k = 10; k < noOfSeats; k += 1) {
-                Seat s = new Seat(Seat.Type.Normal, k + 1, true, 0);
-                seats[k] = s;
+              if (!isPlatinum) {
+                for (int k = 0; k < 10; k += 1) {
+                  Seat s = new Seat(Seat.Type.Couple, k + 1, true, 0);
+                  seats[k] = s;
+                }
+                
+                for (int k = 10; k < noOfSeats; k += 1) {
+                  Seat s = new Seat(Seat.Type.Normal, k + 1, true, 0);
+                  seats[k] = s;
+                }
+              } else {
+                for (int k = 0; k < noOfSeats / 2; k += 1) {
+                  Seat s = new Seat(Seat.Type.Elite, k + 1, true, 0);
+                  seats[k] = s;
+                }
+                
+                for (int k = noOfSeats / 2; k < noOfSeats; k += 1) {
+                  Seat s = new Seat(Seat.Type.Ultima, k + 1, true, 0);
+                  seats[k] = s;
+                }
               }
-            } else {
-              for (int k = 0; k < noOfSeats / 2; k += 1) {
-                Seat s = new Seat(Seat.Type.Elite, k + 1, true, 0);
-                seats[k] = s;
-              }
-              
-              for (int k = noOfSeats / 2; k < noOfSeats; k += 1) {
-                Seat s = new Seat(Seat.Type.Ultima, k + 1, true, 0);
-                seats[k] = s;
-              }
-            }
             
             /* Create three screeningtimes per day at every cinema */
-            for (int z = 0; z < mov.length; z += 1) {
               ScreeningTimes s = new ScreeningTimes(cinemaCode, cinemaName, mov[z], times[y], "13/11/2022", seats);
               st.add(s);
             }
