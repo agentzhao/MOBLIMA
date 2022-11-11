@@ -266,15 +266,15 @@ public class MOBLIMA {
         case 1:
           if (tempUser != null) {
             while (true) {
-              System.out.println("Please select a seat. Press 0 to book");
+              System.out.println("Please select a seat. Press -1 to book");
               z = sc.nextInt();
-              if (z == 0 && s.size() != 0) {
+              if (z == -1 && s.size() != 0) {
                 bookingMenu(movie, st, s, a);
                 break;
               } else {
                 System.out.println("No seat selected");
               }
-              if (z != 0) {
+              if (z != -1) {
                 s.add(z);
                 if (a.size() == 0) {
                   a.add(tm.ageToTicketType(MOBLIMA.c.getAge()));
