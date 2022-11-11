@@ -95,9 +95,9 @@ public class AdminSystem {
 
           break;
         case 8:
-          System.out.println("End the userid that you want to edit");
+          System.out.println("Enter the userid that you want to edit");
           id = sc.nextInt();
-          System.out.println("Enter the movie of the ticket");
+          System.out.println("Enter the movie name of the ticket");
           sc.nextLine();
           cid = sc.nextLine();
           tm.updateTicket(cid, id);
