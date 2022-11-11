@@ -18,8 +18,8 @@ import entities.Customer;
 
 public class TicketManager{
     
-    private List<Transaction> transactions;
-    private List<Ticket> ticket;
+    private ArrayList<Transaction> transactions;
+    private ArrayList<Ticket> ticket;
 
     private double basePrice;
     private double agePrice[]= new double[3];
@@ -50,7 +50,7 @@ public class TicketManager{
     /** 
      * @param ticket
      */
-    public void addTicketList (List<Ticket> ticket)
+    public void addTicketList (ArrayList<Ticket> ticket)
     {
         this.ticket = ticket;
     }
@@ -59,7 +59,7 @@ public class TicketManager{
     /** 
      * @param transactions
      */
-    public void addTransactionList (List<Transaction> transactions)
+    public void addTransactionList (ArrayList<Transaction> transactions)
     {
         this.transactions = transactions;
     }
