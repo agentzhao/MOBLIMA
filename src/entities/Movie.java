@@ -22,7 +22,7 @@ public class Movie {
   private Type movieType;
   private Status movieStatus;
   private Rating movieRating;
-  private List<Review> movieReviews;
+  private ArrayList<Review> movieReviews;
   private String synopsis;
   private String[] cast; // at least 2
   private String director; // 1
@@ -80,7 +80,7 @@ public class Movie {
     return this.movieRating;
   }
 
-  public List<Review> getMovieReviews() {
+  public ArrayList<Review> getMovieReviews() {
     return this.movieReviews;
   }
 
