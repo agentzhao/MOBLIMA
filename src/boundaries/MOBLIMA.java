@@ -263,13 +263,35 @@ public class MOBLIMA {
               System.out.println("Please select a seat. Press 0 to book");
               z = sc.nextInt();
               if (z == 0 && s.size() != 0) {
-                bookingMenu(movie, st, s);
+                bookingMenu(movie, st, s, a);
                 break;
               } else {
                 System.out.println("No seat selected");
               }
               if (z != 0) {
                 s.add(z);
+                if(a.size() == 0)
+                {
+                  //a.add()
+                }
+                else
+                {
+                  while(true)
+                  {
+                    System.out.println("Which ticket type are you getting?\n1: Child\n2: Adult\n3: Senior");
+                    int y = sc.nextInt();
+                    if(y > 0 && y < 4)
+                    {
+                      a.add(y);
+                      break;
+                    }
+                    else
+                    {
+                      System.out.println("Please select a valid number");
+                    }
+                  }
+                  
+                }
                 if (z < 10) {
                   if (z % 2 == 1) {
                     s.add(z + 1);
@@ -278,6 +300,7 @@ public class MOBLIMA {
                   }
                   System.out.println("Couple Seat added");
                 }
+
               }
             }
 
@@ -301,16 +324,16 @@ public class MOBLIMA {
     // sc.close();
   }
 
-  public static void bookingMenu(Movie movie, ScreeningTimes st, ArrayList<Integer> s) {
+  public static void bookingMenu(Movie movie, ScreeningTimes st, ArrayList<Integer> s, ArrayList<Integer> a) {
     if (tempUser.getType() == 2) {
       // Waiting for ticketmanager update
       // tm.createTicket(c, Movie class);
-      // ArrayList<Ticket> tempTicket = tm.createTicket(c, s, movie, st);
-      /*
-       * for (Ticket temp : tempTicket) {
-       * // cm.bookSeat(st, s, temp); // placeholder
-       * }
-       */
+      ArrayList<Ticket> tempTicket = tm.createTicket(c, s, a,  movie, st);
+      
+        for (Ticket temp : tempTicket) {
+        // cm.bookSeat(st, s, temp); // placeholder
+        }
+       
 
       // System.out.println("Book ticket");
     } else {
