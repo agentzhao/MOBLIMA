@@ -13,11 +13,13 @@ import java.util.Scanner;
 
 public class CineplexManager {
   Scanner sc = new Scanner(System.in);
+  private MovieManager mm;
   private List<Cineplex> cineplexes;
 
   // constructor
-  public CineplexManager() {
+  public CineplexManager(MovieManager mm) {
     cineplexes = new ArrayList<Cineplex>();
+    this.mm = mm;
   }
 
   // setter

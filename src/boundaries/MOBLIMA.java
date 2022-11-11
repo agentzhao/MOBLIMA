@@ -74,7 +74,7 @@ public class MOBLIMA {
     log.addAdminList(mi.initializeAdmin());
 
     /* Initialise Cineplexes and store into CineplexManager */
-    cm = new CineplexManager();
+    cm = new CineplexManager(mm);
     List<Cineplex> cineplexes = mi.initializeCineplex(mm.getMovieList());
     cm.setCineplexes(cineplexes);
 
