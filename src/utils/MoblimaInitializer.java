@@ -22,9 +22,12 @@ import controllers.TicketManager;
 public class MoblimaInitializer {  
   private String dataPath;
   
+  
   public MoblimaInitializer() {
     dataPath = Paths.get("").toAbsolutePath() + "/data/initialization_files";
   }
+  
+  
   public List<Movie> initializeMovie() {
     File moviesDir = new File(dataPath + "/movies");
     FileFilter fileFilter = file -> !file.isDirectory() && file.getName().endsWith(".txt");
@@ -165,7 +168,7 @@ public class MoblimaInitializer {
               }
             }
             
-            ScreeningTimes s = new ScreeningTimes(1, times[x], "13/11/2022", seats);
+            ScreeningTimes s = new ScreeningTimes(cinemaCode, 1, times[x], "13/11/2022", seats);
             st.add(s);
           }
            
@@ -251,6 +254,7 @@ public class MoblimaInitializer {
     return admins;
   }
   
+  
   public TicketManager initializeTickets(ArrayList<Customer> customer, Cineplex cineplex) {
     /* 
      * 
@@ -267,9 +271,7 @@ public class MoblimaInitializer {
     Cinema c = cineplex.getCinemas()[0];   
     Movie m = c.getMovies().get(7);
     ScreeningTimes st = c.getScreeningTimes().get(3);
-    
-    //c.getscreeningtimes() should have a parameter for movieid ?
-                
+                    
     for (int i = 0; i < 3; i += 1) {
       Seat s = st.getSeats()[i];
       tm.createTicket(customer.get(i), c, s, m, st);
@@ -278,6 +280,7 @@ public class MoblimaInitializer {
     
     return tm;
   }
+  
   
   public void initializeSeats(ArrayList<Customer> customer, Cineplex cineplex, TicketManager tm) {  
     /* 
@@ -303,3 +306,4 @@ public class MoblimaInitializer {
     }
   }
 }
+
