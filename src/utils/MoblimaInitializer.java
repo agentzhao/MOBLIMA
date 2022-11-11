@@ -351,7 +351,7 @@ public class MoblimaInitializer {
      * Cineplex: SWB 
      * Cinema: Shaw Theatres Waterway Point Hall 1
      * Movie: Jurassic World (Movie id: 7)
-     * Seat Id: 10, 11, 12
+     * Seat Id: 11, 12, 13
      * Customer: Terence Tang (id: 4) (Child / 12), Rachel Tan (id: 6) (Senior Citizen / 65), Wesley Chan (id: 5) (Adult / 23)
      */
     
@@ -376,7 +376,7 @@ public class MoblimaInitializer {
     /* Create ticket and transaction for customers */
     for (int i = 0; i < 3; i += 1) {
       /* Create seatID Array and store seat id */
-      int s = st.getSeats()[i+9].getSeatID();
+      int s = st.getSeats()[i+10].getSeatID();
             
       ArrayList<Integer> seatID = new ArrayList<Integer>();
       seatID.add(s);
@@ -406,7 +406,7 @@ public class MoblimaInitializer {
      * Movie: Jurassic World (Movie id: 7)
      * Date: 13/11/2022
      * Time: 0900
-     * Seat id: 10, 11, 12
+     * Seat id: 11, 12, 13
      * Ticket id: 1, 2, 3
      */
     
@@ -418,7 +418,7 @@ public class MoblimaInitializer {
     
     /* Set seat to occupied and set ticketholder to customerid */ 
     for (int i = 0; i < 3 ; i += 1) {
-      int s = st.getSeats()[i+9].getSeatID();
+      int s = st.getSeats()[i+10].getSeatID();
       int t = tm.getTicketid(c.getMovies().get(7).getMovieName(), customer.get(i).getId());
       
       st.getSeats()[s].setAvailable(false);
