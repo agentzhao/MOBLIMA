@@ -90,49 +90,17 @@ public class CineplexManager {
 
   public void removeShowTime(String cineplexID) {
     ScreeningTimes screeningtime = displayScreentime(cineplexID, null);
-
-    // Getting the cineplex
-    int cineplexnum = -1;
-    for (int i = 0; i < cineplexes.size(); i++) {
-      if (cineplexID.equalsIgnoreCase(cineplexes.get(i).getCineplexID()))
-        cineplexnum = i;
-    }
-    if (cineplexnum == -1) {
-      System.out.println("This cineplexID does not exist");
-      return;
-    }
-    Cineplex cineplex = cineplexes.get(cineplexnum - 1);
-
-    // Getting the cinema
-    for (int i = 0; i < cineplex.getCinemas().length; i++) {
-      System.out.println(i + 1 + ": " + cineplex.getCinemas()[i].getCinemaName());
-    }
-    System.out.println("Choose the Cinema name");
-    int cinemaChoice = sc.nextInt();
-    if (cinemaChoice >= cineplex.getCinemas().length || cinemaChoice <= 0) {
-      System.out.println("Invalid choice");
-      return;
-    }
-    Cinema cinema = cineplex.getCinemas()[cinemaChoice - 1];
-
-    // getting the showtime
-    System.out.println("Enter show time: ");
-    String showtime = sc.next();
-
-    // getting the date
-    System.out.println("Enter date: ");
-    String date = sc.next();
-
-    for (ScreeningTimes screeningtime : cinema.screeningTimes) {
-      if (screeningtime.getDate().equalsIgnoreCase(date) && screeningtime.getScreenTime().equalsIgnoreCase(showtime)) {
-        cinema.screeningTimes.remove(screeningtime);
-        System.out.println("Removed!");
-        return;
-
+    for (Cineplex cineplex : cineplexes) {
+      if (cineplexID == cineplex.getCineplexID()){
+        for (Cinema cinema : cineplex.getCinemas()) {
+          for (ScreeningTimes screentime : cinema.getScreeningTimes()) {
+              if (screentime == screeningtime)
+                cinema.screeningTimes.remove(screentime);
+            }
+          }
+        }
       }
     }
-    System.out.println("No such Showtime yet!");
-    return;
   }
 
   // Display screening time for movie
