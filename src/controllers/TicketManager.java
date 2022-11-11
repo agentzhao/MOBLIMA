@@ -138,17 +138,17 @@ public class TicketManager{
 
 
         //Ticket Type, We need to see if the person is senior child or adult
-        if(tictype.get(i)==0)
+        if(tictype.get(i)==1)
         {
             ttype=TicType.SENIOR;
             agePriceVar=0;
         }
-        else if(tictype.get(i)==1)
+        else if(tictype.get(i)==2)
         {
             ttype=TicType.ADULT;
             agePriceVar=1;
         }
-        else if(tictype.get(i)==2)
+        else if(tictype.get(i)==3)
         {
             ttype=TicType.CHILD;
             agePriceVar=2;
@@ -622,6 +622,8 @@ public class TicketManager{
     public double getTransactionAmount(String TID)
     {
         Transaction t = searchTransaction(TID);
+        double tamt=t.getTransactionAmount();
+        tamt= Math.round(tamt*100)/100;
         return t.getTransactionAmount();
     }
 }
