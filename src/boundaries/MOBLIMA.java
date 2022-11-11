@@ -311,8 +311,8 @@ public class MOBLIMA {
     {
       //Waiting for ticketmanager update
       //tm.createTicket(c, Movie class);
-      //tm.createTicket(c, st.getCinemaID() ,s , movie, st);
-      cm.bookSeat(st, s, 1); //placeholder
+      Ticket tempTicket = tm.createTicket(c ,s , movie, st);
+      cm.bookSeat(st, s, tempTicket.getTicketID()); //placeholder
       System.out.println("Book ticket");
     }
     else
