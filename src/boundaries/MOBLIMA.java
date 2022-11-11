@@ -280,7 +280,7 @@ public class MOBLIMA {
                   a.add(tm.ageToTicketType(MOBLIMA.c.getAge()));
                 } else {
                   while (true) {
-                    System.out.println("Which ticket type are you getting?\n1: Child\n2: Adult\n3: Senior");
+                    System.out.println("Which ticket type are you getting?\n1: Senior\n2: Adult\n3: Child");
                     int y = sc.nextInt();
                     if (y > 0 && y < 4) {
                       a.add(y);
