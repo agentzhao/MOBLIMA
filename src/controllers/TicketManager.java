@@ -99,12 +99,39 @@ public class TicketManager{
      * @param scTime
      * @return Ticket
      */
-    public Ticket createTicket(Customer customer, int seatID,Movie movie, ScreeningTimes scTime)
+    public ArrayList<Ticket> createTicket(Customer customer, ArrayList<Integer> seatID,ArrayList<TicType> tictype, Movie movie, ScreeningTimes scTime)
     {
+        int noOfSeats= seatID.size();
+        double totalPrice =0.0;
         
+        ArrayList<Ticket> multipleTics = new ArrayList<Ticket>();
+        Transaction newTran= new Transaction(customer.getName(), customer.getId());
+        
+        //User IDs
+        newTran.setUserID(customer.getId());
+
+        // Amount of Transaction
+        //newTran.setTransactionAmount(ticket.get(ticket.size()-1).getPrice());
+
+
+        // Name of Customer
+        newTran.setNameOfCustomer(customer.getName());
+
+        // Mobile Number
+        newTran.setMobileNumber(customer.getMobile_number());
+
+        // Transaction ID
+        newTran.setTID(scTime.getCinemaID());
+
+        //Add to list
+        transactions.add(newTran);
+
+        for(int i=0; i<noOfSeats; i++)
+        {
+
         Ticket newTicket= new Ticket(customer.getId(), movie.getMovieName());
 
-
+        
         //User ID
         newTicket.setUserID(customer.getId());
 
@@ -116,7 +143,7 @@ public class TicketManager{
 
 
         //Ticket Type, We need to see if the person is senior child or adult
-        if(customer.getAge()>=60)
+        /*if(customer.getAge()>=60)
         {
             newTicket.setTicketType(TicType.SENIOR);
             agePriceVar=0;
@@ -130,10 +157,17 @@ public class TicketManager{
         {
             newTicket.setTicketType(TicType.ADULT);
             agePriceVar=1;
-        }
+        }*/
+
+
+        //Ticket Type
+        newTicket.setTicketType(tictype.get(i));
         
         // Movie Time
         newTicket.setMovieTime(scTime.getScreenTime());
+
+        //TID
+        newTicket.setTransID(newTran.getTID());
 
         //Movie Date
         newTicket.setMovieDate(scTime.getDate());
@@ -148,19 +182,25 @@ public class TicketManager{
         newTicket.setCinemaName(scTime.getCinemaName());
 
         //seat ID
-        newTicket.setSeatID(seatID);
+        newTicket.setSeatID(seatID.get(i));
 
         //Price
-        double totprice = calPrice(movie,seatID);
+        double totprice = calPrice(movie,seatID.get(i));
+        totalPrice+=totprice;
+
         newTicket.setPrice(totprice);
-
-
 
         //Add to list
         ticket.add(newTicket);
-
-        return newTicket;
+        multipleTics.add(newTicket);
     }
+
+    newTran.setTransactionAmount(totalPrice);
+
+    transactions.add(newTran);
+
+        return multipleTics; 
+}
 
 
 
@@ -172,7 +212,7 @@ public class TicketManager{
      * @return Transaction
      */
     //CREATING A TRANSACTION
-    public Transaction createTransaction(Customer customer, Cinema cinema)
+     /*public Transaction createTransaction(Customer customer, Cinema cinema)
     {
         Transaction newTran= new Transaction(customer.getName(), customer.getId());
         
@@ -196,7 +236,7 @@ public class TicketManager{
         transactions.add(newTran);
 
         return newTran;
-    }
+    } */
 
 
     
@@ -312,6 +352,22 @@ public class TicketManager{
         return 1;
     }
 
+
+    public Transaction searchTransaction(String TID)
+    {
+        
+        for(Transaction t : transactions){
+            if(t.getTID()==TID)
+            {
+               return t;
+            }
+        }
+        
+
+        System.out.println("Transaction not found!");
+
+        return null;
+    }
     
     /** 
      * @param userID
@@ -324,6 +380,10 @@ public class TicketManager{
         {
             if(t.getUserID()==userID && t.getMovieName().equals(movieName))
             {
+                Transaction tran= searchTransaction(t.getTransID());
+                double amountUpdate= tran.getTransactionAmount();
+                amountUpdate= amountUpdate- t.getPrice();
+                tran.setTransactionAmount(amountUpdate);
                 ticket.remove(t);
                 System.out.println("Ticket deleted sucessfully!");
                 return 1;//success
@@ -446,6 +506,8 @@ public class TicketManager{
         System.out.println("Movie Name: "+t.getMovieName());
         System.out.println("Price: "+ String.format("%.2f", t.getPrice()));
         System.out.println("Cinema Name: "+t.getCinemaName());
+
+        //
         System.out.println("Seat ID: "+t.getSeatID());
         
     }
