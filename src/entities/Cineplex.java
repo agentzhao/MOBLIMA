@@ -6,6 +6,7 @@ public class Cineplex{
     private Cinema[] cinemas;
 
     public Cineplex(String cineplexName, String cineplexID, Cinema[] cinemas){
+        this.cineplexName = cineplexName;
         this.cineplexID = cineplexID;
         this.cinemas = cinemas;
     }

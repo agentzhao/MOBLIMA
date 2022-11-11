@@ -175,18 +175,20 @@ public class CineplexManager {
     int count = 1;
     for (Cineplex cineplex : cineplexes) {
       if (cineplexID == null || cineplexID == cineplex.getCineplexID())
-        System.out.print(cineplex.getCineplexID() + "\n");
+        System.out.printf("%s %n", cineplex.getCineplexName());
       else
         continue;
       for (Cinema cinema : cineplex.getCinemas()) {
-        System.out.print(cinema.getCinemaName()+"\n");
+        System.out.printf("%s %n", cinema.getCinemaName());
         for (ScreeningTimes screentime : cinema.getScreeningTimes()) {
           if (screentime.getMovieID() == movie.getMovieID()) {
             System.out.printf("%3d %s %2s %s %2s %s %2s %n", count, ": ", screentime.getDate(), " - ", screentime.getScreenTime(), ": ", movie.getMovieName());
             count++;
           }
         }
+        System.out.println();
       }
+      System.out.println("-------------------------------------");
     }
     System.out.println("Choose the screening time:");
     int ScreeningTimeChoice = sc.nextInt();
@@ -227,32 +229,34 @@ public class CineplexManager {
 
   // Print the ascii cinema seat
   public void printSeats(ScreeningTimes screentime) {
-    System.out.print("Screen\n");
-    System.out.print(" 1 " + " 2 " + " 3 " + " 4 " + " 5 " + "  " + " 6 " + " 7 " + " 8 " + " 9 " + " 10\n");
+    System.out.printf("%20s %n", "Screen");
+    System.out.print("  1 " + " 2 " + " 3 " + " 4 " + " 5 " + " 6 " + "  " + " 7 " + " 8 " + " 9 " + " 10\n");
     System.out.print("0");
     for (int i = 0; i < screentime.getSeats().length; i++) {
       System.out.print("|");
-      if (!screentime.getSeats()[i].isAvailable()) {
-        if (screentime.getSeats()[i].getType() != Type.Normal) {
-          System.out.print("X  X");
-          i++;
-        } else
-          System.out.print("X");
-      } else {
-        if (screentime.getSeats()[i].getType() != Type.Normal) {
-          System.out.print("    ");
-          i++;
-        } else
-          System.out.print(" ");
-      }
-      System.out.print("|");
-      if (i % 10 == 0) {
-        System.out.println();
-        System.out.print(i / 10);
-      } else if (i % 5 == 0)
-        System.out.print("  ");
+        if (!screentime.getSeats()[i].isAvailable()) {
+            if (screentime.getSeats()[i].getType() != Type.Normal) {
+                System.out.print("X  X");
+                i++;
+            } else  System.out.print("X");
+        } else {
+            if (screentime.getSeats()[i].getType() != Type.Normal) {
+                System.out.print("O  O");
+                i++;
+            } else
+                System.out.print("O");
+        }
+            System.out.print("|");
+        if(screentime.getSeats().length > i+1){
+            if ((i+1) % 10 == 0) {
+                System.out.println();
+                System.out.print((i+1) / 10);
+            } 
+            else if (((i+1) % 10) % 6 == 0)
+                System.out.print("  ");
+        }
     }
-    System.out.print("Entrance\n");
+    System.out.printf("%n %20s %n","Entrance");
   }
 
   // Booking, Unbooking, Changing Seats
