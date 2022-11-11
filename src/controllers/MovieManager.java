@@ -13,11 +13,10 @@ import java.time.ZoneOffset;
 import java.time.temporal.ChronoField;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
-import java.util.Calendar;
 
 public class MovieManager {
-  private List<Movie> movies;
-  private List<Review> reviews;
+  private ArrayList<Movie> movies;
+  private ArrayList<Review> reviews;
   Scanner sc = new Scanner(System.in);
 
   // constructor
@@ -26,20 +25,20 @@ public class MovieManager {
     this.reviews = new ArrayList<Review>();
   }
 
-  public MovieManager(List<Movie> movies, List<Review> reviews) {
+  public MovieManager(ArrayList<Movie> movies, ArrayList<Review> reviews) {
     this.movies = movies;
     this.reviews = reviews;
   }
 
-  public void addMovieList(List<Movie> movies) {
+  public void addMovieList(ArrayList<Movie> movies) {
     this.movies = movies;
   }
 
-  public void addReviewList(List<Review> reviews) {
+  public void addReviewList(ArrayList<Review> reviews) {
     this.reviews = reviews;
   }
 
-  public List<Movie> getMovieList() {
+  public ArrayList<Movie> getMovieList() {
     return this.movies;
   }
 
@@ -266,7 +265,7 @@ public class MovieManager {
   public void topSales() {
     System.out.println("Top 5 Movies by Ticket Sales");
 
-    List<Movie> dupMovies = new ArrayList<Movie>();
+    ArrayList<Movie> dupMovies = new ArrayList<Movie>();
     dupMovies = this.movies;
     // insertion sort with ticket sales (descending)
     for (int i = 1; i < dupMovies.size(); i++) {
@@ -291,7 +290,7 @@ public class MovieManager {
   public void topRating() {
     System.out.println("Top 5 Movies by Overall Rating");
 
-    List<Movie> dupMovies = new ArrayList<Movie>();
+    ArrayList<Movie> dupMovies = new ArrayList<Movie>();
     dupMovies = movies;
     // insertion sort with ticket sales (descending)
     for (int i = 1; i < dupMovies.size(); i++) {

@@ -138,17 +138,17 @@ public class TicketManager{
 
 
         //Ticket Type, We need to see if the person is senior child or adult
-        if((tictype.get(i)-1)==0)
+        if((tictype.get(i)==0))
         {
             ttype=TicType.SENIOR;
             agePriceVar=0;
         }
-        else if((tictype.get(i)-1)==1)
+        else if((tictype.get(i)==1))
         {
             ttype=TicType.ADULT;
             agePriceVar=1;
         }
-        else if((tictype.get(i)-1)==2)
+        else if((tictype.get(i)==2))
         {
             ttype=TicType.CHILD;
             agePriceVar=2;
