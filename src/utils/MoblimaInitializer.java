@@ -155,6 +155,7 @@ public class MoblimaInitializer {
         BufferedReader br = new BufferedReader(fr);
         
         /* Read file line by line */
+        String cineplexName = br.readLine();
         String cineplexID = br.readLine();
         
         /* Get list of cinemas under current cineplex */
@@ -232,7 +233,7 @@ public class MoblimaInitializer {
         }
         
         /* Create cineplex object and store into cineplexes list */
-        Cineplex newCineplex = new Cineplex(cineplexID, cinemas);
+        Cineplex newCineplex = new Cineplex(cineplexName, cineplexID, cinemas);
         cineplexes.add(newCineplex);
         
         br.close();
