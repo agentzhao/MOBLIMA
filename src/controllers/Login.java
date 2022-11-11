@@ -1,6 +1,10 @@
-package boundaries;
+package controllers;
 
 import java.util.*;
+
+import entities.Admin;
+import entities.Customer;
+import entities.User;
 
 public class Login {
     private ArrayList<Customer> customer = new ArrayList<Customer>();
@@ -10,13 +14,13 @@ public class Login {
     public Login() {
 
     }
-    
+
     public void addCustomerList(ArrayList<Customer> customer) {
-      this.customer = customer;
+        this.customer = customer;
     }
-    
+
     public void addAdminList(ArrayList<Admin> admin) {
-      this.admin = admin;
+        this.admin = admin;
     }
 
     public User loginSystem(String email, String password) {
@@ -28,7 +32,8 @@ public class Login {
         admin.add(newAdmin);
     }
 
-    public void createCustomer(String email, String password, int type, String mobile_number, String name, int age, int id) {
+    public void createCustomer(String email, String password, int type, String mobile_number, String name, int age,
+            int id) {
         Customer newCustomer = new Customer(email, password, type, mobile_number, name, age, id);
         customer.add(newCustomer);
     }
@@ -36,8 +41,9 @@ public class Login {
     public User searchUser(String email, String password) {
 
         for (int x = 0; x < admin.size(); x++) {
-            //System.out.println(admin.get(x).getEmail() + " password: " + admin.get(x).getPassword());
-            //System.out.println(email + " password: " + password);
+            // System.out.println(admin.get(x).getEmail() + " password: " +
+            // admin.get(x).getPassword());
+            // System.out.println(email + " password: " + password);
             String e = admin.get(x).getEmail();
             String p = admin.get(x).getPassword();
             if (email.equals(e) && password.equals(p)) {

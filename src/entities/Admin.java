@@ -1,4 +1,4 @@
-package boundaries;
+package entities;
 
 import java.util.*;
 

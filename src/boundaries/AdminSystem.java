@@ -5,6 +5,7 @@ import java.util.Scanner;
 import controllers.CineplexManager;
 import controllers.MovieManager;
 import controllers.TicketManager;
+import entities.Admin;
 
 public class AdminSystem {
   private MovieManager mm;

@@ -10,12 +10,10 @@ import entities.ScreeningTimes;
 import entities.Seat;
 import entities.Movie;
 import entities.Movie.*;
+import entities.Admin;
 import entities.Cinema;
 import entities.Cineplex;
-
-import boundaries.Admin;
-import boundaries.Customer;
-
+import entities.Customer;
 import controllers.MovieManager;
 import controllers.TicketManager;
 

@@ -1,4 +1,4 @@
-package boundaries;
+package entities;
 
 import java.util.*;
 
@@ -8,7 +8,6 @@ public class User {
     private int type;
     private int id;
 
-    
     public User(String email, String password, int type, int id) {
         this.email = email;
         this.password = password;
