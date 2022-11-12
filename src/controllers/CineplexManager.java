@@ -332,7 +332,7 @@ public class CineplexManager {
   }
 
   public int changeSeat(Ticket ticket) throws ParseException {
-    String cineplexID = ticket.getTransID().substring(0, 2);
+    String cineplexID = ticket.getTransID().substring(0, 3);
     String cinemaName = ticket.getCinemaName();
     String datestr = ticket.getMoiveDate();
     String showtime = ticket.getMovieTime();
@@ -381,7 +381,7 @@ public class CineplexManager {
     }
 
     //Seat is double seat
-    if (screentime.getSeats()[aftseatID-1].isAvailable() && screentime.getSeats()[aftseatID-1].getType()!= Type.Normal) {
+    if (screentime.getSeats()[aftseatID].isAvailable() && screentime.getSeats()[aftseatID].getType()!= Type.Normal) {
         if((aftseatID-1)%2 == 0){
             screentime.getSeats()[aftseatID+1].setAvailable(false);
             screentime.getSeats()[aftseatID].setAvailable(false);
@@ -408,7 +408,7 @@ public class CineplexManager {
     }
 
     //Seat is single seat
-    else if(screentime.getSeats()[aftseatID-1].isAvailable()){
+    else if(screentime.getSeats()[aftseatID].isAvailable()){
         screentime.getSeats()[aftseatID].setAvailable(false);
         screentime.getSeats()[aftseatID].setTicketHolder(screentime.getSeats()[b4seatID].getTicketholder());
         screentime.getSeats()[b4seatID].setAvailable(true);
