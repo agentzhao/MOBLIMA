@@ -9,6 +9,9 @@ import entities.Movie.Status;
 import entities.Movie.Type;
 import entities.Ticket.TicType;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 
 import java.util.*;
 
@@ -20,10 +23,12 @@ public class TicketManager{
     
     private ArrayList<Transaction> transactions;
     private ArrayList<Ticket> ticket;
+    private ArrayList<String> holidayDates;
 
     private double basePrice;
     private double agePrice[]= new double[3];
     private double typePrice[] = new double[4];
+    private double holidayPrice;
     private int typePriceVar;
     private double previewPrice;
     Scanner sc = new Scanner(System.in);
@@ -32,6 +37,8 @@ public class TicketManager{
     public TicketManager() {
         ticket = new ArrayList<Ticket>();
         transactions = new ArrayList<Transaction>();
+        holidayDates= new ArrayList<String>();
+
         this.basePrice=12;
 
         agePrice[0] =0.8; //SENIOR
@@ -42,6 +49,8 @@ public class TicketManager{
         typePrice[1]= 1.8; //THREED
         typePrice[2]= 1.5; //IMAX
         typePrice[3]= 1.0; //REGULAR
+
+        holidayPrice= 1.5;
 
         previewPrice=2.0;
     }
@@ -62,6 +71,11 @@ public class TicketManager{
     public void addTransactionList (ArrayList<Transaction> transactions)
     {
         this.transactions = transactions;
+    }
+
+    public void addHolidayList (ArrayList<String> holidayDates)
+    {
+        this.holidayDates= holidayDates;
     }
 
 
@@ -182,7 +196,7 @@ public class TicketManager{
         newTicket.setSeatID(seatID.get(i));
 
         //Price
-        double totprice = calPrice(movie,seatID.get(i),agePriceVar);
+        double totprice = calPrice(movie,seatID.get(i),agePriceVar,scTime);
         newTicket.setPrice(totprice);
         totalPrice+=totprice;
 
@@ -481,7 +495,7 @@ public class TicketManager{
      * ticket type: SENIOR, ADULT , CHILD
      * It provides a temporary total to work on after the above classification
      */
-    public double calPrice (Movie movie, int seatID, int agePriceVar)
+    public double calPrice (Movie movie, int seatID, int agePriceVar, ScreeningTimes scTime)
     {
  
         double totprice;
@@ -495,12 +509,37 @@ public class TicketManager{
         else 
             typePriceVar=3;
 
+
+        //checking for holiday and weekend prices
+        //1. For weekend
+        Calendar c = Calendar.getInstance();
+
+        Date date=null;
+        try {
+            date = new SimpleDateFormat("dd/MM/yyyy").parse(scTime.getDate());
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        c.setTime(date);
+
+        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+        if(dayOfWeek==1 || dayOfWeek==7)
+        {
+            basePrice=basePrice*holidayPrice;
+        }
+        //2. For holiday
+        if(searchHoliday(scTime.getDate())==1)
+            basePrice=basePrice*holidayPrice;
+
+
+        //checking if a movie is preview
         if(movie.getMovieStatus()==Status.PREVIEW)
          totprice= basePrice*agePrice[agePriceVar]*typePrice[typePriceVar]*previewPrice;
-        
         else 
          totprice= basePrice*agePrice[agePriceVar]*typePrice[typePriceVar];
 
+         //checking for couple seats
          if(seatID>=01 && seatID<10) // couple seats
          totprice = totprice * 2;
      
@@ -567,6 +606,8 @@ public class TicketManager{
         System.out.println("1. Age Price <SENIOR, ADULT, CHILD> ");
         System.out.println("2. Movie Type Price <BLOCKBUSTER, PREVIEW, NOWSHOWING, ENDOFSHOWING> ");
         System.out.println("3. Preview Price");
+        System.out.println("4. Holiday/ weekend Price");
+
 
         int choice= sc.nextInt();
 
@@ -621,6 +662,12 @@ public class TicketManager{
             previewPrice= sc.nextDouble();
         }
 
+        else if(choice==4)
+        {
+            System.out.println("Enter the new Holiday/weekend Price");
+            holidayPrice= sc.nextDouble();
+        }
+
         else 
         {
             System.out.println("Invalid choice!" );
@@ -656,5 +703,67 @@ public class TicketManager{
         {
             getTicketDetails(t);
         }
+    }
+
+
+    public void addHoliday(String date)
+    {
+        holidayDates.add(date);
+    }
+
+
+
+    public void updateHoliday()
+    {
+        String tempHolidays;
+        int choice ;
+
+
+        System.out.println("Choose the holiday to update: ");
+        
+        for(int i=0; i<holidayDates.size(); i++)
+        {
+            System.out.println((i+1) + ". " + holidayDates.get(i));
+        }
+
+        choice= sc.nextInt();
+
+        System.out.println("Enter the new date: ");
+        tempHolidays = sc.nextLine();
+        holidayDates.set(choice-1, tempHolidays);
+
+        System.out.println("Holiday updated successfully!");
+        
+    }
+
+    public void removeHoliday()
+    {
+        
+        int choice ;
+
+
+        System.out.println("Choose the holiday to remove: ");
+        
+        for(int i=0; i<holidayDates.size(); i++)
+        {
+            System.out.println((i+1) + ". " + holidayDates.get(i));
+        }
+
+        choice = sc.nextInt();
+
+        holidayDates.remove(choice-1);
+
+        System.out.println("Holiday removed successfully!");
+
+    }
+
+    public int searchHoliday(String date)
+    {
+        for(int i=0;i<holidayDates.size();i++)
+        {
+            if(date==holidayDates.get(i))
+                return 1; //successful
+        }
+        return 0; // unsuccessful
     }
 }
