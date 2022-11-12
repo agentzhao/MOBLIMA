@@ -5,7 +5,6 @@ import entities.Cineplex;
 import entities.Seat.Type;
 import entities.ScreeningTimes;
 import entities.Movie;
-import controllers.MovieManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -160,8 +159,8 @@ public class CineplexManager {
               count++;
             }
           }
-        } 
-      }       
+        }
+      }
     }
     return null;
   }
