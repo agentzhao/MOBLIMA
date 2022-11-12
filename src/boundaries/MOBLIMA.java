@@ -180,7 +180,7 @@ public class MOBLIMA {
 
           break;
         case 4:
-          mm.printAllMovies();
+          mm.listMovies();
           break;
         case 5:
           System.out.println("Thank you for using MOBLIMA");
