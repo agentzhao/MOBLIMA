@@ -28,8 +28,11 @@ public class TicketManager{
     private double basePrice;
     private double agePrice[]= new double[3];
     private double typePrice[] = new double[4];
+    private double seatPrice[] = new double[4];
     private double holidayPrice;
     private int typePriceVar;
+    private int seatPriceVar;
+
     private double previewPrice;
     Scanner sc = new Scanner(System.in);
 
@@ -49,6 +52,11 @@ public class TicketManager{
         typePrice[1]= 1.8; //THREED
         typePrice[2]= 1.5; //IMAX
         typePrice[3]= 1.0; //REGULAR
+
+        seatPrice[0]= 1.0; //NORMAL
+        seatPrice[1]= 1.0; //COUPLE
+        seatPrice[2]= 2.5; //ELITE
+        seatPrice[3]= 4.0; //ULTIMA 
 
         holidayPrice= 1.5;
 
@@ -113,7 +121,7 @@ public class TicketManager{
      * @param scTime
      * @return Ticket
      */
-    public ArrayList<Ticket> createTicket(Customer customer, ArrayList<Integer> seatID,ArrayList<Integer> tictype, Movie movie, ScreeningTimes scTime)
+    public ArrayList<Ticket> createTicket(Customer customer, ArrayList<Integer> seatID,ArrayList<Integer> seattype, ArrayList<Integer> tictype, Movie movie, ScreeningTimes scTime)
     {
         int noOfSeats= seatID.size();
         double totalPrice =0.0;
@@ -196,7 +204,7 @@ public class TicketManager{
         newTicket.setSeatID(seatID.get(i));
 
         //Price
-        double totprice = calPrice(movie,seatID.get(i),agePriceVar,scTime);
+        double totprice = calPrice(movie,seatID.get(i),agePriceVar,scTime, seattype.get(i));
        totprice= Math.round(totprice*100.0)/100.0;
         newTicket.setPrice(totprice);
         totalPrice+=totprice;
@@ -506,7 +514,7 @@ public class TicketManager{
      * ticket type: SENIOR, ADULT , CHILD
      * It provides a temporary total to work on after the above classification
      */
-    public double calPrice (Movie movie, int seatID, int agePriceVar, ScreeningTimes scTime)
+    public double calPrice (Movie movie, int seatID, int agePriceVar, ScreeningTimes scTime, int seattype)
     {
  
         double totprice;
@@ -519,6 +527,9 @@ public class TicketManager{
             typePriceVar=2;
         else 
             typePriceVar=3;
+        
+
+        seatPriceVar=seattype;
 
 
         //checking for holiday and weekend prices
@@ -546,13 +557,13 @@ public class TicketManager{
 
         //checking if a movie is preview
         if(movie.getMovieStatus()==Status.PREVIEW)
-         totprice= basePrice*agePrice[agePriceVar]*typePrice[typePriceVar]*previewPrice;
+         totprice= basePrice*agePrice[agePriceVar]*typePrice[typePriceVar]*previewPrice*seatPrice[seatPriceVar];
         else 
-         totprice= basePrice*agePrice[agePriceVar]*typePrice[typePriceVar];
+         totprice= basePrice*agePrice[agePriceVar]*typePrice[typePriceVar]*seatPrice[seatPriceVar];
 
          //checking for couple seats
-         if(seatID>=01 && seatID<10) // couple seats
-         totprice = totprice * 2;
+         //if(seatID>=01 && seatID<10) // couple seats
+         //totprice = totprice * 2;
      
         totprice= totprice*0.07 + totprice; //Adding GST
         
@@ -618,6 +629,7 @@ public class TicketManager{
         System.out.println("2. Movie Type Price <BLOCKBUSTER, PREVIEW, NOWSHOWING, ENDOFSHOWING> ");
         System.out.println("3. Preview Price");
         System.out.println("4. Holiday/ weekend Price");
+        System.out.println("5. Seat type Price <NORMAL, COUPLE, ELITE, ULTIMA> ");
 
 
         int choice= sc.nextInt();
@@ -677,6 +689,28 @@ public class TicketManager{
         {
             System.out.println("Enter the new Holiday/weekend Price");
             holidayPrice= sc.nextDouble();
+        }
+
+        else if(choice == 5)
+        {
+            double multiplier;
+            int ch;
+            System.out.println("For what type of seat do you want to update the price?");
+            System.out.println("1. NORMAL");
+            System.out.println("2. COUPLE");
+            System.out.println("3. ELITE");
+            System.out.println("4. ULTIMA");
+            System.out.println("Enter your choice: ");
+            ch=sc.nextInt();
+
+            if(ch==1||ch==2||ch==3||ch==4)
+            {
+            System.out.println("Enter the new multiplier: ");
+            multiplier=sc.nextDouble();
+            seatPrice[ch-1]=multiplier; //Update the multiplier
+            }
+            else 
+            System.out.println("Invalid Choice!");
         }
 
         else 
