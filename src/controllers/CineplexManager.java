@@ -4,9 +4,14 @@ import entities.Cinema;
 import entities.Cineplex;
 import entities.Seat.Type;
 import entities.ScreeningTimes;
+import entities.Seat;
 import entities.Movie;
+import entities.Ticket;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -66,15 +71,25 @@ public class CineplexManager {
     String date = sc.next();
 
     for (int i = 0; i < cinema.screeningTimes.size(); i++) {
-      if (cinema.screeningTimes.get(i).getDate() == date && cinema.screeningTimes.get(i).getScreenTime() == showtime) {
+      if (cinema.screeningTimes.get(i).getDate().equalsIgnoreCase(date) && cinema.screeningTimes.get(i).getScreenTime().equalsIgnoreCase(showtime)) {
         System.out.println("Showtime already exist");
         return;
       }
     }
-
+    
+    Seat[] tmp = cinema.getScreeningTimes().get(0).getSeats();
+    int noOfSeats = tmp.length;
+    
+    Seat[] seats = new Seat[noOfSeats];
+    
+    for (int x = 0; x < noOfSeats; x += 1) {
+      Seat s = new Seat(tmp[x].getType(), x + 1, true, 0);
+      seats[x] = s;
+    }  
+    
     ScreeningTimes screeningtime = new ScreeningTimes(cinema.getCinemaID(), cinema.getCinemaName(),
         movie.getMovieID(), showtime, date, null);
-    screeningtime.setSeats(cineplexes.get(cineplexnum).getCinemas()[cinemaChoice].screeningTimes.get(0).getSeats());
+    screeningtime.setSeats(seats);
     for (int i = 0; i < screeningtime.getSeats().length; i++) {
       screeningtime.getSeats()[i].setAvailable(true);
       screeningtime.getSeats()[i].setTicketHolder(0);
@@ -209,6 +224,7 @@ public class CineplexManager {
 
   // Booking, Unbooking, Changing Seats
   public int bookSeat(ScreeningTimes screentime, int seatID,  int tID) {
+    
     //Seat is double seat
     if (screentime.getSeats()[seatID].isAvailable() && screentime.getSeats()[seatID].getType()!= Type.Normal) {
         if((seatID)%2 == 0){
@@ -230,16 +246,47 @@ public class CineplexManager {
     else if(screentime.getSeats()[seatID].isAvailable()){
         screentime.getSeats()[seatID].setAvailable(false);
         screentime.getSeats()[seatID].setTicketHolder(tID);
-        return 1;
+        return 0;
     }
     
     //Seat is already taken
     System.out.printf("%s %d %s %n", "Seat ", seatID, " is already taken");
-    return 0;
+    return -1;
 
   }
 
-  public int unbookSeat(ScreeningTimes screentime, int seatID) {
+  public int unbookSeat(Ticket ticket) throws ParseException {
+    String cineplexID = ticket.getTransID().substring(0, 2);
+    String cinemaName = ticket.getCinemaName();
+    String datestr = ticket.getMoiveDate();
+    String showtime = ticket.getMovieTime();
+    int seatID = ticket.getSeatID();
+
+    Date currDate = new Date();
+    Date date = new SimpleDateFormat("dd/MM/yyyy").parse(datestr);
+
+    if(date.compareTo(currDate) <= 0){
+      System.out.println("The date has alrady passed, ticket expired");
+    }
+
+    Cineplex cineplex = null;
+    for(int i=0; i<cineplexes.size(); i++){
+      if(cineplexID.equalsIgnoreCase(cineplexes.get(i).getCineplexID()))
+        cineplex = cineplexes.get(i);
+    }
+
+    Cinema cinema = null;
+    for(int i=0; i<cineplex.getCinemas().length; i++){
+      if(cinemaName.equalsIgnoreCase(cineplex.getCinemas()[i].getCinemaName()))
+        cinema = cineplex.getCinemas()[i];
+    }
+
+    ScreeningTimes screentime = null;
+    for(int i=0; i<cinema.screeningTimes.size(); i++){
+      if(cinema.screeningTimes.get(i).getDate().equalsIgnoreCase(datestr) && cinema.screeningTimes.get(i).getScreenTime().equalsIgnoreCase(showtime))
+        screentime = cinema.screeningTimes.get(i);
+     }
+
     //Seat is double seat
     if (!screentime.getSeats()[seatID].isAvailable() && screentime.getSeats()[seatID].getType()!= Type.Normal) {
         if((seatID)%2 == 0){

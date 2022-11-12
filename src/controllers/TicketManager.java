@@ -34,10 +34,10 @@ public class TicketManager{
     Scanner sc = new Scanner(System.in);
 
     //constructor
-    public TicketManager() {
+    public TicketManager(ArrayList<String> holidayDates) {
         ticket = new ArrayList<Ticket>();
         transactions = new ArrayList<Transaction>();
-        holidayDates= new ArrayList<String>();
+        this.holidayDates= holidayDates;
 
         this.basePrice=12;
 
@@ -197,6 +197,7 @@ public class TicketManager{
 
         //Price
         double totprice = calPrice(movie,seatID.get(i),agePriceVar,scTime);
+       totprice= Math.round(totprice*100.0)/100.0;
         newTicket.setPrice(totprice);
         totalPrice+=totprice;
 
@@ -554,7 +555,7 @@ public class TicketManager{
          totprice = totprice * 2;
      
         totprice= totprice*0.07 + totprice; //Adding GST
-
+        
         return totprice;
     }
 
