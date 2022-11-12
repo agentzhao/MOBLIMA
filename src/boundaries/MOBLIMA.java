@@ -359,7 +359,7 @@ public class MOBLIMA {
       // Waiting for ticketmanager update
       // tm.createTicket(c, Movie class);
       int t = 0;
-      ArrayList<Ticket> tempTicket = tm.createTicket(c, s, a, movie, st, type);
+      ArrayList<Ticket> tempTicket = tm.createTicket(c, s, type, a, movie, st);
       for (int x = 0; x < tempTicket.size(); x++) {
         t = cm.bookSeat(st, s.get(x), tempTicket.get(x).getTicketID());
         if (t == 0) {
