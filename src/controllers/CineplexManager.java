@@ -6,8 +6,12 @@ import entities.Seat.Type;
 import entities.ScreeningTimes;
 import entities.Seat;
 import entities.Movie;
+import entities.Ticket;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -250,7 +254,38 @@ public class CineplexManager {
 
   }
 
-  public int unbookSeat(ScreeningTimes screentime, int seatID) {
+  public int unbookSeat(Ticket ticket) throws ParseException {
+    String cineplexID = ticket.getTransID().substring(0, 2);
+    String cinemaName = ticket.getCinemaName();
+    String datestr = ticket.getMoiveDate();
+    String showtime = ticket.getMovieTime();
+    int seatID = ticket.getSeatID();
+
+    Date currDate = new Date();
+    Date date = new SimpleDateFormat("dd/MM/yyyy").parse(datestr);
+
+    if(date.compareTo(currDate) <= 0){
+      System.out.println("The date has alrady passed, ticket expired");
+    }
+
+    Cineplex cineplex = null;
+    for(int i=0; i<cineplexes.size(); i++){
+      if(cineplexID.equalsIgnoreCase(cineplexes.get(i).getCineplexID()))
+        cineplex = cineplexes.get(i);
+    }
+
+    Cinema cinema = null;
+    for(int i=0; i<cineplex.getCinemas().length; i++){
+      if(cinemaName.equalsIgnoreCase(cineplex.getCinemas()[i].getCinemaName()))
+        cinema = cineplex.getCinemas()[i];
+    }
+
+    ScreeningTimes screentime = null;
+    for(int i=0; i<cinema.screeningTimes.size(); i++){
+      if(cinema.screeningTimes.get(i).getDate().equalsIgnoreCase(datestr) && cinema.screeningTimes.get(i).getScreenTime().equalsIgnoreCase(showtime))
+        screentime = cinema.screeningTimes.get(i);
+     }
+
     //Seat is double seat
     if (!screentime.getSeats()[seatID].isAvailable() && screentime.getSeats()[seatID].getType()!= Type.Normal) {
         if((seatID)%2 == 0){
