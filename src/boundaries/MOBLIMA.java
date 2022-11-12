@@ -180,7 +180,7 @@ public class MOBLIMA {
 
           break;
         case 4:
-          mm.printAllMovies();
+          mm.listMovies();
           break;
         case 5:
           System.out.println("Thank you for using MOBLIMA");
@@ -271,6 +271,7 @@ public class MOBLIMA {
     int c = 0;
     ArrayList<Integer> s = new ArrayList<Integer>();
     ArrayList<Integer> a = new ArrayList<Integer>();
+    ArrayList<Integer> type = new ArrayList<Integer>();
     int z = 0;
     while (c != 2) {
       cm.printSeats(st);
@@ -289,7 +290,7 @@ public class MOBLIMA {
               System.out.println("Please select a seat. Press -1 to book");
               z = sc.nextInt();
               if (z == -1 && s.size() != 0) {
-                bookingMenu(movie, st, s, a);
+                bookingMenu(movie, st, s, a, type);
                 s.clear();
                 a.clear();
                 break;
@@ -314,7 +315,8 @@ public class MOBLIMA {
                   }
 
                 }
-                // int checkSeatType =
+                // int checkSeatType = cm.
+                // type.add(checkSeatType);
                 if (z < 10) {
                   if (z % 2 == 1) {
                     s.add(z - 1);
@@ -349,7 +351,8 @@ public class MOBLIMA {
     // sc.close();
   }
 
-  public static void bookingMenu(Movie movie, ScreeningTimes st, ArrayList<Integer> s, ArrayList<Integer> a) {
+  public static void bookingMenu(Movie movie, ScreeningTimes st, ArrayList<Integer> s, ArrayList<Integer> a,
+      ArrayList<Integer> type) {
     if (tempUser.getType() == 2) {
       // Waiting for ticketmanager update
       // tm.createTicket(c, Movie class);
