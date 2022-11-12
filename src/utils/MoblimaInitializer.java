@@ -9,7 +9,6 @@ import java.util.List;
 import entities.Review;
 import entities.ScreeningTimes;
 import entities.Seat;
-import entities.Ticket;
 import entities.Movie;
 import entities.Movie.*;
 import entities.Admin;
@@ -392,7 +391,6 @@ public class MoblimaInitializer {
       seattype.add(0);
 
       tm.createTicket(customer.get(i), seatID, seattype, tictype, m, st);
-      // tm.createTransaction(customer.get(i), c);
     }
     
     /* Create Expired Ticket */
@@ -460,7 +458,7 @@ public class MoblimaInitializer {
     st = c.getScreeningTimes().get(6);
     
     s = st.getSeats()[10].getSeatID();
-    int t = 4;//tm.getTicketid(c.getMovies().get(7).getMovieName(), customer.get(2).getId());
+    int t = 4;
 
     st.getSeats()[s].setAvailable(false);
     st.getSeats()[s].setTicketHolder(t);
