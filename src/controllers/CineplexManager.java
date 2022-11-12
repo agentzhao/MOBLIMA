@@ -397,7 +397,7 @@ public class CineplexManager {
         }
         System.out.println("Seats are changed");
         System.out.println("Thank you for booking with us");
-        return 1;
+        return aftseatID;
     }
 
     //Seat is single seat
@@ -408,7 +408,7 @@ public class CineplexManager {
         screentime.getSeats()[b4seatID].setTicketHolder(0);
         System.out.println("Seat has been changed");
         System.out.println("Thank you for booking with us");
-        return 1;
+        return aftseatID;
         }
 
     //Seat is taken
