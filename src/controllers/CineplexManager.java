@@ -224,6 +224,7 @@ public class CineplexManager {
 
   // Booking, Unbooking, Changing Seats
   public int bookSeat(ScreeningTimes screentime, int seatID,  int tID) {
+    
     //Seat is double seat
     if (screentime.getSeats()[seatID].isAvailable() && screentime.getSeats()[seatID].getType()!= Type.Normal) {
         if((seatID)%2 == 0){
@@ -245,12 +246,12 @@ public class CineplexManager {
     else if(screentime.getSeats()[seatID].isAvailable()){
         screentime.getSeats()[seatID].setAvailable(false);
         screentime.getSeats()[seatID].setTicketHolder(tID);
-        return 1;
+        return 0;
     }
     
     //Seat is already taken
     System.out.printf("%s %d %s %n", "Seat ", seatID, " is already taken");
-    return 0;
+    return -1;
 
   }
 
