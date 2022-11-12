@@ -34,10 +34,10 @@ public class TicketManager{
     Scanner sc = new Scanner(System.in);
 
     //constructor
-    public TicketManager() {
+    public TicketManager(ArrayList<String> holidayDates) {
         ticket = new ArrayList<Ticket>();
         transactions = new ArrayList<Transaction>();
-        holidayDates= new ArrayList<String>();
+        this.holidayDates= holidayDates;
 
         this.basePrice=12;
 
