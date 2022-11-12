@@ -331,7 +331,43 @@ public class CineplexManager {
     return 0;
   }
 
-  public int changeSeat(ScreeningTimes screentime, int b4seatID, int aftseatID) {
+  public int changeSeat(Ticket ticket) throws ParseException {
+    String cineplexID = ticket.getTransID().substring(0, 2);
+    String cinemaName = ticket.getCinemaName();
+    String datestr = ticket.getMoiveDate();
+    String showtime = ticket.getMovieTime();
+    int seatID = ticket.getSeatID();
+
+    Date currDate = new Date();
+    Date date = new SimpleDateFormat("dd/MM/yyyy").parse(datestr);
+
+    if(date.compareTo(currDate) <= 0){
+      System.out.println("The date has alrady passed, ticket expired");
+    }
+
+    Cineplex cineplex = null;
+    for(int i=0; i<cineplexes.size(); i++){
+      if(cineplexID.equalsIgnoreCase(cineplexes.get(i).getCineplexID()))
+        cineplex = cineplexes.get(i);
+    }
+
+    Cinema cinema = null;
+    for(int i=0; i<cineplex.getCinemas().length; i++){
+      if(cinemaName.equalsIgnoreCase(cineplex.getCinemas()[i].getCinemaName()))
+        cinema = cineplex.getCinemas()[i];
+    }
+
+    ScreeningTimes screentime = null;
+    for(int i=0; i<cinema.screeningTimes.size(); i++){
+      if(cinema.screeningTimes.get(i).getDate().equalsIgnoreCase(datestr) && cinema.screeningTimes.get(i).getScreenTime().equalsIgnoreCase(showtime))
+        screentime = cinema.screeningTimes.get(i);
+     }
+
+    printSeats(screentime);
+    System.out.println("Choose new seat");
+    int aftseatID = sc.nextInt();
+    int b4seatID = ticket.getSeatID();
+
     //B4 seat is not booked yet
     if(screentime.getSeats()[b4seatID].isAvailable()){
         System.out.println("You have not booked the seat yet");
