@@ -279,7 +279,8 @@ public class CineplexManager {
     Date date = new SimpleDateFormat("dd/MM/yyyy").parse(datestr);
 
     if(date.compareTo(currDate) <= 0){
-      System.out.println("The date has alrady passed, ticket expired");
+      System.out.println("The date has already passed, ticket expired");
+      return -1;
     }
 
     Cineplex cineplex = null;
@@ -343,7 +344,8 @@ public class CineplexManager {
     Date date = new SimpleDateFormat("dd/MM/yyyy").parse(datestr);
 
     if(date.compareTo(currDate) <= 0){
-      System.out.println("The date has alrady passed, ticket expired");
+      System.out.println("The date has already passed, ticket expired");
+      return -1;
     }
 
     Cineplex cineplex = null;
