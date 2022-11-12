@@ -132,6 +132,8 @@ public class TicketManager{
         
         ArrayList<Ticket> multipleTics = new ArrayList<Ticket>();
         Transaction newTran= new Transaction(customer.getName(), customer.getId());
+
+        
         
         //User IDs
         newTran.setUserID(customer.getId());
@@ -161,6 +163,17 @@ public class TicketManager{
         int ticID= ticket.size()+1;
         newTicket.setTicketID(ticID);
 
+
+        //seattype couple
+        if(seattype.get(i)>=1)//means its a couple seat
+        {
+            if(seatID.get(i)%2==0) // if the seat id is even then the other seat is odd
+                newTicket.setSeatID2(i+1);
+            else
+                newTicket.setSeatID2(i-1);
+        }
+        else
+        newTicket.setSeatID2(0);
 
         //Ticket Type, We need to see if the person is senior child or adult
         if((tictype.get(i)==0))
@@ -355,8 +368,19 @@ public class TicketManager{
             break;
 
             case 9:
-            System.out.println("Enter new Seat ID: ");
-            tic.get(ch).setSeatID(sc.nextInt());
+            if(tic.get(ch).getSeatID2()==0){
+                System.out.println("Enter new Seat ID: ");
+                tic.get(ch).setSeatID(sc.nextInt());
+            }
+            else 
+            {
+                System.out.println("Enter new couple Seat ID: ");
+                int a = sc.nextInt();
+                if(a%2==0)
+                tic.get(ch).setSeatID2(a+1);
+                else 
+                tic.get(ch).setSeatID2(a-1);
+            }
             break;
 
             case 10:
@@ -611,7 +635,12 @@ public class TicketManager{
         System.out.println("Cinema Name: "+t.getCinemaName());
 
         //
+        if(t.getSeatID2()==0)
         System.out.println("Seat ID: "+t.getSeatID());
+        else
+        {
+            System.out.println("Seat ID: "+t.getSeatID()+ " , "+t.getSeatID2());
+        }
         
     }
 
