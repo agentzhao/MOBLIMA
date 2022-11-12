@@ -750,6 +750,11 @@ public class TicketManager{
         }
     }
 
+    public ArrayList<Ticket> getAllTickets()
+    {
+        return ticket;
+    } 
+
 
     public void addHoliday(String date)
     {
