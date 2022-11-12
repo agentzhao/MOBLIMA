@@ -8,6 +8,7 @@ import entities.Seat;
 import entities.Movie;
 import entities.Ticket;
 
+import java.nio.file.StandardWatchEventKinds;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -220,6 +221,16 @@ public class CineplexManager {
         }
     }
     System.out.printf("%n %20s %n","Entrance");
+  }
+  public int checkSeat(ScreeningTimes screentime, int seatID){
+    if(screentime.getSeats()[seatID].getType() == Type.Normal)
+      return 0;
+    else if(screentime.getSeats()[seatID].getType() == Type.Couple)
+      return 1;
+    else if(screentime.getSeats()[seatID].getType() == Type.Elite)
+      return 2;
+    else
+      return 3;
   }
 
   // Booking, Unbooking, Changing Seats
