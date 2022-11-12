@@ -8,7 +8,6 @@ import entities.Seat;
 import entities.Movie;
 import entities.Ticket;
 
-import java.nio.file.StandardWatchEventKinds;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -336,7 +335,6 @@ public class CineplexManager {
     String cinemaName = ticket.getCinemaName();
     String datestr = ticket.getMoiveDate();
     String showtime = ticket.getMovieTime();
-    int seatID = ticket.getSeatID();
 
     Date currDate = new Date();
     Date date = new SimpleDateFormat("dd/MM/yyyy").parse(datestr);
