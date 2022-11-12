@@ -98,7 +98,7 @@ public class CineplexManager {
     System.out.println("Showtime created!");
   }
 
-  public void updateShowtime(String cineplexID, Movie movie) {
+  public void updateShowtime(String cineplexID, Movie movie) throws ParseException {
     ScreeningTimes screeningtime = displayScreentime(cineplexID, movie);
     // Updating the screening time
     System.out.println("Enter the date:");
@@ -110,7 +110,7 @@ public class CineplexManager {
     System.out.println("Showtime updated");
   }
 
-  public void removeShowTime(String cineplexID, Movie movie) {
+  public void removeShowTime(String cineplexID, Movie movie) throws ParseException{
     ScreeningTimes screeningtime = displayScreentime(cineplexID, movie);
     
     Cinema c = null;
@@ -130,7 +130,9 @@ public class CineplexManager {
     }
 
   // Display screening time for movie
-  public ScreeningTimes displayScreentime(String cineplexID, Movie movie) {
+  public ScreeningTimes displayScreentime(String cineplexID, Movie movie) throws ParseException{
+    Date currDate = new Date();
+    Date date = null;
     int count = 1;
     for (Cineplex cineplex : cineplexes) {
       if (cineplexID == null || cineplexID.equalsIgnoreCase(cineplex.getCineplexID()))
@@ -140,7 +142,8 @@ public class CineplexManager {
       for (Cinema cinema : cineplex.getCinemas()) {
         System.out.printf("%s %n", cinema.getCinemaName());
         for (ScreeningTimes screentime : cinema.getScreeningTimes()) {
-          if (screentime.getMovieID() == movie.getMovieID()) {
+          date = new SimpleDateFormat("dd/MM/yyyy").parse(screentime.getDate());
+          if (screentime.getMovieID() == movie.getMovieID() && date.compareTo(currDate)>=0) {
             System.out.printf("%3d %s %2s %s %2s %s %2s %n", count, ": ", screentime.getDate(), " - ", screentime.getScreenTime(), ": ", movie.getMovieName());
             count++;
           }
