@@ -21,7 +21,7 @@ public class MOBLIMA {
   private static Customer c;
   private static User tempUser;
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws ParseException {
     // ReviewManager rm = new ReviewManager();
     // SeatManager sm = new SeatManager();
     // TicketManager tm = new TicketManager();
