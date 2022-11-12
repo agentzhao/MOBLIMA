@@ -79,11 +79,11 @@ public class MOBLIMA {
     cm.setCineplexes(cineplexes);
 
     /* Initialise 3 Tickets Child, Adult and Senior Citizen */
-    tm = new TicketManager();
+    tm = null;
 
     /* Create ticket and transaction */
     tm = mi.initializeTickets(customer, cm.getCineplexList().get(0));
-
+    
     /* Set seat to occupied based on purchased ticket */
     mi.initializeSeats(customer, cm.getCineplexList().get(0), tm);
 

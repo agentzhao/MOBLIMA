@@ -3,6 +3,7 @@ package utils;
 import java.io.*;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import entities.Review;
@@ -128,6 +129,88 @@ public class MoblimaInitializer {
 
     return reviews;
   }
+  
+  /*
+   * Initialise Customer data
+   * Returns: ArrayList of customer objects
+   */
+  public ArrayList<Customer> initializeCustomers() {
+    /* Get list of Customer<id>.txt files */
+    File custDir = new File(dataPath + "/users/customers");
+    FileFilter fileFilter = file -> !file.isDirectory() && file.getName().endsWith(".txt");
+    File[] file = custDir.listFiles(fileFilter);
+
+    /* Create empty ArrayList of Customer objects */
+    ArrayList<Customer> customers = new ArrayList<Customer>();
+
+    /* Loop through list of Customer<id>.txt files */
+    for (int i = 0; i < file.length; i += 1) {
+      try {
+        FileReader fr = new FileReader(file[i].getPath());
+        BufferedReader br = new BufferedReader(fr);
+
+        /* Read file line by line */
+        String email = br.readLine();
+        String password = br.readLine();
+        int type = Integer.parseInt(br.readLine());
+        String mobile_number = br.readLine();
+        String name = br.readLine();
+        int age = Integer.parseInt(br.readLine());
+        int id = Integer.parseInt(br.readLine());
+
+        /* Create customer object and store into customers list. */
+        Customer newCustomer = new Customer(email, password, type, mobile_number, name, age, id);
+        customers.add(newCustomer);
+
+        br.close();
+
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+
+    return customers;
+  }
+
+  /*
+   * Initialise Admin data
+   * Returns: ArrayList of admin objects
+   */
+  public ArrayList<Admin> initializeAdmin() {
+    /* Get list of Admin<id>.txt files */
+    File adminDir = new File(dataPath + "/users/admin");
+    FileFilter fileFilter = file -> !file.isDirectory() && file.getName().endsWith(".txt");
+    File[] file = adminDir.listFiles(fileFilter);
+
+    /* Create empty ArrayList of Admin objects */
+    ArrayList<Admin> admins = new ArrayList<Admin>();
+
+    /* Loop through list of Admin<id>.txt files */
+    for (int i = 0; i < file.length; i += 1) {
+      try {
+        FileReader fr = new FileReader(file[i].getPath());
+        BufferedReader br = new BufferedReader(fr);
+
+        /* Read file line by line */
+        String email = br.readLine();
+        String password = br.readLine();
+        int type = Integer.parseInt(br.readLine());
+        int id = Integer.parseInt(br.readLine());
+        String cineplexID = br.readLine();
+
+        /* Create admin object and store into customers list */
+        Admin newAdmin = new Admin(email, password, type, id, cineplexID);
+        admins.add(newAdmin);
+
+        br.close();
+
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+
+    return admins;
+  }
 
   /*
    * Initialise Cineplexes
@@ -225,7 +308,7 @@ public class MoblimaInitializer {
               }
 
               /* Create three screeningtimes per day at every cinema */
-              ScreeningTimes s = new ScreeningTimes(cinemaCode, cinemaName, mov[z], times[y], "13/11/2022", seats);
+              ScreeningTimes s = new ScreeningTimes(cinemaCode, cinemaName, mov[z], times[y], "14/11/2022", seats);
               st.add(s);
             }
           }
@@ -249,88 +332,6 @@ public class MoblimaInitializer {
   }
 
   /*
-   * Initialise Customer data
-   * Returns: ArrayList of customer objects
-   */
-  public ArrayList<Customer> initializeCustomers() {
-    /* Get list of Customer<id>.txt files */
-    File custDir = new File(dataPath + "/users/customers");
-    FileFilter fileFilter = file -> !file.isDirectory() && file.getName().endsWith(".txt");
-    File[] file = custDir.listFiles(fileFilter);
-
-    /* Create empty ArrayList of Customer objects */
-    ArrayList<Customer> customers = new ArrayList<Customer>();
-
-    /* Loop through list of Customer<id>.txt files */
-    for (int i = 0; i < file.length; i += 1) {
-      try {
-        FileReader fr = new FileReader(file[i].getPath());
-        BufferedReader br = new BufferedReader(fr);
-
-        /* Read file line by line */
-        String email = br.readLine();
-        String password = br.readLine();
-        int type = Integer.parseInt(br.readLine());
-        String mobile_number = br.readLine();
-        String name = br.readLine();
-        int age = Integer.parseInt(br.readLine());
-        int id = Integer.parseInt(br.readLine());
-
-        /* Create customer object and store into customers list. */
-        Customer newCustomer = new Customer(email, password, type, mobile_number, name, age, id);
-        customers.add(newCustomer);
-
-        br.close();
-
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    }
-
-    return customers;
-  }
-
-  /*
-   * Initialise Admin data
-   * Returns: ArrayList of admin objects
-   */
-  public ArrayList<Admin> initializeAdmin() {
-    /* Get list of Admin<id>.txt files */
-    File adminDir = new File(dataPath + "/users/admin");
-    FileFilter fileFilter = file -> !file.isDirectory() && file.getName().endsWith(".txt");
-    File[] file = adminDir.listFiles(fileFilter);
-
-    /* Create empty ArrayList of Admin objects */
-    ArrayList<Admin> admins = new ArrayList<Admin>();
-
-    /* Loop through list of Admin<id>.txt files */
-    for (int i = 0; i < file.length; i += 1) {
-      try {
-        FileReader fr = new FileReader(file[i].getPath());
-        BufferedReader br = new BufferedReader(fr);
-
-        /* Read file line by line */
-        String email = br.readLine();
-        String password = br.readLine();
-        int type = Integer.parseInt(br.readLine());
-        int id = Integer.parseInt(br.readLine());
-        String cineplexID = br.readLine();
-
-        /* Create admin object and store into customers list */
-        Admin newAdmin = new Admin(email, password, type, id, cineplexID);
-        admins.add(newAdmin);
-
-        br.close();
-
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    }
-
-    return admins;
-  }
-
-  /*
    * Initialise Tickets
    * Parameters: ArrayList of customers, Cineplex object
    * Returns: TicketManager
@@ -346,9 +347,14 @@ public class MoblimaInitializer {
      * Customer: Terence Tang (id: 4) (Child / 12), Rachel Tan (id: 6) (Senior
      * Citizen / 65), Wesley Chan (id: 5) (Adult / 23)
      */
+    
+    ArrayList<String> holidays = new ArrayList<>(Arrays.asList("01/01/2022", "01/02/2022", "02/02/2022", 
+                                                               "15/04/2022", "01/05/2022", "03/05/2022", 
+                                                               "15/05/2022", "10/07/2022", "09/08/2022", 
+                                                               "24/10/2022", "25/12/2022"));
 
     /* Create TicketManager object */
-    TicketManager tm = new TicketManager();
+    TicketManager tm = new TicketManager(holidays);
 
     /* Get cinema object */
     Cinema c = cineplex.getCinemas()[0];
@@ -395,7 +401,7 @@ public class MoblimaInitializer {
      * Cineplex: SWB
      * Cinema: Shaw Theatres Waterway Point Hall 1
      * Movie: Jurassic World (Movie id: 7)
-     * Date: 13/11/2022
+     * Date: 14/11/2022
      * Time: 0900
      * Seat id: 11, 12, 13
      * Ticket id: 1, 2, 3
