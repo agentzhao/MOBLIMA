@@ -267,7 +267,7 @@ public class CineplexManager {
   }
 
   public int unbookSeat(Ticket ticket) throws ParseException {
-    String cineplexID = ticket.getTransID().substring(0, 2);
+    String cineplexID = ticket.getTransID().substring(0, 3);
     String cinemaName = ticket.getCinemaName();
     String datestr = ticket.getMoiveDate();
     String showtime = ticket.getMovieTime();
@@ -294,10 +294,10 @@ public class CineplexManager {
 
     ScreeningTimes screentime = null;
     for(int i=0; i<cinema.screeningTimes.size(); i++){
-      if(cinema.screeningTimes.get(i).getDate().equalsIgnoreCase(datestr) && cinema.screeningTimes.get(i).getScreenTime().equalsIgnoreCase(showtime))
+      if(cinema.screeningTimes.get(i).getDate().equalsIgnoreCase(datestr) && cinema.screeningTimes.get(i).getScreenTime().equalsIgnoreCase(showtime) && cinema.screeningTimes.get(i).getMovieID() == ticket.getMovieID())
         screentime = cinema.screeningTimes.get(i);
      }
-
+    
     //Seat is double seat
     if (!screentime.getSeats()[seatID].isAvailable() && screentime.getSeats()[seatID].getType()!= Type.Normal) {
         if((seatID)%2 == 0){
@@ -359,7 +359,7 @@ public class CineplexManager {
 
     ScreeningTimes screentime = null;
     for(int i=0; i<cinema.screeningTimes.size(); i++){
-      if(cinema.screeningTimes.get(i).getDate().equalsIgnoreCase(datestr) && cinema.screeningTimes.get(i).getScreenTime().equalsIgnoreCase(showtime))
+      if(cinema.screeningTimes.get(i).getDate().equalsIgnoreCase(datestr) && cinema.screeningTimes.get(i).getScreenTime().equalsIgnoreCase(showtime) && cinema.screeningTimes.get(i).getMovieID() == ticket.getMovieID())
         screentime = cinema.screeningTimes.get(i);
      }
 
