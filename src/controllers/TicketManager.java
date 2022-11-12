@@ -398,7 +398,7 @@ public class TicketManager{
 
         
         Ticket t= searchForDelete(userID, ticketID);
-        
+                
         /*if(t.size()!=0)
         {
             Transaction tran= searchTransaction(t.get(0).getTransID());

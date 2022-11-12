@@ -175,7 +175,7 @@ public class MOBLIMA {
                 System.out.println("Which booking do you want to refund for?");
                 l = sc.nextInt();
                 cm.unbookSeat(tempTicket.get(l - 1));
-                tm.deleteTicket(tempTicket.get(l).getUserID(), tempTicket.get(l).getTicketID());
+                tm.deleteTicket(tempTicket.get(l - 1).getUserID(), tempTicket.get(l - 1).getTicketID());
                 break;
               case 2:
                 System.out.println("Which booking do you want to update seat?");
