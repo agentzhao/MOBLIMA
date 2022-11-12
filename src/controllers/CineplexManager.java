@@ -38,17 +38,11 @@ public class CineplexManager {
   // Create, Update, Remove showtime
   public void createShowtime(String cineplexID, Movie movie) {
     // Getting the cineplex
-    int cineplexnum = -1;
-    for (int i = 0; i < cineplexes.size(); i++) {
-      if (cineplexID.equalsIgnoreCase(cineplexes.get(i).getCineplexID()))
-        System.out.print("");
-        cineplexnum = i;
+    Cineplex cineplex = null;
+    for(int i=0; i<cineplexes.size(); i++){
+      if(cineplexes.get(i).getCineplexID().equalsIgnoreCase(cineplexID))
+        cineplex = cineplexes.get(i);
     }
-    if (cineplexnum == -1) {
-      System.out.println("This cineplexID does not exist");
-      return;
-    }
-    Cineplex cineplex = cineplexes.get(cineplexnum - 1);
 
     // Getting the cinema
     for (int i = 0; i < cineplex.getCinemas().length; i++) {
