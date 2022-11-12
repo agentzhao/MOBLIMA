@@ -257,12 +257,12 @@ public class CineplexManager {
     else if(screentime.getSeats()[seatID].isAvailable()){
         screentime.getSeats()[seatID].setAvailable(false);
         screentime.getSeats()[seatID].setTicketHolder(tID);
-        return 0;
+        return 1;
     }
     
     //Seat is already taken
     System.out.printf("%s %d %s %n", "Seat ", seatID, " is already taken");
-    return -1;
+    return 0;
 
   }
 
