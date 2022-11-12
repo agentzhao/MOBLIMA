@@ -169,9 +169,8 @@ public class CineplexManager {
         for (Cinema cinema : cineplex.getCinemas()) {
           
           for (ScreeningTimes screentime : cinema.getScreeningTimes()) {
-            
-            if (screentime.getMovieID() == movie.getMovieID()) {
-              
+            date = new SimpleDateFormat("dd/MM/yyyy").parse(screentime.getDate());
+            if (screentime.getMovieID() == movie.getMovieID() && date.compareTo(currDate)>=0) {
               if (count == ScreeningTimeChoice)
                 return screentime;
               count++;
