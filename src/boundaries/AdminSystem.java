@@ -25,7 +25,7 @@ public class AdminSystem {
   }
 
   public void viewScreen() {
-    System.out.println("5: Admin Panel\n6: Shutdown MOBLIMA");
+    System.out.println("6: Admin Panel\n7: Shutdown MOBLIMA");
   }
 
   public void adminPanel() {

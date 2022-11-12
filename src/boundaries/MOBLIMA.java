@@ -180,6 +180,9 @@ public class MOBLIMA {
 
           break;
         case 4:
+          mm.printAllMovies();
+          break;
+        case 5:
           System.out.println("Thank you for using MOBLIMA");
           admin = 0;
           login = 0;
@@ -187,12 +190,12 @@ public class MOBLIMA {
           c = null;
           as.setAdmin(null);
           break;
-        case 5:
+        case 6:
           if (admin == 1) {
             as.adminPanel();
           }
           break;
-        case 6:
+        case 7:
           if (admin == 1) {
             System.out.println("Shutting down MOBLIMA");
             sc.close();
@@ -212,12 +215,10 @@ public class MOBLIMA {
     String searchName = sc.nextLine();
     Movie temp = mm.searchMovieName(searchName);
     int choice = 0;
-    if (temp != null) {
-      mm.getMovieDetails(temp);
-    } else {
-      System.out.println("Movie not found");
+    if (temp == null) {
       return;
     }
+    mm.getMovieDetails(temp);
     while (choice != 2) {
       System.out.println("1: Check screen time\n2: Exit");
       choice = sc.nextInt();
@@ -313,6 +314,7 @@ public class MOBLIMA {
                   }
 
                 }
+                // int checkSeatType =
                 if (z < 10) {
                   if (z % 2 == 1) {
                     s.add(z - 1);

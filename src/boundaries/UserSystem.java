@@ -38,7 +38,7 @@ public class UserSystem {
          */
         System.out.println("Welcome to MOBLIMA!");
         System.out.println(
-                "Please select function:\n1: Search Movies\n2: Top 5 movie\n3: View Booking History\n4: Logout");
+                "Please select function:\n1: Search Movies\n2: Top 5 movie\n3: View Booking History\n4:View bookable movie\n5: Logout");
     }
 
     public void viewScreenGuest() {
