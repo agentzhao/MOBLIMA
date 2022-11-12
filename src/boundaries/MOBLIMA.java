@@ -318,7 +318,7 @@ public class MOBLIMA {
                     System.out.println("Which ticket type are you getting?\n1: Senior\n2: Adult\n3: Child");
                     int y = sc.nextInt();
                     if (y > 0 && y < 4) {
-                      a.add(y);
+                      a.add(y - 1);
                       break;
                     } else {
                       System.out.println("Please select a valid number");
