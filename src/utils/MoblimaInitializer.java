@@ -68,7 +68,7 @@ public class MoblimaInitializer {
             screenTimes);
         movies.add(newMovie);
 
-        /* Set ticket sales for PREVIEW/ENDOFSHOWING/NOWSHOWING movies */
+        /* Set ticket sales for movies */
         int ticketSales = Integer.parseInt(br.readLine());
         newMovie.setTicketSales(ticketSales);
 
