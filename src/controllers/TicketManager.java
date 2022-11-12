@@ -168,12 +168,12 @@ public class TicketManager{
         if(seattype.get(i)>=1)//means its a couple seat
         {
             if(seatID.get(i)%2==0) // if the seat id is even then the other seat is odd
-                newTicket.setSeatID2(i+1);
+                newTicket.setSeatID2(i+3);
             else
-                newTicket.setSeatID2(i-1);
+                newTicket.setSeatID2(i);
         }
         else
-        newTicket.setSeatID2(0);
+        newTicket.setSeatID2(999);
 
         //Ticket Type, We need to see if the person is senior child or adult
         if((tictype.get(i)==0))
@@ -635,7 +635,7 @@ public class TicketManager{
         System.out.println("Cinema Name: "+t.getCinemaName());
 
         //
-        if(t.getSeatID2()==0)
+        if(t.getSeatID2()==999)
         System.out.println("Seat ID: "+t.getSeatID());
         else
         {
