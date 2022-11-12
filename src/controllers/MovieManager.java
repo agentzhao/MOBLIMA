@@ -343,4 +343,14 @@ public class MovieManager {
       getMovieDetails(m);
     }
   }
+
+  public void listMovies() {
+    System.out.println("List of Movies available for booking: ");
+    for (Movie m : movies) {
+      if (m.getMovieStatus() == Status.COMINGSOON || m.getMovieStatus() == Status.ENDOFSHOWING) {
+        continue;
+      }
+      System.out.println(m.getMovieName() + " - " + m.getMovieStatus());
+    }
+  }
 }
