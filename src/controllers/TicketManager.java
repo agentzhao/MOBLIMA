@@ -554,7 +554,7 @@ public class TicketManager{
          totprice = totprice * 2;
      
         totprice= totprice*0.07 + totprice; //Adding GST
-
+        totprice= Math.round(totprice*100.0)/100;
         return totprice;
     }
 
