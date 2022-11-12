@@ -275,7 +275,7 @@ public class TicketManager{
         ArrayList<Ticket> tic = new ArrayList<Ticket>();
         
         tic= searchTicket(movieName, userID);
-        int ch; 
+        int ch;
 
         if(tic==null)
             return 0;
@@ -393,28 +393,13 @@ public class TicketManager{
      * @param movieName
      * @return int
      */
-    public int deleteTicket(int userID, String movieName)
+    public int deleteTicket(int userID, int ticketID)
     {
-        /*for(Ticket t: ticket)
-        {
-            if(t.getUserID()==userID && t.getMovieName().equals(movieName))
-            {
-                Transaction tran= searchTransaction(t.getTransID());
-                double amountUpdate= tran.getTransactionAmount();
-                amountUpdate= amountUpdate- t.getPrice();
-                tran.setTransactionAmount(amountUpdate);
-                ticket.remove(t);
-                
-                return 1;//success
-            }
-        }
-        System.out.println("Ticket not found!");
-        return 0;//unsuccessfull */
 
         
-        ArrayList<Ticket> t= searchTicket(movieName, userID);
+        Ticket t= searchForDelete(userID, ticketID);
         
-        if(t.size()!=0)
+        /*if(t.size()!=0)
         {
             Transaction tran= searchTransaction(t.get(0).getTransID());
 
@@ -428,10 +413,39 @@ public class TicketManager{
         }
 
         System.out.println("Ticket not found");
+        return 0;*/
+
+              
+        if(t != null)
+        {
+            Transaction tran= searchTransaction(t.getTransID());
+
+            double amountUpdate= tran.getTransactionAmount();
+            amountUpdate= amountUpdate- t.getPrice();
+
+            tran.setTransactionAmount(amountUpdate);
+
+            ticket.remove(t);
+            return 1;
+        }
+
+        System.out.println("Ticket not found");
         return 0;
 
 
 
+
+    }
+
+
+    public Ticket searchForDelete(int userID, int ticketID)
+    {
+        for(Ticket t: ticket){
+            if(t.getTicketID()==ticketID && t.getUserID()==userID)
+                return t;
+        }
+
+        return null;
 
     }
 
@@ -817,14 +831,12 @@ public class TicketManager{
         return 0; // unsuccessful
     }
 
-    public void updateSeatID(int ticketID)
+    public void updateSeatID(int ticketID, int seatid)
     {
         Ticket t= searchTicketThruID(ticketID);
 
         if(t!=null){
-        System.out.println("Enter new SeatID: ");
-        int seatID=sc.nextInt();
-        t.setSeatID(seatID);
+        t.setSeatID(seatid);
         }
         else
             System.out.println("Invalid TicketID");
