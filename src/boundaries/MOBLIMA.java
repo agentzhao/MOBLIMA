@@ -154,9 +154,25 @@ public class MOBLIMA {
             }
           } else {
             ArrayList<Ticket> tempTicket = tm.searchTicketUser(tempUser.getId());
+            int count = 1;
             for (Ticket i : tempTicket) {
+              System.out.print(count + ": ");
               tm.getTicketDetails(i);
               System.out.println("-------------------------------------");
+            }
+            System.out.println("1: Remove booking\n2: Update booking");
+            int l = sc.nextInt();
+            switch (l) {
+              case 1:
+                System.out.println("Which booking do you want to refund for?");
+                l = sc.nextInt();
+                // cm.unbookSeat(tempTicket.get(l*1));
+                break;
+              case 2:
+                System.out.println("Which booking do you want to update seat?");
+                l = sc.nextInt();
+                // cm.changeSeat(tempTicket.get(l-1));
+                break;
             }
           }
 
