@@ -375,15 +375,19 @@ public class MoblimaInitializer {
     for (int i = 0; i < 3; i += 1) {
       /* Create seatID Array and store seat id */
       int s = st.getSeats()[i + 10].getSeatID();
-
+      
       ArrayList<Integer> seatID = new ArrayList<Integer>();
       seatID.add(s);
 
       /* Create tictype array and store corresponding ticket type */
       ArrayList<Integer> tictype = new ArrayList<Integer>();
       tictype.add(tt.get(i));
+      
+      /* Create seattype array and set to NORMAL seattype */
+      ArrayList<Integer> seattype = new ArrayList<Integer>();
+      seattype.add(0);
 
-      tm.createTicket(customer.get(i), seatID, tictype, m, st);
+      tm.createTicket(customer.get(i), seatID, seattype, tictype, m, st);
       // tm.createTransaction(customer.get(i), c);
     }
 
