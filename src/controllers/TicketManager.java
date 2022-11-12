@@ -344,7 +344,7 @@ public class TicketManager{
 
             case 7:
             System.out.println("Enter new Price to set: ");
-            tic.get(ch).setPrice(sc.nextInt());
+            tic.get(ch).setPrice(sc.nextDouble());
             break;
 
             case 8:
