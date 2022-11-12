@@ -15,6 +15,8 @@ import java.text.SimpleDateFormat;
 
 import java.util.*;
 
+import javax.lang.model.util.ElementScanner14;
+
 import entities.Customer;
 
 
@@ -54,9 +56,9 @@ public class TicketManager{
         typePrice[3]= 1.0; //REGULAR
 
         seatPrice[0]= 1.0; //NORMAL
-        seatPrice[1]= 1.0; //COUPLE
-        seatPrice[2]= 2.5; //ELITE
-        seatPrice[3]= 4.0; //ULTIMA 
+        seatPrice[1]= 2.0; //COUPLE
+        seatPrice[2]= 1.5; //ELITE
+        seatPrice[3]= 2.0; //ULTIMA 
 
         holidayPrice= 1.5;
 
@@ -398,7 +400,7 @@ public class TicketManager{
 
         
         Ticket t= searchForDelete(userID, ticketID);
-                
+        
         /*if(t.size()!=0)
         {
             Transaction tran= searchTransaction(t.get(0).getTransID());
@@ -571,9 +573,17 @@ public class TicketManager{
 
         //checking if a movie is preview
         if(movie.getMovieStatus()==Status.PREVIEW)
-         totprice= basePrice*agePrice[agePriceVar]*typePrice[typePriceVar]*previewPrice*seatPrice[seatPriceVar];
+         totprice= basePrice*agePrice[agePriceVar]*typePrice[typePriceVar]*previewPrice;//seatPrice[seatPriceVar];
         else 
-         totprice= basePrice*agePrice[agePriceVar]*typePrice[typePriceVar]*seatPrice[seatPriceVar];
+         totprice= basePrice*agePrice[agePriceVar]*typePrice[typePriceVar];
+
+        if(seatPriceVar==1)
+         totprice=totprice*seatPrice[seatPriceVar];
+        else if(seatPriceVar==2)
+         totprice=totprice*seatPrice[seatPriceVar]*seatPrice[1];
+        else if(seatPriceVar==3)
+         totprice=totprice*seatPrice[seatPriceVar]*seatPrice[1];
+       
 
          //checking for couple seats
          //if(seatID>=01 && seatID<10) // couple seats
