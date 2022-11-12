@@ -315,15 +315,17 @@ public class MOBLIMA {
                   }
 
                 }
-                // int checkSeatType = cm.
-                // type.add(checkSeatType);
-                if (z < 10) {
+                int checkSeatType = cm.checkSeat(st, z);
+                type.add(checkSeatType);
+                if (checkSeatType != 0) {
                   if (z % 2 == 1) {
                     s.add(z - 1);
                     a.add(tm.ageToTicketType(MOBLIMA.c.getAge()));
+                    type.add(checkSeatType);
                   } else {
                     s.add(z + 1);
                     a.add(tm.ageToTicketType(MOBLIMA.c.getAge()));
+                    type.add(checkSeatType);
                   }
                   System.out.println("Couple Seat added");
                 }
@@ -357,7 +359,7 @@ public class MOBLIMA {
       // Waiting for ticketmanager update
       // tm.createTicket(c, Movie class);
       int t = 0;
-      ArrayList<Ticket> tempTicket = tm.createTicket(c, s, a, movie, st);
+      ArrayList<Ticket> tempTicket = tm.createTicket(c, s, a, movie, st, type);
       for (int x = 0; x < tempTicket.size(); x++) {
         t = cm.bookSeat(st, s.get(x), tempTicket.get(x).getTicketID());
         if (t == 0) {
