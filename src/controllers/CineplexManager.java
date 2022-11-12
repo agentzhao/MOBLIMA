@@ -4,6 +4,7 @@ import entities.Cinema;
 import entities.Cineplex;
 import entities.Seat.Type;
 import entities.ScreeningTimes;
+import entities.Seat;
 import entities.Movie;
 
 import java.util.ArrayList;
@@ -66,15 +67,25 @@ public class CineplexManager {
     String date = sc.next();
 
     for (int i = 0; i < cinema.screeningTimes.size(); i++) {
-      if (cinema.screeningTimes.get(i).getDate() == date && cinema.screeningTimes.get(i).getScreenTime() == showtime) {
+      if (cinema.screeningTimes.get(i).getDate().equalsIgnoreCase(date) && cinema.screeningTimes.get(i).getScreenTime().equalsIgnoreCase(showtime)) {
         System.out.println("Showtime already exist");
         return;
       }
     }
-
+    
+    Seat[] tmp = cinema.getScreeningTimes().get(0).getSeats();
+    int noOfSeats = tmp.length;
+    
+    Seat[] seats = new Seat[noOfSeats];
+    
+    for (int x = 0; x < noOfSeats; x += 1) {
+      Seat s = new Seat(tmp[x].getType(), x + 1, true, 0);
+      seats[x] = s;
+    }  
+    
     ScreeningTimes screeningtime = new ScreeningTimes(cinema.getCinemaID(), cinema.getCinemaName(),
         movie.getMovieID(), showtime, date, null);
-    screeningtime.setSeats(cineplexes.get(cineplexnum).getCinemas()[cinemaChoice].screeningTimes.get(0).getSeats());
+    screeningtime.setSeats(seats);
     for (int i = 0; i < screeningtime.getSeats().length; i++) {
       screeningtime.getSeats()[i].setAvailable(true);
       screeningtime.getSeats()[i].setTicketHolder(0);
