@@ -181,7 +181,7 @@ public class MOBLIMA {
                 System.out.println("Which booking do you want to update seat?");
                 l = sc.nextInt();
                 int sid = cm.changeSeat(tempTicket.get(l - 1));
-                tm.updateSeatID(tempTicket.get(l).getTicketID(), sid);
+                tm.updateSeatID(tempTicket.get(l - 1).getTicketID(), sid);
                 break;
             }
           }
@@ -328,18 +328,20 @@ public class MOBLIMA {
                 }
                 int checkSeatType = cm.checkSeat(st, z);
                 type.add(checkSeatType);
-                if (checkSeatType != 0) {
-                  if (z % 2 == 1) {
-                    s.add(z - 1);
-                    a.add(tm.ageToTicketType(MOBLIMA.c.getAge()));
-                    type.add(checkSeatType);
-                  } else {
-                    s.add(z + 1);
-                    a.add(tm.ageToTicketType(MOBLIMA.c.getAge()));
-                    type.add(checkSeatType);
-                  }
-                  System.out.println("Couple Seat added");
-                }
+                /*
+                 * if (checkSeatType != 0) {
+                 * if (z % 2 == 1) {
+                 * s.add(z - 1);
+                 * a.add(tm.ageToTicketType(MOBLIMA.c.getAge()));
+                 * type.add(checkSeatType);
+                 * } else {
+                 * s.add(z + 1);
+                 * a.add(tm.ageToTicketType(MOBLIMA.c.getAge()));
+                 * type.add(checkSeatType);
+                 * }
+                 * System.out.println("Couple Seat added");
+                 * }
+                 */
 
               }
             }
