@@ -175,13 +175,13 @@ public class MOBLIMA {
                 System.out.println("Which booking do you want to refund for?");
                 l = sc.nextInt();
                 cm.unbookSeat(tempTicket.get(l - 1));
-                tm.deleteTicket(tempTicket.get(l).getUserID(), tempTicket.get(l).getMovieName());
+                tm.deleteTicket(tempTicket.get(l).getUserID(), tempTicket.get(l).getTicketID());
                 break;
               case 2:
                 System.out.println("Which booking do you want to update seat?");
                 l = sc.nextInt();
-                cm.changeSeat(tempTicket.get(l - 1));
-                tm.updateSeatID(tempTicket.get(l).getTicketID());
+                int sid = cm.changeSeat(tempTicket.get(l - 1));
+                tm.updateSeatID(tempTicket.get(l).getTicketID(), sid);
                 break;
             }
           }
@@ -374,7 +374,7 @@ public class MOBLIMA {
       for (int x = 0; x < tempTicket.size(); x++) {
         t = cm.bookSeat(st, s.get(x), tempTicket.get(x).getTicketID());
         if (t == 0) {
-          tm.deleteTicket(c.getId(), movie.getMovieName());
+          tm.deleteTicket(c.getId(), tempTicket.get(x).getTicketID());
 
         } else {
           System.out.println(
