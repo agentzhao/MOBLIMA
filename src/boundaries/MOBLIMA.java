@@ -174,12 +174,22 @@ public class MOBLIMA {
               case 1:
                 System.out.println("Which booking do you want to refund for?");
                 l = sc.nextInt();
+                if(l > tempTicket.size())
+                {
+                  System.out.println("Invalid index");
+                  break;
+                } 
                 cm.unbookSeat(tempTicket.get(l - 1));
                 tm.deleteTicket(tempTicket.get(l - 1).getUserID(), tempTicket.get(l - 1).getTicketID());
                 break;
               case 2:
                 System.out.println("Which booking do you want to update seat?");
                 l = sc.nextInt();
+                if(l > tempTicket.size())
+                {
+                  System.out.println("Invalid index");
+                  break;
+                } 
                 int sid = cm.changeSeat(tempTicket.get(l - 1));
                 tm.updateSeatID(tempTicket.get(l - 1).getTicketID(), sid);
                 break;

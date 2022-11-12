@@ -8,7 +8,6 @@ import entities.Seat;
 import entities.Movie;
 import entities.Ticket;
 
-import java.nio.file.StandardWatchEventKinds;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -336,7 +335,6 @@ public class CineplexManager {
     String cinemaName = ticket.getCinemaName();
     String datestr = ticket.getMoiveDate();
     String showtime = ticket.getMovieTime();
-    int seatID = ticket.getSeatID();
 
     Date currDate = new Date();
     Date date = new SimpleDateFormat("dd/MM/yyyy").parse(datestr);
@@ -368,14 +366,9 @@ public class CineplexManager {
     int aftseatID = sc.nextInt();
     int b4seatID = ticket.getSeatID();
 
-    //B4 seat is not booked yet
-    if(screentime.getSeats()[b4seatID].isAvailable()){
-        System.out.println("You have not booked the seat yet");
-        return 0;
-    }
 
     //Changing from couple seat to single seat not allowed, vice versa
-    if(b4seatID>=10 && aftseatID<10 || b4seatID<10 && aftseatID>=10){
+    if((b4seatID>=10 && aftseatID<10) || (b4seatID<10 && aftseatID>=10)){
         System.out.println("Cannot change between couple seat and single seat");
         return 0;
     }
@@ -385,7 +378,7 @@ public class CineplexManager {
         if((aftseatID-1)%2 == 0){
             screentime.getSeats()[aftseatID+1].setAvailable(false);
             screentime.getSeats()[aftseatID].setAvailable(false);
-            screentime.getSeats()[aftseatID+1].setTicketHolder(screentime.getSeats()[b4seatID].getTicketholder());
+            screentime.getSeats()[aftseatID+1].setTicketHolder(screentime.getSeats()[b4seatID+1].getTicketholder());
             screentime.getSeats()[aftseatID].setTicketHolder(screentime.getSeats()[b4seatID].getTicketholder());
             screentime.getSeats()[b4seatID+1].setAvailable(true);
             screentime.getSeats()[b4seatID].setAvailable(true);
@@ -395,7 +388,7 @@ public class CineplexManager {
         else{
             screentime.getSeats()[aftseatID-1].setAvailable(false);
             screentime.getSeats()[aftseatID].setAvailable(false);
-            screentime.getSeats()[aftseatID-1].setTicketHolder(screentime.getSeats()[b4seatID].getTicketholder());
+            screentime.getSeats()[aftseatID-1].setTicketHolder(screentime.getSeats()[b4seatID-1].getTicketholder());
             screentime.getSeats()[aftseatID].setTicketHolder(screentime.getSeats()[b4seatID].getTicketholder());
             screentime.getSeats()[b4seatID-1].setAvailable(true);
             screentime.getSeats()[b4seatID].setAvailable(true);
