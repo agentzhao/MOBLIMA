@@ -212,12 +212,11 @@ public class MOBLIMA {
     String searchName = sc.nextLine();
     Movie temp = mm.searchMovieName(searchName);
     int choice = 0;
-    if (temp != null) {
-      mm.getMovieDetails(temp);
-    } else {
-      System.out.println("Movie not found");
+    if (temp == null) {
       return;
     }
+    mm.getMovieDetails(temp);
+
     while (choice != 2) {
       System.out.println("1: Check screen time\n2: Exit");
       choice = sc.nextInt();

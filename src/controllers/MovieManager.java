@@ -228,10 +228,11 @@ public class MovieManager {
 
   public Movie searchMovieName(String movieName) {
     for (Movie m : movies) {
-      if (m.getMovieStatus() == Status.COMINGSOON || m.getMovieStatus() == Status.ENDOFSHOWING) {
-        continue;
-      }
       if (movieName.equalsIgnoreCase(m.getMovieName())) {
+        if (m.getMovieStatus() == Status.COMINGSOON || m.getMovieStatus() == Status.ENDOFSHOWING) {
+          System.out.println(m.getMovieName() + " not available for booking. Current status: " + m.getMovieStatus());
+          return null;
+        }
         return m;
       }
     }
