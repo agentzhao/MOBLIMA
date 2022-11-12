@@ -1,5 +1,6 @@
 package boundaries;
 
+import java.text.ParseException;
 import java.util.Scanner;
 
 import controllers.CineplexManager;
@@ -28,7 +29,7 @@ public class AdminSystem {
     System.out.println("6: Admin Panel\n7: Shutdown MOBLIMA");
   }
 
-  public void adminPanel() {
+  public void adminPanel() throws ParseException {
     Scanner sc = new Scanner(System.in);
     String id;
     int i;
