@@ -83,7 +83,7 @@ public class MOBLIMA {
 
     /* Create ticket and transaction */
     tm = mi.initializeTickets(customer, cm.getCineplexList().get(0));
-    
+
     /* Set seat to occupied based on purchased ticket */
     mi.initializeSeats(customer, cm.getCineplexList().get(0), tm);
 
@@ -166,7 +166,7 @@ public class MOBLIMA {
               case 1:
                 System.out.println("Which booking do you want to refund for?");
                 l = sc.nextInt();
-                // cm.unbookSeat(tempTicket.get(l*1));
+                // cm.unbookSeat(tempTicket.get(l-1));
                 break;
               case 2:
                 System.out.println("Which booking do you want to update seat?");
