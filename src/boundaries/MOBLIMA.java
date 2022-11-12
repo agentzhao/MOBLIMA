@@ -196,6 +196,7 @@ public class MOBLIMA {
           login = 0;
           a = null;
           c = null;
+          tempUser = null;
           as.setAdmin(null);
           break;
         case 6:
@@ -295,7 +296,7 @@ public class MOBLIMA {
       c = sc.nextInt();
       switch (c) {
         case 1:
-          if (tempUser != null) {
+          if (tempUser != null && tempUser.getType() != 1) {
             while (true) {
               System.out.println("Please select a seat. Press -1 to book");
               z = sc.nextInt();
