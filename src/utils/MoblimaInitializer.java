@@ -414,7 +414,7 @@ public class MoblimaInitializer {
     ArrayList<Integer> seattype = new ArrayList<Integer>();
     seattype.add(0);
         
-    tm.createTicket(customer.get(3), seatID, seattype, tictype, m, st);
+    tm.createTicket(customer.get(2), seatID, seattype, tictype, m, st);
     
     return tm;
   }
@@ -443,7 +443,7 @@ public class MoblimaInitializer {
     ScreeningTimes st = c.getScreeningTimes().get(7);
 
     /* Set seat to occupied and set ticketholder to customerid */
-    for (int i = 0; i < 3; i += 1) {
+    for (int i = 0; i < 2; i += 1) {
       int s = st.getSeats()[i + 10].getSeatID();
       int t = tm.getTicketid(c.getMovies().get(7).getMovieName(), customer.get(i).getId());
 
@@ -451,11 +451,16 @@ public class MoblimaInitializer {
       st.getSeats()[s].setTicketHolder(t);
     }
     
+    int s = st.getSeats()[2+10].getSeatID();
+    
+    st.getSeats()[s].setAvailable(false);
+    st.getSeats()[s].setTicketHolder(3);
+    
     /* Create expired ticket */
     st = c.getScreeningTimes().get(6);
     
-    int s = st.getSeats()[10].getSeatID();
-    int t = tm.getTicketid(c.getMovies().get(7).getMovieName(), customer.get(3).getId());
+    s = st.getSeats()[10].getSeatID();
+    int t = 4;//tm.getTicketid(c.getMovies().get(7).getMovieName(), customer.get(2).getId());
 
     st.getSeats()[s].setAvailable(false);
     st.getSeats()[s].setTicketHolder(t);
