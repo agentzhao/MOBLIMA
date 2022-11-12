@@ -16,6 +16,7 @@ public class Ticket
 	private double price;
 	private String cinemaName;
 	private int seatID;
+	private int seatID2;
 	private String datemov;
 	private String transID;
 
@@ -70,6 +71,11 @@ public class Ticket
 	public int getSeatID()
 	{
 		return seatID;
+	}
+
+	public int getSeatID2()
+	{
+		return seatID2;
 	}
 
 	public String getMoiveDate()
@@ -129,6 +135,11 @@ public class Ticket
 	public void setSeatID(int seatID)
 	{
 		this.seatID=seatID;
+	}
+	
+	public void setSeatID2(int seatID2)
+	{
+		this.seatID2=seatID2;
 	}
 	
 	public void setMovieDate(String datemov)
