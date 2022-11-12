@@ -22,36 +22,8 @@ public class MOBLIMA {
   private static User tempUser;
 
   public static void main(String[] args) throws ParseException {
-    // ReviewManager rm = new ReviewManager();
-    // SeatManager sm = new SeatManager();
-    // TicketManager tm = new TicketManager();
-    /*
-     * Login log = new Login();
-     * log.createAdmin("admin@gmail.com", "123", 1, 1234, "1333");
-     * log.createCustomer("customer@gmail.com", "123", 0, "123999", "James", 21);
-     */
-    // System.out.println("Welcome to MOBLIMA");
     initData();
     mainMenu(log);
-    // todo initialize data
-
-    /*
-     * while (choice < 3) {
-     * System.out.
-     * println("Please select user mode: \n1: User\n2: Admin\n3: Exit App");
-     * choice = sc.nextInt();
-     * switch (choice) {
-     * case 1:
-     * us.viewScreen();
-     * break;
-     * case 2:
-     * as.viewScreen();
-     * break;
-     * default:
-     * break;
-     * }
-     * }
-     */
     System.out.println("Thank you for using MOBLIMA");
 
   }
@@ -131,11 +103,6 @@ public class MOBLIMA {
           String e = "";
           String p = "";
           if (login == 0) {
-            // Login
-            // Admin test = (Admin) log.loginSystem("admin@gmail.com", "123");
-            // System.out.println(test.getCinemaId());
-            // Customer testc = (Customer) log.loginSystem("customer@gmail.com", 123);
-            // System.out.println(testc.getMobile_number());
             sc.nextLine();
             System.out.println("Enter your email: ");
             e = sc.nextLine();
@@ -289,8 +256,6 @@ public class MOBLIMA {
           break;
       }
     }
-
-    // sc.close();
   }
 
   public static void seatMenu(Movie movie, ScreeningTimes st) {
@@ -329,7 +294,6 @@ public class MOBLIMA {
                 s.add(z);
                 if (a.size() == 0) {
                   a.add(tm.ageToTicketType(MOBLIMA.c.getAge()));
-                  // System.out.println("Seat");
                 } else {
                   while (true) {
                     System.out.println("Which ticket type are you getting?\n1: Senior\n2: Adult\n3: Child");
@@ -345,20 +309,6 @@ public class MOBLIMA {
                 }
                 int checkSeatType = cm.checkSeat(st, z);
                 type.add(checkSeatType);
-                /*
-                 * if (checkSeatType != 0) {
-                 * if (z % 2 == 1) {
-                 * s.add(z - 1);
-                 * a.add(tm.ageToTicketType(MOBLIMA.c.getAge()));
-                 * type.add(checkSeatType);
-                 * } else {
-                 * s.add(z + 1);
-                 * a.add(tm.ageToTicketType(MOBLIMA.c.getAge()));
-                 * type.add(checkSeatType);
-                 * }
-                 * System.out.println("Couple Seat added");
-                 * }
-                 */
 
               }
             }
@@ -379,15 +329,11 @@ public class MOBLIMA {
 
       }
     }
-
-    // sc.close();
   }
 
   public static void bookingMenu(Movie movie, ScreeningTimes st, ArrayList<Integer> s, ArrayList<Integer> a,
       ArrayList<Integer> type) {
     if (tempUser.getType() == 2) {
-      // Waiting for ticketmanager update
-      // tm.createTicket(c, Movie class);
       int t = 0;
       ArrayList<Ticket> tempTicket = tm.createTicket(c, s, type, a, movie, st);
       for (int x = 0; x < tempTicket.size(); x++) {
@@ -401,10 +347,7 @@ public class MOBLIMA {
         }
       }
       System.out.println("Total price of tickets: " + tm.getTransactionAmount(tempTicket.get(0).getTransID()));
-
-      // System.out.println("Book ticket");
     } else {
-      // tm.createTicket(c, Movie class);
       System.out.println("Admin cannot book ticket");
     }
   }
