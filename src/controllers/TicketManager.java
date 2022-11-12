@@ -168,12 +168,12 @@ public class TicketManager{
         if(seattype.get(i)>=1)//means its a couple seat
         {
             if(seatID.get(i)%2==0) // if the seat id is even then the other seat is odd
-                newTicket.setSeatID2(i+1);
+                newTicket.setSeatID2(i+3);
             else
-                newTicket.setSeatID2(i-1);
+                newTicket.setSeatID2(i);
         }
         else
-        newTicket.setSeatID2(0);
+        newTicket.setSeatID2(999);
 
         //Ticket Type, We need to see if the person is senior child or adult
         if((tictype.get(i)==0))
@@ -368,19 +368,11 @@ public class TicketManager{
             break;
 
             case 9:
-            if(tic.get(ch).getSeatID2()==0){
+           
                 System.out.println("Enter new Seat ID: ");
-                tic.get(ch).setSeatID(sc.nextInt());
-            }
-            else 
-            {
-                System.out.println("Enter new couple Seat ID: ");
-                int a = sc.nextInt();
-                if(a%2==0)
-                tic.get(ch).setSeatID2(a+1);
-                else 
-                tic.get(ch).setSeatID2(a-1);
-            }
+                int b=sc.nextInt();
+                updateSeatID(tic.get(ch).getTicketID(),b);
+
             break;
 
             case 10:
@@ -635,7 +627,7 @@ public class TicketManager{
         System.out.println("Cinema Name: "+t.getCinemaName());
 
         //
-        if(t.getSeatID2()==0)
+        if(t.getSeatID2()==999)
         System.out.println("Seat ID: "+t.getSeatID());
         else
         {
@@ -874,8 +866,23 @@ public class TicketManager{
     {
         Ticket t= searchTicketThruID(ticketID);
 
-        if(t!=null){
-        t.setSeatID(seatid);
+        if(t!=null)
+        {
+            if(t.getSeatID2()==999)
+                t.setSeatID(seatid);
+            else
+            {
+                if(seatid%2==0)
+                {
+                    t.setSeatID(seatid);
+                    t.setSeatID2(seatid+1);
+                }
+                else 
+                {
+                    t.setSeatID(seatid);
+                    t.setSeatID2(seatid-1);
+                }
+            }
         }
         else
             System.out.println("Invalid TicketID");
