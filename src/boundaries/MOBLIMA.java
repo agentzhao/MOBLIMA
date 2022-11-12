@@ -168,7 +168,7 @@ public class MOBLIMA {
               System.out.println("-------------------------------------");
               count++;
             }
-            System.out.println("1: Remove booking\n2: Update booking");
+            System.out.println("1: Remove booking\n2: Update booking\n3: Exit");
             int l = sc.nextInt();
             int sid;
             switch (l) {
@@ -196,6 +196,10 @@ public class MOBLIMA {
                   break;
                 tm.updateSeatID(tempTicket.get(l - 1).getTicketID(), sid);
                 break;
+              case 3:
+                break;
+              default:
+                System.out.println("Select a valid value");
             }
           }
 
