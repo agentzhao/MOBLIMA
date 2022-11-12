@@ -1,5 +1,6 @@
 package boundaries;
 
+import java.text.ParseException;
 import java.util.*;
 
 import javax.lang.model.util.ElementScanner14;
@@ -91,7 +92,7 @@ public class MOBLIMA {
     as = new AdminSystem(mm, cm, tm);
   }
 
-  public static void mainMenu(Login log) {
+  public static void mainMenu(Login log) throws ParseException {
 
     int login = 0, admin = 0;
     Scanner sc = new Scanner(System.in);
@@ -153,12 +154,19 @@ public class MOBLIMA {
               }
             }
           } else {
-            ArrayList<Ticket> tempTicket = tm.searchTicketUser(tempUser.getId());
+            ArrayList<Ticket> tempTicket;
+            if (tempUser.getType() == 1) {
+              tempTicket = tm.getAllTickets();
+            } else {
+              tempTicket = tm.searchTicketUser(tempUser.getId());
+            }
+
             int count = 1;
             for (Ticket i : tempTicket) {
               System.out.print(count + ": ");
               tm.getTicketDetails(i);
               System.out.println("-------------------------------------");
+              count++;
             }
             System.out.println("1: Remove booking\n2: Update booking");
             int l = sc.nextInt();
@@ -166,14 +174,14 @@ public class MOBLIMA {
               case 1:
                 System.out.println("Which booking do you want to refund for?");
                 l = sc.nextInt();
-                // cm.unbookSeat(tempTicket.get(l-1));
-                // tm.deleteTicket(c.getId(), tempTicket.get(l).getMovieName());
+                cm.unbookSeat(tempTicket.get(l - 1));
+                tm.deleteTicket(c.getId(), tempTicket.get(l).getMovieName());
                 break;
               case 2:
                 System.out.println("Which booking do you want to update seat?");
                 l = sc.nextInt();
-                // cm.changeSeat(tempTicket.get(l-1));
-                // tm.updateSeatID(tempTicket.get(l).getTicketID());
+                cm.changeSeat(tempTicket.get(l - 1));
+                tm.updateSeatID(tempTicket.get(l).getTicketID());
                 break;
             }
           }
@@ -252,10 +260,12 @@ public class MOBLIMA {
         case 1:
           if (st != null) {
             seatMenu(movie, st);
+          } else {
+            return;
           }
           break;
         case 2:
-          break;
+          return;
         default:
           System.out.println("Please input a valid number");
           break;
@@ -276,7 +286,7 @@ public class MOBLIMA {
     while (c != 2) {
       cm.printSeats(st);
 
-      if (tempUser != null) {
+      if (tempUser != null && tempUser.getType() != 1) {
         System.out.println("1: Book ticket\n2: Exit");
       } else {
         System.out.println("1: Exit");
