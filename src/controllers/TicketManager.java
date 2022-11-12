@@ -34,10 +34,10 @@ public class TicketManager{
     Scanner sc = new Scanner(System.in);
 
     //constructor
-    public TicketManager(ArrayList<String> holidayDates) {
+    public TicketManager() {
         ticket = new ArrayList<Ticket>();
         transactions = new ArrayList<Transaction>();
-        this.holidayDates = holidayDates;
+        holidayDates= new ArrayList<String>();
 
         this.basePrice=12;
 
@@ -483,6 +483,16 @@ public class TicketManager{
         return searchTickets;
     }
 
+    public Ticket searchTicketThruID(int ticketID)
+    {
+        for(Ticket t: ticket){
+            if(t.getTicketID()==ticketID)
+                return t;
+        }
+
+        return null;
+    }
+
 
     
 
@@ -765,5 +775,18 @@ public class TicketManager{
                 return 1; //successful
         }
         return 0; // unsuccessful
+    }
+
+    public void updateSeatID(int ticketID)
+    {
+        Ticket t= searchTicketThruID(ticketID);
+
+        if(t!=null){
+        System.out.println("Enter new SeatID: ");
+        int seatID=sc.nextInt();
+        t.setSeatID(seatID);
+        }
+        else
+            System.out.println("Invalid TicketID");
     }
 }
