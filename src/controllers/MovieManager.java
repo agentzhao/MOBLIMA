@@ -73,6 +73,11 @@ public class MovieManager {
     System.out.print("Enter movie name: ");
     newMovie.setMovieName(sc.nextLine());
 
+    if (searchMovieName(newMovie.getMovieName()) != null) {
+      System.out.println("Movie name already exists!");
+      return;
+    }
+
     // movieType
     System.out.print("Type of movie (BLOCKBUSTER, THREED, IMAX, REGULAR): ");
     System.out.print("Enter movie type: ");
