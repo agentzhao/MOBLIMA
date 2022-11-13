@@ -64,7 +64,7 @@ public class AdminSystem {
     int choice = 0;
     while (choice != 9) {
       System.out.println(
-          "1: Create Movie Listing\n2: Update Movie Listing\n3: Remove Movie Listing\n4: Create Cinema showtime\n5: Update Cinema Showtime\n6: Remove Cinema Showtime\n7: Configure System settings\n8: Update ticket\n9: Exit");
+          "1: Create Movie Listing\n2: Update Movie Listing\n3: Remove Movie Listing\n4: Create Cinema showtime\n5: Update Cinema Showtime\n6: Remove Cinema Showtime\n7: Configure System settings\n8: Update ticket\n9: Update prices\n10: Exit");
       choice = sc.nextInt();
       sc.nextLine();
       switch (choice) {
@@ -137,6 +137,8 @@ public class AdminSystem {
           tm.updateTicket(cid, i);
           break;
         case 9:
+          tm.updatePrices();
+        case 10:
           break;
         case 69:
           // print all movies
