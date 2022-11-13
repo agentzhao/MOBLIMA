@@ -447,7 +447,7 @@ public class CineplexManager {
 
     // Seat is double seat
     if (screentime.getSeats()[aftseatID].isAvailable() && screentime.getSeats()[aftseatID].getType() != Type.Normal) {
-      if ((aftseatID - 1) % 2 == 0) {
+      if ((aftseatID) % 2 == 0) {
         screentime.getSeats()[aftseatID + 1].setAvailable(false);
         screentime.getSeats()[aftseatID].setAvailable(false);
         screentime.getSeats()[aftseatID + 1].setTicketHolder(screentime.getSeats()[b4seatID + 1].getTicketholder());
