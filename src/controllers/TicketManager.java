@@ -14,7 +14,10 @@ import entities.Customer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-
+/**
+ * This class manages the price calculation, ticket and transaction objects.
+ * Provides methods for Admin and Customer to use.
+ */
 public class TicketManager{
     
     private ArrayList<Transaction> transactions;
@@ -34,6 +37,7 @@ public class TicketManager{
 
     /**
      * Is a constructor for the TicketManager class. Initializes all the price multipliers and all ArrayList used in the class
+     * 
      */
     //constructor
     public TicketManager(ArrayList<String> holidayDates) {
