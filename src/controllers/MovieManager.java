@@ -114,7 +114,6 @@ public class MovieManager {
     }
 
     getMovieDetails(m);
-    // todo: need to add other fields: reviews, overallRating, ticketSales?
     System.out.println("1. Movie ID");
     System.out.println("2. Movie Name");
     System.out.println("3. Movie Type");
@@ -241,7 +240,6 @@ public class MovieManager {
   }
 
   public void getMovieDetails(Movie m) {
-    // print details (only relevant fields)
     System.out.println("------------------- Movie Details -----------------");
     System.out.println("Movie Name: " + m.getMovieName());
     System.out.println("Movie Type: " + m.getMovieType());
@@ -264,8 +262,6 @@ public class MovieManager {
   public void topSales() {
     System.out.println("Top 5 Movies by Ticket Sales");
 
-    // ArrayList<Movie> dupMovies = new ArrayList<Movie>();
-    // dupMovies = this.movies;
     ArrayList<Movie> dupMovies = (ArrayList<Movie>) this.movies.clone();
     dupMovies.removeIf(m -> m.getMovieStatus() == Status.COMINGSOON || m.getMovieStatus() == Status.ENDOFSHOWING);
     // insertion sort with ticket sales (descending)
@@ -288,8 +284,6 @@ public class MovieManager {
   public void topRating() {
     System.out.println("Top 5 Movies by Overall Rating");
 
-    // ArrayList<Movie> dupMovies = new ArrayList<Movie>();
-    // dupMovies = this.movies;
     ArrayList<Movie> dupMovies = (ArrayList<Movie>) this.movies.clone();
     dupMovies.removeIf(m -> m.getMovieStatus() == Status.COMINGSOON || m.getMovieStatus() == Status.ENDOFSHOWING);
     // insertion sort with top rating (descending)

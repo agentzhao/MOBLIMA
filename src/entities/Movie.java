@@ -1,7 +1,6 @@
 package entities;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.text.SimpleDateFormat;
 
 public class Movie {
@@ -25,12 +24,12 @@ public class Movie {
   private ArrayList<Review> movieReviews;
   private String synopsis;
   private String[] cast; // at least 2
-  private String director; // 1
+  private String director;
   private double overallRating; // 1 - 5 (best)
   private int ticketSales;
   private long[] screenTimes;
 
-  // constructor (default and parameterized)
+  /* constructors */
   public Movie(int movieID) {
     this.movieID = movieID;
     this.movieReviews = new ArrayList<Review>();
@@ -39,10 +38,6 @@ public class Movie {
     this.screenTimes = new long[3];
   }
 
-  // after calling, need to update Reviews and TicketSales
-  // movie.addReview(review)
-  // movie.updateOverallRating()
-  // movie.setTicketSales()
   public Movie(int movieID, String movieName, Type movieType, Status movieStatus,
       Rating movieRating, String synopsis, String[] cast, String director, long[] screenTimes) {
     this.movieID = movieID;
@@ -54,12 +49,12 @@ public class Movie {
     this.synopsis = synopsis;
     this.cast = cast;
     this.director = director;
-    this.overallRating = 0; // 0 = null
+    this.overallRating = 0;
     this.ticketSales = 0;
     this.screenTimes = screenTimes;
   }
 
-  // getters
+  /* getters */
   public int getMovieID() {
     return this.movieID;
   }
@@ -114,7 +109,7 @@ public class Movie {
         + ", " + dateFormat.format(this.screenTimes[1] * 1000) + ", " + dateFormat.format(this.screenTimes[2] * 1000));
   }
 
-  // setters
+  /* setters */
   public void setMovieID(int movieID) {
     this.movieID = movieID;
   }
@@ -180,7 +175,6 @@ public class Movie {
   }
 
   public void updateOverallRating() {
-    // 1 or less reviews
     if (this.movieReviews.size() <= 1) {
       this.overallRating = 0;
       return;
