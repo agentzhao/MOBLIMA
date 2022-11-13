@@ -22,6 +22,7 @@ public class ScreeningTimes {
     /*Getters */
     /**
      * @return int
+     * Get the ID of the movie the showtime
      */
     public int getMovieID() {
         return this.movieID;
@@ -29,6 +30,7 @@ public class ScreeningTimes {
 
     /**
      * @return String
+     * Get the name of the cinema the screeningtime is at
      */
     public String getCinemaName() {
         return cinemaName;
@@ -36,6 +38,7 @@ public class ScreeningTimes {
 
     /**
      * @return String
+     * Get the time the screeningtime
      */
     public String getScreenTime() {
         return this.screenTime;
@@ -43,6 +46,7 @@ public class ScreeningTimes {
 
     /**
      * @return String
+     * Gets the ID of the cinema the screeningtime is at
      */
     public String getCinemaID() {
         return cinemaID;
@@ -50,6 +54,7 @@ public class ScreeningTimes {
 
     /**
      * @return Seat[]
+     * Gets the array of seats in the screeningtime
      */
     public Seat[] getSeats() {
         return this.seats;
@@ -57,6 +62,7 @@ public class ScreeningTimes {
 
     /**
      * @return String
+     * Gets the date of the screeningtime
      */
     public String getDate() {
         return this.date;
@@ -65,14 +71,15 @@ public class ScreeningTimes {
     /*Setters */
     /**
      * @param movieID
+     * Set the ID of the movie the showtime
      */
-    // setters
     public void setMovieID(int movieID) {
         this.movieID = movieID;
     }
 
     /**
      * @param screenTime
+     * Set the time the screeningtime
      */
     public void setScreenTime(String screenTime) {
         this.screenTime = screenTime;
@@ -80,6 +87,7 @@ public class ScreeningTimes {
 
     /**
      * @param date
+     * Sets the date of the screeningtime
      */
     public void setDate(String date) {
         this.date = date;
@@ -87,6 +95,7 @@ public class ScreeningTimes {
 
     /**
      * @param seats
+     * Sets the array of seats in the screeningtime
      */
     public void setSeats(Seat[] seats) {
         this.seats = seats;
@@ -94,6 +103,7 @@ public class ScreeningTimes {
 
     /**
      * @param cinemaID
+     * Sets the ID of the cinema the screeningtime is at
      */
     public void setCinemaID(String cinemaID) {
         this.cinemaID = cinemaID;
@@ -101,6 +111,7 @@ public class ScreeningTimes {
 
     /**
      * @param cinemaName
+     * Set the name of the cinema the screeningtime is at
      */
     public void setCinemaName(String cinemaName) {
         this.cinemaName = cinemaName;

@@ -20,6 +20,7 @@ public class Seat {
     /*Getters */
     /**
      * @return boolean
+     * Gets the availability of the seat
      */
     public boolean isAvailable() {
         return this.available;
@@ -27,6 +28,7 @@ public class Seat {
 
     /**
      * @return int
+     * Gets the ID of the seat
      */
     public int getSeatID() {
         return this.seatID;
@@ -34,6 +36,7 @@ public class Seat {
 
     /**
      * @return int
+     * Gets the ticketID of the seat
      */
     public int getTicketholder() {
         return this.ticketHolder;
@@ -41,6 +44,7 @@ public class Seat {
 
     /**
      * @return Type
+     * Gets the type of the seat (Single, Couple, Elite, Ultima)
      */
     public Type getType() {
         return this.type;
@@ -49,6 +53,7 @@ public class Seat {
     /*Setters */
     /**
      * @param seatID
+     * sets the ID of the seat
      */
     public void setSeatID(int seatID) {
         this.seatID = seatID;
@@ -56,6 +61,7 @@ public class Seat {
 
     /**
      * @param ticketHolder
+     * Sets the ticketID of the seat
      */
     public void setTicketHolder(int ticketHolder) {
         this.ticketHolder = ticketHolder;
@@ -63,6 +69,7 @@ public class Seat {
 
     /**
      * @param available
+     * Sets the availability of the seat
      */
     public void setAvailable(boolean available) {
         this.available = available;
@@ -70,6 +77,7 @@ public class Seat {
 
     /**
      * @param type
+     * Sets the type of the seat (Single, Couple, Elite, Ultima)
      */
     public void setType(Type type) {
         this.type = type;
