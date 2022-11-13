@@ -41,9 +41,7 @@ public class Login {
     public User searchUser(String email, String password) {
         returnUser = null;
         for (int x = 0; x < admin.size(); x++) {
-            // System.out.println(admin.get(x).getEmail() + " password: " +
-            // admin.get(x).getPassword());
-            // System.out.println(email + " password: " + password);
+
             String e = admin.get(x).getEmail();
             String p = admin.get(x).getPassword();
             if (email.equals(e) && password.equals(p)) {

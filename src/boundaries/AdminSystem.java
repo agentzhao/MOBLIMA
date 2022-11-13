@@ -64,11 +64,6 @@ public class AdminSystem {
         case 4:
           System.out.println("Enter the movie name of the movie you want to add screentime for");
           id = sc.nextLine();
-          /*
-           * System.out.println("Select the cinema you want to add screentime for");
-           * cid = sc.next();
-           */
-          // cm.createShowtime(a.getcineplexID(), cid, id);
           m = mm.searchMovieName(id);
           if (m == null)
             break;
@@ -77,9 +72,6 @@ public class AdminSystem {
         case 5:
           System.out.println("Enter the movie name of the movie you want to update screentime for");
           id = sc.nextLine();
-          // System.out.println("Select the cinema you want to update screentime for");
-          // cid = sc.next();
-          // cm.updateShowtime(a.getcineplexID(), cid, id);
           m = mm.searchMovieName(id);
           if (m == null)
             break;
@@ -88,9 +80,6 @@ public class AdminSystem {
         case 6:
           System.out.println("Enter the movie name of the movie you want to remove screentime for");
           id = sc.nextLine();
-          // System.out.println("Select the cinema you want to remove screentime for");
-          // cid = sc.next();
-          // cm.removeShowTime(a.getcineplexID(), cid, id);
           m = mm.searchMovieName(id);
           if (m == null)
             break;
