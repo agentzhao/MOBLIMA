@@ -15,6 +15,14 @@ public class AdminSystem {
   private Admin a;
   private TicketManager tm;
 
+  /**
+   * This is the admin system where the admin can interact with the system or
+   * shutdown the system
+   * 
+   * @param m
+   * @param c
+   * @param t
+   */
   public AdminSystem(MovieManager m, CineplexManager c, TicketManager t) {
     mm = m;
     cm = c;
@@ -22,17 +30,26 @@ public class AdminSystem {
   }
 
   /**
+   * This function set the admin to which ever admin is currently login to the
+   * system
+   * 
    * @param a
    */
   public void setAdmin(Admin a) {
     this.a = a;
   }
 
+  /**
+   * View screen allow MOBLIMA to show the admin option in the main menu
+   */
   public void viewScreen() {
     System.out.println("6: Admin Panel\n7: Shutdown MOBLIMA");
   }
 
   /**
+   * Admin panel allow the admin to access multiple function of the system which
+   * allow the admin to modify variables of the system
+   * 
    * @throws ParseException
    */
   public void adminPanel() throws ParseException {

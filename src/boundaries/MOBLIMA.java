@@ -22,6 +22,8 @@ public class MOBLIMA {
   private static User tempUser;
 
   /**
+   * This is the main function for MOBLIMA
+   * 
    * @param args
    * @throws ParseException
    */
@@ -69,6 +71,8 @@ public class MOBLIMA {
   }
 
   /**
+   * Main menu function to display the main menu
+   * 
    * @param log
    * @throws ParseException
    */
@@ -211,6 +215,8 @@ public class MOBLIMA {
   }
 
   /**
+   * Movie menu to allow the user to search for a movie
+   * 
    * @throws ParseException
    */
   public static void movieMenu() throws ParseException {
@@ -241,6 +247,8 @@ public class MOBLIMA {
   }
 
   /**
+   * Screen time menu to allow the user to see the screening time of a movie
+   * 
    * @param movie
    * @throws ParseException
    */
@@ -274,6 +282,9 @@ public class MOBLIMA {
   }
 
   /**
+   * Seat menu to display the seating plan of the cinema for the specific
+   * screening time
+   * 
    * @param movie
    * @param st
    */
@@ -351,6 +362,9 @@ public class MOBLIMA {
   }
 
   /**
+   * Booking menu allow the customer to book a ticket base on the movie, screening
+   * time and seat that they choice
+   * 
    * @param movie
    * @param st
    * @param s
