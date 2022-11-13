@@ -11,10 +11,10 @@ public class Cineplex {
         this.cinemas = cinemas;
     }
 
+    /*Getters */
     /**
      * @return String
      */
-    // Getters
     public String getCineplexID() {
         return cineplexID;
     }
@@ -33,10 +33,10 @@ public class Cineplex {
         return cineplexName;
     }
 
+    /*Setters */
     /**
      * @param cineplexName
      */
-    // Setters
     public void setCineplexName(String cineplexName) {
         this.cineplexName = cineplexName;
     }

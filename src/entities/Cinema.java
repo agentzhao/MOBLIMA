@@ -18,10 +18,10 @@ public class Cinema {
         this.screeningTimes = screeningTimes;
     }
 
+    /*Getters */
     /**
      * @return boolean
      */
-    // getters
     public boolean getIsPlatinum() {
         return this.isPlatinum;
     }
@@ -47,10 +47,10 @@ public class Cinema {
         return this.cinemaID;
     }
 
+    /*Setter */
     /**
      * @param isPlatinum
      */
-    // setters
     public void setPlatinum(boolean isPlatinum) {
         this.isPlatinum = isPlatinum;
     }

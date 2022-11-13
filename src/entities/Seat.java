@@ -17,10 +17,10 @@ public class Seat {
         this.ticketHolder = ticketholder;
     }
 
+    /*Getters */
     /**
      * @return boolean
      */
-    // getters
     public boolean isAvailable() {
         return this.available;
     }
@@ -46,10 +46,10 @@ public class Seat {
         return this.type;
     }
 
+    /*Setters */
     /**
      * @param seatID
      */
-    // setters
     public void setSeatID(int seatID) {
         this.seatID = seatID;
     }

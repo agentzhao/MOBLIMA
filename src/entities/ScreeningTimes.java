@@ -19,10 +19,10 @@ public class ScreeningTimes {
 
     }
 
+    /*Getters */
     /**
      * @return int
      */
-    // getters
     public int getMovieID() {
         return this.movieID;
     }
@@ -62,6 +62,7 @@ public class ScreeningTimes {
         return this.date;
     }
 
+    /*Setters */
     /**
      * @param movieID
      */

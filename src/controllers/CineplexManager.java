@@ -41,8 +41,8 @@ public class CineplexManager {
   }
 
   /**
-   * @param cineplexID
-   * @param movie
+   * @param cineplexID used to know which cineplex to create showtime
+   * @param movie the movie's showtimes in the cineplex that will be created
    */
   // Create, Update, Remove showtime
   public void createShowtime(String cineplexID, Movie movie) {
@@ -103,8 +103,8 @@ public class CineplexManager {
   }
 
   /**
-   * @param cineplexID
-   * @param movie
+   * @param cineplexID to know which cineplex to update showtime
+   * @param movie the movie's showtime that will be updated
    * @throws ParseException
    */
   public void updateShowtime(String cineplexID, Movie movie) throws ParseException {
@@ -120,8 +120,8 @@ public class CineplexManager {
   }
 
   /**
-   * @param cineplexID
-   * @param movie
+   * @param cineplexID to know which cineplex to remove showtime
+   * @param movie the movie's showtime that will be removed
    * @throws ParseException
    */
   public void removeShowTime(String cineplexID, Movie movie) throws ParseException {
@@ -144,9 +144,9 @@ public class CineplexManager {
   }
 
   /**
-   * @param cineplexID
-   * @param movie
-   * @return ScreeningTimes
+   * @param cineplexID the cineplex's showtimes to be displayed
+   * @param movie the movie selected to be displayed
+   * @return ScreeningTimes returns the selected showtime by the user/admin
    * @throws ParseException
    */
   // Display screening time for movie
@@ -204,7 +204,7 @@ public class CineplexManager {
   }
 
   /**
-   * @param screentime
+   * @param screentime the showtime that is choosen, printing out the number of seats available
    */
   // Number for seats available
   public void getSeatAvailability(ScreeningTimes screentime) {
@@ -217,7 +217,7 @@ public class CineplexManager {
   }
 
   /**
-   * @param screentime
+   * @param screentime the showtime that is chodsen to print the seats for
    */
   // Print the ascii cinema seat
   public void printSeats(ScreeningTimes screentime) {
@@ -252,8 +252,8 @@ public class CineplexManager {
   }
 
   /**
-   * @param screentime
-   * @param seatID
+   * @param screentime the showtime that is choosen
+   * @param seatID the seat that is being checked for the seat type
    * @return int
    */
   public int checkSeat(ScreeningTimes screentime, int seatID) {
@@ -268,10 +268,10 @@ public class CineplexManager {
   }
 
   /**
-   * @param screentime
-   * @param seatID
-   * @param tID
-   * @return int
+   * @param screentime showtime that is being chosen
+   * @param seatID the seat to be booked
+   * @param tID the ticketID of the booked seat
+   * @return int returns on whether successful or not
    */
   // Booking, Unbooking, Changing Seats
   public int bookSeat(ScreeningTimes screentime, int seatID, int tID) {
@@ -306,8 +306,8 @@ public class CineplexManager {
   }
 
   /**
-   * @param ticket
-   * @return int
+   * @param ticket the ticket of the user unbooking the seat
+   * @return int whether it is successful or not
    * @throws ParseException
    */
   public int unbookSeat(Ticket ticket) throws ParseException {
@@ -378,8 +378,8 @@ public class CineplexManager {
   }
 
   /**
-   * @param ticket
-   * @return int
+   * @param ticket ticket of the user changing seat
+   * @return int the new seat chosen by the user
    * @throws ParseException
    */
   public int changeSeat(Ticket ticket) throws ParseException {
