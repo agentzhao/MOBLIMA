@@ -24,6 +24,7 @@ public class Ticket
 	 * @param userID used to initialise the userID of the customer in the parametrized constructor
 	 * @param movieName used to initialise the Movie Name of the Movie in the parametrized constructor
 	 */
+	//constructor
 	public Ticket(int userID, String movieName)
 	{
 		this.userID= userID;
