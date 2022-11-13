@@ -3,113 +3,144 @@ package entities;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Transaction {
-
-	private String TID; // format XXXYYYYMMDDhhmm
-
+public class Transaction{
+	
+	private String TID;
+	
 	private int userID;
 
-	private String name;// customer name
-
-	private String mobileNumber;// customer mobile number
-
-	private double amount;// Amount of the transaction
-
-	public Transaction(String name, int userID) {
-		this.name = name;
-		this.userID = userID;
-	}
-
+	private String name;
+	
+	private String mobileNumber;
+	
+	private double amount;
+	
 	/**
-	 * @return String
+	 * @param name used to initialise the name of the customer in the parametrized constructor
+	 * @param userID used to initialise the userID of the customer in the parametrized constructor
 	 */
-	public String getTID() {
+	public Transaction( String name,int userID)
+	{
+		this.name=name;
+		this.userID=userID;		
+	}
+	
+	
+	/** 
+	 * @return gets the Transaction ID of the Transaction
+	 */
+	public String getTID()
+	{
 		return TID;
 	}
-
-	/**
-	 * @return double
+	
+	
+	/** 
+	 * @return gets the total amount of the Transaction
 	 */
-	public double getTransactionAmount() {
+	public double getTransactionAmount()
+	{
 		return amount;
 	}
-
-	/**
-	 * @return String
+	
+	
+	/** 
+	 * @return gets the Name of the Customer under whom the Transaction is being taken
 	 */
-	public String getNameOfCustomer() {
+	public String getNameOfCustomer()
+	{
 		return name;
 	}
-
-	/**
-	 * @return String
+	
+	
+	/** 
+	 * @return gets the Mobile number of the customer
 	 */
-	public String getMobileNumber() {
+	public String getMobileNumber()
+	{
 		return mobileNumber;
 	}
 
-	/**
-	 * @return int
+	
+	/** 
+	 * @return gets the UserID of the customer
 	 */
-	public int getUserID() {
+	public int getUserID()
+	{
 		return this.userID;
 	}
 
-	/**
-	 * @param cinemaID
+	
+	/** 
+	 * @param cinemaID sets the Transaction ID of the Transaction
 	 */
-	public void setTID(String cinemaID) {
-		String tid = generateTID(cinemaID);
-		this.TID = tid;
+	public void setTID(String cinemaID)
+	{
+		String tid= generateTID(cinemaID);
+		this.TID=tid;
+	}
+
+	
+	/** 
+	 * @param amount sets the total amount of the Transaction
+	 */
+	public void setTransactionAmount(double amount)
+	{
+		this.amount=amount;
+	}
+
+	
+	/** 
+	 * @param name sets the Name of the Customer under whom the Transaction is being taken
+	 */
+	public void setNameOfCustomer(String name)
+	{
+		this.name=name;
+	}
+
+	
+	/** 
+	 * @param mno sets the Mobile number of the customer
+	 */
+	public void setMobileNumber(String mno)
+	{
+		this.mobileNumber=mno;
+	}
+
+	
+	/** 
+	 * @param userID sets the UserID of the customer
+	 */
+	public void setUserID(int userID)
+	{
+		this.userID=userID;
 	}
 
 	/**
-	 * @param amount
+	 * Prints the Transaction Info
 	 */
-	public void setTransactionAmount(double amount) {
-		this.amount = amount;
+	public void prinTransactionInfo()
+	{
+		System.out.println("Transaction ID: "+TID);
+		System.out.println("Name of Customer: "+name);
+		System.out.println("Mobile Number: "+mobileNumber);
+		System.out.println("Transaction amount: "+amount);
+		System.out.println("UserID: "+userID);
+		
 	}
 
-	/**
-	 * @param name
+	
+	/** 
+	 * @param cinemaID Used to generate the first three letters in a transaction ID
+	 * @return Returns the generated TID of the format XXXYYYYMMddhhmm
 	 */
-	public void setNameOfCustomer(String name) {
-		this.name = name;
-	}
-
-	/**
-	 * @param mno
-	 */
-	public void setMobileNumber(String mno) {
-		this.mobileNumber = mno;
-	}
-
-	/**
-	 * @param userID
-	 */
-	public void setUserID(int userID) {
-		this.userID = userID;
-	}
-
-	public void prinTransactionInfo() {
-		System.out.println("Transaction ID: " + TID);
-		System.out.println("Name of Customer: " + name);
-		System.out.println("Mobile Number: " + mobileNumber);
-		System.out.println("Transaction amount: " + amount);
-		System.out.println("UserID: " + userID);
-
-	}
-
-	/**
-	 * @param cinemaID
-	 * @return String
-	 */
-	public static String generateTID(String cinemaID) {
+	public static String generateTID(String cinemaID)
+	{
 		Date date = new Date();
 		SimpleDateFormat formatter = new SimpleDateFormat("YYYYMMddhhmm");
-		String strDate = formatter.format(date);
-
-		String strTID = cinemaID + strDate;
+		String strDate= formatter.format(date);
+		
+		String strTID= cinemaID + strDate;
 
 		return strTID;
 	}
