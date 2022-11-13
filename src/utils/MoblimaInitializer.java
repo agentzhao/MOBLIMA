@@ -18,6 +18,9 @@ import entities.Customer;
 import controllers.MovieManager;
 import controllers.TicketManager;
 
+/**
+ * MoblimaInitializer Class - Initialises all the necessary data
+ */
 public class MoblimaInitializer {
   /**
    * dataPath - Path containing all initialisation .txt files.
