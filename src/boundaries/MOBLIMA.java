@@ -34,6 +34,9 @@ public class MOBLIMA {
 
   }
 
+  /**
+   * Creates MoblimaInitializer object and Initialises Movies, reviews, customers, administrators, cineplex and ticket objects.
+   */
   public static void initData() {
     /* Create MoblimaInitializer Object */
     MoblimaInitializer mi = new MoblimaInitializer();
