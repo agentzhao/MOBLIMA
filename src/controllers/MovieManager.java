@@ -12,6 +12,10 @@ import java.text.ParseException;
 
 @SuppressWarnings("unchecked")
 
+/**
+ * This class manages the movie and review objects. Provides methods for admin
+ * and user system to use.
+ */
 public class MovieManager {
   private ArrayList<Movie> movies;
   private ArrayList<Review> reviews;

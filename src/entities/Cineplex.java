@@ -5,6 +5,11 @@ public class Cineplex {
     private String cineplexID;
     private Cinema[] cinemas;
 
+    /**
+     * @param cineplexName
+     * @param cineplexID
+     * @param cinemas
+     */
     public Cineplex(String cineplexName, String cineplexID, Cinema[] cinemas) {
         this.cineplexName = cineplexName;
         this.cineplexID = cineplexID;
@@ -14,6 +19,7 @@ public class Cineplex {
     /*Getters */
     /**
      * @return String
+     * Gets the ID of the cineplex
      */
     public String getCineplexID() {
         return cineplexID;
@@ -21,6 +27,7 @@ public class Cineplex {
 
     /**
      * @return Cinema[]
+     * Gets the array of cinemas the cineplex has
      */
     public Cinema[] getCinemas() {
         return cinemas;
@@ -28,6 +35,7 @@ public class Cineplex {
 
     /**
      * @return String
+     * Gets the name of the cineplex
      */
     public String getCineplexName() {
         return cineplexName;
@@ -36,6 +44,7 @@ public class Cineplex {
     /*Setters */
     /**
      * @param cineplexName
+     * Sets the name of the cineplex
      */
     public void setCineplexName(String cineplexName) {
         this.cineplexName = cineplexName;
@@ -43,6 +52,7 @@ public class Cineplex {
 
     /**
      * @param cineplexID
+     * Sets the ID of the cineplex
      */
     public void setCineplexID(String cineplexID) {
         this.cineplexID = cineplexID;
@@ -50,6 +60,7 @@ public class Cineplex {
 
     /**
      * @param cinemas
+     * Set the cinemas the cineplex has
      */
     public void setCinemas(Cinema[] cinemas) {
         this.cinemas = cinemas;
