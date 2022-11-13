@@ -1,5 +1,9 @@
 package entities;
 
+/**
+ * This entity class represents a review object which stores all the information
+ * about a review.
+ */
 public class Review {
   private int movieID;
   private String customerName;
