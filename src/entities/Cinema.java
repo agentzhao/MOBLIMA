@@ -9,6 +9,13 @@ public class Cinema {
     private List<Movie> movies;
     public List<ScreeningTimes> screeningTimes;
 
+    /**
+     * @param isPlatinum
+     * @param cinemaID
+     * @param cinemaName
+     * @param movies
+     * @param screeningTimes
+     */
     public Cinema(boolean isPlatinum, String cinemaID, String cinemaName, List<Movie> movies,
             List<ScreeningTimes> screeningTimes) {
         this.isPlatinum = isPlatinum;

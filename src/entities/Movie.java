@@ -3,6 +3,11 @@ package entities;
 import java.util.ArrayList;
 import java.text.SimpleDateFormat;
 
+/**
+ * This entity class represents a movie object which stores all the information
+ * about a
+ * movie including reviews.
+ */
 public class Movie {
   /**
    * Movie Types

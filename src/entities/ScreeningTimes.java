@@ -8,6 +8,14 @@ public class ScreeningTimes {
     private String date;
     private Seat[] seats;
 
+    /**
+     * @param cinemaID
+     * @param cinemaName
+     * @param movieID
+     * @param screenTime
+     * @param date
+     * @param seats
+     */
     public ScreeningTimes(String cinemaID, String cinemaName, int movieID, String screenTime, String date,
             Seat[] seats) {
         this.cinemaID = cinemaID;
