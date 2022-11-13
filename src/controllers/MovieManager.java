@@ -49,17 +49,18 @@ public class MovieManager {
     return this.movies;
   }
 
+  /* Admin System (create, update, delete) */
+
   /**
    * @return int
    */
-  /* Admin System (create, update, delete) */
-
   public int getMovieLength() {
     return this.movies.size();
   }
 
   /**
    * @param movieID
+   *                create a new movie object
    */
   public void createMovie(int movieID) {
     Movie newMovie = new Movie(movieID);
@@ -234,11 +235,12 @@ public class MovieManager {
     return 0; // unsuccessful
   }
 
+  /* User System (search, getDetails, ranking) */
+
   /**
    * @param movieID
    * @return Movie
    */
-  /* User System (search, getDetails, ranking) */
   public Movie searchMovie(int movieID) {
     for (Movie m : movies) {
       if (m.getMovieStatus() == Status.COMINGSOON || m.getMovieStatus() == Status.ENDOFSHOWING) {
@@ -271,7 +273,8 @@ public class MovieManager {
   }
 
   /**
-   * @param m
+   * @param <Movie>
+   *                prints movie details
    */
   public void getMovieDetails(Movie m) {
     System.out.println("------------------- Movie Details -----------------");
@@ -338,6 +341,9 @@ public class MovieManager {
     }
   }
 
+  /**
+   * adds new <Review> to ArrayList<Review> reviews
+   */
   public void addReview() {
     System.out.println("Enter movie ID: ");
     int movieID = sc.nextInt();
@@ -367,12 +373,18 @@ public class MovieManager {
     reviews.add(newReview);
   }
 
+  /**
+   * prints all movies in ArrayList<Movie> movies
+   */
   public void printAllMovies() {
     for (Movie m : movies) {
       getMovieDetails(m);
     }
   }
 
+  /**
+   * lists movies with status PREVIEW or NOWSHOWING
+   */
   public void listMovies() {
     System.out.println("List of Movies available for booking: ");
     for (Movie m : movies) {
