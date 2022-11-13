@@ -3,6 +3,9 @@ package entities;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * This entity class represents a Transaction object which stores all the information about a transaction.
+ */
 public class Transaction{
 	
 	private String TID;
