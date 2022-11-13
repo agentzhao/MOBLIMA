@@ -1,5 +1,7 @@
 package entities;
-
+/**
+ * Creates an entity cineplex to store the information of a cineplex
+ */
 public class Cineplex {
     private String cineplexName;
     private String cineplexID;

@@ -14,7 +14,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
-
+/**
+ * This class manages the cineplex, cinemas, screeningtimes and seats. Provides methods for admin
+ * and user system to use.
+ */
 public class CineplexManager {
   Scanner sc = new Scanner(System.in);
   private List<Cineplex> cineplexes;

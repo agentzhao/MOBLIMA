@@ -1,5 +1,7 @@
 package entities;
-
+/**
+ * Creates an entity seat class storing all the information about the seat
+ */
 public class Seat {
     public enum Type {
         Normal, Couple, Elite, Ultima

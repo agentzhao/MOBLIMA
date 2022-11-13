@@ -1,5 +1,7 @@
 package entities;
-
+/**
+ * Creates an entity screeningtime class to store the information about a screeningtime
+ */
 public class ScreeningTimes {
     private String cinemaID;
     private String cinemaName;
