@@ -6,14 +6,14 @@ import entities.Admin;
 import entities.Customer;
 import entities.User;
 
+/**
+ * Login is a controller that provide the system the login functionality
+ */
 public class Login {
     private ArrayList<Customer> customer = new ArrayList<Customer>();
     private ArrayList<Admin> admin = new ArrayList<Admin>();
     private User returnUser = null;
 
-    /**
-     * Login is a controller that provide the system the login functionality
-     */
     public Login() {
 
     }

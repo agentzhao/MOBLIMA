@@ -1,7 +1,8 @@
 package entities;
 
-import java.util.*;
-
+/**
+ * User is the superclass of admin and customer class
+ */
 public class User {
     private String email;
     private String password;
@@ -9,7 +10,7 @@ public class User {
     private int id;
 
     /**
-     * User is the superclass of admin and customer class
+     * This is the constructor of User
      * 
      * @param email
      * @param password

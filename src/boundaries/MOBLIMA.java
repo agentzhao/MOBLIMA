@@ -3,12 +3,13 @@ package boundaries;
 import java.text.ParseException;
 import java.util.*;
 
-import javax.lang.model.util.ElementScanner14;
-
 import controllers.*;
 import utils.MoblimaInitializer;
 import entities.*;
 
+/**
+ * Main class of MOBLIMA
+ */
 public class MOBLIMA {
 
   private static MovieManager mm;
