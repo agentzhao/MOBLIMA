@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.*;
+
 import entities.Movie;
 import entities.ScreeningTimes;
 import entities.Ticket;
@@ -7,15 +9,10 @@ import entities.Transaction;
 import entities.Movie.Status;
 import entities.Movie.Type;
 import entities.Ticket.TicType;
+import entities.Customer;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
-import java.util.*;
-
-import javax.lang.model.util.ElementScanner14;
-
-import entities.Customer;
 
 public class TicketManager {
 
@@ -34,7 +31,6 @@ public class TicketManager {
     private double previewPrice;
     Scanner sc = new Scanner(System.in);
 
-    // constructor
     public TicketManager(ArrayList<String> holidayDates) {
         ticket = new ArrayList<Ticket>();
         transactions = new ArrayList<Transaction>();
@@ -62,43 +58,35 @@ public class TicketManager {
     }
 
     /**
-     * @param ticket
+     * @param ticket adds the ticket to the array List
      */
     public void addTicketList(ArrayList<Ticket> ticket) {
         this.ticket = ticket;
     }
 
     /**
-     * @param transactions
+     * @param transactions adds the transaction to the array list
      */
     public void addTransactionList(ArrayList<Transaction> transactions) {
         this.transactions = transactions;
     }
 
     /**
-     * @param holidayDates
+     * @param holidayDates adds the holiday dates to the array list
      */
     public void addHolidayList(ArrayList<String> holidayDates) {
         this.holidayDates = holidayDates;
     }
 
     /**
-     * @param basePrice
+     * @param basePrice sets the basePrice for the tickets
      */
-    /*
-     * Admin System:
-     * set and get base price,
-     * create a ticket,
-     * update ticket details,
-     * delete a ticket
-     */
-
     public void setBasePrice(double basePrice) {
         this.basePrice = basePrice;
     }
 
     /**
-     * @return double
+     * @return returns the base Price for the tickets
      */
 
     public double getBasePrice() {
@@ -106,12 +94,14 @@ public class TicketManager {
     }
 
     /**
-     * @param customer
-     * @param cinema
-     * @param seatID
-     * @param movie
-     * @param scTime
-     * @return Ticket
+     * @param customer Accepts parameter customer to create a ticket
+     * @param seatID   Accepts the seatID of the customer
+     * @param seattype Accepts the seat type <NORMAL, COUPLE, ELITE, ULTIMA>
+     * @param tictype  Accepts the ticket type <SENIOR, ADULT, CHILD>
+     * @param movie    Accepts the Movie class object
+     * @param scTime   Accepts the ScreeningTimes class object
+     * @return ArrayList<Ticket> gives back multiple/single to ticket that have been
+     *         created under one Transaction ID
      */
     public ArrayList<Ticket> createTicket(Customer customer, ArrayList<Integer> seatID, ArrayList<Integer> seattype,
             ArrayList<Integer> tictype, Movie movie, ScreeningTimes scTime) {
@@ -123,23 +113,20 @@ public class TicketManager {
         ArrayList<Ticket> multipleTics = new ArrayList<Ticket>();
         Transaction newTran = new Transaction(customer.getName(), customer.getId());
 
-        // User IDs
         newTran.setUserID(customer.getId());
 
-        // Name of Customer
         newTran.setNameOfCustomer(customer.getName());
 
-        // Mobile Number
         newTran.setMobileNumber(customer.getMobile_number());
 
-        // Transaction ID
         newTran.setTID(scTime.getCinemaID());
 
         for (int i = 0; i < noOfSeats; i++) {
 
             Ticket newTicket = new Ticket(customer.getId(), movie.getMovieName());
 
-            // User ID
+            Ticket newTicket = new Ticket(customer.getId(), movie.getMovieName());
+
             newTicket.setUserID(customer.getId());
 
             // Ticket ID
@@ -214,49 +201,11 @@ public class TicketManager {
     }
 
     /**
-     * @param customer
-     * @param cinema
-     * @return Transaction
-     */
-    // CREATING A TRANSACTION
-    /*
-     * public Transaction createTransaction(Customer customer, Cinema cinema)
-     * {
-     * Transaction newTran= new Transaction(customer.getName(), customer.getId());
-     * 
-     * //User IDs
-     * newTran.setUserID(customer.getId());
-     * 
-     * // Amount of Transaction
-     * newTran.setTransactionAmount(ticket.get(ticket.size()-1).getPrice());
-     * 
-     * 
-     * // Name of Customer
-     * newTran.setNameOfCustomer(customer.getName());
-     * 
-     * // Mobile Number
-     * newTran.setMobileNumber(customer.getMobile_number());
-     * 
-     * // Transaction ID
-     * newTran.setTID(cinema);
-     * 
-     * //Add to list
-     * transactions.add(newTran);
-     * 
-     * return newTran;
-     * }
-     */
-
-    /**
-     * @param movieName
-     * @param userID
-     * @return int
-     */
-    /*
-     * The set price part for this function will allow the admin to set
-     * the price of the ticket at any stage. For example, when booking ,
-     * when the admin wants to add gst and update the final ticket price
-     * 
+     * @param movieName Is required for the search function used here
+     * @param userID    Is required for the search function used here
+     * @return This function will allow the admin to set
+     *         the price of the ticket at any stage. For example, when booking ,
+     *         when the admin wants to add gst and update the final ticket price
      */
     public int updateTicket(String movieName, int userID) {
         ArrayList<Ticket> tic = new ArrayList<Ticket>();
@@ -359,6 +308,12 @@ public class TicketManager {
      * @param TID
      * @return Transaction
      */
+
+    /**
+     * @param TID is used as a parameter to search a Transaction. Only TID is needed
+     *            because there is only one transaction even for multiple tickets
+     * @return Transaction class object that has been found by the search function
+     */
     public Transaction searchTransaction(String TID) {
 
         for (Transaction t : transactions) {
@@ -373,31 +328,13 @@ public class TicketManager {
     }
 
     /**
-     * @param userID
-     * @param movieName
-     * @return int
+     * @param userID   Is required to search a ticket to delete it
+     * @param ticketID Is required to search a ticket to delete it
+     * @return Return 1 or 0 depending on if the Ticket was deleted successfully or
+     *         not. 1= Deleted successfully
      */
     public int deleteTicket(int userID, int ticketID) {
-
         Ticket t = searchForDelete(userID, ticketID);
-
-        /*
-         * if(t.size()!=0)
-         * {
-         * Transaction tran= searchTransaction(t.get(0).getTransID());
-         * 
-         * double amountUpdate= tran.getTransactionAmount();
-         * amountUpdate= amountUpdate- t.get(0).getPrice();
-         * 
-         * tran.setTransactionAmount(amountUpdate);
-         * 
-         * ticket.remove(t.get(0));
-         * return 1;
-         * }
-         * 
-         * System.out.println("Ticket not found");
-         * return 0;
-         */
 
         if (t != null) {
             Transaction tran = searchTransaction(t.getTransID());
@@ -413,13 +350,12 @@ public class TicketManager {
 
         System.out.println("Ticket not found");
         return 0;
-
     }
 
     /**
-     * @param userID
-     * @param ticketID
-     * @return Ticket
+     * @param userID   Is used to search a ticket through an array list
+     * @param ticketID Is used to search a ticket through an array list
+     * @return Returns the Ticket that has been found with the passed parameters
      */
     public Ticket searchForDelete(int userID, int ticketID) {
         for (Ticket t : ticket) {
@@ -428,24 +364,14 @@ public class TicketManager {
         }
 
         return null;
-
     }
 
     /**
-     * @param movieName
-     * @param userID
-     * @return ArrayList<Ticket>
+     * @param movieName Is used as a parameter in the search function
+     * @param userID    Is used as a parameter in the search function
+     * @return Returns a list of tickets purchased acc to both movie name and for a
+     *         specific user
      */
-    /*
-     * User System:
-     * searchTicket ,
-     * calculate the price depending on the type: SENIOR, ADULT, CHILD ..,
-     * get ticket details.
-     */
-
-    // This function will return a list of tickets purchased acc to
-    // both movie name and for a specific user
-
     public ArrayList<Ticket> searchTicket(String movieName, int userID) {
         ArrayList<Ticket> searchTickets = new ArrayList<Ticket>();
 
@@ -461,8 +387,8 @@ public class TicketManager {
     }
 
     /**
-     * @param userID
-     * @return ArrayList<Ticket>
+     * @param userID Is used as a parameter in the search function
+     * @return Returns a list of tickets purchased by the specific user
      */
     // This function will return a list of tickets purchased by the specific user
     public ArrayList<Ticket> searchTicketUser(int userID) {
@@ -480,8 +406,8 @@ public class TicketManager {
     }
 
     /**
-     * @param ticketID
-     * @return Ticket
+     * @param ticketID Used to seach a ticket through ticketID
+     * @return Returns the found Ticket
      */
     public Ticket searchTicketThruID(int ticketID) {
         for (Ticket t : ticket) {
@@ -494,6 +420,10 @@ public class TicketManager {
 
     /**
      * @param movie
+     * @param seatID
+     * @param agePriceVar
+     * @param scTime
+     * @param seattype
      * @return double
      */
     /*
@@ -524,7 +454,6 @@ public class TicketManager {
         try {
             date = new SimpleDateFormat("dd/MM/yyyy").parse(scTime.getDate());
         } catch (ParseException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         c.setTime(date);
@@ -756,7 +685,6 @@ public class TicketManager {
         holidayDates.set(choice - 1, tempHolidays);
 
         System.out.println("Holiday updated successfully!");
-
     }
 
     public void removeHoliday() {
@@ -784,9 +712,9 @@ public class TicketManager {
     public int searchHoliday(String date) {
         for (int i = 0; i < holidayDates.size(); i++) {
             if (date == holidayDates.get(i))
-                return 1; // successful
+                return 1;
         }
-        return 0; // unsuccessful
+        return 0;
     }
 
     /**

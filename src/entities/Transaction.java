@@ -58,8 +58,6 @@ public class Transaction {
 	/**
 	 * @param cinemaID
 	 */
-	// setter functions
-
 	public void setTID(String cinemaID) {
 		String tid = generateTID(cinemaID);
 		this.TID = tid;

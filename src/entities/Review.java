@@ -7,7 +7,7 @@ public class Review {
   private String reviewBody;
   private int reviewRating; // 1 - 5 (best)
 
-  // constructor
+  /** constructors **/
   public Review() {
   };
 

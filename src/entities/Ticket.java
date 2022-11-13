@@ -27,7 +27,6 @@ public class Ticket {
 	/**
 	 * @return int
 	 */
-	// get methods
 	public int getUserID() {
 		return userID;
 	}
@@ -112,7 +111,6 @@ public class Ticket {
 	/**
 	 * @param userID
 	 */
-	// setter methods
 	public void setUserID(int userID) {
 		this.userID = userID;
 	}

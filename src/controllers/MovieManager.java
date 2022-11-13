@@ -17,7 +17,7 @@ public class MovieManager {
   private ArrayList<Review> reviews;
   Scanner sc = new Scanner(System.in);
 
-  // constructor
+  /** constructor **/
   public MovieManager() {
     this.movies = new ArrayList<Movie>();
     this.reviews = new ArrayList<Review>();
