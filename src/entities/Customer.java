@@ -1,14 +1,15 @@
 package entities;
 
-import java.util.*;
-
+/**
+ * Customer is a entity that store customer information
+ */
 public class Customer extends User {
     private String mobile_number;
     private String name;
     private int age;
 
     /**
-     * Customer is a entity that store customer information
+     * This is the constructor for Customer
      * 
      * @param email
      * @param password

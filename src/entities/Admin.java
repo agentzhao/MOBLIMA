@@ -1,12 +1,13 @@
 package entities;
 
-import java.util.*;
-
+/**
+ * Admin is a entity that store the information of an admin
+ */
 public class Admin extends User {
     private String cineplexID;
 
     /**
-     * Admin is a entity that store the information of an admin
+     * This is the constructor for Admin
      * 
      * @param email
      * @param password

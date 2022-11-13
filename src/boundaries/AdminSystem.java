@@ -9,6 +9,10 @@ import controllers.TicketManager;
 import entities.Admin;
 import entities.Movie;
 
+/**
+ * Admin system is where the admin can interact with the system or
+ * shutdown the system
+ */
 public class AdminSystem {
   private MovieManager mm;
   private CineplexManager cm;
@@ -16,8 +20,7 @@ public class AdminSystem {
   private TicketManager tm;
 
   /**
-   * This is the admin system where the admin can interact with the system or
-   * shutdown the system
+   * This is the constructor for the AdminSystem
    * 
    * @param m
    * @param c

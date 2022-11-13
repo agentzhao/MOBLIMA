@@ -1,5 +1,8 @@
 package entities;
-
+/**
+ * This entity class represents a Ticket object which stores all the information 
+ * about a Ticket.
+ */
 public class Ticket
 {
 	public enum TicType {
