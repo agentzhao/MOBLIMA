@@ -5,6 +5,11 @@ public class Cineplex {
     private String cineplexID;
     private Cinema[] cinemas;
 
+    /**
+     * @param cineplexName
+     * @param cineplexID
+     * @param cinemas
+     */
     public Cineplex(String cineplexName, String cineplexID, Cinema[] cinemas) {
         this.cineplexName = cineplexName;
         this.cineplexID = cineplexID;

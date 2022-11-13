@@ -10,6 +10,12 @@ public class Seat {
     private boolean available;
     private int ticketHolder;
 
+    /**
+     * @param type
+     * @param seatID
+     * @param available
+     * @param ticketholder
+     */
     public Seat(Type type, int seatID, boolean available, int ticketholder) {
         this.type = type;
         this.seatID = seatID;

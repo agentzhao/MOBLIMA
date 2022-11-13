@@ -18,8 +18,10 @@ import java.util.Scanner;
 public class CineplexManager {
   Scanner sc = new Scanner(System.in);
   private List<Cineplex> cineplexes;
-  /*It creates the cineplex with an array of cinemas which has an arrray of screeningtimes which in turn has an array of seats */
-  // constructor
+
+  /**
+   * It creates the cineplex with an array of cinemas which has an arrray of screeningtimes which in turn has an array of seats
+   */
   public CineplexManager() {
     cineplexes = new ArrayList<Cineplex>();
   }
