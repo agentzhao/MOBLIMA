@@ -20,10 +20,11 @@ public class Review {
     this.reviewRating = reviewRating;
   }
 
+  /** getters **/
+
   /**
    * @return int
    */
-  // getters
   public int getMovieID() {
     return this.movieID;
   }
@@ -56,6 +57,9 @@ public class Review {
     return this.reviewRating;
   }
 
+  /**
+   * prints <Review> in human-readable format
+   */
   public void printReview() {
     System.out.println("Customer Name: " + customerName);
     System.out.println("Review Title: " + reviewTitle);
@@ -63,10 +67,11 @@ public class Review {
     System.out.println("Review Rating: " + reviewRating);
   }
 
+  /* setters */
+
   /**
    * @param movieID
    */
-  // setters
   public void setMovieID(int movieID) {
     this.movieID = movieID;
   }

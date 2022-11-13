@@ -4,14 +4,23 @@ import java.util.ArrayList;
 import java.text.SimpleDateFormat;
 
 public class Movie {
+  /**
+   * Movie Types
+   */
   public enum Type {
     BLOCKBUSTER, THREED, IMAX, REGULAR
   };
 
+  /**
+   * Movie Status
+   */
   public enum Status {
     COMINGSOON, PREVIEW, NOWSHOWING, ENDOFSHOWING
   }
 
+  /**
+   * Movie Rating
+   */
   public enum Rating {
     G, PG, PG13, NC16, M18, R21
   }
@@ -54,10 +63,11 @@ public class Movie {
     this.screenTimes = screenTimes;
   }
 
+  /* getters */
+
   /**
    * @return int
    */
-  /* getters */
   public int getMovieID() {
     return this.movieID;
   }
@@ -138,6 +148,10 @@ public class Movie {
   public long[] getScreenTimes() {
     return this.screenTimes;
   }
+
+  /**
+   * prints the movie's screen times (in the format of "dd/MM/yyyy")
+   */
 
   public void printScreenTimes() {
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -223,6 +237,9 @@ public class Movie {
     this.screenTimes = screenTimes;
   }
 
+  /**
+   * updates movie status based on screen times
+   */
   public void updateMovieStatus() {
     int temp = 0;
     long currentTime = System.currentTimeMillis() / 1000;
@@ -243,6 +260,9 @@ public class Movie {
     }
   }
 
+  /**
+   * updates overall rating based on reviews
+   */
   public void updateOverallRating() {
     if (this.movieReviews.size() <= 1) {
       this.overallRating = 0;
@@ -261,9 +281,5 @@ public class Movie {
    */
   public void setTicketSales(int ticketSales) {
     this.ticketSales = ticketSales;
-  }
-
-  public void updateTicketSales() {
-    this.ticketSales += 1;
   }
 }
