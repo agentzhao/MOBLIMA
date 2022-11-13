@@ -158,13 +158,15 @@ public class TicketManager{
             int ticID= ticket.size()+1;
             newTicket.setTicketID(ticID);
 
+
             //check cuople seat
+            newTicket.setSeatID(seatID.get(i));
             if(seattype.get(i)>=1)
             {
                 if(seatID.get(i)%2==0) 
-                    newTicket.setSeatID2(i+3);
+                    newTicket.setSeatID2(newTicket.getSeatID()+1);
                 else
-                    newTicket.setSeatID2(i);
+                    newTicket.setSeatID2(newTicket.getSeatID()-1);
             }
             else
             newTicket.setSeatID2(999);
@@ -257,8 +259,8 @@ public class TicketManager{
             ch=sc.nextInt();
         }
         else 
-        ch= 0;
-
+        ch= 1;
+        ch--;
         getTicketDetails(tic.get(ch));
 
         System.out.println("1. User ID: ");
@@ -816,18 +818,16 @@ public class TicketManager{
 
         if(t!=null)
         {
-            if(t.getSeatID2()==999)
-                t.setSeatID(seatid);
-            else
+            
+            t.setSeatID(seatid);
+            if(t.getSeatID2()!=999)
             {
                 if(seatid%2==0)
-                {
-                    t.setSeatID(seatid);
+                {   
                     t.setSeatID2(seatid+1);
                 }
                 else 
-                {
-                    t.setSeatID(seatid);
+                {   
                     t.setSeatID2(seatid-1);
                 }
             }
