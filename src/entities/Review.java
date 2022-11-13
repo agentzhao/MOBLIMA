@@ -7,7 +7,7 @@ public class Review {
   private String reviewBody;
   private int reviewRating; // 1 - 5 (best)
 
-  // constructor
+  /** constructors **/
   public Review() {
   };
 
@@ -20,7 +20,7 @@ public class Review {
     this.reviewRating = reviewRating;
   }
 
-  // getters
+  /** getters **/
   public int getMovieID() {
     return this.movieID;
   }
@@ -48,7 +48,7 @@ public class Review {
     System.out.println("Review Rating: " + reviewRating);
   }
 
-  // setters
+  /** setters **/
   public void setMovieID(int movieID) {
     this.movieID = movieID;
   }

@@ -17,7 +17,7 @@ public class MovieManager {
   private ArrayList<Review> reviews;
   Scanner sc = new Scanner(System.in);
 
-  // constructor
+  /** constructor **/
   public MovieManager() {
     this.movies = new ArrayList<Movie>();
     this.reviews = new ArrayList<Review>();
@@ -40,7 +40,7 @@ public class MovieManager {
     return this.movies;
   }
 
-  /* Admin System (create, update, delete) */
+  /** Admin System (create, update, delete) **/
 
   public int getMovieLength() {
     return this.movies.size();
@@ -211,7 +211,8 @@ public class MovieManager {
     return 0; // unsuccessful
   }
 
-  /* User System (search, getDetails, ranking) */
+  /** User System (search, getDetails, ranking) **/
+
   public Movie searchMovie(int movieID) {
     for (Movie m : movies) {
       if (m.getMovieStatus() == Status.COMINGSOON || m.getMovieStatus() == Status.ENDOFSHOWING) {
