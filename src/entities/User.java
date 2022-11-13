@@ -8,6 +8,14 @@ public class User {
     private int type;
     private int id;
 
+    /**
+     * User is the superclass of admin and customer class
+     * 
+     * @param email
+     * @param password
+     * @param type
+     * @param id
+     */
     public User(String email, String password, int type, int id) {
         this.email = email;
         this.password = password;
@@ -16,6 +24,10 @@ public class User {
     }
 
     /**
+     * This function return the type of the user account
+     * 1: Admin
+     * 2: Customer
+     * 
      * @return int
      */
     public int getType() {
@@ -23,6 +35,8 @@ public class User {
     }
 
     /**
+     * This function set the user type
+     * 
      * @param type
      */
     public void setType(int type) {
@@ -30,6 +44,8 @@ public class User {
     }
 
     /**
+     * This function retrieve the email of the user
+     * 
      * @return String
      */
     public String getEmail() {
@@ -37,6 +53,8 @@ public class User {
     }
 
     /**
+     * This function set the email of the user
+     * 
      * @param email
      */
     public void setEmail(String email) {
@@ -44,6 +62,8 @@ public class User {
     }
 
     /**
+     * This function get the password of the user
+     * 
      * @return String
      */
     public String getPassword() {
@@ -51,6 +71,8 @@ public class User {
     }
 
     /**
+     * This function set the password of the user
+     * 
      * @param password
      */
     public void setPassword(String password) {
@@ -58,6 +80,8 @@ public class User {
     }
 
     /**
+     * This function get the ID of the user
+     * 
      * @return int
      */
     public int getId() {
@@ -65,6 +89,8 @@ public class User {
     }
 
     /**
+     * This function set the ID of the user
+     * 
      * @param id
      */
     public void setId(int id) {

@@ -7,6 +7,17 @@ public class Customer extends User {
     private String name;
     private int age;
 
+    /**
+     * Customer is a entity that store customer information
+     * 
+     * @param email
+     * @param password
+     * @param type
+     * @param mobile_number
+     * @param name
+     * @param age
+     * @param id
+     */
     public Customer(String email, String password, int type, String mobile_number, String name, int age, int id) {
         super(email, password, type, id);
         this.mobile_number = mobile_number;
@@ -15,6 +26,8 @@ public class Customer extends User {
     }
 
     /**
+     * This function get the mobile number of the customer
+     * 
      * @return String
      */
     public String getMobile_number() {
@@ -22,6 +35,8 @@ public class Customer extends User {
     }
 
     /**
+     * This function set the mobiel number of the customer
+     * 
      * @param mobile_number
      */
     public void setMobile_number(String mobile_number) {
@@ -29,6 +44,8 @@ public class Customer extends User {
     }
 
     /**
+     * This function get the name of the customer
+     * 
      * @return String
      */
     public String getName() {
@@ -36,6 +53,8 @@ public class Customer extends User {
     }
 
     /**
+     * This function set the name of the customer
+     * 
      * @param name
      */
     public void setName(String name) {
@@ -43,6 +62,8 @@ public class Customer extends User {
     }
 
     /**
+     * This function get the age of the customer
+     * 
      * @return int
      */
     public int getAge() {
@@ -50,6 +71,8 @@ public class Customer extends User {
     }
 
     /**
+     * This function set the age of the customer
+     * 
      * @param age
      */
     public void setAge(int age) {

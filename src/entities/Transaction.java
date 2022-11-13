@@ -19,6 +19,7 @@ public class Transaction{
 	 * @param name used to initialise the name of the customer in the parametrized constructor
 	 * @param userID used to initialise the userID of the customer in the parametrized constructor
 	 */
+	//constructor
 	public Transaction( String name,int userID)
 	{
 		this.name=name;
@@ -137,6 +138,7 @@ public class Transaction{
 	public static String generateTID(String cinemaID)
 	{
 		Date date = new Date();
+		//generate date according to the date and time while booking
 		SimpleDateFormat formatter = new SimpleDateFormat("YYYYMMddhhmm");
 		String strDate= formatter.format(date);
 		

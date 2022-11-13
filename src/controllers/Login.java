@@ -11,11 +11,16 @@ public class Login {
     private ArrayList<Admin> admin = new ArrayList<Admin>();
     private User returnUser = null;
 
+    /**
+     * Login is a controller that provide the system the login functionality
+     */
     public Login() {
 
     }
 
     /**
+     * This function allow the system to take in a customer list
+     * 
      * @param customer
      */
     public void addCustomerList(ArrayList<Customer> customer) {
@@ -23,6 +28,8 @@ public class Login {
     }
 
     /**
+     * This function allow the system to take in an admin list
+     * 
      * @param admin
      */
     public void addAdminList(ArrayList<Admin> admin) {
@@ -30,6 +37,8 @@ public class Login {
     }
 
     /**
+     * This function is the login system
+     * 
      * @param email
      * @param password
      * @return User
@@ -39,6 +48,8 @@ public class Login {
     }
 
     /**
+     * This function allow the system to create new admins
+     * 
      * @param email
      * @param password
      * @param type
@@ -51,6 +62,8 @@ public class Login {
     }
 
     /**
+     * This function allow the system create new customers
+     * 
      * @param email
      * @param password
      * @param type
@@ -66,6 +79,9 @@ public class Login {
     }
 
     /**
+     * This allow the login system to search for a user that match the email and
+     * password inputted
+     * 
      * @param email
      * @param password
      * @return User
