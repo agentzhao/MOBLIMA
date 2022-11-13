@@ -5,18 +5,15 @@ import java.util.Date;
 
 public class Transaction{
 	
-	private String TID; // format XXXYYYYMMDDhhmm
+	private String TID;
 	
 	private int userID;
 
-	private String name;//customer name
+	private String name;
 	
-	private String mobileNumber;//customer mobile number
+	private String mobileNumber;
 	
-	private double amount;//Amount of the transaction
-
-
-	
+	private double amount;
 	
 	public Transaction( String name,int userID)
 	{
@@ -24,55 +21,92 @@ public class Transaction{
 		this.userID=userID;		
 	}
 	
+	
+	/** 
+	 * @return String
+	 */
 	public String getTID()
 	{
 		return TID;
 	}
 	
+	
+	/** 
+	 * @return double
+	 */
 	public double getTransactionAmount()
 	{
 		return amount;
 	}
 	
+	
+	/** 
+	 * @return String
+	 */
 	public String getNameOfCustomer()
 	{
 		return name;
 	}
 	
+	
+	/** 
+	 * @return String
+	 */
 	public String getMobileNumber()
 	{
 		return mobileNumber;
 	}
 
+	
+	/** 
+	 * @return int
+	 */
 	public int getUserID()
 	{
 		return this.userID;
 	}
 
 	
-	//setter functions
-
+	/** 
+	 * @param cinemaID
+	 */
 	public void setTID(String cinemaID)
 	{
 		String tid= generateTID(cinemaID);
 		this.TID=tid;
 	}
 
+	
+	/** 
+	 * @param amount
+	 */
 	public void setTransactionAmount(double amount)
 	{
 		this.amount=amount;
 	}
 
+	
+	/** 
+	 * @param name
+	 */
 	public void setNameOfCustomer(String name)
 	{
 		this.name=name;
 	}
 
+	
+	/** 
+	 * @param mno
+	 */
 	public void setMobileNumber(String mno)
 	{
 		this.mobileNumber=mno;
 	}
 
+	
+	/** 
+	 * @param userID
+	 */
 	public void setUserID(int userID)
 	{
 		this.userID=userID;
@@ -88,6 +122,11 @@ public class Transaction{
 		
 	}
 
+	
+	/** 
+	 * @param cinemaID
+	 * @return String
+	 */
 	public static String generateTID(String cinemaID)
 	{
 		Date date = new Date();
