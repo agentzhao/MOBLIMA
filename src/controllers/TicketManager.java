@@ -158,13 +158,15 @@ public class TicketManager{
             int ticID= ticket.size()+1;
             newTicket.setTicketID(ticID);
 
+
             //check cuople seat
+            newTicket.setSeatID(seatID.get(i));
             if(seattype.get(i)>=1)
             {
                 if(seatID.get(i)%2==0) 
-                    newTicket.setSeatID2(i+3);
+                    newTicket.setSeatID2(newTicket.getSeatID()+1);
                 else
-                    newTicket.setSeatID2(i);
+                    newTicket.setSeatID2(newTicket.getSeatID()-1);
             }
             else
             newTicket.setSeatID2(999);
@@ -257,20 +259,13 @@ public class TicketManager{
             ch=sc.nextInt();
         }
         else 
-        ch= 0;
-
+        ch= 1;
+        ch--;
         getTicketDetails(tic.get(ch));
 
-        System.out.println("1. User ID: ");
-        System.out.println("2. Ticket ID: ");
-        System.out.println("3. Ticket Type: ");
-        System.out.println("4. Movie Time: ");
-        System.out.println("5. Movie ID: ");
-        System.out.println("6. Movie Name: ");
-        System.out.println("7. Price: ");
-        System.out.println("8. Cinema Name: ");
-        System.out.println("9. Seat ID: ");
-        System.out.println("10.Date of the Movie: ");
+        System.out.println("1. Ticket ID: ");
+        System.out.println("2. Ticket Type: ");
+
         System.out.println("0. Exit");
         System.out.println("Enter field to update: ");
 
@@ -279,55 +274,15 @@ public class TicketManager{
         {
 
             case 1:
-            System.out.println("Enter new User ID: ");
-            tic.get(ch).setUserID(sc.nextInt());
+            System.out.println("Enter new Ticket ID: ");
+            tic.get(ch).setTicketID(sc.nextInt());
             break;
 
             case 2:
-            System.out.println("Enter new Ticket ID: ");
-            tic.get(ch).setTicketID(sc.nextInt());
-
-            case 3:
             System.out.println("Type of Ticket (SENIOR, ADULT, CHILD): ");
             System.out.println("Enter the new type of ticket:");
             tic.get(ch).setTicketType(TicType.valueOf(sc.nextLine()));
             break;
-
-            case 4:
-            System.out.println("Enter new movie time: ");
-            tic.get(ch).setMovieTime(sc.nextLine());
-            break;
-
-            case 5:
-            System.out.println("Enter new movie ID: ");
-            tic.get(ch).setMovieID(sc.nextInt());
-            break;
-
-            case 6:
-            System.out.println("Enter new Movie Name: ");
-            tic.get(ch).setMovieName(sc.nextLine());
-            break;
-
-            case 7:
-            System.out.println("Enter new Price to set: ");
-            tic.get(ch).setPrice(sc.nextDouble());
-            break;
-
-            case 8:
-            System.out.println("Enter new Cinema Name: ");
-            tic.get(ch).setCinemaName(sc.nextLine());
-            break;
-
-            case 9:
-           
-            System.out.println("Enter new Seat ID: ");
-            int b=sc.nextInt();
-            updateSeatID(tic.get(ch).getTicketID(),b);
-            break;
-
-            case 10:
-            System.out.println("Enter new Date to set: ");
-            tic.get(ch).setMovieDate(sc.nextLine());
 
             case 0:
             return 1;
@@ -816,18 +771,16 @@ public class TicketManager{
 
         if(t!=null)
         {
-            if(t.getSeatID2()==999)
-                t.setSeatID(seatid);
-            else
+            
+            t.setSeatID(seatid);
+            if(t.getSeatID2()!=999)
             {
                 if(seatid%2==0)
-                {
-                    t.setSeatID(seatid);
+                {   
                     t.setSeatID2(seatid+1);
                 }
                 else 
-                {
-                    t.setSeatID(seatid);
+                {   
                     t.setSeatID2(seatid-1);
                 }
             }

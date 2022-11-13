@@ -2,6 +2,9 @@ package entities;
 
 import java.util.List;
 
+/**
+ * Creates an entity to store the information of a cinema
+ */
 public class Cinema {
     private boolean isPlatinum;
     private String cinemaID;
