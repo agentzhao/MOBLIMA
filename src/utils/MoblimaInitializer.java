@@ -21,7 +21,7 @@ import controllers.TicketManager;
 public class MoblimaInitializer {
   private String dataPath;
 
-  /*
+  /**
    * MoblimaInitializer Constructor
    * dataPath - Path containing all initialisation .txt files.
    */
@@ -30,11 +30,8 @@ public class MoblimaInitializer {
   }
 
   /**
+   * Initialise movie data returns ArrayList of movie objects
    * @return ArrayList<Movie>
-   */
-  /*
-   * Initialise movie data
-   * Returns: List of movie objects
    */
   public ArrayList<Movie> initializeMovie() {
     /* Get list of Movie<id>.txt files */
@@ -86,12 +83,9 @@ public class MoblimaInitializer {
   }
 
   /**
+   * Initialise reviews, returns ArrayList of review objects
    * @param mm
    * @return ArrayList<Review>
-   */
-  /*
-   * Initialise reviews
-   * Returns: List of review objects
    */
   public ArrayList<Review> initializeReview(MovieManager mm) {
     /* Get list of Review<id>.txt files */
@@ -138,11 +132,8 @@ public class MoblimaInitializer {
   }
 
   /**
+   * Initialise Customer data, returns ArrayList of customer objects
    * @return ArrayList<Customer>
-   */
-  /*
-   * Initialise Customer data
-   * Returns: ArrayList of customer objects
    */
   public ArrayList<Customer> initializeCustomers() {
     /* Get list of Customer<id>.txt files */
@@ -183,11 +174,8 @@ public class MoblimaInitializer {
   }
 
   /**
+   * Initialise Admin data, returns ArrayList of admin objects
    * @return ArrayList<Admin>
-   */
-  /*
-   * Initialise Admin data
-   * Returns: ArrayList of admin objects
    */
   public ArrayList<Admin> initializeAdmin() {
     /* Get list of Admin<id>.txt files */
@@ -226,13 +214,10 @@ public class MoblimaInitializer {
   }
 
   /**
+   * Initialise Cineplexes, cinemas it contains, and all other relevant data.
+   * Returns List of cineplex objects
    * @param movies
    * @return List<Cineplex>
-   */
-  /*
-   * Initialise Cineplexes
-   * Parameters: List of movie objects
-   * Returns: List of cineplex objects
    */
   public List<Cineplex> initializeCineplex(List<Movie> movies) {
     /* Get list of <CineplexID>.txt files */
@@ -351,14 +336,10 @@ public class MoblimaInitializer {
   }
 
   /**
+   * Initialise Tickets, create 4 tickets, 1 adult, 1 child, 1 senior and 1 expired for demo purposes.
    * @param customer
    * @param cineplex
    * @return TicketManager
-   */
-  /*
-   * Initialise Tickets
-   * Parameters: ArrayList of customers, Cineplex object
-   * Returns: TicketManager
    */
   public TicketManager initializeTickets(ArrayList<Customer> customer, Cineplex cineplex) {
     /*
@@ -440,13 +421,10 @@ public class MoblimaInitializer {
   }
 
   /**
+   * Initialise Seats, set them to occupied and their corresponding ticketid
    * @param customer
    * @param cineplex
    * @param tm
-   */
-  /*
-   * Initialise Seats
-   * Parameters: ArrayList of customers, Cineplex object, TicketManager
    */
   public void initializeSeats(ArrayList<Customer> customer, Cineplex cineplex, TicketManager tm) {
     /*
