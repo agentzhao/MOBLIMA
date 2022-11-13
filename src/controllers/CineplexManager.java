@@ -18,7 +18,7 @@ import java.util.Scanner;
 public class CineplexManager {
   Scanner sc = new Scanner(System.in);
   private List<Cineplex> cineplexes;
-
+  /*It creates the cineplex with an array of cinemas which has an arrray of screeningtimes which in turn has an array of seats */
   // constructor
   public CineplexManager() {
     cineplexes = new ArrayList<Cineplex>();
@@ -43,6 +43,7 @@ public class CineplexManager {
   /**
    * @param cineplexID used to know which cineplex to create showtime
    * @param movie the movie's showtimes in the cineplex that will be created
+   * Adds a showtime into the cineplex of admin and of a movie
    */
   // Create, Update, Remove showtime
   public void createShowtime(String cineplexID, Movie movie) {
@@ -106,6 +107,7 @@ public class CineplexManager {
    * @param cineplexID to know which cineplex to update showtime
    * @param movie the movie's showtime that will be updated
    * @throws ParseException
+   * Updates the showtime of the cineplex of the admin and of a movie
    */
   public void updateShowtime(String cineplexID, Movie movie) throws ParseException {
     ScreeningTimes screeningtime = displayScreentime(cineplexID, movie);
@@ -123,6 +125,7 @@ public class CineplexManager {
    * @param cineplexID to know which cineplex to remove showtime
    * @param movie the movie's showtime that will be removed
    * @throws ParseException
+   * Removes the showtime of cineplex of the admin and of a movie
    */
   public void removeShowTime(String cineplexID, Movie movie) throws ParseException {
     ScreeningTimes screeningtime = displayScreentime(cineplexID, movie);
@@ -148,6 +151,8 @@ public class CineplexManager {
    * @param movie the movie selected to be displayed
    * @return ScreeningTimes returns the selected showtime by the user/admin
    * @throws ParseException
+   * Displays the screeningtimes of the Cineplex of admin and movie
+   * If it is customer, it would display for all cinplexes as cineplexID would be null
    */
   // Display screening time for movie
   public ScreeningTimes displayScreentime(String cineplexID, Movie movie) throws ParseException {
@@ -205,6 +210,7 @@ public class CineplexManager {
 
   /**
    * @param screentime the showtime that is choosen, printing out the number of seats available
+   * Returns the number of seats available for a selected screentime
    */
   // Number for seats available
   public void getSeatAvailability(ScreeningTimes screentime) {
@@ -217,7 +223,8 @@ public class CineplexManager {
   }
 
   /**
-   * @param screentime the showtime that is chodsen to print the seats for
+   * @param screentime the showtime that is choosen to print the seats for
+   * Prints out the ascii drawing of the cinema seating and shows the seats that are available
    */
   // Print the ascii cinema seat
   public void printSeats(ScreeningTimes screentime) {
@@ -255,6 +262,7 @@ public class CineplexManager {
    * @param screentime the showtime that is choosen
    * @param seatID the seat that is being checked for the seat type
    * @return int
+   * Returns the seat type 
    */
   public int checkSeat(ScreeningTimes screentime, int seatID) {
     if (screentime.getSeats()[seatID].getType() == Type.Normal)
@@ -272,6 +280,7 @@ public class CineplexManager {
    * @param seatID the seat to be booked
    * @param tID the ticketID of the booked seat
    * @return int returns on whether successful or not
+   * Books the seat of a screentime selected and seatID selected by user
    */
   // Booking, Unbooking, Changing Seats
   public int bookSeat(ScreeningTimes screentime, int seatID, int tID) {
@@ -309,6 +318,7 @@ public class CineplexManager {
    * @param ticket the ticket of the user unbooking the seat
    * @return int whether it is successful or not
    * @throws ParseException
+   * Unbooks the seat through the ticket obtained
    */
   public int unbookSeat(Ticket ticket) throws ParseException {
     String cineplexID = ticket.getTransID().substring(0, 3);
@@ -381,6 +391,9 @@ public class CineplexManager {
    * @param ticket ticket of the user changing seat
    * @return int the new seat chosen by the user
    * @throws ParseException
+   * Changes the seat of in the showtime
+   * User would select the seat from the same showtime to change to
+   * Can only change to same seat type
    */
   public int changeSeat(Ticket ticket) throws ParseException {
     String cineplexID = ticket.getTransID().substring(0, 3);
