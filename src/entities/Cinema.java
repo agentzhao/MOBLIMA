@@ -21,6 +21,9 @@ public class Cinema {
     /*Getters */
     /**
      * @return boolean
+     * Gets the cinema platinum boolean value
+     * if true, the cinema is platinum
+     * else the cinema is not platinum
      */
     public boolean getIsPlatinum() {
         return this.isPlatinum;
@@ -28,6 +31,7 @@ public class Cinema {
 
     /**
      * @return List<Movie>
+     * Gets the list of movies the cinema is showing
      */
     public List<Movie> getMovies() {
         return movies;
@@ -35,6 +39,7 @@ public class Cinema {
 
     /**
      * @return String
+     * Gets the name of the cinema
      */
     public String getCinemaName() {
         return this.cinemaName;
@@ -42,14 +47,24 @@ public class Cinema {
 
     /**
      * @return String
+     * Gets the ID of the cinema
      */
     public String getCinemaID() {
         return this.cinemaID;
     }
 
+     /**
+     * @return List<ScreeningTimes>
+     * Gets the screeningtimes of the cinema
+     */
+    public List<ScreeningTimes> getScreeningTimes() {
+        return this.screeningTimes;
+    }
+
     /*Setter */
     /**
      * @param isPlatinum
+     * Sets the cinema to be either platinum or not
      */
     public void setPlatinum(boolean isPlatinum) {
         this.isPlatinum = isPlatinum;
@@ -57,6 +72,7 @@ public class Cinema {
 
     /**
      * @param cinemaCode
+     * Sets the ID of the cinema
      */
     public void setCinemaID(String cinemaCode) {
         this.cinemaID = cinemaCode;
@@ -64,6 +80,7 @@ public class Cinema {
 
     /**
      * @param cinemaName
+     * Sets the name of the Cinema
      */
     public void setCinemaName(String cinemaName) {
         this.cinemaName = cinemaName;
@@ -71,6 +88,7 @@ public class Cinema {
 
     /**
      * @param movies
+     * Sets the array of movies the cinema has
      */
     public void setMovies(List<Movie> movies) {
         this.movies = movies;
@@ -78,15 +96,10 @@ public class Cinema {
 
     /**
      * @param screeningTimes
+     * Sets the screeningtimes the movie can access
      */
     public void setScreeningTimes(List<ScreeningTimes> screeningTimes) {
         this.screeningTimes = screeningTimes;
     }
 
-    /**
-     * @return List<ScreeningTimes>
-     */
-    public List<ScreeningTimes> getScreeningTimes() {
-        return this.screeningTimes;
-    }
 }
