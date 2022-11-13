@@ -19,11 +19,13 @@ import controllers.MovieManager;
 import controllers.TicketManager;
 
 public class MoblimaInitializer {
+  /**
+   * dataPath - Path containing all initialisation .txt files.
+   */
   private String dataPath;
 
   /**
-   * MoblimaInitializer Constructor
-   * dataPath - Path containing all initialisation .txt files.
+   * MoblimaInitializer Constructor, sets dataPath to initialization_files directory
    */
   public MoblimaInitializer() {
     dataPath = Paths.get("").toAbsolutePath() + "/data/initialization_files";
