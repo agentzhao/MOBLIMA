@@ -35,6 +35,7 @@ public class TicketManager{
     /**
      * Is a constructor for the TicketManager class. Initializes all the price multipliers and all ArrayList used in the class
      */
+    //constructor
     public TicketManager(ArrayList<String> holidayDates) {
         ticket = new ArrayList<Ticket>();
         transactions = new ArrayList<Transaction>();
@@ -42,23 +43,23 @@ public class TicketManager{
 
         this.basePrice=12;
 
-        agePrice[0] =0.8; 
-        agePrice[1] =1.0; 
-        agePrice[2] =0.5; 
+        agePrice[0] =0.8; //SENIOR
+        agePrice[1] =1.0; //ADULT
+        agePrice[2] =0.5; //CHILD
 
-        typePrice[0]= 1.2;
-        typePrice[1]= 1.8; 
-        typePrice[2]= 1.5; 
-        typePrice[3]= 1.0; 
+        typePrice[0]= 1.2; //BLOCKBUSTER
+        typePrice[1]= 1.8; //THREED
+        typePrice[2]= 1.5; //IMAX
+        typePrice[3]= 1.0; //REGULAR
 
-        seatPrice[0]= 1.0;
-        seatPrice[1]= 2.0; 
-        seatPrice[2]= 1.5; 
-        seatPrice[3]= 2.0; 
+        seatPrice[0]= 1.0; //REGULAR 
+        seatPrice[1]= 2.0; //COUPLE
+        seatPrice[2]= 1.5; //ELITE
+        seatPrice[3]= 2.0; //ULTIMA
 
-        holidayPrice= 1.5;
+        holidayPrice= 1.5; //HOLIDAY/WEEKEND PRICE
 
-        previewPrice=2.0;
+        previewPrice=2.0; //IF YOU SEE A MOVIE IN A PREVIEW DATE
     }
 
 
@@ -128,25 +129,32 @@ public class TicketManager{
         ArrayList<Ticket> multipleTics = new ArrayList<Ticket>();
         Transaction newTran= new Transaction(customer.getName(), customer.getId());
 
+        //UserID
         newTran.setUserID(customer.getId());
 
+        //Name
         newTran.setNameOfCustomer(customer.getName());
 
+        //Mobile Number
         newTran.setMobileNumber(customer.getMobile_number());
 
+        //TID
         newTran.setTID(scTime.getCinemaID());
 
-
+        //To generate multiple tickets if user want to book multiple in one transaction
         for(int i=0; i<noOfSeats; i++)
         {
 
             Ticket newTicket= new Ticket(customer.getId(), movie.getMovieName());
 
+            //UserID
             newTicket.setUserID(customer.getId());
 
+            //TicketID
             int ticID= ticket.size()+1;
             newTicket.setTicketID(ticID);
 
+            //check cuople seat
             if(seattype.get(i)>=1)
             {
                 if(seatID.get(i)%2==0) 
@@ -157,6 +165,7 @@ public class TicketManager{
             else
             newTicket.setSeatID2(999);
 
+            //chaeck age
             if((tictype.get(i)==0))
             {
                 ttype=TicType.SENIOR;
@@ -173,20 +182,28 @@ public class TicketManager{
                 agePriceVar=2;
             }
 
+            //Ticket Type
             newTicket.setTicketType(ttype);
 
+            //ScreenTime
             newTicket.setMovieTime(scTime.getScreenTime());
 
+            //Transaction ID of ticket
             newTicket.setTransID(newTran.getTID());
 
-             newTicket.setMovieDate(scTime.getDate());
+            //Movie Date
+            newTicket.setMovieDate(scTime.getDate());
 
+            //Movie ID
             newTicket.setMovieID(scTime.getMovieID());
 
+            //Movie Name
             newTicket.setMovieName(movie.getMovieName());
 
+            //Cinema Name
             newTicket.setCinemaName(scTime.getCinemaName());
 
+            //Seat ID
             newTicket.setSeatID(seatID.get(i));
 
             double totprice = calPrice(movie,seatID.get(i),agePriceVar,scTime, seattype.get(i));
@@ -194,12 +211,14 @@ public class TicketManager{
             newTicket.setPrice(totprice);
             totalPrice+=totprice;
 
+            //add the newly created ticket to the ArrayList ticket
             ticket.add(newTicket);
             multipleTics.add(newTicket);
         }
 
     newTran.setTransactionAmount(totalPrice);
 
+    //Add the trsaction to the ArrayList transactions
     transactions.add(newTran);
 
     return multipleTics; 
@@ -221,9 +240,11 @@ public class TicketManager{
         tic= searchTicket(movieName, userID);
         int ch;
 
+        //if no such ticket
         if(tic==null)
             return 0;
 
+        //if multiple tickets found
         if(tic.size()!=1) 
         {
              System.out.println("Select a ticket to update:");
@@ -454,6 +475,7 @@ public class TicketManager{
  
         double totprice;
 
+        //set the index of the movie type price variable according to the type of the movie
         if(movie.getMovieType()==Type.BLOCKBUSTER)
             typePriceVar=0;
         else if(movie.getMovieType()==Type.THREED)
@@ -476,20 +498,24 @@ public class TicketManager{
         }
         c.setTime(date);
 
+        //stores what day of week it is in number format
         int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+        //check is Sunday(1) or Saturday(7) for the weekend price
         if(dayOfWeek==1 || dayOfWeek==7)
         {
             basePrice=basePrice*holidayPrice;
         }
-
+        //check if its a holiday
         if(searchHoliday(scTime.getDate())==1)
             basePrice=basePrice*holidayPrice;
 
+        //Cheks if the movie is preview type
         if(movie.getMovieStatus()==Status.PREVIEW)
          totprice= basePrice*agePrice[agePriceVar]*typePrice[typePriceVar]*previewPrice;
         else 
          totprice= basePrice*agePrice[agePriceVar]*typePrice[typePriceVar];
 
+        //according the type of seat
         if(seatPriceVar==1)
          totprice=totprice*seatPrice[seatPriceVar];
         else if(seatPriceVar==2)
@@ -497,6 +523,7 @@ public class TicketManager{
         else if(seatPriceVar==3)
          totprice=totprice*seatPrice[seatPriceVar]*seatPrice[1];
 
+        //calculating and including the GST
         totprice= totprice*0.07 + totprice; 
         
         return totprice;
