@@ -29,6 +29,9 @@ public class MoblimaInitializer {
     dataPath = Paths.get("").toAbsolutePath() + "/data/initialization_files";
   }
 
+  /**
+   * @return ArrayList<Movie>
+   */
   /*
    * Initialise movie data
    * Returns: List of movie objects
@@ -82,6 +85,10 @@ public class MoblimaInitializer {
     return movies;
   }
 
+  /**
+   * @param mm
+   * @return ArrayList<Review>
+   */
   /*
    * Initialise reviews
    * Returns: List of review objects
@@ -129,7 +136,10 @@ public class MoblimaInitializer {
 
     return reviews;
   }
-  
+
+  /**
+   * @return ArrayList<Customer>
+   */
   /*
    * Initialise Customer data
    * Returns: ArrayList of customer objects
@@ -172,6 +182,9 @@ public class MoblimaInitializer {
     return customers;
   }
 
+  /**
+   * @return ArrayList<Admin>
+   */
   /*
    * Initialise Admin data
    * Returns: ArrayList of admin objects
@@ -212,6 +225,10 @@ public class MoblimaInitializer {
     return admins;
   }
 
+  /**
+   * @param movies
+   * @return List<Cineplex>
+   */
   /*
    * Initialise Cineplexes
    * Parameters: List of movie objects
@@ -286,13 +303,13 @@ public class MoblimaInitializer {
             for (int z = 0; z < mov.length; z += 1) {
               for (int x = 0; x < dates.length; x += 1) {
                 Seat[] seats = new Seat[noOfSeats];
-  
+
                 if (!isPlatinum) {
                   for (int k = 0; k < 10; k += 1) {
                     Seat s = new Seat(Seat.Type.Couple, k + 1, true, 0);
                     seats[k] = s;
                   }
-  
+
                   for (int k = 10; k < noOfSeats; k += 1) {
                     Seat s = new Seat(Seat.Type.Normal, k + 1, true, 0);
                     seats[k] = s;
@@ -302,7 +319,7 @@ public class MoblimaInitializer {
                     Seat s = new Seat(Seat.Type.Elite, k + 1, true, 0);
                     seats[k] = s;
                   }
-  
+
                   for (int k = noOfSeats / 2; k < noOfSeats; k += 1) {
                     Seat s = new Seat(Seat.Type.Ultima, k + 1, true, 0);
                     seats[k] = s;
@@ -333,6 +350,11 @@ public class MoblimaInitializer {
     return cineplexes;
   }
 
+  /**
+   * @param customer
+   * @param cineplex
+   * @return TicketManager
+   */
   /*
    * Initialise Tickets
    * Parameters: ArrayList of customers, Cineplex object
@@ -349,12 +371,12 @@ public class MoblimaInitializer {
      * Customer: Terence Tang (id: 4) (Child / 12), Rachel Tan (id: 6) (Senior
      * Citizen / 65), Wesley Chan (id: 5) (Adult / 23)
      */
-    
+
     /* Create ArrayList of holidays for ticketmanager */
-    ArrayList<String> holidays = new ArrayList<>(Arrays.asList("01/01/2022", "01/02/2022", "02/02/2022", 
-                                                               "15/04/2022", "01/05/2022", "03/05/2022", 
-                                                               "15/05/2022", "10/07/2022", "09/08/2022", 
-                                                               "24/10/2022", "25/12/2022"));
+    ArrayList<String> holidays = new ArrayList<>(Arrays.asList("01/01/2022", "01/02/2022", "02/02/2022",
+        "15/04/2022", "01/05/2022", "03/05/2022",
+        "15/05/2022", "10/07/2022", "09/08/2022",
+        "24/10/2022", "25/12/2022"));
 
     /* Create TicketManager object */
     TicketManager tm = new TicketManager(holidays);
@@ -364,7 +386,7 @@ public class MoblimaInitializer {
 
     /* Get movie object */
     Movie m = c.getMovies().get(7);
-    
+
     /* Get ScreeningTime object */
     ScreeningTimes st = c.getScreeningTimes().get(7);
 
@@ -378,45 +400,50 @@ public class MoblimaInitializer {
     for (int i = 0; i < 3; i += 1) {
       /* Create seatID Array and store seat id */
       int s = st.getSeats()[i + 10].getSeatID();
-      
+
       ArrayList<Integer> seatID = new ArrayList<Integer>();
       seatID.add(s);
 
       /* Create tictype array and store corresponding ticket type */
       ArrayList<Integer> tictype = new ArrayList<Integer>();
       tictype.add(tt.get(i));
-      
+
       /* Create seattype array and set to NORMAL seattype */
       ArrayList<Integer> seattype = new ArrayList<Integer>();
       seattype.add(0);
 
       tm.createTicket(customer.get(i), seatID, seattype, tictype, m, st);
     }
-    
+
     /* Create Expired Ticket */
-    
+
     /* Get ScreeningTime object */
     st = c.getScreeningTimes().get(6);
-    
+
     /* Create seatID Array and store seat id */
     int s = st.getSeats()[10].getSeatID();
-    
+
     ArrayList<Integer> seatID = new ArrayList<Integer>();
     seatID.add(s);
 
     /* Create tictype array and store corresponding ticket type */
     ArrayList<Integer> tictype = new ArrayList<Integer>();
     tictype.add(1);
-    
+
     /* Create seattype array and set to NORMAL seattype */
     ArrayList<Integer> seattype = new ArrayList<Integer>();
     seattype.add(0);
-        
+
     tm.createTicket(customer.get(2), seatID, seattype, tictype, m, st);
-    
+
     return tm;
   }
 
+  /**
+   * @param customer
+   * @param cineplex
+   * @param tm
+   */
   /*
    * Initialise Seats
    * Parameters: ArrayList of customers, Cineplex object, TicketManager
@@ -448,15 +475,15 @@ public class MoblimaInitializer {
       st.getSeats()[s].setAvailable(false);
       st.getSeats()[s].setTicketHolder(t);
     }
-    
-    int s = st.getSeats()[2+10].getSeatID();
-    
+
+    int s = st.getSeats()[2 + 10].getSeatID();
+
     st.getSeats()[s].setAvailable(false);
     st.getSeats()[s].setTicketHolder(3);
-    
+
     /* Create expired ticket */
     st = c.getScreeningTimes().get(6);
-    
+
     s = st.getSeats()[10].getSeatID();
     int t = 4;
 

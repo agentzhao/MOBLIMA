@@ -21,6 +21,10 @@ public class MOBLIMA {
   private static Customer c;
   private static User tempUser;
 
+  /**
+   * @param args
+   * @throws ParseException
+   */
   public static void main(String[] args) throws ParseException {
     initData();
     mainMenu(log);
@@ -64,6 +68,10 @@ public class MOBLIMA {
     as = new AdminSystem(mm, cm, tm);
   }
 
+  /**
+   * @param log
+   * @throws ParseException
+   */
   public static void mainMenu(Login log) throws ParseException {
 
     int login = 0, admin = 0;
@@ -202,6 +210,9 @@ public class MOBLIMA {
 
   }
 
+  /**
+   * @throws ParseException
+   */
   public static void movieMenu() throws ParseException {
     Scanner sc = new Scanner(System.in);
     System.out.println("Please Enter the movie name: ");
@@ -229,6 +240,10 @@ public class MOBLIMA {
     }
   }
 
+  /**
+   * @param movie
+   * @throws ParseException
+   */
   public static void screenTimeMenu(Movie movie) throws ParseException {
     ScreeningTimes st;
     int c = 0;
@@ -258,6 +273,10 @@ public class MOBLIMA {
     }
   }
 
+  /**
+   * @param movie
+   * @param st
+   */
   public static void seatMenu(Movie movie, ScreeningTimes st) {
     // Print out Seating plan
 
@@ -331,6 +350,13 @@ public class MOBLIMA {
     }
   }
 
+  /**
+   * @param movie
+   * @param st
+   * @param s
+   * @param a
+   * @param type
+   */
   public static void bookingMenu(Movie movie, ScreeningTimes st, ArrayList<Integer> s, ArrayList<Integer> a,
       ArrayList<Integer> type) {
     if (tempUser.getType() == 2) {

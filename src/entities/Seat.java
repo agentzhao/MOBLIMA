@@ -1,44 +1,76 @@
 package entities;
 
 public class Seat {
-    public enum Type {Normal, Couple, Elite, Ultima};
+    public enum Type {
+        Normal, Couple, Elite, Ultima
+    };
 
     private Type type;
     private int seatID;
     private boolean available;
     private int ticketHolder;
 
-    public Seat(Type type, int seatID, boolean available, int ticketholder){
+    public Seat(Type type, int seatID, boolean available, int ticketholder) {
         this.type = type;
         this.seatID = seatID;
         this.available = available;
         this.ticketHolder = ticketholder;
     }
 
-    //getters
+    /**
+     * @return boolean
+     */
+    // getters
     public boolean isAvailable() {
         return this.available;
     }
-    public int getSeatID(){
+
+    /**
+     * @return int
+     */
+    public int getSeatID() {
         return this.seatID;
     }
-    public int getTicketholder(){
+
+    /**
+     * @return int
+     */
+    public int getTicketholder() {
         return this.ticketHolder;
     }
+
+    /**
+     * @return Type
+     */
     public Type getType() {
         return this.type;
     }
 
-    //setters
+    /**
+     * @param seatID
+     */
+    // setters
     public void setSeatID(int seatID) {
         this.seatID = seatID;
     }
-    public void setTicketHolder(int ticketHolder){
+
+    /**
+     * @param ticketHolder
+     */
+    public void setTicketHolder(int ticketHolder) {
         this.ticketHolder = ticketHolder;
     }
+
+    /**
+     * @param available
+     */
     public void setAvailable(boolean available) {
         this.available = available;
     }
+
+    /**
+     * @param type
+     */
     public void setType(Type type) {
         this.type = type;
     }

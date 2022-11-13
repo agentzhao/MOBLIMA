@@ -54,51 +54,87 @@ public class Movie {
     this.screenTimes = screenTimes;
   }
 
+  /**
+   * @return int
+   */
   /* getters */
   public int getMovieID() {
     return this.movieID;
   }
 
+  /**
+   * @return String
+   */
   public String getMovieName() {
     return this.movieName;
   }
 
+  /**
+   * @return Type
+   */
   public Type getMovieType() {
     return this.movieType;
   }
 
+  /**
+   * @return Status
+   */
   public Status getMovieStatus() {
     return this.movieStatus;
   }
 
+  /**
+   * @return Rating
+   */
   public Rating getMovieRating() {
     return this.movieRating;
   }
 
+  /**
+   * @return ArrayList<Review>
+   */
   public ArrayList<Review> getMovieReviews() {
     return this.movieReviews;
   }
 
+  /**
+   * @return String
+   */
   public String getSynopsis() {
     return this.synopsis;
   }
 
+  /**
+   * @return String[]
+   */
   public String[] getCast() {
     return this.cast;
   }
 
+  /**
+   * @return String
+   */
   public String getDirector() {
     return this.director;
   }
 
+  /**
+   * @return double
+   */
   public double getOverallRating() {
     return this.overallRating;
   }
 
+  /**
+   * @return int
+   */
   public int getTicketSales() {
     return this.ticketSales;
   }
 
+  /**
+   * @return long[]
+   */
   public long[] getScreenTimes() {
     return this.screenTimes;
   }
@@ -109,47 +145,80 @@ public class Movie {
         + ", " + dateFormat.format(this.screenTimes[1] * 1000) + ", " + dateFormat.format(this.screenTimes[2] * 1000));
   }
 
+  /**
+   * @param movieID
+   */
   /* setters */
   public void setMovieID(int movieID) {
     this.movieID = movieID;
   }
 
+  /**
+   * @param movieName
+   */
   public void setMovieName(String movieName) {
     this.movieName = movieName;
   }
 
+  /**
+   * @param movieType
+   */
   public void setMovieType(Type movieType) {
     this.movieType = movieType;
   }
 
+  /**
+   * @param movieStatus
+   */
   public void setMovieStatus(Status movieStatus) {
     this.movieStatus = movieStatus;
   }
 
+  /**
+   * @param movieRating
+   */
   public void setMovieRating(Rating movieRating) {
     this.movieRating = movieRating;
   }
 
+  /**
+   * @param review
+   */
   public void addReview(Review review) {
     this.movieReviews.add(review);
   }
 
+  /**
+   * @param review
+   */
   public void removeReview(Review review) {
     this.movieReviews.remove(review);
   }
 
+  /**
+   * @param synopsis
+   */
   public void setSynopsis(String synopsis) {
     this.synopsis = synopsis;
   }
 
+  /**
+   * @param cast
+   */
   public void setCast(String[] cast) {
     this.cast = cast;
   }
 
+  /**
+   * @param director
+   */
   public void setDirector(String director) {
     this.director = director;
   }
 
+  /**
+   * @param screenTimes
+   */
   public void setScreenTimes(long[] screenTimes) {
     this.screenTimes = screenTimes;
   }
@@ -187,6 +256,9 @@ public class Movie {
     this.overallRating = temp / (double) this.movieReviews.size();
   }
 
+  /**
+   * @param ticketSales
+   */
   public void setTicketSales(int ticketSales) {
     this.ticketSales = ticketSales;
   }

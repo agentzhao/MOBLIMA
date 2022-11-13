@@ -10,10 +10,16 @@ public class Admin extends User {
         this.cineplexID = cineplexID;
     }
 
+    /**
+     * @return String
+     */
     public String getcineplexID() {
         return cineplexID;
     }
 
+    /**
+     * @param cineplexID
+     */
     public void setCinemaId(String cineplexID) {
         this.cineplexID = cineplexID;
     }

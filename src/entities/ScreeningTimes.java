@@ -1,6 +1,6 @@
 package entities;
 
-public class ScreeningTimes{
+public class ScreeningTimes {
     private String cinemaID;
     private String cinemaName;
     private int movieID;
@@ -8,7 +8,8 @@ public class ScreeningTimes{
     private String date;
     private Seat[] seats;
 
-    public ScreeningTimes(String cinemaID, String cinemaName, int movieID, String screenTime, String date, Seat[] seats){
+    public ScreeningTimes(String cinemaID, String cinemaName, int movieID, String screenTime, String date,
+            Seat[] seats) {
         this.cinemaID = cinemaID;
         this.cinemaName = cinemaName;
         this.movieID = movieID;
@@ -17,42 +18,89 @@ public class ScreeningTimes{
         this.seats = seats;
 
     }
-    //getters
-    public int getMovieID(){
+
+    /**
+     * @return int
+     */
+    // getters
+    public int getMovieID() {
         return this.movieID;
     }
+
+    /**
+     * @return String
+     */
     public String getCinemaName() {
         return cinemaName;
     }
-    public String getScreenTime(){
+
+    /**
+     * @return String
+     */
+    public String getScreenTime() {
         return this.screenTime;
     }
+
+    /**
+     * @return String
+     */
     public String getCinemaID() {
         return cinemaID;
     }
+
+    /**
+     * @return Seat[]
+     */
     public Seat[] getSeats() {
         return this.seats;
     }
-    public String getDate(){
+
+    /**
+     * @return String
+     */
+    public String getDate() {
         return this.date;
     }
 
-    //setters
+    /**
+     * @param movieID
+     */
+    // setters
     public void setMovieID(int movieID) {
         this.movieID = movieID;
     }
+
+    /**
+     * @param screenTime
+     */
     public void setScreenTime(String screenTime) {
         this.screenTime = screenTime;
     }
+
+    /**
+     * @param date
+     */
     public void setDate(String date) {
         this.date = date;
     }
+
+    /**
+     * @param seats
+     */
     public void setSeats(Seat[] seats) {
         this.seats = seats;
     }
+
+    /**
+     * @param cinemaID
+     */
     public void setCinemaID(String cinemaID) {
         this.cinemaID = cinemaID;
     }
+
+    /**
+     * @param cinemaName
+     */
     public void setCinemaName(String cinemaName) {
         this.cinemaName = cinemaName;
     }

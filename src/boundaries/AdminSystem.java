@@ -21,6 +21,9 @@ public class AdminSystem {
     tm = t;
   }
 
+  /**
+   * @param a
+   */
   public void setAdmin(Admin a) {
     this.a = a;
   }
@@ -29,6 +32,9 @@ public class AdminSystem {
     System.out.println("6: Admin Panel\n7: Shutdown MOBLIMA");
   }
 
+  /**
+   * @throws ParseException
+   */
   public void adminPanel() throws ParseException {
     Scanner sc = new Scanner(System.in);
     String id;

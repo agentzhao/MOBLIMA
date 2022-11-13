@@ -1,11 +1,9 @@
 package entities;
 
-public class Ticket
-{
+public class Ticket {
 	public enum TicType {
 		SENIOR, ADULT, CHILD
 	};
-
 
 	private int userID;
 	private int ticketID;
@@ -20,141 +18,187 @@ public class Ticket
 	private String datemov;
 	private String transID;
 
-	public Ticket(int userID, String movieName)
-	{
-		this.userID= userID;
-		this.price=0.0;
-		this.movieName=movieName;
+	public Ticket(int userID, String movieName) {
+		this.userID = userID;
+		this.price = 0.0;
+		this.movieName = movieName;
 	}
-	
-	//get methods
-	public int getUserID()
-	{
+
+	/**
+	 * @return int
+	 */
+	// get methods
+	public int getUserID() {
 		return userID;
 	}
 
-	public int getTicketID()
-	{
+	/**
+	 * @return int
+	 */
+	public int getTicketID() {
 		return ticketID;
 	}
-	
-	public TicType getTicketType()
-	{
+
+	/**
+	 * @return TicType
+	 */
+	public TicType getTicketType() {
 		return ticketType;
 	}
-	
-	public String getMovieTime()
-	{
+
+	/**
+	 * @return String
+	 */
+	public String getMovieTime() {
 		return movieTime;
 	}
-	
-	public int getMovieID()
-	{
+
+	/**
+	 * @return int
+	 */
+	public int getMovieID() {
 		return movieID;
 	}
-	
-	public String getMovieName()
-	{
+
+	/**
+	 * @return String
+	 */
+	public String getMovieName() {
 		return movieName;
 	}
-	
-	public double getPrice()
-	{
+
+	/**
+	 * @return double
+	 */
+	public double getPrice() {
 		return price;
 	}
-	
-	public String getCinemaName()
-	{
+
+	/**
+	 * @return String
+	 */
+	public String getCinemaName() {
 		return cinemaName;
 	}
-	
-	public int getSeatID()
-	{
+
+	/**
+	 * @return int
+	 */
+	public int getSeatID() {
 		return seatID;
 	}
 
-	public int getSeatID2()
-	{
+	/**
+	 * @return int
+	 */
+	public int getSeatID2() {
 		return seatID2;
 	}
 
-	public String getMoiveDate()
-	{
+	/**
+	 * @return String
+	 */
+	public String getMoiveDate() {
 		return datemov;
 	}
 
-	public String getTransID()
-	{
+	/**
+	 * @return String
+	 */
+	public String getTransID() {
 		return transID;
 	}
 
-
-
-	//setter methods
-	public void setUserID(int userID)
-	{
-		this.userID=userID;
+	/**
+	 * @param userID
+	 */
+	// setter methods
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}
 
-	public void setTicketID(int ticketID)
-	{
-		this.ticketID=ticketID;
-	}
-	
-	public void setTicketType(TicType ticketType)
-	{
-		this.ticketType=ticketType;
-	}
-	
-	public void setMovieTime(String movieTime)
-	{
-		this.movieTime=movieTime;
-	}
-	
-	public void setMovieID(int movieID)
-	{
-		this.movieID=movieID;
-	}
-	
-	public void setMovieName(String movieName)
-	{
-		this.movieName= movieName;
+	/**
+	 * @param ticketID
+	 */
+	public void setTicketID(int ticketID) {
+		this.ticketID = ticketID;
 	}
 
-
-	public void setPrice(double price)
-	{
-		this.price=price;
-	}
-	
-	public void setCinemaName(String cinemaName)
-	{
-		this.cinemaName=cinemaName;
-	}
-	
-	public void setSeatID(int seatID)
-	{
-		this.seatID=seatID;
-	}
-	
-	public void setSeatID2(int seatID2)
-	{
-		this.seatID2=seatID2;
-	}
-	
-	public void setMovieDate(String datemov)
-	{
-		this.datemov=datemov;
+	/**
+	 * @param ticketType
+	 */
+	public void setTicketType(TicType ticketType) {
+		this.ticketType = ticketType;
 	}
 
-	public void setTransID(String transID)
-	{
-		this.transID=transID;
+	/**
+	 * @param movieTime
+	 */
+	public void setMovieTime(String movieTime) {
+		this.movieTime = movieTime;
 	}
 
-	public void printTicketInfo()
-	{
-		System.out.println("User ID: "+userID+"\nTicket ID: "+ticketID+"\nTicket Type: "+ticketType+"\nMovie Time: "+ movieTime + "\nMovie ID: "+ movieID +"\nMovie Name: "+ movieName +"\nPrice: " + String.format("%.2f",price) +"\nCinema Name: "+ cinemaName +"\nSeat ID: "+seatID+"\nDate of Movie: "+datemov+"\nTransaction ID: "+transID);
+	/**
+	 * @param movieID
+	 */
+	public void setMovieID(int movieID) {
+		this.movieID = movieID;
 	}
-	
+
+	/**
+	 * @param movieName
+	 */
+	public void setMovieName(String movieName) {
+		this.movieName = movieName;
+	}
+
+	/**
+	 * @param price
+	 */
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	/**
+	 * @param cinemaName
+	 */
+	public void setCinemaName(String cinemaName) {
+		this.cinemaName = cinemaName;
+	}
+
+	/**
+	 * @param seatID
+	 */
+	public void setSeatID(int seatID) {
+		this.seatID = seatID;
+	}
+
+	/**
+	 * @param seatID2
+	 */
+	public void setSeatID2(int seatID2) {
+		this.seatID2 = seatID2;
+	}
+
+	/**
+	 * @param datemov
+	 */
+	public void setMovieDate(String datemov) {
+		this.datemov = datemov;
+	}
+
+	/**
+	 * @param transID
+	 */
+	public void setTransID(String transID) {
+		this.transID = transID;
+	}
+
+	public void printTicketInfo() {
+		System.out.println("User ID: " + userID + "\nTicket ID: " + ticketID + "\nTicket Type: " + ticketType
+				+ "\nMovie Time: " + movieTime + "\nMovie ID: " + movieID + "\nMovie Name: " + movieName + "\nPrice: "
+				+ String.format("%.2f", price) + "\nCinema Name: " + cinemaName + "\nSeat ID: " + seatID
+				+ "\nDate of Movie: " + datemov + "\nTransaction ID: " + transID);
+	}
+
 }

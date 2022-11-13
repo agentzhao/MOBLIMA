@@ -28,24 +28,39 @@ public class MovieManager {
     this.reviews = reviews;
   }
 
+  /**
+   * @param movies
+   */
   public void addMovieList(ArrayList<Movie> movies) {
     this.movies = movies;
   }
 
+  /**
+   * @param reviews
+   */
   public void addReviewList(ArrayList<Review> reviews) {
     this.reviews = reviews;
   }
 
+  /**
+   * @return ArrayList<Movie>
+   */
   public ArrayList<Movie> getMovieList() {
     return this.movies;
   }
 
+  /**
+   * @return int
+   */
   /* Admin System (create, update, delete) */
 
   public int getMovieLength() {
     return this.movies.size();
   }
 
+  /**
+   * @param movieID
+   */
   public void createMovie(int movieID) {
     Movie newMovie = new Movie(movieID);
 
@@ -106,6 +121,10 @@ public class MovieManager {
     this.movies.add(newMovie);
   }
 
+  /**
+   * @param movieID
+   * @return int
+   */
   public int updateMovie(int movieID) {
     Movie m = searchMovie(movieID);
 
@@ -200,6 +219,10 @@ public class MovieManager {
     return 1;
   }
 
+  /**
+   * @param movieID
+   * @return int
+   */
   public int deleteMovie(int movieID) {
     for (Movie m : movies) {
       if (m.getMovieID() == movieID) {
@@ -211,6 +234,10 @@ public class MovieManager {
     return 0; // unsuccessful
   }
 
+  /**
+   * @param movieID
+   * @return Movie
+   */
   /* User System (search, getDetails, ranking) */
   public Movie searchMovie(int movieID) {
     for (Movie m : movies) {
@@ -225,6 +252,10 @@ public class MovieManager {
     return null;
   }
 
+  /**
+   * @param movieName
+   * @return Movie
+   */
   public Movie searchMovieName(String movieName) {
     for (Movie m : movies) {
       if (movieName.equalsIgnoreCase(m.getMovieName())) {
@@ -239,6 +270,9 @@ public class MovieManager {
     return null;
   }
 
+  /**
+   * @param m
+   */
   public void getMovieDetails(Movie m) {
     System.out.println("------------------- Movie Details -----------------");
     System.out.println("Movie Name: " + m.getMovieName());

@@ -14,26 +14,44 @@ public class Customer extends User {
         this.age = age;
     }
 
+    /**
+     * @return String
+     */
     public String getMobile_number() {
         return mobile_number;
     }
 
+    /**
+     * @param mobile_number
+     */
     public void setMobile_number(String mobile_number) {
         this.mobile_number = mobile_number;
     }
 
+    /**
+     * @return String
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * @return int
+     */
     public int getAge() {
         return age;
     }
 
+    /**
+     * @param age
+     */
     public void setAge(int age) {
         this.age = age;
     }

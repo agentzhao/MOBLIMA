@@ -15,29 +15,61 @@ public class Login {
 
     }
 
+    /**
+     * @param customer
+     */
     public void addCustomerList(ArrayList<Customer> customer) {
         this.customer = customer;
     }
 
+    /**
+     * @param admin
+     */
     public void addAdminList(ArrayList<Admin> admin) {
         this.admin = admin;
     }
 
+    /**
+     * @param email
+     * @param password
+     * @return User
+     */
     public User loginSystem(String email, String password) {
         return searchUser(email, password);
     }
 
+    /**
+     * @param email
+     * @param password
+     * @param type
+     * @param id
+     * @param cineplexID
+     */
     public void createAdmin(String email, String password, int type, int id, String cineplexID) {
         Admin newAdmin = new Admin(email, password, type, id, cineplexID);
         admin.add(newAdmin);
     }
 
+    /**
+     * @param email
+     * @param password
+     * @param type
+     * @param mobile_number
+     * @param name
+     * @param age
+     * @param id
+     */
     public void createCustomer(String email, String password, int type, String mobile_number, String name, int age,
             int id) {
         Customer newCustomer = new Customer(email, password, type, mobile_number, name, age, id);
         customer.add(newCustomer);
     }
 
+    /**
+     * @param email
+     * @param password
+     * @return User
+     */
     public User searchUser(String email, String password) {
         returnUser = null;
         for (int x = 0; x < admin.size(); x++) {

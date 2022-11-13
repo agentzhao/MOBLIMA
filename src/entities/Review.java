@@ -20,23 +20,38 @@ public class Review {
     this.reviewRating = reviewRating;
   }
 
+  /**
+   * @return int
+   */
   // getters
   public int getMovieID() {
     return this.movieID;
   }
 
+  /**
+   * @return String
+   */
   public String getCustomerName() {
     return this.customerName;
   }
 
+  /**
+   * @return String
+   */
   public String getReviewTitle() {
     return this.reviewTitle;
   }
 
+  /**
+   * @return String
+   */
   public String getReviewBody() {
     return this.reviewBody;
   }
 
+  /**
+   * @return int
+   */
   public int getReviewRating() {
     return this.reviewRating;
   }
@@ -48,23 +63,38 @@ public class Review {
     System.out.println("Review Rating: " + reviewRating);
   }
 
+  /**
+   * @param movieID
+   */
   // setters
   public void setMovieID(int movieID) {
     this.movieID = movieID;
   }
 
+  /**
+   * @param customerName
+   */
   public void setCustomerName(String customerName) {
     this.customerName = customerName;
   }
 
+  /**
+   * @param reviewTitle
+   */
   public void setReviewTitle(String reviewTitle) {
     this.reviewTitle = reviewTitle;
   }
 
+  /**
+   * @param reviewBody
+   */
   public void setReviewBody(String reviewBody) {
     this.reviewBody = reviewBody;
   }
 
+  /**
+   * @param reviewRating
+   */
   public void setReviewRating(int reviewRating) {
     this.reviewRating = reviewRating;
   }
